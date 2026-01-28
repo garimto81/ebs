@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS - Skin Editor</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #fff; color: #000; padding: 0; margin: 0; }
+
+        .container { width: 900px; padding: 20px; background: #fff; }
+
+        .label {
+            background: #000;
+            color: #fff;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Main Layout */
+        .editor-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            gap: 15px;
+        }
+
+        /* Panel */
+        .panel {
+            border: 2px solid #000;
+        }
+
+        .panel-header {
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .panel-content {
+            padding: 12px;
+        }
+
+        /* Presets */
+        .preset-list {
+            list-style: none;
+        }
+
+        .preset-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .preset-item:hover {
+            background: #f5f5f5;
+        }
+
+        .preset-item.active {
+            background: #000;
+            color: #fff;
+        }
+
+        .preset-swatch {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .preset-item.active .preset-swatch {
+            border-color: #fff;
+        }
+
+        /* Preview */
+        .preview-area {
+            background: #1a1a1a;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .preview-overlay {
+            width: 80%;
+            height: 80%;
+            border: 2px dashed #444;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+        }
+
+        .preview-player {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .preview-card-slot {
+            width: 50px;
+            height: 35px;
+            border: 1px solid #555;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 10px;
+        }
+
+        .preview-pot {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* Color Picker */
+        .color-group {
+            margin-bottom: 15px;
+        }
+
+        .color-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #000;
+            cursor: pointer;
+        }
+
+        .color-input {
+            flex: 1;
+            border: 1px solid #000;
+            padding: 5px;
+            font-size: 11px;
+        }
+
+        /* Slider */
+        .slider-group {
+            margin-bottom: 12px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            background: #ddd;
+            position: relative;
+        }
+
+        .slider-fill {
+            height: 100%;
+            background: #000;
+            width: 70%;
+        }
+
+        .slider-thumb {
+            width: 14px;
+            height: 14px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: -4px;
+            left: 70%;
+            transform: translateX(-50%);
+        }
+
+        /* Toggle */
+        .toggle-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 11px;
+        }
+
+        .toggle {
+            width: 36px;
+            height: 18px;
+            background: #ccc;
+            border-radius: 9px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle.on {
+            background: #000;
+        }
+
+        .toggle::after {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: left 0.2s;
+        }
+
+        .toggle.on::after {
+            left: 20px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            border: 2px solid #000;
+            padding: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .btn.primary {
+            background: #000;
+            color: #fff;
+        }
+
+        .btn.primary:hover {
+            background: #333;
+        }
+
+        /* Section Divider */
+        .section-divider {
+            font-size: 9px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 0 5px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="label">WIREFRAME: Skin Editor</div>
+        <div class="title">스킨/테마 에디터</div>
+
+        <div class="editor-layout">
+            <!-- Presets Panel -->
+            <div class="panel">
+                <div class="panel-header">Presets</div>
+                <div class="panel-content">
+                    <ul class="preset-list">
+                        <li class="preset-item active">
+                            <div class="preset-swatch" style="background: #000;"></div>
+                            <span>Classic Dark</span>
+                        </li>
+                        <li class="preset-item">
+                            <div class="preset-swatch" style="background: #1a472a;"></div>
+                            <span>Casino Green</span>
+                        </li>
+                        <li class="preset-item">
+                            <div class="preset-swatch" style="background: #2c3e50;"></div>
+                            <span>Modern Blue</span>
+                        </li>
+                        <li class="preset-item">
+                            <div class="preset-swatch" style="background: #8b0000;"></div>
+                            <span>Royal Red</span>
+                        </li>
+                        <li class="preset-item">
+                            <div class="preset-swatch" style="background: #fff; border: 1px solid #000;"></div>
+                            <span>Minimal White</span>
+                        </li>
+                    </ul>
+                    <div class="buttons">
+                        <button class="btn">+ New</button>
+                        <button class="btn">Import</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview -->
+            <div class="panel">
+                <div class="panel-header">Live Preview</div>
+                <div class="preview-area">
+                    <div class="preview-overlay">
+                        <div class="preview-player">
+                            <div class="preview-card-slot">[A♠]</div>
+                            <div class="preview-card-slot">[K♥]</div>
+                        </div>
+                        <div class="preview-pot">POT: $15,000</div>
+                        <div class="preview-player">
+                            <div class="preview-card-slot">[?]</div>
+                            <div class="preview-card-slot">[?]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Panel -->
+            <div class="panel">
+                <div class="panel-header">Settings</div>
+                <div class="panel-content">
+                    <div class="section-divider">Colors</div>
+
+                    <div class="color-group">
+                        <div class="color-label">Background</div>
+                        <div class="color-picker">
+                            <div class="color-swatch" style="background: #1a1a1a;"></div>
+                            <input class="color-input" type="text" value="#1A1A1A">
+                        </div>
+                    </div>
+
+                    <div class="color-group">
+                        <div class="color-label">Card Border</div>
+                        <div class="color-picker">
+                            <div class="color-swatch" style="background: #ffffff;"></div>
+                            <input class="color-input" type="text" value="#FFFFFF">
+                        </div>
+                    </div>
+
+                    <div class="color-group">
+                        <div class="color-label">Text</div>
+                        <div class="color-picker">
+                            <div class="color-swatch" style="background: #ffffff;"></div>
+                            <input class="color-input" type="text" value="#FFFFFF">
+                        </div>
+                    </div>
+
+                    <div class="section-divider">Layout</div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Card Size</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="slider">
+                            <div class="slider-fill"></div>
+                            <div class="slider-thumb"></div>
+                        </div>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Font Size</span>
+                            <span>16px</span>
+                        </div>
+                        <div class="slider">
+                            <div class="slider-fill" style="width: 50%;"></div>
+                            <div class="slider-thumb" style="left: 50%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider">Options</div>
+
+                    <div class="toggle-group">
+                        <span>Animation</span>
+                        <div class="toggle on"></div>
+                    </div>
+
+                    <div class="toggle-group">
+                        <span>Shadow</span>
+                        <div class="toggle on"></div>
+                    </div>
+
+                    <div class="toggle-group">
+                        <span>Rounded Corners</span>
+                        <div class="toggle"></div>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn">Reset</button>
+                        <button class="btn primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

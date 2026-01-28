@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS - Mobile Action Tracker</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #fff; color: #000; padding: 0; margin: 0; }
+
+        .container {
+            width: 375px;
+            height: 667px;
+            background: #fff;
+            border: 2px solid #000;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label {
+            background: #000;
+            color: #fff;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: bold;
+            display: inline-block;
+            position: absolute;
+            top: -25px;
+            left: 0;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: #000;
+            color: #fff;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+        }
+
+        .status-bar .time {
+            font-weight: bold;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 5px;
+        }
+
+        /* Header */
+        .header {
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .header-sub {
+            font-size: 10px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Game Info */
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .info-label {
+            font-size: 9px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* Players Carousel */
+        .players-section {
+            padding: 12px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .players-row {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+
+        .player-chip {
+            flex-shrink: 0;
+            border: 2px solid #ccc;
+            padding: 8px 12px;
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .player-chip.active {
+            border-color: #000;
+            background: #000;
+            color: #fff;
+        }
+
+        .player-chip.action-on {
+            border-width: 3px;
+            position: relative;
+        }
+
+        .player-chip.action-on::before {
+            content: "→";
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #000;
+            color: #fff;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-chip.folded {
+            background: #ddd;
+            color: #888;
+            border-color: #aaa;
+        }
+
+        .player-name {
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .player-chips {
+            font-size: 9px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .player-chip.active .player-chips {
+            color: #aaa;
+        }
+
+        /* Action Buttons */
+        .actions-section {
+            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            flex: 1;
+            border: 2px solid #000;
+            padding: 20px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .action-btn:active {
+            background: #000;
+            color: #fff;
+        }
+
+        .action-btn .sub {
+            font-size: 10px;
+            font-weight: normal;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .action-btn:active .sub {
+            color: #aaa;
+        }
+
+        /* Raise Section */
+        .raise-section {
+            border: 2px solid #000;
+            padding: 12px;
+        }
+
+        .raise-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 11px;
+        }
+
+        .raise-label {
+            font-weight: bold;
+        }
+
+        .raise-limits {
+            color: #666;
+        }
+
+        .raise-input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .raise-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #000;
+            background: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .raise-btn:active {
+            background: #000;
+            color: #fff;
+        }
+
+        .raise-input {
+            flex: 1;
+            border: 2px solid #000;
+            padding: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Quick Bets */
+        .quick-bets {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .quick-bet {
+            flex: 1;
+            border: 2px solid #000;
+            padding: 10px 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 10px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .quick-bet:active {
+            background: #000;
+            color: #fff;
+        }
+
+        /* Bottom Controls */
+        .bottom-controls {
+            display: flex;
+            padding: 10px 15px;
+            background: #f5f5f5;
+            border-top: 1px solid #ccc;
+            gap: 10px;
+        }
+
+        .ctrl-btn {
+            flex: 1;
+            border: 2px solid #000;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .ctrl-btn:active {
+            background: #000;
+            color: #fff;
+        }
+
+        /* Swipe Hint */
+        .swipe-hint {
+            text-align: center;
+            padding: 8px;
+            font-size: 9px;
+            color: #888;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div style="position: relative; padding-top: 30px; padding-left: 10px;">
+        <div class="label">WIREFRAME: Mobile Action Tracker (375x667)</div>
+        <div class="container">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <span class="time">14:32</span>
+                <div class="status-icons">[WiFi] [Battery]</div>
+            </div>
+
+            <!-- Header -->
+            <div class="header">
+                <div class="header-title">[EBS] TABLE 1</div>
+                <div class="header-sub">NLHE 500/1000 • Hand #47</div>
+            </div>
+
+            <!-- Game Info -->
+            <div class="game-info">
+                <div class="info-item">
+                    <div class="info-value">$4,500</div>
+                    <div class="info-label">Pot</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-value">6</div>
+                    <div class="info-label">Players</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-value">FLOP</div>
+                    <div class="info-label">Street</div>
+                </div>
+            </div>
+
+            <!-- Players -->
+            <div class="players-section">
+                <div class="section-title">Players</div>
+                <div class="players-row">
+                    <div class="player-chip active">
+                        <div class="player-name">[P1]</div>
+                        <div class="player-chips">BTN • $50K</div>
+                    </div>
+                    <div class="player-chip folded">
+                        <div class="player-name">[P2]</div>
+                        <div class="player-chips">SB • FOLD</div>
+                    </div>
+                    <div class="player-chip folded">
+                        <div class="player-name">[P3]</div>
+                        <div class="player-chips">BB • FOLD</div>
+                    </div>
+                    <div class="player-chip action-on">
+                        <div class="player-name">[P4]</div>
+                        <div class="player-chips">UTG • $52K</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions-section">
+                <div class="action-row">
+                    <div class="action-btn">FOLD</div>
+                    <div class="action-btn">CHECK</div>
+                </div>
+                <div class="action-row">
+                    <div class="action-btn">
+                        CALL
+                        <div class="sub">$1,000</div>
+                    </div>
+                    <div class="action-btn">RAISE</div>
+                </div>
+
+                <!-- Raise Section -->
+                <div class="raise-section">
+                    <div class="raise-header">
+                        <span class="raise-label">RAISE TO</span>
+                        <span class="raise-limits">MIN $2K | MAX $52K</span>
+                    </div>
+                    <div class="raise-input-row">
+                        <button class="raise-btn">−</button>
+                        <input class="raise-input" type="text" value="2,000">
+                        <button class="raise-btn">+</button>
+                    </div>
+                    <div class="quick-bets">
+                        <div class="quick-bet">2x</div>
+                        <div class="quick-bet">3x</div>
+                        <div class="quick-bet">½ POT</div>
+                        <div class="quick-bet">POT</div>
+                        <div class="quick-bet">ALL</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Controls -->
+            <div class="bottom-controls">
+                <button class="ctrl-btn">UNDO</button>
+                <button class="ctrl-btn">NEW HAND</button>
+            </div>
+
+            <!-- Swipe Hint -->
+            <div class="swipe-hint">← Swipe for more players →</div>
+        </div>
+    </div>
+</body>
+</html>

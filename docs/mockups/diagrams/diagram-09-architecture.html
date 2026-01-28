@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS System Architecture</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #fff; color: #000; padding: 0; margin: 0; }
+
+        .container { width: 900px; padding: 20px; background: #fff; }
+
+        .label {
+            background: #000;
+            color: #fff;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .architecture {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .layer {
+            border: 2px solid #000;
+        }
+
+        .layer-header {
+            background: #000;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .layer-content {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .component {
+            border: 2px solid #000;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .component-name {
+            background: #f5f5f5;
+            padding: 10px 15px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .component-detail {
+            padding: 8px;
+            font-size: 9px;
+            color: #666;
+        }
+
+        .arrow-h {
+            font-size: 18px;
+            color: #000;
+        }
+
+        .arrow-v {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .arrow-v-symbol {
+            font-size: 18px;
+            color: #000;
+        }
+
+        .connector {
+            display: flex;
+            justify-content: center;
+            padding: 5px 0;
+        }
+
+        .connector-line {
+            width: 2px;
+            height: 20px;
+            background: #000;
+        }
+
+        .connector-label {
+            font-size: 9px;
+            color: #666;
+            margin-left: 10px;
+        }
+
+        .server-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 100%;
+        }
+
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="label">DIAGRAM: 시스템 아키텍처</div>
+        <div class="title">EBS System Architecture v4.0</div>
+
+        <div class="architecture">
+            <!-- Hardware Layer -->
+            <div class="layer">
+                <div class="layer-header">Hardware Layer</div>
+                <div class="layer-content">
+                    <div class="component">
+                        <div class="component-name">RFID Cards</div>
+                        <div class="component-detail">(DESFire)</div>
+                    </div>
+                    <div class="arrow-h">→</div>
+                    <div class="component">
+                        <div class="component-name">MFRC522</div>
+                        <div class="component-detail">Reader</div>
+                    </div>
+                    <div class="arrow-h">→</div>
+                    <div class="component">
+                        <div class="component-name">ESP32</div>
+                        <div class="component-detail">Controller</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connector -->
+            <div class="connector">
+                <div class="arrow-v">
+                    <div class="arrow-v-symbol">▼</div>
+                    <span>USB Serial</span>
+                </div>
+            </div>
+
+            <!-- Server Layer -->
+            <div class="layer">
+                <div class="layer-header">Server Layer</div>
+                <div class="layer-content">
+                    <div class="server-grid">
+                        <div class="component">
+                            <div class="component-name">Serial Service</div>
+                            <div class="component-detail">UID 수신</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-name">Mode Switch</div>
+                            <div class="component-detail">Realtime/Trustless</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-name">FastAPI Server</div>
+                            <div class="component-detail">REST + WS</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-name">SQLCipher DB</div>
+                            <div class="component-detail">Card/Hand DB</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-name">Reveal Service</div>
+                            <div class="component-detail">Delay 관리</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-name">WebSocket</div>
+                            <div class="component-detail">(WSS)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connector -->
+            <div class="connector">
+                <div class="arrow-v">
+                    <div class="arrow-v-symbol">▼</div>
+                    <span>WebSocket</span>
+                </div>
+            </div>
+
+            <!-- Client Layer -->
+            <div class="layer">
+                <div class="layer-header">Client Layer</div>
+                <div class="layer-content">
+                    <div class="client-grid">
+                        <div class="component">
+                            <div class="component-name">React Overlay</div>
+                            <div class="component-detail">시청자 표시</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-name">OBS Browser</div>
+                            <div class="component-detail">Source 통합</div>
+                        </div>
+                        <div class="component">
+                            <div class="component-name">Action Tracker</div>
+                            <div class="component-detail">운영자 UI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

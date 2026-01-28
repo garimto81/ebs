@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS - GFX Console / Statistics</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #fff; color: #000; padding: 0; margin: 0; }
+
+        .container {
+            width: 900px;
+            background: #fff;
+            border: 2px solid #000;
+        }
+
+        .label {
+            background: #000;
+            color: #fff;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        /* Header */
+        .header {
+            background: #000;
+            color: #fff;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-title {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .header-info {
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        /* Stat Display Buttons */
+        .stat-buttons {
+            padding: 15px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #ccc;
+        }
+        .stat-btn-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .stat-btn {
+            border: 2px solid #000;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 11px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .stat-btn:hover { background: #eee; }
+        .stat-btn.active { background: #000; color: #fff; }
+        .stat-btn-desc {
+            font-size: 9px;
+            color: #666;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+        .stat-btn.active .stat-btn-desc { color: #aaa; }
+
+        /* Leaderboard Table */
+        .leaderboard {
+            padding: 15px;
+        }
+        .leaderboard-title {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sort-toggle {
+            display: flex;
+            gap: 5px;
+        }
+        .sort-btn {
+            border: 1px solid #000;
+            padding: 4px 10px;
+            font-size: 10px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .sort-btn.active { background: #000; color: #fff; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background: #000;
+            color: #fff;
+            padding: 10px 8px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        th.num { text-align: right; }
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #ddd;
+            font-size: 12px;
+        }
+        td.num { text-align: right; font-weight: bold; }
+        tr:hover { background: #f9f9f9; }
+        tr.eliminated { color: #999; background: #f5f5f5; }
+        tr.leader { background: #eee; }
+
+        .rank {
+            width: 30px;
+            height: 24px;
+            background: #000;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11px;
+        }
+        .rank.gold { background: #222; }
+        .rank.silver { background: #555; }
+        .rank.bronze { background: #888; }
+
+        .chip-bar {
+            width: 100px;
+            height: 8px;
+            background: #ddd;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .chip-fill {
+            height: 100%;
+            background: #666;
+        }
+
+        .stat-value {
+            display: inline-block;
+            min-width: 45px;
+        }
+        .stat-bar {
+            width: 40px;
+            height: 6px;
+            background: #ddd;
+            display: inline-block;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+        .stat-fill {
+            height: 100%;
+            background: #555;
+        }
+        .stat-fill.high { background: #888; }
+        .stat-fill.low { background: #666; }
+
+        /* Field Info */
+        .field-info {
+            padding: 15px;
+            background: #f9f9f9;
+            border-top: 1px solid #ccc;
+            display: flex;
+            gap: 30px;
+        }
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .field-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        .field-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .field-input {
+            border: 2px solid #000;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            width: 80px;
+            text-align: center;
+        }
+
+        /* Additional Controls */
+        .controls-row {
+            padding: 15px;
+            border-top: 1px solid #ccc;
+            display: flex;
+            gap: 10px;
+        }
+        .ctrl-btn {
+            border: 2px solid #000;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 11px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .ctrl-btn:hover { background: #000; color: #fff; }
+        .ctrl-btn.toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .toggle-switch {
+            width: 40px;
+            height: 20px;
+            background: #ccc;
+            border-radius: 10px;
+            position: relative;
+        }
+        .toggle-switch::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: left 0.2s;
+        }
+        .toggle-switch.on { background: #000; }
+        .toggle-switch.on::after { left: 22px; }
+
+        /* Ticker Section */
+        .ticker-section {
+            padding: 15px;
+            background: #f5f5f5;
+            border-top: 1px solid #ccc;
+        }
+        .ticker-title {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .ticker-input {
+            width: 100%;
+            border: 2px solid #000;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="label">WIREFRAME: GFX Console / Statistics (PokerGFX Style)</div>
+
+        <!-- Header -->
+        <div class="header">
+            <span class="header-title">GFX CONSOLE - STATISTICS</span>
+            <span class="header-info">WSOP Main Event | Hand #47 | 15 Players Remaining</span>
+        </div>
+
+        <!-- Stat Display Buttons -->
+        <div class="stat-buttons">
+            <div class="stat-btn-row">
+                <button class="stat-btn active">
+                    Seat
+                    <div class="stat-btn-desc">좌석 순서</div>
+                </button>
+                <button class="stat-btn">
+                    Stack
+                    <div class="stat-btn-desc">칩 순위</div>
+                </button>
+                <button class="stat-btn">
+                    VPIP%
+                    <div class="stat-btn-desc">자발적 참여율</div>
+                </button>
+                <button class="stat-btn">
+                    PFR%
+                    <div class="stat-btn-desc">프리플랍 레이즈</div>
+                </button>
+                <button class="stat-btn">
+                    AGRfq%
+                    <div class="stat-btn-desc">공격 빈도</div>
+                </button>
+                <button class="stat-btn">
+                    WTSD%
+                    <div class="stat-btn-desc">쇼다운 도달률</div>
+                </button>
+                <button class="stat-btn">
+                    WIN
+                    <div class="stat-btn-desc">순수익</div>
+                </button>
+                <button class="stat-btn">
+                    Payouts
+                    <div class="stat-btn-desc">상금</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Leaderboard Table -->
+        <div class="leaderboard">
+            <div class="leaderboard-title">
+                <span>Player Leaderboard</span>
+                <div class="sort-toggle">
+                    <button class="sort-btn active">STACK ↓</button>
+                    <button class="sort-btn">NAME</button>
+                    <button class="sort-btn">SEAT</button>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:50px">RANK</th>
+                        <th style="width:50px">SEAT</th>
+                        <th>PLAYER</th>
+                        <th class="num" style="width:120px">STACK</th>
+                        <th class="num" style="width:70px">VPIP%</th>
+                        <th class="num" style="width:70px">PFR%</th>
+                        <th class="num" style="width:70px">AGR%</th>
+                        <th class="num" style="width:70px">WTSD%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="leader">
+                        <td><span class="rank gold">1</span></td>
+                        <td>7</td>
+                        <td><strong>STEVE</strong></td>
+                        <td class="num">
+                            15,000
+                            <div class="chip-bar"><div class="chip-fill" style="width:100%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">28%</span>
+                            <div class="stat-bar"><div class="stat-fill low" style="width:28%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">22%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:22%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">45%</span>
+                            <div class="stat-bar"><div class="stat-fill high" style="width:45%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">32%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:32%"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank silver">2</span></td>
+                        <td>3</td>
+                        <td><strong>ANDY</strong></td>
+                        <td class="num">
+                            12,000
+                            <div class="chip-bar"><div class="chip-fill" style="width:80%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">35%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:35%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">28%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:28%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">52%</span>
+                            <div class="stat-bar"><div class="stat-fill high" style="width:52%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">28%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:28%"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank bronze">3</span></td>
+                        <td>10</td>
+                        <td><strong>LEON</strong></td>
+                        <td class="num">
+                            11,000
+                            <div class="chip-bar"><div class="chip-fill" style="width:73%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">42%</span>
+                            <div class="stat-bar"><div class="stat-fill high" style="width:42%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">18%</span>
+                            <div class="stat-bar"><div class="stat-fill low" style="width:18%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">38%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:38%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">35%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:35%"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank">4</span></td>
+                        <td>6</td>
+                        <td><strong>BRYAN</strong></td>
+                        <td class="num">
+                            9,200
+                            <div class="chip-bar"><div class="chip-fill" style="width:61%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">25%</span>
+                            <div class="stat-bar"><div class="stat-fill low" style="width:25%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">20%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:20%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">30%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:30%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">40%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:40%"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank">5</span></td>
+                        <td>2</td>
+                        <td><strong>GAVIN</strong></td>
+                        <td class="num">
+                            8,000
+                            <div class="chip-bar"><div class="chip-fill" style="width:53%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">32%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:32%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">25%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:25%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">42%</span>
+                            <div class="stat-bar"><div class="stat-fill high" style="width:42%"></div></div>
+                        </td>
+                        <td class="num">
+                            <span class="stat-value">30%</span>
+                            <div class="stat-bar"><div class="stat-fill" style="width:30%"></div></div>
+                        </td>
+                    </tr>
+                    <tr class="eliminated">
+                        <td><span class="rank">—</span></td>
+                        <td>9</td>
+                        <td>TRAVIS (Eliminated)</td>
+                        <td class="num">0</td>
+                        <td class="num">38%</td>
+                        <td class="num">30%</td>
+                        <td class="num">55%</td>
+                        <td class="num">45%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Field Info -->
+        <div class="field-info">
+            <div class="field-group">
+                <span class="field-label">Total Field</span>
+                <input type="text" class="field-input" value="156">
+            </div>
+            <div class="field-group">
+                <span class="field-label">Remaining</span>
+                <input type="text" class="field-input" value="15">
+            </div>
+            <div class="field-group">
+                <span class="field-label">Avg Stack</span>
+                <span class="field-value">52,000</span>
+            </div>
+            <div class="field-group">
+                <span class="field-label">Total Chips</span>
+                <span class="field-value">780,000</span>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-row">
+            <button class="ctrl-btn toggle">
+                <span>LIVE Stats</span>
+                <div class="toggle-switch on"></div>
+            </button>
+            <button class="ctrl-btn toggle">
+                <span>Show Eliminated</span>
+                <div class="toggle-switch"></div>
+            </button>
+            <button class="ctrl-btn">PIP Display</button>
+            <button class="ctrl-btn">Export CSV</button>
+        </div>
+
+        <!-- Ticker -->
+        <div class="ticker-section">
+            <div class="ticker-title">Ticker Message (scrolls right to left)</div>
+            <input type="text" class="ticker-input" placeholder="Enter ticker message...">
+        </div>
+    </div>
+</body>
+</html>

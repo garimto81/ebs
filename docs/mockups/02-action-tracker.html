@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS - Action Tracker (PokerGFX Style)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #fff; color: #000; padding: 0; margin: 0; }
+
+        .container {
+            width: 900px;
+            background: #fff;
+            border: 2px solid #000;
+        }
+
+        .label {
+            background: #000;
+            color: #fff;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        /* Top Status Bar */
+        .status-bar {
+            background: #000;
+            color: #fff;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+        }
+        .status-indicators {
+            display: flex;
+            gap: 15px;
+        }
+        .indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #666;
+        }
+        .indicator-dot.off { background: #ccc; }
+        .top-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .top-btn {
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        .top-btn:hover { background: #555; }
+
+        /* Game Info Row */
+        .game-info {
+            background: #f5f5f5;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+        .game-type {
+            display: flex;
+            gap: 10px;
+        }
+        .game-btn {
+            border: 2px solid #000;
+            padding: 6px 15px;
+            font-weight: bold;
+            font-size: 12px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .game-btn.active { background: #000; color: #fff; }
+        .blinds-info {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+        }
+        .blinds-info span { color: #666; }
+        .blinds-info strong { color: #000; }
+
+        /* Player Grid */
+        .player-grid {
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+        .grid-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .player-slot {
+            width: 80px;
+            text-align: center;
+        }
+        .player-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            margin: 0 auto 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            background: #fff;
+        }
+        .player-icon.active { background: #000; color: #fff; border-color: #000; }
+        .player-icon.dealt { background: #555; color: #fff; border-color: #555; }
+        .player-icon.folded { background: #ccc; color: #888; border-color: #aaa; }
+        .player-icon.empty { background: #f5f5f5; color: #999; border-color: #ddd; }
+        .player-icon.action-on {
+            border: 3px solid #000;
+            box-shadow: none;
+        }
+        .player-name {
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        .player-chips {
+            font-size: 9px;
+            color: #666;
+            background: #eee;
+            padding: 2px 6px;
+            display: inline-block;
+        }
+        .player-pos {
+            font-size: 8px;
+            font-weight: bold;
+            color: #fff;
+            background: #000;
+            padding: 1px 4px;
+            display: inline-block;
+            margin-top: 2px;
+        }
+        .player-cards {
+            display: flex;
+            gap: 2px;
+            justify-content: center;
+            margin-top: 3px;
+        }
+        .mini-card {
+            width: 16px;
+            height: 22px;
+            background: #fff;
+            border: 1px solid #000;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .mini-card.back { background: #888; color: #888; border-color: #888; }
+
+        /* Board Area */
+        .board-area {
+            background: #888;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+        .board-label {
+            color: #ddd;
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .board-cards {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        .board-card {
+            width: 45px;
+            height: 63px;
+            background: #fff;
+            border: 2px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .board-card .rank { font-size: 18px; }
+        .board-card .suit { font-size: 16px; }
+        .board-card .suit.red { color: #666; }
+        .board-card.empty { background: #666; border-color: #888; }
+
+        /* Action Section */
+        .action-section {
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+        .current-action {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .current-player {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .action-btn {
+            border: 2px solid #000;
+            padding: 20px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            background: #888;
+            color: #fff;
+            min-width: 100px;
+        }
+        .action-btn.fold { background: #666; }
+        .action-btn.check { background: #888; }
+        .action-btn.call { background: #888; }
+        .action-btn.bet { background: #555; color: #fff; }
+        .action-btn.allin { background: #000; }
+        .action-btn.undo {
+            background: #fff;
+            color: #000;
+            padding: 20px 15px;
+            min-width: 50px;
+        }
+        .action-btn:hover { opacity: 0.9; }
+        .action-btn .sub { font-size: 11px; font-weight: normal; margin-top: 3px; }
+
+        /* Bet Input */
+        .bet-input-area {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f5f5f5;
+            border: 2px solid #000;
+        }
+        .bet-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+        .bet-input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .bet-input {
+            flex: 1;
+            border: 2px solid #000;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .bet-adjust {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #000;
+            background: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .bet-adjust:hover { background: #000; color: #fff; }
+        .quick-bets {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .quick-btn {
+            flex: 1;
+            border: 2px solid #000;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 12px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .quick-btn:hover { background: #000; color: #fff; }
+
+        /* Bottom Controls */
+        .bottom-controls {
+            padding: 12px 15px;
+            background: #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        .control-group {
+            display: flex;
+            gap: 10px;
+        }
+        .ctrl-btn {
+            border: 2px solid #000;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 12px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .ctrl-btn:hover { background: #000; color: #fff; }
+        .ctrl-btn.danger { background: #888; color: #fff; border-color: #888; }
+        .ctrl-btn.primary { background: #000; color: #fff; border-color: #000; }
+
+        /* Keyboard Shortcuts */
+        .shortcuts {
+            padding: 10px 15px;
+            background: #f9f9f9;
+            border-top: 1px solid #ccc;
+            font-size: 10px;
+            color: #666;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .shortcut { display: flex; gap: 5px; }
+        .shortcut kbd {
+            background: #ddd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="label">WIREFRAME: Action Tracker (PokerGFX Style)</div>
+
+        <!-- Top Status Bar -->
+        <div class="status-bar">
+            <div class="status-indicators">
+                <div class="indicator">
+                    <div class="indicator-dot"></div>
+                    <span>Network</span>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-dot"></div>
+                    <span>Table</span>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-dot"></div>
+                    <span>Stream</span>
+                </div>
+                <div class="indicator">
+                    <div class="indicator-dot off"></div>
+                    <span>Record</span>
+                </div>
+            </div>
+            <div class="top-buttons">
+                <button class="top-btn">Director</button>
+                <button class="top-btn">Statistics</button>
+                <button class="top-btn">Register Deck</button>
+                <button class="top-btn">Close</button>
+            </div>
+        </div>
+
+        <!-- Game Info -->
+        <div class="game-info">
+            <div class="game-type">
+                <button class="game-btn active">HOLDEM</button>
+                <button class="game-btn">PLO</button>
+                <button class="game-btn">SHORT DECK</button>
+            </div>
+            <div class="blinds-info">
+                <div><span>Event:</span> <strong>[Event Name]</strong></div>
+                <div><span>Blinds:</span> <strong>500/1,000</strong></div>
+                <div><span>Ante:</span> <strong>100</strong></div>
+                <div><span>Hand:</span> <strong>#47</strong></div>
+            </div>
+        </div>
+
+        <!-- Player Grid (10 seats) -->
+        <div class="player-grid">
+            <div class="grid-row">
+                <div class="player-slot">
+                    <div class="player-icon dealt">1</div>
+                    <div class="player-name">BLAKE</div>
+                    <div class="player-chips">5,000</div>
+                    <div class="player-pos">DLR</div>
+                </div>
+                <div class="player-slot">
+                    <div class="player-icon dealt">2</div>
+                    <div class="player-name">GAVIN</div>
+                    <div class="player-chips">8,000</div>
+                    <div class="player-pos">SB</div>
+                </div>
+                <div class="player-slot">
+                    <div class="player-icon dealt">3</div>
+                    <div class="player-name">ANDY</div>
+                    <div class="player-chips">12,000</div>
+                    <div class="player-pos">BB</div>
+                </div>
+                <div class="player-slot">
+                    <div class="player-icon dealt">4</div>
+                    <div class="player-name">JONESY</div>
+                    <div class="player-chips">6,500</div>
+                </div>
+                <div class="player-slot">
+                    <div class="player-icon action-on dealt">5</div>
+                    <div class="player-name">MATT</div>
+                    <div class="player-chips">5,300</div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="player-slot">
+                    <div class="player-icon folded">6</div>
+                    <div class="player-name">BRYAN</div>
+                    <div class="player-chips">9,200</div>
+                </div>
+                <div class="player-slot">
+                    <div class="player-icon dealt">7</div>
+                    <div class="player-name">STEVE</div>
+                    <div class="player-chips">15,000</div>
+                </div>
+                <div class="player-slot">
+                    <div class="player-icon folded">8</div>
+                    <div class="player-name">TRAVIS</div>
+                    <div class="player-chips">7,800</div>
+                </div>
+                <div class="player-slot">
+                    <div class="player-icon empty">9</div>
+                    <div class="player-name" style="color:#999">EMPTY</div>
+                </div>
+                <div class="player-slot">
+                    <div class="player-icon dealt">10</div>
+                    <div class="player-name">LEON</div>
+                    <div class="player-chips">11,000</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Board Area -->
+        <div class="board-area">
+            <div class="board-label">Community Cards</div>
+            <div class="board-cards">
+                <div class="board-card">
+                    <span class="rank">10</span>
+                    <span class="suit">♣</span>
+                </div>
+                <div class="board-card">
+                    <span class="rank">9</span>
+                    <span class="suit">♣</span>
+                </div>
+                <div class="board-card">
+                    <span class="rank">8</span>
+                    <span class="suit">♣</span>
+                </div>
+                <div class="board-card empty"></div>
+                <div class="board-card empty"></div>
+            </div>
+        </div>
+
+        <!-- Action Section -->
+        <div class="action-section">
+            <div class="current-action">
+                <span class="current-player">(5) MATT</span> - STACK 5,300 | POT: 3,500
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn undo">←</button>
+                <button class="action-btn fold">FOLD</button>
+                <button class="action-btn check">CHECK</button>
+                <button class="action-btn bet">BET</button>
+                <button class="action-btn allin">ALL IN<div class="sub">5,300</div></button>
+            </div>
+
+            <!-- Bet Input -->
+            <div class="bet-input-area">
+                <div class="bet-header">
+                    <span><strong>BET AMOUNT</strong></span>
+                    <span>Min: 1,000 | Max: 5,300</span>
+                </div>
+                <div class="bet-input-row">
+                    <button class="bet-adjust">−</button>
+                    <input type="text" class="bet-input" value="2,000">
+                    <button class="bet-adjust">+</button>
+                </div>
+                <div class="quick-bets">
+                    <button class="quick-btn">MIN</button>
+                    <button class="quick-btn">2x BB</button>
+                    <button class="quick-btn">3x BB</button>
+                    <button class="quick-btn">½ POT</button>
+                    <button class="quick-btn">POT</button>
+                    <button class="quick-btn">ALL-IN</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="bottom-controls">
+            <div class="control-group">
+                <button class="ctrl-btn">HIDE GFX</button>
+                <button class="ctrl-btn">TAG HAND ★</button>
+                <button class="ctrl-btn">ADJUST STACK</button>
+            </div>
+            <div class="control-group">
+                <button class="ctrl-btn">CHOP</button>
+                <button class="ctrl-btn">RUN IT 2x</button>
+                <button class="ctrl-btn danger">MISS DEAL</button>
+            </div>
+        </div>
+
+        <!-- Keyboard Shortcuts -->
+        <div class="shortcuts">
+            <div class="shortcut"><kbd>F</kbd> Fold</div>
+            <div class="shortcut"><kbd>C</kbd> Check/Call</div>
+            <div class="shortcut"><kbd>B</kbd> Bet/Raise</div>
+            <div class="shortcut"><kbd>A</kbd> All-In</div>
+            <div class="shortcut"><kbd>⌫</kbd> Undo</div>
+            <div class="shortcut"><kbd>↵</kbd> Confirm</div>
+        </div>
+    </div>
+</body>
+</html>

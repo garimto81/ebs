@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokerCaster Meeting Questions</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #fff;
+            color: #000;
+            padding: 0;
+            margin: 0;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            border: 2px solid #000;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .header .meta {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Info Box */
+        .info-box {
+            border: 1px solid #ccc;
+            background: #f5f5f5;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+        .info-box strong {
+            color: #000;
+        }
+
+        /* Questions Grid */
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Question Card */
+        .question-card {
+            border: 2px solid #000;
+            padding: 0;
+        }
+        .question-header {
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .question-body {
+            padding: 12px;
+        }
+        .question-text {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .question-note {
+            font-size: 11px;
+            color: #666;
+            border-left: 3px solid #ccc;
+            padding-left: 10px;
+            line-height: 1.5;
+        }
+        .answer-box {
+            border: 1px dashed #999;
+            background: #fafafa;
+            padding: 8px;
+            margin-top: 10px;
+            min-height: 40px;
+        }
+        .answer-box::before {
+            content: "[Answer]";
+            font-size: 10px;
+            color: #999;
+        }
+
+        /* Checklist */
+        .checklist {
+            border: 2px solid #000;
+            margin-bottom: 20px;
+        }
+        .checklist-header {
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .checklist-body {
+            padding: 12px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #000;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Notes Section */
+        .notes-section {
+            border: 2px solid #000;
+        }
+        .notes-header {
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .notes-body {
+            padding: 12px;
+            min-height: 80px;
+        }
+        .notes-placeholder {
+            border: 1px dashed #999;
+            background: #fafafa;
+            padding: 15px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>PokerCaster Meeting Questions</h1>
+            <div class="meta">2026-01-26 | First Meeting</div>
+        </div>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <strong>Background:</strong> PokerCaster has EPT/WSOPE broadcast experience.
+            Basic verification questions are unnecessary.
+        </div>
+
+        <!-- Questions Grid -->
+        <div class="questions-grid">
+            <!-- Q1 -->
+            <div class="question-card">
+                <div class="question-header">Q1. Development Stage</div>
+                <div class="question-body">
+                    <div class="question-text">What stage is your system at?</div>
+                    <div class="question-note">Concept / Prototype / Beta / Production - determines collaboration type</div>
+                    <div class="answer-box"></div>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-card">
+                <div class="question-header">Q2. Technology Independence</div>
+                <div class="question-body">
+                    <div class="question-text">Self-developed or based on existing solution (PokerGFX)?</div>
+                    <div class="question-note">Self-developed = high customization / Existing = license review needed</div>
+                    <div class="answer-box"></div>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-card">
+                <div class="question-header">Q3. Hardware Supply</div>
+                <div class="question-body">
+                    <div class="question-text">Did you develop the RFID hardware yourself?</div>
+                    <div class="question-note">Self-developed = turnkey solution possible / Otherwise = separate HW procurement</div>
+                    <div class="answer-box"></div>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-card">
+                <div class="question-header">Q4. Feature Scope</div>
+                <div class="question-body">
+                    <div class="question-text">What main features are currently implemented?</div>
+                    <div class="question-note">Hole cards / Community / Pot / Odds / Secure Delay - check our needs</div>
+                    <div class="answer-box"></div>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-card">
+                <div class="question-header">Q5. Overlay Graphics</div>
+                <div class="question-body">
+                    <div class="question-text">How do you handle overlay graphics?</div>
+                    <div class="question-note">OBS / NDI / Independent rendering / vMix - compatibility check</div>
+                    <div class="answer-box"></div>
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question-card">
+                <div class="question-header">Q6. Timeline</div>
+                <div class="question-body">
+                    <div class="question-text">When is your planned service launch?</div>
+                    <div class="question-note">Alignment with our schedule / Ready-to-use vs development participation</div>
+                    <div class="answer-box"></div>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-card">
+                <div class="question-header">Q7. Differentiation</div>
+                <div class="question-body">
+                    <div class="question-text">What differentiates you from PokerGFX?</div>
+                    <div class="question-note">PokerGFX = industry standard, expensive, proprietary HW</div>
+                    <div class="answer-box"></div>
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question-card">
+                <div class="question-header">Q8. Next Step</div>
+                <div class="question-body">
+                    <div class="question-text">Can we see a product demo?</div>
+                    <div class="question-note">Verify actual completion level / Natural follow-up meeting setup</div>
+                    <div class="answer-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Checklist -->
+        <div class="checklist">
+            <div class="checklist-header">Required Features Checklist</div>
+            <div class="checklist-body">
+                <div class="checklist-item"><div class="checkbox"></div> Hole card recognition</div>
+                <div class="checklist-item"><div class="checkbox"></div> Community card recognition</div>
+                <div class="checklist-item"><div class="checkbox"></div> Pot size display</div>
+                <div class="checklist-item"><div class="checkbox"></div> Odds calculation</div>
+                <div class="checklist-item"><div class="checkbox"></div> Secure Delay</div>
+                <div class="checklist-item"><div class="checkbox"></div> Multi-table support (optional)</div>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="notes-section">
+            <div class="notes-header">Meeting Notes</div>
+            <div class="notes-body">
+                <div class="notes-placeholder">[Additional conversation notes]</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

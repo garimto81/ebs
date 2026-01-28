@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS - Production Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #f5f5f5; color: #000; padding: 0; margin: 0; }
+
+        .container { width: 900px; background: #f5f5f5; }
+
+        .label {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: #000;
+            color: #fff;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 100;
+        }
+
+        /* Header */
+        .header {
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 18px; font-weight: bold; letter-spacing: 2px; }
+        .nav { display: flex; gap: 25px; }
+        .nav a { color: #888; text-decoration: none; font-size: 12px; }
+        .nav a.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 3px; }
+        .header-btns { display: flex; gap: 10px; }
+        .header-btn {
+            border: 1px solid #fff;
+            padding: 6px 15px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: bold;
+            background: transparent;
+            cursor: pointer;
+        }
+        .header-btn.primary { background: #fff; color: #000; }
+
+        /* Main Grid */
+        .main { display: grid; grid-template-columns: 200px 1fr 200px; gap: 15px; padding: 15px; }
+
+        /* Panel */
+        .panel { background: #fff; border: 1px solid #000; }
+        .panel-header {
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .panel-content { padding: 12px; }
+
+        /* Status List */
+        .status-list { list-style: none; }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 11px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #000;
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .status-dot.ok { background: #666; }
+        .status-dot.warn { background: #999; }
+
+        /* Quick Actions */
+        .quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .quick-btn {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #fff;
+        }
+        .quick-btn:hover { background: #000; color: #fff; }
+
+        /* Toggle */
+        .toggle-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 11px;
+        }
+        .toggle {
+            width: 32px;
+            height: 16px;
+            background: #ccc;
+            border-radius: 8px;
+            position: relative;
+            cursor: pointer;
+        }
+        .toggle.on { background: #000; }
+        .toggle::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+        }
+        .toggle.on::after { left: 18px; }
+
+        /* Center */
+        .center { display: flex; flex-direction: column; gap: 12px; }
+
+        /* Preview */
+        .preview {
+            background: #1a1a1a;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            border: 1px solid #000;
+        }
+        .preview-text { text-align: center; font-size: 12px; }
+        .preview-text .icon { font-size: 32px; margin-bottom: 5px; }
+
+        /* Stats */
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .stat-card {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+        .stat-value { font-size: 20px; font-weight: bold; }
+        .stat-label { font-size: 9px; color: #666; margin-top: 3px; text-transform: uppercase; }
+
+        /* Table */
+        .table { width: 100%; border-collapse: collapse; font-size: 11px; }
+        .table th, .table td { padding: 8px; text-align: left; border-bottom: 1px solid #eee; }
+        .table th { font-size: 9px; color: #888; text-transform: uppercase; }
+
+        /* Player List */
+        .player-list { list-style: none; }
+        .player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .player-info { display: flex; align-items: center; gap: 8px; }
+        .player-avatar {
+            width: 24px;
+            height: 24px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            color: #888;
+        }
+        .player-name { font-size: 11px; font-weight: bold; }
+        .player-seat { font-size: 9px; color: #888; }
+        .player-chips { font-size: 11px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="label">WIREFRAME: Production Dashboard</div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">[EBS]</div>
+            <nav class="nav">
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Tables</a>
+                <a href="#">History</a>
+                <a href="#">Settings</a>
+            </nav>
+            <div class="header-btns">
+                <button class="header-btn">Overlay</button>
+                <button class="header-btn primary">Start</button>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <div class="main">
+            <!-- Left -->
+            <div class="sidebar">
+                <div class="panel">
+                    <div class="panel-header">System Status</div>
+                    <div class="panel-content">
+                        <ul class="status-list">
+                            <li class="status-item"><span><span class="status-dot ok"></span>RFID Reader</span><span>COM3</span></li>
+                            <li class="status-item"><span><span class="status-dot ok"></span>WebSocket</span><span>OK</span></li>
+                            <li class="status-item"><span><span class="status-dot ok"></span>Card DB</span><span>52</span></li>
+                            <li class="status-item"><span><span class="status-dot warn"></span>OBS</span><span>Pending</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">Quick Actions</div>
+                    <div class="panel-content">
+                        <div class="quick-actions">
+                            <button class="quick-btn">New Table</button>
+                            <button class="quick-btn">Add Player</button>
+                            <button class="quick-btn">Reset</button>
+                            <button class="quick-btn">Test Card</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">Security</div>
+                    <div class="panel-content">
+                        <div class="toggle-item"><span>Trustless Mode</span><div class="toggle on"></div></div>
+                        <div class="toggle-item"><span>Delay (sec)</span><span>[30]</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center -->
+            <div class="center">
+                <div class="panel">
+                    <div class="panel-header">Live Preview</div>
+                    <div class="preview">
+                        <div class="preview-text">
+                            <div class="icon">[▶]</div>
+                            <div>Overlay Preview</div>
+                            <div style="color:#444">960 x 540</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-card"><div class="stat-value">47</div><div class="stat-label">Hands</div></div>
+                    <div class="stat-card"><div class="stat-value">$225K</div><div class="stat-label">Total Pot</div></div>
+                    <div class="stat-card"><div class="stat-value">2:45</div><div class="stat-label">Session</div></div>
+                    <div class="stat-card"><div class="stat-value">0</div><div class="stat-label">Errors</div></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">Recent Hands</div>
+                    <div class="panel-content">
+                        <table class="table">
+                            <thead><tr><th>Hand</th><th>Winner</th><th>Pot</th><th>Board</th></tr></thead>
+                            <tbody>
+                                <tr><td>#46</td><td>[Player A]</td><td>$12,500</td><td>Ks 7h 2d 9c Jh</td></tr>
+                                <tr><td>#45</td><td>[Player C]</td><td>$8,000</td><td>As Qd 3c 8h 5s</td></tr>
+                                <tr><td>#44</td><td>[Player B]</td><td>$3,500</td><td>---</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right -->
+            <div class="sidebar">
+                <div class="panel">
+                    <div class="panel-header">Players (6/9)</div>
+                    <div class="panel-content">
+                        <ul class="player-list">
+                            <li class="player-item">
+                                <div class="player-info">
+                                    <div class="player-avatar">[1]</div>
+                                    <div><div class="player-name">[Player A]</div><div class="player-seat">Seat 1 - BTN</div></div>
+                                </div>
+                                <div class="player-chips">$50K</div>
+                            </li>
+                            <li class="player-item">
+                                <div class="player-info">
+                                    <div class="player-avatar">[2]</div>
+                                    <div><div class="player-name">[Player B]</div><div class="player-seat">Seat 2 - SB</div></div>
+                                </div>
+                                <div class="player-chips">$48K</div>
+                            </li>
+                            <li class="player-item">
+                                <div class="player-info">
+                                    <div class="player-avatar">[3]</div>
+                                    <div><div class="player-name">[Player C]</div><div class="player-seat">Seat 3 - BB</div></div>
+                                </div>
+                                <div class="player-chips">$47K</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">Output</div>
+                    <div class="panel-content">
+                        <div class="toggle-item"><span>Browser Source</span><div class="toggle on"></div></div>
+                        <div class="toggle-item"><span>Virtual Cam</span><div class="toggle"></div></div>
+                        <div class="toggle-item"><span>NDI</span><div class="toggle"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

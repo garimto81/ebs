@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS - Viewer Overlay (PokerGFX Style)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #fff; color: #000; padding: 20px; }
+
+        .container {
+            width: 960px;
+            height: 540px;
+            /* 실제 영상 위 오버레이를 시뮬레이션 - 어두운 테이블 배경 */
+            background: #e0e0e0;
+            border: 2px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #000;
+            color: #fff;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 100;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            z-index: 50;
+        }
+
+        .event-logo {
+            width: 70px;
+            height: 38px;
+            background: #222;
+            border: 1px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 8px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .blinds-info {
+            margin-left: 15px;
+            padding: 5px 12px;
+            background: #1a1a1a;
+            border-left: 3px solid #333;
+            flex-shrink: 0;
+        }
+        .blinds-label {
+            color: #666;
+            font-size: 9px;
+            text-transform: uppercase;
+        }
+        .blinds-value {
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .blinds-ante {
+            color: #888;
+            font-size: 10px;
+        }
+
+        .chip-counts {
+            display: flex;
+            gap: 2px;
+            margin-left: 15px;
+            flex: 1;
+            justify-content: center;
+        }
+        .chip-item {
+            text-align: center;
+            padding: 4px 8px;
+            background: #111;
+            border-bottom: 2px solid transparent;
+            min-width: 80px;
+        }
+        .chip-item.active {
+            border-bottom-color: #333;
+            background: #1a1a1a;
+        }
+        .chip-name {
+            color: #888;
+            font-size: 8px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .chip-value {
+            color: #fff;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .broadcaster-logo {
+            width: 50px;
+            height: 30px;
+            background: #222;
+            border: 1px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 7px;
+            flex-shrink: 0;
+        }
+
+        /* ===== PLAYER HUD STACK (좌측 하단, 수직 정렬) ===== */
+        .player-huds {
+            position: absolute;
+            left: 15px;
+            bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 40;
+        }
+
+        .player-hud {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        /* 카드가 HUD 위로 겹침 */
+        .hud-cards {
+            display: flex;
+            gap: 2px;
+            position: absolute;
+            top: -20px;
+            left: 5px;
+            z-index: 5;
+        }
+        .hud-card {
+            width: 28px;
+            height: 38px;
+            background: #fff;
+            border: 2px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            border-radius: 3px;
+        }
+        .hud-card .rank { font-size: 13px; line-height: 1; }
+        .hud-card .suit { font-size: 11px; line-height: 1; }
+        .hud-card .suit.red { color: #666; }
+        .hud-card.back {
+            background: repeating-linear-gradient(45deg, #888, #888 3px, #aaa 3px, #aaa 6px);
+            border-color: #444;
+        }
+        .hud-card.back .rank { display: none; }
+
+        .hud-info {
+            background: rgba(0,0,0,0.9);
+            padding: 20px 12px 8px 12px;
+            min-width: 180px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .hud-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        .hud-name {
+            color: #fff;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hud-stack {
+            color: #ccc;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .hud-action {
+            color: #888;
+            text-transform: uppercase;
+            font-size: 10px;
+        }
+        .hud-equity {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Folded state */
+        .player-hud.folded .hud-info {
+            background: rgba(40,40,40,0.8);
+        }
+        .player-hud.folded .hud-name,
+        .player-hud.folded .hud-stack {
+            color: #666;
+        }
+        .player-hud.folded .hud-equity {
+            display: none;
+        }
+
+        /* ===== 우측 하단 컴팩트 3-Grid ===== */
+        .right-panel {
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            width: 160px;
+            z-index: 40;
+        }
+
+        .board-cards-panel {
+            background: rgba(0,0,0,0.9);
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+        }
+        .board-cards-row {
+            display: flex;
+            gap: 3px;
+        }
+        .board-card {
+            width: 26px;
+            height: 36px;
+            background: #fff;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 2px;
+        }
+        .board-card .rank { font-size: 12px; line-height: 1; }
+        .board-card .suit { font-size: 10px; line-height: 1; }
+        .board-card .suit.red { color: #666; }
+        .board-card.empty {
+            background: #222;
+            border-color: #444;
+        }
+
+        .pot-display {
+            background: #333;
+            color: #fff;
+            padding: 6px 10px;
+            text-align: center;
+        }
+        .pot-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+        .pot-value {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .event-info {
+            background: rgba(0,0,0,0.9);
+            color: #aaa;
+            padding: 6px 10px;
+            font-size: 9px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* ===== 상태 표시 (좌측 상단) ===== */
+        .status-indicator {
+            position: absolute;
+            top: 60px;
+            left: 15px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 10px;
+            z-index: 30;
+            display: flex;
+            gap: 15px;
+        }
+        .status-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .status-label {
+            color: #666;
+            font-size: 8px;
+            text-transform: uppercase;
+        }
+        .status-value {
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        /* ===== 디자인 노트 ===== */
+        .design-note {
+            position: absolute;
+            top: 60px;
+            right: 15px;
+            background: rgba(255,255,255,0.95);
+            border: 1px solid #000;
+            padding: 8px 12px;
+            font-size: 9px;
+            color: #333;
+            max-width: 180px;
+            z-index: 60;
+        }
+        .design-note strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="label">WIREFRAME: Viewer Overlay (PokerGFX Style) - 960x540</div>
+
+
+        <!-- TOP BAR: Event Logo + Blinds + Player Chips -->
+        <div class="top-bar">
+            <div class="event-logo">[EVENT<br>LOGO]</div>
+            <div class="blinds-info">
+                <div class="blinds-label">BLINDS</div>
+                <div class="blinds-value">20K / 40K</div>
+                <div class="blinds-ante">-40K (M)</div>
+            </div>
+            <div class="chip-counts">
+                <div class="chip-item">
+                    <div class="chip-name">TOLLERENE</div>
+                    <div class="chip-value">2,040,000</div>
+                </div>
+                <div class="chip-item">
+                    <div class="chip-name">ZOBIAN</div>
+                    <div class="chip-value">1,825,000</div>
+                </div>
+                <div class="chip-item active">
+                    <div class="chip-name">LICHTENBERGER</div>
+                    <div class="chip-value">4,140,000</div>
+                </div>
+                <div class="chip-item">
+                    <div class="chip-name">VON KRIEG.</div>
+                    <div class="chip-value">1,490,000</div>
+                </div>
+                <div class="chip-item">
+                    <div class="chip-name">SOVEREL</div>
+                    <div class="chip-value">710,000</div>
+                </div>
+            </div>
+            <div class="broadcaster-logo">[TV]</div>
+        </div>
+
+        <!-- 상태 표시 (좌측 상단) -->
+        <div class="status-indicator">
+            <div class="status-item">
+                <span class="status-label">Street</span>
+                <span class="status-value">FLOP</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">To Act</span>
+                <span class="status-value">VON KRIEGENBERGER</span>
+            </div>
+        </div>
+
+        <!-- PLAYER HUDs (좌측 하단, 수직 정렬) -->
+        <div class="player-huds">
+            <!-- Player 1: TOLLERENE -->
+            <div class="player-hud">
+                <div class="hud-cards">
+                    <div class="hud-card">
+                        <span class="rank">6</span>
+                        <span class="suit red">&#9830;</span>
+                    </div>
+                    <div class="hud-card">
+                        <span class="rank">5</span>
+                        <span class="suit red">&#9829;</span>
+                    </div>
+                </div>
+                <div class="hud-info">
+                    <div class="hud-row">
+                        <span class="hud-name">TOLLERENE</span>
+                    </div>
+                    <div class="hud-row">
+                        <span class="hud-stack">1.9M</span>
+                        <span class="hud-action">CHECK</span>
+                        <span class="hud-equity">20%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player 2: LICHTENBERGER -->
+            <div class="player-hud">
+                <div class="hud-cards">
+                    <div class="hud-card">
+                        <span class="rank">K</span>
+                        <span class="suit">&#9824;</span>
+                    </div>
+                    <div class="hud-card">
+                        <span class="rank">9</span>
+                        <span class="suit">&#9824;</span>
+                    </div>
+                </div>
+                <div class="hud-info">
+                    <div class="hud-row">
+                        <span class="hud-name">LICHTENBERGER</span>
+                    </div>
+                    <div class="hud-row">
+                        <span class="hud-stack">4.1M</span>
+                        <span class="hud-action">CHECK</span>
+                        <span class="hud-equity">49%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player 3: VON KRIEGENBERGER -->
+            <div class="player-hud">
+                <div class="hud-cards">
+                    <div class="hud-card">
+                        <span class="rank">J</span>
+                        <span class="suit">&#9824;</span>
+                    </div>
+                    <div class="hud-card">
+                        <span class="rank">2</span>
+                        <span class="suit">&#9827;</span>
+                    </div>
+                </div>
+                <div class="hud-info">
+                    <div class="hud-row">
+                        <span class="hud-name">VON KRIEGENBERGER</span>
+                    </div>
+                    <div class="hud-row">
+                        <span class="hud-stack">1.4M</span>
+                        <span class="hud-action"></span>
+                        <span class="hud-equity">31%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: 컴팩트 3-Grid (보드/팟/이벤트) -->
+        <div class="right-panel">
+            <div class="board-cards-panel">
+                <div class="board-cards-row">
+                    <div class="board-card">
+                        <span class="rank">K</span>
+                        <span class="suit red">&#9830;</span>
+                    </div>
+                    <div class="board-card">
+                        <span class="rank">Q</span>
+                        <span class="suit red">&#9829;</span>
+                    </div>
+                    <div class="board-card empty"></div>
+                    <div class="board-card empty"></div>
+                    <div class="board-card empty"></div>
+                </div>
+            </div>
+            <div class="pot-display">
+                <div class="pot-label">POT</div>
+                <div class="pot-value">300,000</div>
+            </div>
+            <div class="event-info">
+                EVENT #8 &bull; $25K NLH
+            </div>
+        </div>
+
+        <!-- Design Note -->
+        <div class="design-note">
+            <strong>PokerGFX Style</strong>
+            &#8226; HUD: 좌측 하단 수직 정렬<br>
+            &#8226; 카드: HUD 위로 겹침<br>
+            &#8226; 우측: 컴팩트 3-Grid<br>
+            &#8226; 영상 영역 최대 노출
+        </div>
+    </div>
+</body>
+</html>
