@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280">
+    <title>ESP32 + MFRC522 Breadboard Wiring</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1280px;
+            min-height: 800px;
+            background: #FFF;
+            font-family: 'Courier New', monospace;
+            color: #000;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #000;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .diagram-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: #FFF;
+            border: 2px solid #000;
+            margin-bottom: 30px;
+        }
+
+        /* Breadboard Grid */
+        .breadboard {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 500px;
+            background: #F5F5F5;
+            border: 3px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Power Rails */
+        .power-rail {
+            position: absolute;
+            width: 680px;
+            height: 20px;
+            left: 10px;
+            display: flex;
+        }
+
+        .power-rail.top {
+            top: 10px;
+        }
+
+        .power-rail.bottom {
+            bottom: 10px;
+        }
+
+        .rail-strip {
+            flex: 1;
+            height: 100%;
+            margin: 0 2px;
+            border: 1px solid #666;
+        }
+
+        .rail-strip.positive {
+            background: repeating-linear-gradient(
+                90deg,
+                #DDD 0px,
+                #DDD 5px,
+                #CCC 5px,
+                #CCC 10px
+            );
+        }
+
+        .rail-strip.ground {
+            background: repeating-linear-gradient(
+                90deg,
+                #999 0px,
+                #999 5px,
+                #888 5px,
+                #888 10px
+            );
+        }
+
+        .rail-label {
+            position: absolute;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* Main Grid */
+        .main-grid {
+            position: absolute;
+            left: 10px;
+            top: 50px;
+            width: 680px;
+            height: 400px;
+            display: grid;
+            grid-template-columns: repeat(64, 1fr);
+            grid-template-rows: repeat(30, 1fr);
+            gap: 1px;
+        }
+
+        .hole {
+            width: 100%;
+            height: 100%;
+            background: #DDD;
+            border: 1px solid #CCC;
+            border-radius: 50%;
+        }
+
+        /* Center Gap */
+        .center-gap {
+            position: absolute;
+            left: 50%;
+            top: 50px;
+            width: 40px;
+            height: 400px;
+            background: #E8E8E8;
+            transform: translateX(-50%);
+            border-left: 2px solid #999;
+            border-right: 2px solid #999;
+        }
+
+        /* ESP32 Module */
+        .esp32 {
+            position: absolute;
+            left: 120px;
+            top: 120px;
+            width: 180px;
+            height: 280px;
+            background: #000;
+            border: 3px solid #333;
+            border-radius: 4px;
+            z-index: 10;
+        }
+
+        .esp32-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFF;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .esp32-pin {
+            position: absolute;
+            width: 30px;
+            height: 8px;
+            background: #666;
+            border: 1px solid #333;
+        }
+
+        .esp32-pin.left {
+            left: -3px;
+        }
+
+        .esp32-pin.right {
+            right: -3px;
+        }
+
+        .pin-label {
+            position: absolute;
+            font-size: 9px;
+            color: #000;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .pin-label.left {
+            right: 35px;
+        }
+
+        .pin-label.right {
+            left: 35px;
+        }
+
+        /* MFRC522 Module */
+        .mfrc522 {
+            position: absolute;
+            right: 120px;
+            top: 180px;
+            width: 140px;
+            height: 160px;
+            background: #0066CC;
+            background: linear-gradient(135deg, #003366, #0066CC);
+            border: 3px solid #003366;
+            border-radius: 4px;
+            z-index: 10;
+        }
+
+        .mfrc522::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .mfrc522-label {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFF;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .mfrc522-pin {
+            position: absolute;
+            width: 8px;
+            height: 30px;
+            background: #666;
+            border: 1px solid #333;
+            bottom: -3px;
+        }
+
+        /* Wires */
+        .wire {
+            position: absolute;
+            z-index: 5;
+        }
+
+        .wire-line {
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        .wire.red .wire-line { stroke: #000; stroke-dasharray: 8 4; }
+        .wire.black .wire-line { stroke: #000; stroke-width: 4; }
+        .wire.yellow .wire-line { stroke: #666; }
+        .wire.green .wire-line { stroke: #666; stroke-dasharray: 4 2; }
+        .wire.blue .wire-line { stroke: #333; }
+        .wire.orange .wire-line { stroke: #999; }
+        .wire.gray .wire-line { stroke: #999; stroke-dasharray: 6 3; }
+
+        /* Legend */
+        .legend {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .legend-section {
+            border: 2px solid #333;
+            padding: 15px;
+            background: #F9F9F9;
+        }
+
+        .legend-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 40px;
+            height: 4px;
+            margin-right: 10px;
+            border: 1px solid #333;
+        }
+
+        .legend-color.red { background: #000; }
+        .legend-color.black { background: #000; height: 6px; }
+        .legend-color.yellow { background: #666; }
+        .legend-color.green { background: #666; }
+        .legend-color.blue { background: #333; }
+        .legend-color.orange { background: #999; }
+        .legend-color.gray { background: #999; }
+
+        .step-indicator {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #000;
+            color: #FFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 15;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #333;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Pin connection table */
+        .connection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .connection-table th,
+        .connection-table td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .connection-table th {
+            background: #000;
+            color: #FFF;
+            font-weight: bold;
+        }
+
+        .connection-table tr:nth-child(even) {
+            background: #F5F5F5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ESP32 + MFRC522 Breadboard Wiring</h1>
+        <div class="subtitle">Hardware Connection Diagram - EBS Stage 0</div>
+    </div>
+
+    <div class="diagram-container">
+        <!-- Breadboard -->
+        <div class="breadboard">
+            <!-- Power Rails Top -->
+            <div class="power-rail top">
+                <div class="rail-strip positive"></div>
+                <div class="rail-strip ground"></div>
+            </div>
+            <span class="rail-label" style="left: 15px; top: 5px;">+3.3V</span>
+            <span class="rail-label" style="left: 355px; top: 5px;">GND</span>
+
+            <!-- Power Rails Bottom -->
+            <div class="power-rail bottom">
+                <div class="rail-strip positive"></div>
+                <div class="rail-strip ground"></div>
+            </div>
+
+            <!-- Center Gap -->
+            <div class="center-gap"></div>
+
+            <!-- ESP32 Module -->
+            <div class="esp32">
+                <div class="esp32-label">ESP32<br>DevKit</div>
+
+                <!-- Left Pins -->
+                <div class="esp32-pin left" style="top: 20px;"></div>
+                <span class="pin-label left" style="top: 18px; left: 8px;">3V3</span>
+
+                <div class="esp32-pin left" style="top: 50px;"></div>
+                <span class="pin-label left" style="top: 48px; left: 8px;">GND</span>
+
+                <div class="esp32-pin left" style="top: 100px;"></div>
+                <span class="pin-label left" style="top: 98px; left: 8px;">GPIO5</span>
+
+                <div class="esp32-pin left" style="top: 130px;"></div>
+                <span class="pin-label left" style="top: 128px; left: 8px;">GPIO18</span>
+
+                <div class="esp32-pin left" style="top: 160px;"></div>
+                <span class="pin-label left" style="top: 158px; left: 8px;">GPIO23</span>
+
+                <div class="esp32-pin left" style="top: 190px;"></div>
+                <span class="pin-label left" style="top: 188px; left: 8px;">GPIO19</span>
+
+                <div class="esp32-pin left" style="top: 220px;"></div>
+                <span class="pin-label left" style="top: 218px; left: 8px;">GPIO4</span>
+            </div>
+
+            <!-- MFRC522 Module -->
+            <div class="mfrc522">
+                <div class="mfrc522-label">MFRC522<br>RFID Module</div>
+
+                <!-- Bottom Pins -->
+                <div class="mfrc522-pin" style="left: 10px;"></div>
+                <div class="mfrc522-pin" style="left: 25px;"></div>
+                <div class="mfrc522-pin" style="left: 40px;"></div>
+                <div class="mfrc522-pin" style="left: 55px;"></div>
+                <div class="mfrc522-pin" style="left: 70px;"></div>
+                <div class="mfrc522-pin" style="left: 85px;"></div>
+                <div class="mfrc522-pin" style="left: 100px;"></div>
+                <div class="mfrc522-pin" style="left: 115px;"></div>
+
+                <!-- Pin Labels -->
+                <span class="pin-label" style="bottom: -25px; left: 5px; font-size: 8px;">SDA</span>
+                <span class="pin-label" style="bottom: -25px; left: 20px; font-size: 8px;">SCK</span>
+                <span class="pin-label" style="bottom: -25px; left: 33px; font-size: 8px;">MOSI</span>
+                <span class="pin-label" style="bottom: -25px; left: 48px; font-size: 8px;">MISO</span>
+                <span class="pin-label" style="bottom: -25px; left: 65px; font-size: 8px;">IRQ</span>
+                <span class="pin-label" style="bottom: -25px; left: 78px; font-size: 8px;">GND</span>
+                <span class="pin-label" style="bottom: -25px; left: 93px; font-size: 8px;">RST</span>
+                <span class="pin-label" style="bottom: -25px; left: 107px; font-size: 8px;">VCC</span>
+            </div>
+
+            <!-- Wires (SVG) -->
+            <svg class="wire" width="700" height="500" style="position: absolute; left: 0; top: 0; pointer-events: none;">
+                <!-- Power: 3V3 → VCC (Red/Dashed) -->
+                <path class="wire-line" d="M 120 140 L 80 140 L 80 60 L 620 60 L 620 325" fill="none"/>
+
+                <!-- Ground: GND → GND (Black/Thick) -->
+                <path class="wire-line" d="M 120 170 L 90 170 L 90 440 L 610 440 L 610 325" fill="none"/>
+
+                <!-- Data: GPIO5 → SDA (Yellow/Solid) -->
+                <path class="wire-line" d="M 120 220 L 100 220 L 100 300 L 520 300 L 520 325" fill="none"/>
+
+                <!-- Clock: GPIO18 → SCK (Green/Dashed) -->
+                <path class="wire-line" d="M 120 250 L 110 250 L 110 310 L 535 310 L 535 325" fill="none"/>
+
+                <!-- MOSI: GPIO23 → MOSI (Blue/Solid) -->
+                <path class="wire-line" d="M 120 280 L 120 320 L 550 320 L 550 325" fill="none"/>
+
+                <!-- MISO: GPIO19 → MISO (Orange/Solid) -->
+                <path class="wire-line" d="M 120 310 L 130 310 L 130 330 L 565 330 L 565 325" fill="none"/>
+
+                <!-- Reset: GPIO4 → RST (Gray/Dashed) -->
+                <path class="wire-line" d="M 120 340 L 140 340 L 140 350 L 595 350 L 595 325" fill="none"/>
+            </svg>
+
+            <!-- Step Indicators -->
+            <div class="step-indicator" style="left: 50px; top: 100px;">1</div>
+            <div class="step-indicator" style="right: 50px; top: 140px;">2</div>
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-section">
+            <div class="legend-title">Wire Connections (7 wires)</div>
+            <div class="legend-item">
+                <div class="legend-color red"></div>
+                <span><strong>3V3 → VCC</strong> (Power - 3.3V)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color black"></div>
+                <span><strong>GND → GND</strong> (Ground)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color yellow"></div>
+                <span><strong>GPIO5 → SDA</strong> (SPI Chip Select)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color green"></div>
+                <span><strong>GPIO18 → SCK</strong> (SPI Clock)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color blue"></div>
+                <span><strong>GPIO23 → MOSI</strong> (SPI Master Out)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color orange"></div>
+                <span><strong>GPIO19 → MISO</strong> (SPI Master In)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color gray"></div>
+                <span><strong>GPIO4 → RST</strong> (Reset Pin)</span>
+            </div>
+        </div>
+
+        <div class="legend-section">
+            <div class="legend-title">Connection Table</div>
+            <table class="connection-table">
+                <thead>
+                    <tr>
+                        <th>ESP32 Pin</th>
+                        <th>→</th>
+                        <th>MFRC522 Pin</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3.3V</td>
+                        <td>→</td>
+                        <td>VCC</td>
+                        <td>Power Supply</td>
+                    </tr>
+                    <tr>
+                        <td>GND</td>
+                        <td>→</td>
+                        <td>GND</td>
+                        <td>Ground</td>
+                    </tr>
+                    <tr>
+                        <td>GPIO5</td>
+                        <td>→</td>
+                        <td>SDA (SS)</td>
+                        <td>Chip Select</td>
+                    </tr>
+                    <tr>
+                        <td>GPIO18</td>
+                        <td>→</td>
+                        <td>SCK</td>
+                        <td>SPI Clock</td>
+                    </tr>
+                    <tr>
+                        <td>GPIO23</td>
+                        <td>→</td>
+                        <td>MOSI</td>
+                        <td>Data Out</td>
+                    </tr>
+                    <tr>
+                        <td>GPIO19</td>
+                        <td>→</td>
+                        <td>MISO</td>
+                        <td>Data In</td>
+                    </tr>
+                    <tr>
+                        <td>GPIO4</td>
+                        <td>→</td>
+                        <td>RST</td>
+                        <td>Reset Control</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 10px; font-size: 10px; color: #666;">
+                Note: IRQ pin is not used in basic setup
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <strong>EBS Stage 0 - Hardware Setup Guide</strong><br>
+        IMPORTANT: Use 3.3V power only. Do NOT connect 5V to MFRC522 VCC pin (will damage module).<br>
+        Verify connections before powering on. Keep wires short to minimize interference.
+    </div>
+</body>
+</html>

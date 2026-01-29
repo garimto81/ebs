@@ -161,18 +161,21 @@ Stage 0는 본격적인 개발(Stage 1-3) 전에 하드웨어 연결 가능성�
 
 ### 5.2 배선도
 
-```
-ESP32          MFRC522
-─────          ───────
-3.3V    ────── VCC
-GND     ────── GND
-GPIO5   ────── SDA (SS)
-GPIO18  ────── SCK
-GPIO23  ────── MOSI
-GPIO19  ────── MISO
-GPIO4   ────── RST
-        (IRQ 미사용)
-```
+![ESP32-MFRC522 배선도](../images/stage-0/02-wiring-diagram.png)
+*그림 5.1: ESP32 ↔ MFRC522 배선도*
+
+**핀 연결 요약:**
+
+| ESP32 | MFRC522 | 기능 |
+|-------|---------|------|
+| 3.3V | VCC | 전원 (3.3V 필수!) |
+| GND | GND | 접지 |
+| GPIO5 | SDA (SS) | SPI 칩 선택 |
+| GPIO18 | SCK | SPI 클럭 |
+| GPIO23 | MOSI | SPI 데이터 출력 |
+| GPIO19 | MISO | SPI 데이터 입력 |
+| GPIO4 | RST | 리셋 |
+| - | IRQ | 미사용 |
 
 ### 5.3 주의사항
 

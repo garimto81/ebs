@@ -95,18 +95,21 @@
 
 ### 3.1 배선 연결
 
-```
-ESP32          MFRC522
-─────          ───────
-3.3V    ────── VCC      (빨강)
-GND     ────── GND      (검정)
-GPIO5   ────── SDA (SS) (노랑)
-GPIO18  ────── SCK      (초록)
-GPIO23  ────── MOSI     (파랑)
-GPIO19  ────── MISO     (주황)
-GPIO4   ────── RST      (흰색)
-        (IRQ 미사용)
-```
+![ESP32-MFRC522 배선도](../images/stage-0/02-wiring-diagram.png)
+*그림 3.1: ESP32 ↔ MFRC522 배선 연결 (와이어 색상 참조)*
+
+**핀 연결 및 와이어 색상:**
+
+| ESP32 | MFRC522 | 와이어 색상 | 기능 |
+|-------|---------|------------|------|
+| 3.3V | VCC | 빨강 | 전원 |
+| GND | GND | 검정 | 접지 |
+| GPIO5 | SDA (SS) | 노랑 | SPI CS |
+| GPIO18 | SCK | 초록 | SPI Clock |
+| GPIO23 | MOSI | 파랑 | SPI Data Out |
+| GPIO19 | MISO | 주황 | SPI Data In |
+| GPIO4 | RST | 흰색 | Reset |
+| - | IRQ | - | 미사용 |
 
 **⚠️ 주의: VCC는 반드시 3.3V! 5V 연결 시 모듈 손상**
 
