@@ -1,7 +1,8 @@
 # PRD-0003-Stage0: RFID 연결 검증
 
-**버전**: 1.0.0
+**버전**: 1.0.1
 **생성일**: 2026-01-28
+**수정일**: 2026-01-29
 **상위 문서**: [PRD-0003-EBS-RFID-System.md](PRD-0003-EBS-RFID-System.md)
 **목표 기간**: 2026년 상반기 (H1)
 
@@ -140,6 +141,10 @@ Stage 0는 본격적인 개발(Stage 1-3) 전에 하드웨어 연결 가능성�
 ---
 
 ## 5. 하드웨어 구성
+
+> 📖 **상세 하드웨어 설계**: [DESIGN-RFID-Hardware.md](DESIGN-RFID-Hardware.md)
+> - MCU 대안 비교 (ESP32-C3, S3, C6, Pico W 등): Section 1.3
+> - RFID 리더 대안 비교 (PN5180, PN532 등): Section 1.4
 
 ### 5.1 필요 부품
 
