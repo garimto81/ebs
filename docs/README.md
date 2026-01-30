@@ -48,6 +48,7 @@ docs/
 
 | 질문 | 문서 |
 |------|------|
+| **처음 시작, 전문 용어 모름** | [stage-0/BEGINNER-Hardware-Quickstart.md](stage-0/BEGINNER-Hardware-Quickstart.md) |
 | **EBS가 뭔가요?** | [PRD-0003-EBS-RFID-System.md](PRD-0003-EBS-RFID-System.md) |
 | **Stage 0에서 뭘 해야 하나요?** | [stage-0/](stage-0/) 폴더 전체 |
 | **하드웨어 어떻게 연결하나요?** | [stage-0/DESIGN-RFID-Hardware.md](stage-0/DESIGN-RFID-Hardware.md) |
@@ -98,6 +99,7 @@ docs/
 
 ```
 stage-0/
+├── BEGINNER-Hardware-Quickstart.md     # 🆕 초보자용 빠른 시작
 ├── PRD-0003-Stage0-RFID-Connection.md  # 무엇을 검증할 것인가
 ├── DESIGN-RFID-Hardware.md             # 하드웨어 어떻게 연결하나
 └── GUIDE-RFID-Implementation.md        # 주차별 체크리스트

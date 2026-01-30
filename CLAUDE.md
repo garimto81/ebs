@@ -128,3 +128,11 @@ RFID Card → MFRC522 (13.56MHz) → ESP32 (SPI) → USB Serial JSON
 ```
 
 **Latency Target**: < 200ms E2E
+
+---
+
+## Google Docs 동기화
+
+| 문서 | Google Docs ID | URL |
+|------|---------------|-----|
+| BEGINNER-Hardware-Quickstart | `1Q61fgxFZeU1L0epB44ybSJ1dKxXslvmLorqAqmLcotc` | [Edit](https://docs.google.com/document/d/1Q61fgxFZeU1L0epB44ybSJ1dKxXslvmLorqAqmLcotc/edit) |

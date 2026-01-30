@@ -9,6 +9,17 @@
 
 ---
 
+## 0. 사전 준비
+
+이 가이드를 따라하기 전에:
+- [ ] **처음 시작**: [BEGINNER-Hardware-Quickstart.md](BEGINNER-Hardware-Quickstart.md) 완료
+- [ ] **배선 완료**: ESP32 ↔ MFRC522 연결됨
+- [ ] **첫 테스트 성공**: Serial Monitor에 UID 출력 확인
+
+위 체크리스트가 완료되지 않았다면, 먼저 초보자 가이드부터 시작하세요.
+
+---
+
 ## 1. Stage 0 개요
 
 ### 1.1 목표
