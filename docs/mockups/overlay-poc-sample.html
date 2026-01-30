@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS Stage 0 PoC - Minimal Overlay</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f0f0;
+            font-family: 'Roboto', 'Noto Sans', 'Segoe UI', Arial, sans-serif;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* 컨테이너: OBS Browser Source 시뮬레이션 */
+        .obs-container {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            border: 3px solid #000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin: 0 auto;
+            /* 실제 사용 시: background: transparent; */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        /* 레이블 (개발용, 실제 배포 시 제거) */
+        .dev-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            z-index: 100;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== Player HUD (좌측 하단) ===== */
+        .player-hud {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            z-index: 10;
+            animation: fadeIn 400ms ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 카드 컨테이너 */
+        .hud-cards {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            width: 60px;
+            height: 80px;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 4px;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: transform 200ms ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-4px) scale(1.05);
+        }
+
+        .card .rank {
+            font-size: 24px;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .card .suit {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        /* 카드 색상 */
+        .card.red .rank,
+        .card.red .suit {
+            color: #d32f2f;
+        }
+
+        .card.black .rank,
+        .card.black .suit {
+            color: #000;
+        }
+
+        /* 뒷면 카드 (숨김) */
+        .card.back {
+            background: repeating-linear-gradient(
+                45deg,
+                #888,
+                #888 3px,
+                #aaa 3px,
+                #aaa 6px
+            );
+            border-color: #555;
+        }
+
+        .card.back .rank,
+        .card.back .suit {
+            display: none;
+        }
+
+        /* 플레이어 정보 */
+        .hud-info {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 14px;
+            border-radius: 4px;
+            min-width: 200px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hud-name {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .hud-stack {
+            color: #ffd700;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hud-stack-label {
+            color: #999;
+            font-size: 12px;
+            margin-right: 6px;
+        }
+
+        /* 상태 인디케이터 (연결 상태) */
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4caf50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .status-text {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 디자인 노트 (목업 설명) */
+        .design-note {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #000;
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 11px;
+            color: #333;
+            max-width: 280px;
+            z-index: 20;
+            line-height: 1.6;
+        }
+
+        .design-note h3 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 4px;
+        }
+
+        .design-note ul {
+            margin: 8px 0 0 16px;
+            padding: 0;
+        }
+
+        .design-note li {
+            margin-bottom: 4px;
+        }
+
+        .design-note strong {
+            color: #d32f2f;
+        }
+
+        /* 대체 스타일 예시 (3개 버전) */
+        .style-variants {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .variant-button {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 200ms;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .variant-button:hover {
+            background: rgba(50, 50, 50, 0.9);
+            border-color: #666;
+        }
+
+        .variant-button.active {
+            background: #4caf50;
+            border-color: #4caf50;
+        }
+
+        /* 반응형: 1920x1080 모드 */
+        @media (min-width: 1920px) {
+            .obs-container {
+                width: 1920px;
+                height: 1080px;
+            }
+
+            .card {
+                width: 120px;
+                height: 160px;
+            }
+
+            .card .rank {
+                font-size: 48px;
+            }
+
+            .card .suit {
+                font-size: 40px;
+            }
+
+            .hud-name {
+                font-size: 32px;
+            }
+
+            .hud-stack {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="obs-container">
+        <!-- 개발용 레이블 -->
+        <div class="dev-label">
+            MOCKUP: Stage 0 PoC Overlay - Minimal Style (960x540)
+        </div>
+
+        <!-- 상태 인디케이터 (RFID 연결 상태) -->
+        <div class="status-indicator">
+            <div class="status-dot"></div>
+            <span class="status-text">RFID Connected</span>
+        </div>
+
+        <!-- Player HUD (좌측 하단) -->
+        <div class="player-hud">
+            <!-- 홀카드 2장 -->
+            <div class="hud-cards">
+                <div class="card red">
+                    <span class="rank">A</span>
+                    <span class="suit">♦</span>
+                </div>
+                <div class="card black">
+                    <span class="rank">K</span>
+                    <span class="suit">♠</span>
+                </div>
+            </div>
+
+            <!-- 플레이어 정보 -->
+            <div class="hud-info">
+                <div class="hud-name">Player 1</div>
+                <div class="hud-stack">
+                    <span class="hud-stack-label">Stack:</span>
+                    1,500,000
+                </div>
+            </div>
+        </div>
+
+        <!-- 디자인 노트 -->
+        <div class="design-note">
+            <h3>Stage 0 PoC - 미니멀 오버레이</h3>
+            <ul>
+                <li><strong>목표:</strong> RFID 카드 인식 검증</li>
+                <li><strong>UI 범위:</strong> 2장 홀카드 + 플레이어 정보</li>
+                <li><strong>배경:</strong> 투명 (OBS Browser Source)</li>
+                <li><strong>해상도:</strong> 960x540 (경량) / 1920x1080 (Full HD)</li>
+                <li><strong>애니메이션:</strong> fade-in 400ms</li>
+                <li><strong>확장:</strong> Stage 1에서 PokerGFX 스타일로 진화</li>
+            </ul>
+            <br>
+            <strong>WebSocket 연동:</strong>
+            <code style="font-size: 10px; display: block; margin-top: 4px;">
+                ws://localhost:8000/ws
+            </code>
+        </div>
+
+        <!-- 스타일 변형 버튼 (예시) -->
+        <div class="style-variants">
+            <div class="variant-button active">Minimal</div>
+            <div class="variant-button">PokerGFX (Stage 1)</div>
+            <div class="variant-button">WPT (Stage 2)</div>
+        </div>
+    </div>
+
+    <!-- JavaScript: 실제 구현 시 WebSocket 연동 -->
+    <script>
+        // Stage 0 PoC에서는 정적 HTML만 사용
+        // Stage 1부터 WebSocket 연동 추가 예정
+
+        /*
+        // WebSocket 연결 예시 (Stage 1 구현 시)
+        const ws = new WebSocket('ws://localhost:8000/ws');
+
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            if (data.type === 'card_detected') {
+                updateCard(data.card);
+            }
+        };
+
+        function updateCard(cardData) {
+            const cardElement = document.querySelector('.card');
+            cardElement.querySelector('.rank').textContent = cardData.rank;
+            cardElement.querySelector('.suit').textContent = cardData.display.slice(1);
+            // 색상 업데이트 (red/black)
+            if (['♥', '♦'].includes(cardData.suit)) {
+                cardElement.classList.add('red');
+                cardElement.classList.remove('black');
+            } else {
+                cardElement.classList.add('black');
+                cardElement.classList.remove('red');
+            }
+        }
+        */
+
+        // 스타일 변형 버튼 이벤트 (데모용)
+        const buttons = document.querySelectorAll('.variant-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                button.classList.add('active');
+                alert(`"${button.textContent}" 스타일은 ${button.textContent.includes('Stage') ? button.textContent.match(/Stage \d/)[0] : 'Stage 0'}에서 구현됩니다.`);
+            });
+        });
+    </script>
+</body>
+</html>

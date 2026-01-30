@@ -43,6 +43,36 @@ Stage 0는 본격적인 개발(Stage 1-3) 전에 하드웨어 연결 가능성�
 | 종료 | 2026년 6월 |
 | 총 기간 | 5개월 (약 20주) |
 
+### 1.5 Stage-Pre에서 이관된 작업
+
+> Stage-Pre 완료 후 Stage 0에서 수행할 하드웨어 관련 작업
+
+| # | 작업 | 상태 | 선행 조건 |
+|---|------|:----:|----------|
+| S0-1 | 하드웨어 구매 (MFRC522 + ST25R3911B) | 대기 | Stage-Pre 완료 |
+| S0-2 | 개발 환경 설정 (Arduino IDE) | 대기 | S0-1 완료 |
+| S0-3 | MFRC522 학습 및 E2E PoC | 대기 | S0-2 완료 |
+| S0-4 | **ST25R3911B 프로덕션 스펙 검증** | 대기 | S0-3 완료 |
+
+**참조 문서**:
+- [SPEC-RFID-Production-Module.md](../specs/SPEC-RFID-Production-Module.md) - **프로덕션 스펙 정의 (최종 사양)**
+- [PROCUREMENT-RFID-Parts.md](../procurement/PROCUREMENT-RFID-Parts.md) - 구매 가이드
+- [DECISION-RFID-Module.md](../decisions/DECISION-RFID-Module.md) - MFRC522 선택 근거 (학습용)
+- [DESIGN-RFID-Hardware.md](DESIGN-RFID-Hardware.md) - 배선도
+
+### 1.6 프로덕션 RFID 모듈 정의
+
+> **"RFID 통신 성공" = 프로덕션 스펙(ST25R3911B)에서의 성공**
+
+| 모듈 | 용도 | Stage 0 역할 |
+|------|------|-------------|
+| MFRC522 | 학습용 | Phase 0-1 ~ 0-2 |
+| **ST25R3911B** | **프로덕션** | Phase 0-3 ~ 0-4 (검증) |
+
+**Stage 0 Gate 추가 조건**:
+- [ ] ST25R3911B로 SPEC 문서 검증 체크리스트 10항목 PASS (Section 8)
+- [ ] "프로덕션 RFID 모듈 검증 완료" 선언
+
 ---
 
 ## 2. 팀 역량 현황
@@ -295,6 +325,7 @@ Stage 1 착수를 위해 다음 조건을 **모두** 충족해야 합니다:
 | RFID 읽기 | 5장 카드 100% 인식 | 테스트 로그 |
 | E2E 지연 | 카드→화면 < 1초 | 타임스탬프 |
 | 연속 운영 | 4시간 무중단 | 모니터링 |
+| **프로덕션 스펙 검증** | **ST25R3911B 검증 체크리스트 10항목 PASS** | **SPEC 문서 Section 8** |
 | 팀 자신감 | "Stage 1 진행 가능" 합의 | 팀 회의록 |
 | 문서화 | 4개 가이드 완성 | 문서 검토 |
 
@@ -321,6 +352,12 @@ Stage 1 착수를 위해 다음 조건을 **모두** 충족해야 합니다:
 - [ ] E2E 지연 < 1초
 - [ ] 4시간 무중단 테스트
 - [ ] 에러 로깅 동작
+
+### 프로덕션 스펙 (ST25R3911B)
+
+- [ ] ST25R3911B 모듈 동작 확인
+- [ ] P0 요구사항 10항목 PASS (`docs/specs/SPEC-RFID-Production-Module.md`)
+- [ ] 프로덕션 모듈 검증 완료 선언
 
 ### 문서
 

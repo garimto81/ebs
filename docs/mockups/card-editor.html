@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS Card-UID Mapping Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse-border {
+            0%, 100% { border-color: #fbbf24; box-shadow: 0 0 10px #fbbf24; }
+            50% { border-color: #f59e0b; box-shadow: 0 0 20px #f59e0b; }
+        }
+        .learning {
+            animation: pulse-border 1s ease-in-out infinite;
+        }
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        .card-symbol {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .card-spades, .card-clubs { color: #1e293b; }
+        .card-hearts, .card-diamonds { color: #dc2626; }
+        .status-mapped {
+            background: #10b981;
+            color: white;
+            animation: none;
+        }
+        .status-unmapped {
+            background: #6b7280;
+            color: white;
+        }
+        .status-learning {
+            background: #fbbf24;
+            color: #1a1a2e;
+            animation: pulse-border 1s ease-in-out infinite;
+        }
+        .reader-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .reader-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .reader-disconnected .reader-dot {
+            background: #ef4444;
+            animation: none;
+        }
+        .table-container {
+            max-height: calc(100vh - 280px);
+            overflow-y: auto;
+        }
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        .action-btn {
+            transition: all 0.2s;
+        }
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-100 p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="bg-slate-800 rounded-lg shadow-2xl p-6 mb-6 border border-slate-700">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-white mb-2">Card-UID Mapping Editor</h1>
+                    <p class="text-slate-400">EBS RFID System - Backend Configuration</p>
+                </div>
+                <div class="reader-status">
+                    <span class="reader-dot"></span>
+                    <span class="text-sm font-medium">Reader Connected: COM3</span>
+                </div>
+            </div>
+
+            <!-- Stats & Actions -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                <div class="bg-slate-700 rounded-lg p-4 border border-slate-600">
+                    <div class="text-2xl font-bold text-green-400">42</div>
+                    <div class="text-sm text-slate-400">Mapped Cards</div>
+                </div>
+                <div class="bg-slate-700 rounded-lg p-4 border border-slate-600">
+                    <div class="text-2xl font-bold text-red-400">12</div>
+                    <div class="text-sm text-slate-400">Unmapped Cards</div>
+                </div>
+                <div class="bg-slate-700 rounded-lg p-4 border border-slate-600">
+                    <div class="text-2xl font-bold text-yellow-400">0</div>
+                    <div class="text-sm text-slate-400">Learning Queue</div>
+                </div>
+                <div class="bg-slate-700 rounded-lg p-4 border border-slate-600">
+                    <div class="text-2xl font-bold text-blue-400">54</div>
+                    <div class="text-sm text-slate-400">Total Cards</div>
+                </div>
+            </div>
+
+            <!-- Batch Actions -->
+            <div class="flex flex-wrap gap-3">
+                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-lg font-medium shadow-lg">
+                    🎯 Learn All (Sequential)
+                </button>
+                <button class="action-btn bg-red-600 hover:bg-red-700 px-6 py-2.5 rounded-lg font-medium shadow-lg">
+                    🗑️ Clear All Mappings
+                </button>
+                <button class="action-btn bg-green-600 hover:bg-green-700 px-6 py-2.5 rounded-lg font-medium shadow-lg">
+                    💾 Export JSON
+                </button>
+                <button class="action-btn bg-purple-600 hover:bg-purple-700 px-6 py-2.5 rounded-lg font-medium shadow-lg">
+                    📂 Import JSON
+                </button>
+                <button class="action-btn bg-slate-600 hover:bg-slate-700 px-6 py-2.5 rounded-lg font-medium shadow-lg">
+                    🔄 Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-slate-800 rounded-lg shadow-2xl p-4 mb-6 border border-slate-700">
+            <div class="flex flex-wrap gap-3 items-center">
+                <select class="bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    <option>All Suits</option>
+                    <option>♠ Spades</option>
+                    <option>♥ Hearts</option>
+                    <option>♦ Diamonds</option>
+                    <option>♣ Clubs</option>
+                    <option>🃏 Joker</option>
+                </select>
+                <select class="bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    <option>All Status</option>
+                    <option>Mapped</option>
+                    <option>Unmapped</option>
+                </select>
+                <input type="text" placeholder="Search UID or Rank..." class="bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none flex-1 min-w-[200px]">
+                <button class="action-btn bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm font-medium border border-slate-600">
+                    Clear Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- Card Table -->
+        <div class="bg-slate-800 rounded-lg shadow-2xl border border-slate-700 overflow-hidden">
+            <div class="table-container">
+                <table class="w-full">
+                    <thead class="bg-slate-900 sticky top-0 z-10">
+                        <tr>
+                            <th class="text-left p-4 font-semibold text-slate-300 border-b border-slate-700">ID</th>
+                            <th class="text-left p-4 font-semibold text-slate-300 border-b border-slate-700">UID</th>
+                            <th class="text-left p-4 font-semibold text-slate-300 border-b border-slate-700">Card</th>
+                            <th class="text-left p-4 font-semibold text-slate-300 border-b border-slate-700">Suit</th>
+                            <th class="text-left p-4 font-semibold text-slate-300 border-b border-slate-700">Rank</th>
+                            <th class="text-left p-4 font-semibold text-slate-300 border-b border-slate-700">Value</th>
+                            <th class="text-left p-4 font-semibold text-slate-300 border-b border-slate-700">Status</th>
+                            <th class="text-left p-4 font-semibold text-slate-300 border-b border-slate-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Spades -->
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">1</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm">04:A2:B3:C4</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-spades">A♠</span></td>
+                            <td class="p-4 border-b border-slate-700">Spades</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">A</td>
+                            <td class="p-4 border-b border-slate-700">14</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-mapped px-3 py-1 rounded-full text-xs font-medium">Mapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">Clear</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">2</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm">05:B3:C4:D5</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-spades">2♠</span></td>
+                            <td class="p-4 border-b border-slate-700">Spades</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">2</td>
+                            <td class="p-4 border-b border-slate-700">2</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-mapped px-3 py-1 rounded-full text-xs font-medium">Mapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">Clear</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-700 transition-colors learning">
+                            <td class="p-4 border-b border-slate-700">3</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm text-yellow-400">Waiting for scan...</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-spades">3♠</span></td>
+                            <td class="p-4 border-b border-slate-700">Spades</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">3</td>
+                            <td class="p-4 border-b border-slate-700">3</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-learning px-3 py-1 rounded-full text-xs font-medium">🔄 Learning...</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-slate-600 px-3 py-1 rounded text-sm" disabled>Cancel</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">4</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm text-slate-500">-</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-spades">4♠</span></td>
+                            <td class="p-4 border-b border-slate-700">Spades</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">4</td>
+                            <td class="p-4 border-b border-slate-700">4</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-unmapped px-3 py-1 rounded-full text-xs font-medium">Unmapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-slate-600 px-3 py-1 rounded text-sm" disabled>Clear</button>
+                            </td>
+                        </tr>
+
+                        <!-- Hearts -->
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">14</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm">06:C4:D5:E6</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-hearts">A♥</span></td>
+                            <td class="p-4 border-b border-slate-700">Hearts</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">A</td>
+                            <td class="p-4 border-b border-slate-700">14</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-mapped px-3 py-1 rounded-full text-xs font-medium">Mapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">Clear</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">15</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm text-slate-500">-</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-hearts">2♥</span></td>
+                            <td class="p-4 border-b border-slate-700">Hearts</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">2</td>
+                            <td class="p-4 border-b border-slate-700">2</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-unmapped px-3 py-1 rounded-full text-xs font-medium">Unmapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-slate-600 px-3 py-1 rounded text-sm" disabled>Clear</button>
+                            </td>
+                        </tr>
+
+                        <!-- Diamonds -->
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">27</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm">07:D5:E6:F7</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-diamonds">A♦</span></td>
+                            <td class="p-4 border-b border-slate-700">Diamonds</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">A</td>
+                            <td class="p-4 border-b border-slate-700">14</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-mapped px-3 py-1 rounded-full text-xs font-medium">Mapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">Clear</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">28</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm">08:E6:F7:G8</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-diamonds">K♦</span></td>
+                            <td class="p-4 border-b border-slate-700">Diamonds</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">K</td>
+                            <td class="p-4 border-b border-slate-700">13</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-mapped px-3 py-1 rounded-full text-xs font-medium">Mapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">Clear</button>
+                            </td>
+                        </tr>
+
+                        <!-- Clubs -->
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">40</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm text-slate-500">-</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-clubs">A♣</span></td>
+                            <td class="p-4 border-b border-slate-700">Clubs</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">A</td>
+                            <td class="p-4 border-b border-slate-700">14</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-unmapped px-3 py-1 rounded-full text-xs font-medium">Unmapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-slate-600 px-3 py-1 rounded text-sm" disabled>Clear</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">41</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm">09:F7:G8:H9</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol card-clubs">Q♣</span></td>
+                            <td class="p-4 border-b border-slate-700">Clubs</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">Q</td>
+                            <td class="p-4 border-b border-slate-700">12</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-mapped px-3 py-1 rounded-full text-xs font-medium">Mapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">Clear</button>
+                            </td>
+                        </tr>
+
+                        <!-- Jokers -->
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">53</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm text-slate-500">-</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol" style="color: #dc2626;">🃏</span></td>
+                            <td class="p-4 border-b border-slate-700">Joker</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">Red</td>
+                            <td class="p-4 border-b border-slate-700">15</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-unmapped px-3 py-1 rounded-full text-xs font-medium">Unmapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-slate-600 px-3 py-1 rounded text-sm" disabled>Clear</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-700 transition-colors">
+                            <td class="p-4 border-b border-slate-700">54</td>
+                            <td class="p-4 border-b border-slate-700 font-mono text-sm">0A:G8:H9:I0</td>
+                            <td class="p-4 border-b border-slate-700"><span class="card-symbol" style="color: #1e293b;">🃏</span></td>
+                            <td class="p-4 border-b border-slate-700">Joker</td>
+                            <td class="p-4 border-b border-slate-700 font-bold">Black</td>
+                            <td class="p-4 border-b border-slate-700">16</td>
+                            <td class="p-4 border-b border-slate-700">
+                                <span class="status-mapped px-3 py-1 rounded-full text-xs font-medium">Mapped</span>
+                            </td>
+                            <td class="p-4 border-b border-slate-700">
+                                <button class="action-btn bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm mr-2">Learn</button>
+                                <button class="action-btn bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">Clear</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-6 text-center text-slate-500 text-sm">
+            <p>EBS (Event Broadcasting System) - RFID Card Mapping Editor v1.0.0</p>
+            <p class="mt-1">Last Updated: 2026-01-30 | Total Cards: 54 (52 + 2 Jokers)</p>
+        </div>
+    </div>
+
+    <script>
+        // Simulate real-time updates (mock functionality)
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Card-UID Mapping Editor Loaded');
+
+            // Simulate learning animation
+            const learningRow = document.querySelector('.learning');
+            if (learningRow) {
+                setTimeout(() => {
+                    const uidCell = learningRow.querySelector('td:nth-child(2)');
+                    const statusCell = learningRow.querySelector('.status-learning');
+
+                    uidCell.textContent = '0B:H9:I0:J1';
+                    uidCell.classList.remove('text-yellow-400');
+
+                    statusCell.textContent = 'Mapped';
+                    statusCell.classList.remove('status-learning');
+                    statusCell.classList.add('status-mapped');
+
+                    learningRow.classList.remove('learning');
+
+                    // Update stats
+                    document.querySelector('.text-green-400').textContent = '43';
+                    document.querySelector('.text-red-400').textContent = '11';
+                    document.querySelector('.text-yellow-400').textContent = '0';
+                }, 3000);
+            }
+
+            // Add hover tooltips
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    if (this.textContent.includes('Learn')) {
+                        this.title = 'Wait for next RFID scan and assign UID to this card';
+                    } else if (this.textContent.includes('Clear')) {
+                        this.title = 'Remove UID mapping from this card';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

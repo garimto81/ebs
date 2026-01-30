@@ -24,21 +24,23 @@ EBS(Event Broadcasting System)는 **WSOP STUDIO에서 축적된 핸드 히스토
 | **완전 자동화** | 카드 인식 → 그래픽 → 팟 계산 자동 | 인력/실수 최소화 |
 | **Trustless Security** | 운영자조차 실시간 카드 정보 접근 불가 | 게임 무결성 100% 보장 |
 
-## 1.3 4단계 개발 전략
+## 1.3 5단계 개발 전략
 
 EBS는 **소프트웨어 전문 팀의 첫 하드웨어 도전**으로, 단계적 검증을 통해 안정적으로 발전합니다:
 
-| Stage | 기간 | 목표 연도 | 핵심 전략 |
-|-------|------|----------|----------|
-| **Stage 0** | 5개월 | 2026 H1 | RFID 연결 검증 (팀 첫 하드웨어) |
-| **Stage 1** | 6개월 | 2026 H2 | PokerGFX 100% 복제 |
-| **Stage 2** | 12개월 | 2027 | WSOP+ DB 연동 |
-| **Stage 3** | 12개월 | 2028 | EBS 독창적 자동화 |
+| Stage | 기간 | 목표 연도 | 핵심 전략 | 슬로건 |
+|-------|------|----------|----------|--------|
+| **Stage-Pre** | 4-6주 | 2026 Q1 | PokerGFX 대체 준비 | "준비 완료" |
+| **Stage 0** | 5개월 | 2026 H1 | RFID 연결 검증 (팀 첫 하드웨어) | "연결 증명" |
+| **Stage 1** | 6개월 | 2026 H2 | PokerGFX 100% 복제 | "동일하게" |
+| **Stage 2** | 12개월 | 2027 | WSOP+ DB 연동 | "연결한다" |
+| **Stage 3** | 12개월 | 2028 | EBS 독창적 자동화 | "80% 감소" |
 
 **총 개발 기간**: 약 3년 (2026-2028)
 
 **상세 기획서:**
-- [Stage 0: RFID 연결 검증](stage-0/PRD-0003-Stage0-RFID-Connection.md) ← 신규
+- [Stage-Pre: PokerGFX 대체 준비](stage-pre/PRD-0003-Stage-Pre-GFX-Replacement.md) ← **신규**
+- [Stage 0: RFID 연결 검증](stage-0/PRD-0003-Stage0-RFID-Connection.md)
 - [Stage 1: PokerGFX 완전 복제](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md)
 - [Stage 2: WSOP+ DB 연동](stage-2/PRD-0003-Stage2-WSOP-Integration.md)
 - [Stage 3: EBS 독창적 자동화](stage-3/PRD-0003-Stage3-EBS-Automation.md)
