@@ -1,0 +1,61 @@
+{
+  "total_emails": 2,
+  "emails": [
+    {
+      "id": "19bfa03c1cece8b2",
+      "thread_id": "19bfa03c1cece8b2",
+      "subject": "회의록: “Pokercaster GFX Module Meeting” 2026년 1월 26일",
+      "sender": "Gemini <gemini-notes@google.com>",
+      "date": "2026-01-26T11:15:08+00:00",
+      "is_unread": false,
+      "labels": [
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "“Pokercaster GFX Module Meeting” 회의록 회의록이 조직의 초대된 참석자님에게 전송되었습니다. 회의록 열기 이 콘텐츠는 January 26, 2026, 8:13 PM KST에 자동 생성되었으며, 오류가 있을 수 있습니다. 요약 Marcus Kim, Tony Park, Ken Ahn, Chris You, Kate Han, Aiden",
+      "vendor": null
+    },
+    {
+      "id": "19bebde00213bcf7",
+      "thread_id": "19bebde00213bcf7",
+      "subject": "Re: New Contact Us Request",
+      "sender": "\"support@pokergfx.io\" <support@pokergfx.io>",
+      "date": "2026-01-23T17:19:12+00:00",
+      "is_unread": false,
+      "labels": [
+        "YELLOW_STAR",
+        "IMPORTANT",
+        "STARRED",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi Aiden, The PokerGFX live hand API (a json file that updates at the completion of each hand) is no longer available by request. This feature is now only available with an Enterprise license. If you",
+      "vendor": "pokergfx"
+    }
+  ],
+  "awaiting_reply": [],
+  "needs_followup": [],
+  "vendor_emails": {
+    "pokergfx": [
+      {
+        "id": "19bebde00213bcf7",
+        "thread_id": "19bebde00213bcf7",
+        "subject": "Re: New Contact Us Request",
+        "sender": "\"support@pokergfx.io\" <support@pokergfx.io>",
+        "date": "2026-01-23T17:19:12+00:00",
+        "is_unread": false,
+        "labels": [
+          "YELLOW_STAR",
+          "IMPORTANT",
+          "STARRED",
+          "CATEGORY_PERSONAL",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi Aiden, The PokerGFX live hand API (a json file that updates at the completion of each hand) is no longer available by request. This feature is now only available with an Enterprise license. If you",
+        "vendor": "pokergfx"
+      }
+    ]
+  },
+  "collected_at": "2026-02-02T17:45:15.359507",
+  "last_updated": "2026-02-02T18:02:40.349365"
+}

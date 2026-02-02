@@ -1,0 +1,15 @@
+# EBS Morning Automation Dependencies
+
+# Slack SDK (already in C:\claude\lib\slack)
+slack-sdk>=3.27.0
+
+# Google APIs (already in C:\claude\lib\gmail)
+google-api-python-client>=2.100.0
+google-auth-oauthlib>=1.1.0
+google-auth-httplib2>=0.1.1
+
+# Date utilities
+python-dateutil>=2.8.2
+
+# Optional: Rich console output
+rich>=13.0.0
