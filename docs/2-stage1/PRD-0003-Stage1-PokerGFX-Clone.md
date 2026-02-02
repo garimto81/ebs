@@ -1100,8 +1100,8 @@ Stage 1 개발 시 참조할 B&W 와이어프레임 목업입니다.
 | [PRD-0003-EBS-RFID-System.md](../PRD-0003-EBS-RFID-System.md) | 상위 PRD (전체 로드맵) |
 | [PokerGFX-Feature-Checklist.md](PokerGFX-Feature-Checklist.md) | 54개 기능 체크리스트 |
 | [ARCHITECTURE-RFID-Software.md](ARCHITECTURE-RFID-Software.md) | 소프트웨어 아키텍처 |
-| [DESIGN-RFID-Hardware.md](../stage-0/DESIGN-RFID-Hardware.md) | 하드웨어 설계 |
-| [GUIDE-RFID-Implementation.md](../stage-0/GUIDE-RFID-Implementation.md) | 구현 가이드 |
+| [DESIGN-RFID-Hardware.md](../1-stage0/DESIGN-RFID-Hardware.md) | 하드웨어 설계 |
+| [GUIDE-RFID-Implementation.md](../1-stage0/GUIDE-RFID-Implementation.md) | 구현 가이드 |
 | [REPORT-PokerGFX-Server-Analysis.md](REPORT-PokerGFX-Server-Analysis.md) | 경쟁사 분석 |
 
 ---

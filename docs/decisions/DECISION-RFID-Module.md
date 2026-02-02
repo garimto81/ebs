@@ -4,7 +4,7 @@
 **결정 상태**: 확정 (Stage 0)
 **효력 범위**: Stage 0 - Stage 3 (업그레이드 경로 포함)
 **관련 문서**:
-- [DESIGN-RFID-Hardware.md](../stage-0/DESIGN-RFID-Hardware.md#141-가격대별-전체-비교표)
+- [DESIGN-RFID-Hardware.md](../1-stage0/DESIGN-RFID-Hardware.md#141-가격대별-전체-비교표)
 - [PRD-0003-EBS-RFID-System.md](../PRD-0003-EBS-RFID-System.md)
 
 ---
@@ -313,8 +313,8 @@ ST25R3911B reader(SS_PIN, RST_PIN);
 
 | 문서 | URL / 경로 |
 |------|-----------|
-| RFID 리더 비교 | docs/stage-0/DESIGN-RFID-Hardware.md (Section 1.4) |
-| MCU 선택 | docs/stage-0/DESIGN-RFID-Hardware.md (Section 1.3) |
+| RFID 리더 비교 | docs/1-stage0/DESIGN-RFID-Hardware.md (Section 1.4) |
+| MCU 선택 | docs/1-stage0/DESIGN-RFID-Hardware.md (Section 1.3) |
 | 포커 카드/공급망 | docs/research/RESEARCH-RFID-Poker-Suppliers.md |
 | Master PRD | docs/PRD-0003-EBS-RFID-System.md |
 

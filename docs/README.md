@@ -1,147 +1,210 @@
-# EBS Documentation
+# EBS 문서 네비게이션
 
-EBS (Event Broadcasting System) 프로젝트 문서 색인입니다.
+**Last Updated**: 2026-02-02
+**Current Stage**: 🟡 **Stage-Pre** (진행 중)
 
 ---
 
-## 문서 구조
+## 🚨 현재 단계 (CRITICAL)
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         EBS 프로젝트 진행 단계                                │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐   │
+│   │Stage-Pre│───▶│ Stage 0 │───▶│ Stage 1 │───▶│ Stage 2 │───▶│ Stage 3 │   │
+│   │  기획   │    │  검증   │    │  복제   │    │  연동   │    │ 자동화  │   │
+│   └─────────┘    └─────────┘    └─────────┘    └─────────┘    └─────────┘   │
+│       🟡             ⏳             ⏳             ⏳             ⏳          │
+│      현재           대기           대기           대기           대기         │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+⚠️ Stage-Pre가 Stage 0보다 먼저입니다!
+⚠️ Stage-Pre 완료 전까지 Stage 0 작업을 시작하지 마세요!
+```
+
+---
+
+## 빠른 시작
+
+### 지금 무엇을 해야 하나요?
+
+**현재 Stage-Pre 진행 중입니다.**
+
+| 해야 할 일 | 문서 | 상태 |
+|-----------|------|:----:|
+| Slack Lists 칸반보드 생성 | [SLACK-LISTS-KANBAN.md](operations/SLACK-LISTS-KANBAN.md) | 📋 |
+| 1순위 업체 견적 요청 | [VENDOR-MANAGEMENT.md](operations/VENDOR-MANAGEMENT.md) | 📋 |
+| Stage 0 부품 발주 | [procurement/](procurement/) | 📋 |
+
+**상세 현황**: [operations/EBS-WORK-DASHBOARD.md](operations/EBS-WORK-DASHBOARD.md)
+
+---
+
+## 문서 구조 (Stage 순서)
+
+> ⚠️ **반드시 숫자 순서대로 진행하세요!**
 
 ```
 docs/
-├── README.md                          # 문서 네비게이션 (현재 파일)
-├── PRD-0003-EBS-RFID-System.md        # Master PRD (비전/전략)
 │
-├── stage-0/                           # 2026 H1: RFID 연결 검증
-│   ├── PRD-0003-Stage0-RFID-Connection.md
-│   ├── DESIGN-RFID-Hardware.md
-│   └── GUIDE-RFID-Implementation.md
+├── 📌 README.md ..................... 이 문서 (네비게이션)
+├── 📌 PRD-0003-EBS-RFID-System.md ... Master PRD (전체 로드맵)
 │
-├── stage-1/                           # 2026 H2: PokerGFX 복제
-│   ├── PRD-0003-Stage1-PokerGFX-Clone.md
-│   ├── PokerGFX-Feature-Checklist.md
-│   ├── ARCHITECTURE-RFID-Software.md
-│   └── REPORT-PokerGFX-Server-Analysis.md
 │
-├── stage-2/                           # 2027: WSOP+ 연동
-│   └── PRD-0003-Stage2-WSOP-Integration.md
+│   ══════════════════════════════════════════════════════════════
+│   🟡 Stage-Pre: 기획 및 준비 (현재 진행 중)
+│   ══════════════════════════════════════════════════════════════
 │
-├── stage-3/                           # 2028: EBS 자동화
-│   └── PRD-0003-Stage3-EBS-Automation.md
+├── 0-pre/  ◀◀◀ 현재 단계
+│   ├── CONCEPT-EBS-Vision.md ........ EBS 비전 정의
+│   ├── STRATEGY-*.md ................ 기술 전략
+│   └── RFP-*.md ..................... 개발 제안서
 │
-├── research/                          # 리서치/의사결정 근거
-│   └── RESEARCH-RFID-Poker-Suppliers.md
+├── operations/ ◀◀◀ 현재 작업 문서
+│   ├── EBS-WORK-DASHBOARD.md ........ 📊 업무 대시보드
+│   ├── STAGE-PROGRESSION.md ......... 📋 Stage 진행 가이드
+│   ├── SLACK-LISTS-KANBAN.md ........ Slack 칸반보드 설정
+│   ├── VENDOR-MANAGEMENT.md ......... 업체 관리
+│   ├── MAIL-MANAGEMENT.md ........... 메일 관리
+│   └── SLACK-MANAGEMENT.md .......... Slack 관리
 │
-├── mockups/                           # HTML 와이어프레임
-├── images/                            # 스크린샷/다이어그램
 │
-└── archived/                          # 레거시 문서
-    ├── PRD-0001-RFID-Poker-Card-Reader-MVP.md
-    ├── PRD-0002-Overlay-POC-Feature-Roadmap.md
-    └── MEETING-Outsourcing-Questions.md
+│   ══════════════════════════════════════════════════════════════
+│   ⏳ Stage 0: RFID 연결 검증 (대기)
+│   ══════════════════════════════════════════════════════════════
+│
+├── 1-stage0/
+│   ├── PRD-0003-Stage0-*.md ......... Stage 0 기획서
+│   ├── DESIGN-RFID-Hardware.md ...... 하드웨어 설계
+│   ├── GUIDE-*.md ................... 구현 가이드
+│   └── BEGINNER-*.md ................ 초보자 가이드
+│
+│
+│   ══════════════════════════════════════════════════════════════
+│   ⏳ Stage 1: PokerGFX 복제 (대기)
+│   ══════════════════════════════════════════════════════════════
+│
+├── 2-stage1/
+│   ├── PRD-0003-Stage1-*.md ......... Stage 1 기획서
+│   └── ARCHITECTURE-*.md ............ 소프트웨어 아키텍처
+│
+│
+│   ══════════════════════════════════════════════════════════════
+│   ⏳ Stage 2-3: 연동 및 자동화 (대기)
+│   ══════════════════════════════════════════════════════════════
+│
+├── 3-stage2/
+│   └── PRD-0003-Stage2-*.md ......... Stage 2 기획서
+│
+├── 4-stage3/
+│   └── PRD-0003-Stage3-*.md ......... Stage 3 기획서
+│
+│
+│   ══════════════════════════════════════════════════════════════
+│   📁 공통 문서
+│   ══════════════════════════════════════════════════════════════
+│
+├── procurement/ ..................... 구매/조달 문서
+├── specs/ ........................... 기술 스펙
+├── research/ ........................ 리서치 자료
+├── design/ .......................... 설계 문서
+├── decisions/ ....................... 의사결정 기록
+└── archived/ ........................ 폐기 문서
 ```
 
 ---
 
-## Quick Start
+## Stage별 상세
 
-### "지금 무엇을 봐야 하나요?"
+### 🟡 Stage-Pre: 기획 및 준비 (현재)
 
-| 질문 | 문서 |
-|------|------|
-| **처음 시작, 전문 용어 모름** | [stage-0/BEGINNER-Hardware-Quickstart.md](stage-0/BEGINNER-Hardware-Quickstart.md) |
-| **EBS가 뭔가요?** | [PRD-0003-EBS-RFID-System.md](PRD-0003-EBS-RFID-System.md) |
-| **Stage 0에서 뭘 해야 하나요?** | [stage-0/](stage-0/) 폴더 전체 |
-| **하드웨어 어떻게 연결하나요?** | [stage-0/DESIGN-RFID-Hardware.md](stage-0/DESIGN-RFID-Hardware.md) |
-| **소프트웨어 구조는?** | [stage-1/ARCHITECTURE-RFID-Software.md](stage-1/ARCHITECTURE-RFID-Software.md) |
-| **PokerGFX 기능 목록은?** | [stage-1/PokerGFX-Feature-Checklist.md](stage-1/PokerGFX-Feature-Checklist.md) |
+**목표**: 프로젝트 방향성 확립 + 관리 체계 구축
+
+| 구분 | 문서 | 상태 |
+|------|------|:----:|
+| **비전** | [CONCEPT-EBS-Vision.md](0-pre/CONCEPT-EBS-Vision.md) | ✅ |
+| **전략** | [STRATEGY-Lean-Production.md](0-pre/STRATEGY-Lean-Production.md) | ✅ |
+| **제안서** | [RFP-EBS-Hardware-Development.md](0-pre/RFP-EBS-Hardware-Development.md) | ✅ |
+| **업체 관리** | [VENDOR-MANAGEMENT.md](operations/VENDOR-MANAGEMENT.md) | ✅ |
+| **칸반보드** | [SLACK-LISTS-KANBAN.md](operations/SLACK-LISTS-KANBAN.md) | 📋 |
+
+**완료 조건**: [operations/STAGE-PROGRESSION.md](operations/STAGE-PROGRESSION.md)
 
 ---
 
-## 문서 역할 분류
+### ⏳ Stage 0: RFID 연결 검증
 
-### Master PRD (비전/전략)
+**목표**: ESP32 + RFID 모듈로 카드 읽기 성공
 
-| 문서 | 역할 | 독자 |
+| 구분 | 문서 | 비고 |
 |------|------|------|
-| [PRD-0003-EBS-RFID-System.md](PRD-0003-EBS-RFID-System.md) | 왜 만드는가, 무엇을 만드는가 | 경영진, PM |
+| **기획서** | [PRD-0003-Stage0-RFID-Connection.md](1-stage0/PRD-0003-Stage0-RFID-Connection.md) | |
+| **하드웨어** | [DESIGN-RFID-Hardware.md](1-stage0/DESIGN-RFID-Hardware.md) | 배선도 포함 |
+| **가이드** | [GUIDE-RFID-Implementation.md](1-stage0/GUIDE-RFID-Implementation.md) | |
+| **초보자** | [BEGINNER-Hardware-Quickstart.md](1-stage0/BEGINNER-Hardware-Quickstart.md) | |
 
-### Stage PRD (구현 계획)
-
-| Stage | 기간 | 문서 |
-|-------|------|------|
-| **Stage 0** | 2026 H1 | [PRD-0003-Stage0-RFID-Connection.md](stage-0/PRD-0003-Stage0-RFID-Connection.md) |
-| **Stage 1** | 2026 H2 | [PRD-0003-Stage1-PokerGFX-Clone.md](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md) |
-| **Stage 2** | 2027 | [PRD-0003-Stage2-WSOP-Integration.md](stage-2/PRD-0003-Stage2-WSOP-Integration.md) |
-| **Stage 3** | 2028 | [PRD-0003-Stage3-EBS-Automation.md](stage-3/PRD-0003-Stage3-EBS-Automation.md) |
-
-### 기술 문서 (상세 설계)
-
-| 문서 | 역할 | 주 사용 시점 |
-|------|------|-------------|
-| [DESIGN-RFID-Hardware.md](stage-0/DESIGN-RFID-Hardware.md) | ESP32+MFRC522 배선도 | Stage 0 |
-| [GUIDE-RFID-Implementation.md](stage-0/GUIDE-RFID-Implementation.md) | 구현 체크리스트 | Stage 0 |
-| [ARCHITECTURE-RFID-Software.md](stage-1/ARCHITECTURE-RFID-Software.md) | 3-Layer 소프트웨어 구조 | Stage 1+ |
-| [PokerGFX-Feature-Checklist.md](stage-1/PokerGFX-Feature-Checklist.md) | 54개 기능 추적 | Stage 1 |
-
-### 리서치 (의사결정 근거)
-
-| 문서 | 용도 |
-|------|------|
-| [REPORT-PokerGFX-Server-Analysis.md](stage-1/REPORT-PokerGFX-Server-Analysis.md) | 경쟁사 분석 |
-| [RESEARCH-RFID-Poker-Suppliers.md](research/RESEARCH-RFID-Poker-Suppliers.md) | 부품 구매 정보 |
-| `PokerGFX_Security.pdf` | 경쟁사 보안 분석 |
+**시작 조건**: Stage-Pre 완료 + 부품 도착
 
 ---
 
-## Stage별 필요 문서
+### ⏳ Stage 1: PokerGFX 복제
 
-### Stage 0: RFID 연결 검증 (2026 H1)
+**목표**: PokerGFX와 100% 동일한 기능
 
-```
-stage-0/
-├── BEGINNER-Hardware-Quickstart.md     # 🆕 초보자용 빠른 시작
-├── PRD-0003-Stage0-RFID-Connection.md  # 무엇을 검증할 것인가
-├── DESIGN-RFID-Hardware.md             # 하드웨어 어떻게 연결하나
-└── GUIDE-RFID-Implementation.md        # 주차별 체크리스트
-```
+| 구분 | 문서 | 비고 |
+|------|------|------|
+| **기획서** | [PRD-0003-Stage1-PokerGFX-Clone.md](2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md) | |
+| **아키텍처** | [ARCHITECTURE-RFID-Software.md](2-stage1/ARCHITECTURE-RFID-Software.md) | 3-Layer |
 
-**참조**: Stage 1의 `ARCHITECTURE-RFID-Software.md` (소프트웨어 구조 이해 시)
-
-### Stage 1: PokerGFX 복제 (2026 H2)
-
-```
-stage-1/
-├── PRD-0003-Stage1-PokerGFX-Clone.md   # 무엇을 복제할 것인가
-├── PokerGFX-Feature-Checklist.md       # 54개 기능 체크리스트
-├── ARCHITECTURE-RFID-Software.md       # 소프트웨어 구조
-└── REPORT-PokerGFX-Server-Analysis.md  # 경쟁사 분석
-```
-
-### Stage 2-3
-
-Stage 2, 3는 Stage 1 완료 후 상세 기술 문서가 추가될 예정입니다.
+**시작 조건**: Stage 0 Gate 통과
 
 ---
 
-## Archived 문서
+### ⏳ Stage 2-3: 연동 및 자동화
 
-`archived/` 폴더의 문서는 더 이상 사용되지 않습니다:
-
-| 문서 | 대체된 문서 |
-|------|-------------|
-| PRD-0001 | Stage 0 PRD |
-| PRD-0002 | Stage 1-3 PRD |
-| MEETING-* | 일회성 기록, 보관용 |
+| Stage | 목표 | 기획서 |
+|:-----:|------|--------|
+| 2 | WSOP+ DB 연동 | [PRD-0003-Stage2-WSOP-Integration.md](3-stage2/PRD-0003-Stage2-WSOP-Integration.md) |
+| 3 | 80% 자동화 | [PRD-0003-Stage3-EBS-Automation.md](4-stage3/PRD-0003-Stage3-EBS-Automation.md) |
 
 ---
 
-## 문서 업데이트 정책
+## 역할별 시작점
 
-- **Master PRD**: 비전/전략 변경 시에만 수정
-- **Stage PRD**: 해당 Stage 진행 중 상세화
-- **기술 문서**: 구현 중 수시 업데이트
-- **Archived**: 수정 금지 (참조용)
+| 역할 | 시작 문서 | 다음 문서 |
+|------|----------|----------|
+| **PM** | [EBS-WORK-DASHBOARD.md](operations/EBS-WORK-DASHBOARD.md) | [PRD-0003-EBS-RFID-System.md](PRD-0003-EBS-RFID-System.md) |
+| **하드웨어** | [BEGINNER-Hardware-Quickstart.md](1-stage0/BEGINNER-Hardware-Quickstart.md) | [DESIGN-RFID-Hardware.md](1-stage0/DESIGN-RFID-Hardware.md) |
+| **소프트웨어** | [ARCHITECTURE-RFID-Software.md](2-stage1/ARCHITECTURE-RFID-Software.md) | - |
+| **구매** | [VENDOR-MANAGEMENT.md](operations/VENDOR-MANAGEMENT.md) | [procurement/](procurement/) |
 
 ---
 
-*Last Updated: 2026-01-28*
+## 상태 아이콘
+
+| 아이콘 | 의미 |
+|:------:|------|
+| 🟡 | 현재 진행 중 |
+| ⏳ | 대기 (이전 단계 완료 필요) |
+| ✅ | 완료 |
+| 📋 | 작업 필요 |
+| 🔴 | 긴급/차단됨 |
+
+---
+
+## 문서 변경 시 체크리스트
+
+Stage 전환 시 반드시 업데이트:
+
+- [ ] `CLAUDE.md` - Current Phase 변경
+- [ ] `docs/README.md` (이 문서) - 현재 단계 표시
+- [ ] `operations/EBS-WORK-DASHBOARD.md` - Current Stage
+- [ ] `operations/STAGE-PROGRESSION.md` - 상태 이모지
+
+---
+
+**문서 버전**: 2.0.0
+**마지막 업데이트**: 2026-02-02

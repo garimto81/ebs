@@ -106,7 +106,7 @@
 
 ### 3.1 배선 연결
 
-![ESP32-MFRC522 배선도](../images/stage-0/02-wiring-diagram.png)
+![ESP32-MFRC522 배선도](../images/1-stage0/02-wiring-diagram.png)
 *그림 3.1: ESP32 ↔ MFRC522 배선 연결 (와이어 색상 참조)*
 
 **핀 연결 및 와이어 색상:**

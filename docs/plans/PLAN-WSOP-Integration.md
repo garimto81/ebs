@@ -1030,6 +1030,6 @@ Stage 2 (2027) 목표 조정:
 ## 참고 문서
 
 - `docs/research/RESEARCH-WSOP-Integration.md` - 리서치 결과
-- `docs/stage-2/PRD-0003-Stage2-WSOP-Integration.md` - Stage 2 상세 계획
+- `docs/3-stage2/PRD-0003-Stage2-WSOP-Integration.md` - Stage 2 상세 계획
 - `docs/PRD-0003-EBS-RFID-System.md` - Master PRD (비전)
-- `docs/stage-0/GUIDE-RFID-Implementation.md` - 현재 구현 범위
+- `docs/1-stage0/GUIDE-RFID-Implementation.md` - 현재 구현 범위

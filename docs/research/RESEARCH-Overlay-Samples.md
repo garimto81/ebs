@@ -297,7 +297,7 @@
 ---
 
 **참고 문서**:
-- `docs/stage-1/PRD-0003-Stage1-PokerGFX-Clone.md` (PokerGFX 상세 기능)
+- `docs/2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md` (PokerGFX 상세 기능)
 - `docs/mockups/01-viewer-overlay.html` (기존 PokerGFX 목업)
 - `docs/research/RESEARCH-RFID-Poker-Suppliers.md` (하드웨어 공급망)
 

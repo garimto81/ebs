@@ -1,9 +1,35 @@
-# EBS - RFID 포커 카드 리더 하드웨어 설계 가이드
+---
+doc_type: "architecture"
+doc_id: "ARCH-RFID-Hardware"
+version: "1.5.0"
+status: "review"
+owner: "하드웨어팀"
+last_updated: "2026-01-29"
+next_review: "2026-03-01"
+stage: "0"
+phase: "design"
+architecture_layer: "hardware"
+technology_stack:
+  - "ESP32"
+  - "MFRC522"
+  - "ISO/IEC 14443A"
+  - "SPI"
 
-**Version**: 2.4.0
-**작성일**: 2026-01-22
-**수정일**: 2026-01-29
-**관련 PRD**: [PRD-0003-Stage0-RFID-Connection.md](PRD-0003-Stage0-RFID-Connection.md)
+depends_on:
+  - "docs/1-stage0/PRD-0003-Stage0-RFID-Connection.md"
+
+related_docs:
+  - "docs/1-stage0/GUIDE-RFID-Implementation.md"
+  - "docs/1-stage0/BEGINNER-Hardware-Quickstart.md"
+  - "docs/1-stage0/BEGINNER-RFID-MCU-Guide.md"
+
+adr_refs:
+  - "ADR-001: ESP32 vs Arduino 선택 이유"
+  - "ADR-002: MFRC522 vs PN532 선택 이유"
+  - "ADR-003: 13.56MHz vs 125kHz 주파수 선택"
+---
+
+# EBS - RFID 포커 카드 리더 하드웨어 설계 가이드
 
 ---
 
@@ -17,7 +43,7 @@
 
 ### 1.1 하드웨어 블록 다이어그램
 
-![하드웨어 블록 다이어그램](../images/stage-0/01-system-architecture.png)
+![하드웨어 블록 다이어그램](../images/1-stage0/01-system-architecture.png)
 *그림 1.1: EBS Stage 0 시스템 아키텍처 - RFID 카드부터 React UI까지의 데이터 흐름*
 
 ### 1.2 핵심 컴포넌트
@@ -217,7 +243,7 @@
 
 #### 1.3.5 MCU 선택 의사결정 플로우차트
 
-![MCU 선택 플로우차트](../images/stage-0/03-mcu-selection-flowchart.png)
+![MCU 선택 플로우차트](../images/1-stage0/03-mcu-selection-flowchart.png)
 *그림 1.2: MCU 선택 의사결정 가이드 - Stage 0 권장: ESP32-WROOM-32*
 
 ---
@@ -569,7 +595,7 @@ Stage 2+ 상용화 단계에서 고려
 
 #### 1.4.9 의사결정 플로우차트
 
-![RFID 리더 선택 플로우차트](../images/stage-0/04-rfid-reader-selection-flowchart.png)
+![RFID 리더 선택 플로우차트](../images/1-stage0/04-rfid-reader-selection-flowchart.png)
 *그림 1.3: RFID 리더 선택 의사결정 가이드 - Stage 0 권장: MFRC522*
 
 ---
@@ -759,12 +785,12 @@ Stage 2+ 상용화 단계에서 고려
 
 ### 3.1 배선도 (Wiring Diagram)
 
-![ESP32-MFRC522 배선도](../images/stage-0/02-wiring-diagram.png)
+![ESP32-MFRC522 배선도](../images/1-stage0/02-wiring-diagram.png)
 *그림 3.1: ESP32 ↔ MFRC522 배선 연결도 - 7개 핀 연결*
 
 ### 3.2 브레드보드 레이아웃
 
-![ESP32-MFRC522 브레드보드 배선](../images/stage-0/09-breadboard-layout.png)
+![ESP32-MFRC522 브레드보드 배선](../images/1-stage0/09-breadboard-layout.png)
 *그림 3.2: ESP32 + MFRC522 브레드보드 배선도 - 7개 핀 연결 (3.3V 전원 필수)*
 
 **핀 연결 요약:**

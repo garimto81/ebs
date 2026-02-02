@@ -1,3 +1,38 @@
+---
+doc_type: "prd"
+doc_id: "PRD-0003-EBS-Master"
+version: "5.6.0"
+status: "approved"
+owner: "EBS Project Team"
+last_updated: "2026-01-15"
+next_review: "2026-07-01"
+stage: "master"
+phase: "planning"
+priority: "critical"
+
+depends_on: []
+
+related_docs:
+  - "docs/0-pre/CONCEPT-EBS-Vision.md"
+  - "docs/0-pre/STRATEGY-Lean-Production.md"
+  - "docs/0-pre/INFRA-EBS-Platform-Architecture.md"
+  - "docs/1-stage0/PRD-0003-Stage0-RFID-Connection.md"
+  - "docs/2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md"
+  - "docs/3-stage2/PRD-0003-Stage2-WSOP-Integration.md"
+  - "docs/4-stage3/PRD-0003-Stage3-EBS-Automation.md"
+
+stakeholders:
+  - "방송팀"
+  - "기술팀"
+  - "운영팀"
+  - "경영진"
+
+approvals:
+  - reviewer: "EBS Team Lead"
+    date: "2026-01-15"
+    status: "approved"
+---
+
 # PRD-0003: EBS Event Broadcasting System
 
 # 1. Executive Summary
@@ -13,6 +48,21 @@ EBS(Event Broadcasting System)는 **WSOP STUDIO에서 축적된 핸드 히스토
 3. **운영 자동화**: 시청자 정보 즉시 제공, 운영자 간편 입력, 전 과정 자동화
 
 를 실현하는 시스템입니다.
+
+## 1.1.1 Infrastructure Perspective
+
+> **"EBS는 포커 프로덕션의 데이터 중심축이다"**
+
+EBS는 단순한 RFID 카드 인식 시스템이 아닙니다. EBS는:
+
+| 역할 | 설명 |
+|------|------|
+| **데이터 생산자** | 핸드, 액션, 팟 이벤트 생성 |
+| **데이터 허브** | 모든 프로덕션 시스템의 Single Source of Truth |
+| **API 제공자** | 외부 시스템에 실시간/배치 데이터 제공 |
+| **분석 기반** | 콘텐츠, 통계, 인사이트의 원천 |
+
+상세 아키텍처: [INFRA-EBS-Platform-Architecture.md](0-pre/INFRA-EBS-Platform-Architecture.md)
 
 ## 1.2 핵심 가치 제안 (Value Proposition)
 
@@ -39,11 +89,11 @@ EBS는 **소프트웨어 전문 팀의 첫 하드웨어 도전**으로, 단계�
 **총 개발 기간**: 약 3년 (2026-2028)
 
 **상세 기획서:**
-- [Stage-Pre: PokerGFX 대체 준비](stage-pre/PRD-0003-Stage-Pre-GFX-Replacement.md) ← **신규**
-- [Stage 0: RFID 연결 검증](stage-0/PRD-0003-Stage0-RFID-Connection.md)
-- [Stage 1: PokerGFX 완전 복제](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md)
-- [Stage 2: WSOP+ DB 연동](stage-2/PRD-0003-Stage2-WSOP-Integration.md)
-- [Stage 3: EBS 독창적 자동화](stage-3/PRD-0003-Stage3-EBS-Automation.md)
+- [Stage-Pre: 소수 인원 운영 전략](0-pre/STRATEGY-Lean-Production.md)
+- [Stage 0: RFID 연결 검증](1-stage0/PRD-0003-Stage0-RFID-Connection.md)
+- [Stage 1: PokerGFX 완전 복제](2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md)
+- [Stage 2: WSOP+ DB 연동](3-stage2/PRD-0003-Stage2-WSOP-Integration.md)
+- [Stage 3: EBS 독창적 자동화](4-stage3/PRD-0003-Stage3-EBS-Automation.md)
 
 ## 1.4 v3.0 vs v4.0 방향 전환
 
@@ -281,9 +331,9 @@ EBS는 세 가지 핵심 기능 영역을 제공합니다:
 
 | 영역 | 비전 | 상세 명세 |
 |------|------|----------|
-| **시청자 정보 표시** | 홀카드, 승률, 통계를 실시간 표시 | [Stage 1 PRD §2](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md) |
-| **운영자 입력** | 최소 클릭으로 액션 입력 | [Stage 1 PRD §2.1](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md) |
-| **프로덕션 통합** | OBS, NDI 출력 지원 | [Stage 1 PRD §2.3](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md) |
+| **시청자 정보 표시** | 홀카드, 승률, 통계를 실시간 표시 | [Stage 1 PRD §2](2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md) |
+| **운영자 입력** | 최소 클릭으로 액션 입력 | [Stage 1 PRD §2.1](2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md) |
+| **프로덕션 통합** | OBS, NDI 출력 지원 | [Stage 1 PRD §2.3](2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md) |
 
 ## 4.2 Stage별 기능 확장 요약
 
@@ -340,7 +390,7 @@ EBS의 궁극적 목표는 **수동 입력 80% 감소** (Stage 3 완료 시)입�
 | **점진적 자동화** | 팟 계산, 칩 카운트, 플레이어 통계 |
 | **수동 유지** | 베팅 액션 입력 (Stage 3에서 옵션으로 자동화) |
 
-> **상세 자동화 시나리오, 흐름도, 데이터 스키마**는 [Stage 1 PRD](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md)를 참조하세요.
+> **상세 자동화 시나리오, 흐름도, 데이터 스키마**는 [Stage 1 PRD](2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md)를 참조하세요.
 
 ---
 
@@ -366,7 +416,7 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 | **역할 기반 접근** | 역할별 권한 분리 |
 
 > **상세 암호화 스펙 (알고리즘, 키 관리), Trustless Mode 워크플로우**는
-> [Stage 1 PRD](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md) 및 보안 설계 문서를 참조하세요.
+> [Stage 1 PRD](2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md) 및 보안 설계 문서를 참조하세요.
 
 ---
 
@@ -415,10 +465,10 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 
 | Stage | 문서 | 주요 내용 |
 |-------|------|----------|
-| 0 | [PRD-0003-Stage0-RFID-Connection.md](stage-0/PRD-0003-Stage0-RFID-Connection.md) | 하드웨어 학습, 연결 검증, 리스크 발견 |
-| 1 | [PRD-0003-Stage1-PokerGFX-Clone.md](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md) | 기능 매핑, 주차별 계획, Gate 조건 |
-| 2 | [PRD-0003-Stage2-WSOP-Integration.md](stage-2/PRD-0003-Stage2-WSOP-Integration.md) | API 명세, 동기화 로직, 에러 핸들링 |
-| 3 | [PRD-0003-Stage3-EBS-Automation.md](stage-3/PRD-0003-Stage3-EBS-Automation.md) | 자동화 알고리즘, 성능 요구사항 |
+| 0 | [PRD-0003-Stage0-RFID-Connection.md](1-stage0/PRD-0003-Stage0-RFID-Connection.md) | 하드웨어 학습, 연결 검증, 리스크 발견 |
+| 1 | [PRD-0003-Stage1-PokerGFX-Clone.md](2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md) | 기능 매핑, 주차별 계획, Gate 조건 |
+| 2 | [PRD-0003-Stage2-WSOP-Integration.md](3-stage2/PRD-0003-Stage2-WSOP-Integration.md) | API 명세, 동기화 로직, 에러 핸들링 |
+| 3 | [PRD-0003-Stage3-EBS-Automation.md](4-stage3/PRD-0003-Stage3-EBS-Automation.md) | 자동화 알고리즘, 성능 요구사항 |
 
 ## 7.4 Stage Gate 조건
 
@@ -490,9 +540,42 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 
 ---
 
-# 8. 부록
+# 8. Infrastructure Vision
 
-## 8.1 용어 정의
+## 8.1 RFID 프로젝트 vs 인프라
+
+| 관점 | RFID 프로젝트 | 인프라스트럭처 |
+|------|-------------|---------------|
+| 핵심 목표 | 카드 → 화면 | 데이터 흐름 중심 |
+| API 방향 | 소비 (WSOP+ → EBS) | **제공 (EBS → 외부)** |
+| SLA | 4시간 무중단 | 99.9% 가용성 |
+| 확장성 | 단일 테이블 | 동시 10개 테이블 |
+
+## 8.2 Stage별 인프라 마일스톤
+
+| Stage | 인프라 목표 | 기능 목표와 연계 |
+|-------|-----------|----------------|
+| 0 | 메트릭 로깅 표준화 | E2E 지연 측정 |
+| 1 | 이벤트 로깅, API Gateway | Trustless Mode |
+| 2 | Message Queue, Multi-table | WSOP+ 동기화 |
+| 3 | Event Sourcing, Data Lake | 자동화 학습 데이터 |
+
+## 8.3 SLA 정의
+
+| 지표 | 목표 | 측정 |
+|------|------|------|
+| 가용성 | 99.9% | 월 다운타임 < 43.8분 |
+| API 응답 | p95 < 500ms | 모니터링 |
+| RPO | 1핸드 | 최대 데이터 손실 |
+| RTO | 5분 | 복구 시간 |
+
+상세: [INFRA-EBS-Platform-Architecture.md](0-pre/INFRA-EBS-Platform-Architecture.md)
+
+---
+
+# 9. 부록
+
+## 9.1 용어 정의
 
 | 용어 | 정의 |
 |------|------|
@@ -504,43 +587,43 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 | **VPIP** | Voluntarily Put $ In Pot, 자발적으로 팟에 참여한 비율 |
 | **PFR** | Pre-Flop Raise, 프리플랍에서 레이즈한 비율 |
 
-## 8.2 참조 문서
+## 9.2 참조 문서
 
 ### Stage별 PRD
 
 | 문서 | 용도 |
 |------|------|
-| [stage-0/PRD-0003-Stage0-RFID-Connection.md](stage-0/PRD-0003-Stage0-RFID-Connection.md) | Stage 0: 하드웨어 연결 검증 계획 |
-| [stage-1/PRD-0003-Stage1-PokerGFX-Clone.md](stage-1/PRD-0003-Stage1-PokerGFX-Clone.md) | Stage 1: PokerGFX 복제 계획 |
-| [stage-2/PRD-0003-Stage2-WSOP-Integration.md](stage-2/PRD-0003-Stage2-WSOP-Integration.md) | Stage 2: WSOP+ 연동 계획 |
-| [stage-3/PRD-0003-Stage3-EBS-Automation.md](stage-3/PRD-0003-Stage3-EBS-Automation.md) | Stage 3: 자동화 시스템 계획 |
+| [1-stage0/PRD-0003-Stage0-RFID-Connection.md](1-stage0/PRD-0003-Stage0-RFID-Connection.md) | Stage 0: 하드웨어 연결 검증 계획 |
+| [2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md](2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md) | Stage 1: PokerGFX 복제 계획 |
+| [3-stage2/PRD-0003-Stage2-WSOP-Integration.md](3-stage2/PRD-0003-Stage2-WSOP-Integration.md) | Stage 2: WSOP+ 연동 계획 |
+| [4-stage3/PRD-0003-Stage3-EBS-Automation.md](4-stage3/PRD-0003-Stage3-EBS-Automation.md) | Stage 3: 자동화 시스템 계획 |
 
 ### 기술 설계 (구현 시 참조)
 
 | 문서 | 용도 |
 |------|------|
-| [stage-1/ARCHITECTURE-RFID-Software.md](stage-1/ARCHITECTURE-RFID-Software.md) | 소프트웨어 아키텍처 상세 (3-Layer 구조) |
-| [stage-0/DESIGN-RFID-Hardware.md](stage-0/DESIGN-RFID-Hardware.md) | 하드웨어 설계 상세 (ESP32+MFRC522 배선) |
-| [stage-0/GUIDE-RFID-Implementation.md](stage-0/GUIDE-RFID-Implementation.md) | 구현 가이드 (Week별 체크리스트) |
-| [stage-1/PokerGFX-Feature-Checklist.md](stage-1/PokerGFX-Feature-Checklist.md) | Stage 1 기능 추적 체크리스트 |
+| [2-stage1/ARCHITECTURE-RFID-Software.md](2-stage1/ARCHITECTURE-RFID-Software.md) | 소프트웨어 아키텍처 상세 (3-Layer 구조) |
+| [1-stage0/DESIGN-RFID-Hardware.md](1-stage0/DESIGN-RFID-Hardware.md) | 하드웨어 설계 상세 (ESP32+MFRC522 배선) |
+| [1-stage0/GUIDE-RFID-Implementation.md](1-stage0/GUIDE-RFID-Implementation.md) | 구현 가이드 (Week별 체크리스트) |
+| [2-stage1/PokerGFX-Feature-Checklist.md](2-stage1/PokerGFX-Feature-Checklist.md) | Stage 1 기능 추적 체크리스트 |
 
 ### 리서치 (의사결정 근거)
 
 | 문서 | 용도 |
 |------|------|
-| [stage-1/REPORT-PokerGFX-Server-Analysis.md](stage-1/REPORT-PokerGFX-Server-Analysis.md) | 경쟁사 서버 분석 |
+| [2-stage1/REPORT-PokerGFX-Server-Analysis.md](2-stage1/REPORT-PokerGFX-Server-Analysis.md) | 경쟁사 서버 분석 |
 | [research/RESEARCH-RFID-Poker-Suppliers.md](research/RESEARCH-RFID-Poker-Suppliers.md) | RFID 공급망 조사 |
 | `PokerGFX_Security.pdf` | 경쟁사 보안 분석 |
 
 ---
 
-# 9. 문서 정보
+# 10. 문서 정보
 
-## 9.1 문서 메타데이터
+## 10.1 문서 메타데이터
 
 | 항목 | 내용 |
 |------|------|
-| **문서 버전** | 5.5.0 |
+| **문서 버전** | 5.6.0 |
 | **작성일** | 2026-01-28 |
 | **작성자** | EBS Product Team |
 | **검토자** | Technical Architect |
@@ -548,7 +631,7 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 | **상태** | **Draft** |
 | **분류** | 기밀 (Confidential) |
 
-## 9.2 변경 이력
+## 10.2 변경 이력
 
 | 버전 | 날짜 | 변경 내용 | 작성자 |
 |------|------|----------|--------|
@@ -563,4 +646,5 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 | 5.2.0 | 2026-01-28 | Master PRD 정체성 재정립: 비전/전략 문서로 전환, 상세 설계 명세 Stage 문서로 위임 | Product Team |
 | 5.3.0 | 2026-01-28 | Section 4-6 경량화: 상세 스펙 제거, 비전/목표 요약만 유지, Stage PRD 참조로 전환 | Product Team |
 | 5.4.0 | 2026-01-28 | Section 7 (기술 스택) 제거: Stage PRD로 위임, 섹션 번호 재정렬 (7→8→9) | Product Team |
-| **5.5.0** | **2026-01-28** | **문서 제목 변경 (Secure Poker → Event), 수평선 정리, Appendix 제거** | Product Team |
+| 5.5.0 | 2026-01-28 | 문서 제목 변경 (Secure Poker → Event), 수평선 정리, Appendix 제거 | Product Team |
+| **5.6.0** | **2026-02-02** | **Section 8 Infrastructure Vision 추가, 인프라 관점 명시, related_docs 업데이트** | Product Team |

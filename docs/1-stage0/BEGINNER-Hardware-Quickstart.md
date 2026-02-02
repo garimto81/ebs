@@ -1,7 +1,32 @@
+---
+doc_type: "guide"
+doc_id: "GUIDE-Beginner-Hardware"
+version: "1.1.0"
+status: "approved"
+owner: "기술팀"
+last_updated: "2026-01-28"
+next_review: "as-needed"
+stage: "0"
+phase: "education"
+audience: "beginner"
+estimated_time: "2 hours"
+
+prerequisites:
+  - "Windows PC"
+  - "USB 케이블 (Micro-B 또는 Type-C)"
+
+depends_on:
+  - "docs/1-stage0/PRD-0003-Stage0-RFID-Connection.md"
+
+related_docs:
+  - "docs/1-stage0/DESIGN-RFID-Hardware.md"
+  - "docs/1-stage0/GUIDE-RFID-Implementation.md"
+  - "docs/1-stage0/BEGINNER-RFID-MCU-Guide.md"
+  - "docs/procurement/BILL_OF_MATERIALS.md"
+---
+
 # EBS 하드웨어 연결 초보자 가이드
 
-**Version**: 1.1.0
-**작성일**: 2026-01-30
 **대상 독자**: 전자공학/하드웨어 경험이 전혀 없는 개발자
 **상세 문서**: [DESIGN-RFID-Hardware.md](DESIGN-RFID-Hardware.md)
 
@@ -109,7 +134,7 @@ ESP32를 컴퓨터에 연결하려면 **반드시 데이터 케이블**을 사�
 
 ### 핵심 개념 그림
 
-![RFID 시스템 데이터 흐름](../images/stage-0/beginner-00-system-flow.png)
+![RFID 시스템 데이터 흐름](../images/1-stage0/beginner-00-system-flow.png)
 *그림 2.1: 카드 스캔부터 화면 표시까지의 전체 데이터 흐름*
 
 **실제 시스템 구성 사진:**
@@ -125,7 +150,7 @@ ESP32를 컴퓨터에 연결하려면 **반드시 데이터 케이블**을 사�
 
 ESP32와 MFRC522를 연결하려면 **7개의 선**이 필요합니다.
 
-![배선 색상 참조](../images/stage-0/beginner-04-wiring-color.png)
+![배선 색상 참조](../images/1-stage0/beginner-04-wiring-color.png)
 *그림 3.1: 색상별 배선 가이드*
 
 **권장 색상 코드** (이 색상을 쓰면 실수를 줄일 수 있습니다):
@@ -232,7 +257,7 @@ SPI 통신은 마치 전화 통화와 같습니다. 클럭(SCK)이 "지금 말�
 
 **완성된 배선도**:
 
-![ESP32-MFRC522 배선도](../images/stage-0/beginner-04-wiring-color.png)
+![ESP32-MFRC522 배선도](../images/1-stage0/beginner-04-wiring-color.png)
 *그림 3.2: ESP32와 MFRC522 연결 배선도 (색상별 가이드 포함)*
 
 **실제 배선 예시:**

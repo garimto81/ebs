@@ -149,7 +149,7 @@
    - 2-3일 내 도착 목표
 
 2. **도착 후 검증**
-   - `docs/stage-0/GUIDE-RFID-Implementation.md` 3.1절 참고
+   - `docs/1-stage0/GUIDE-RFID-Implementation.md` 3.1절 참고
    - 각 부품 전압/연결 테스트
 
 3. **불량 발생 시**
@@ -158,6 +158,6 @@
 
 ## 참고 문서
 
-- `docs/stage-0/DESIGN-RFID-Hardware.md` - 배선도 및 핀 매핑
-- `docs/stage-0/GUIDE-RFID-Implementation.md` - 하드웨어 조립 가이드
+- `docs/1-stage0/DESIGN-RFID-Hardware.md` - 배선도 및 핀 매핑
+- `docs/1-stage0/GUIDE-RFID-Implementation.md` - 하드웨어 조립 가이드
 - `docs/PRD-0003-EBS-RFID-System.md` - 전체 프로젝트 개요

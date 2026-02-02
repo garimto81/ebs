@@ -230,8 +230,8 @@ Stage 0 Gate: "ST25R3911B가 프로덕션 스펙 충족" 확인
 |------|------|------|
 | RFID 모듈 결정 | `docs/decisions/DECISION-RFID-Module.md` | 모듈 선택 근거 |
 | 부품 조달 계획 | `docs/procurement/PROCUREMENT-RFID-Parts.md` | BOM + 구매처 |
-| 하드웨어 설계 | `docs/stage-0/DESIGN-RFID-Hardware.md` | 배선도 |
-| Stage 0 PRD | `docs/stage-0/PRD-0003-Stage0-RFID-Connection.md` | Gate 조건 |
+| 하드웨어 설계 | `docs/1-stage0/DESIGN-RFID-Hardware.md` | 배선도 |
+| Stage 0 PRD | `docs/1-stage0/PRD-0003-Stage0-RFID-Connection.md` | Gate 조건 |
 
 ---
 

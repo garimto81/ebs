@@ -1,9 +1,40 @@
+---
+doc_type: "prd"
+doc_id: "PRD-0003-Stage0"
+version: "2.1.0"
+status: "approved"
+owner: "하드웨어팀"
+last_updated: "2026-01-28"
+next_review: "2026-04-01"
+stage: "0"
+phase: "planning"
+priority: "critical"
+target_date: "2026-06-30"
+completion: 75
+
+depends_on:
+  - "docs/PRD-0003-EBS-RFID-System.md"
+  - "docs/0-pre/CONCEPT-EBS-Vision.md"
+
+related_docs:
+  - "docs/1-stage0/DESIGN-RFID-Hardware.md"
+  - "docs/1-stage0/GUIDE-RFID-Implementation.md"
+  - "docs/1-stage0/BEGINNER-Hardware-Quickstart.md"
+  - "docs/2-stage1/PRD-0003-Stage1-PokerGFX-Clone.md"
+
+stakeholders:
+  - "하드웨어팀"
+  - "기술팀"
+  - "EBS Team"
+
+approvals:
+  - reviewer: "Hardware Team Lead"
+    date: "2026-01-28"
+    status: "approved"
+---
+
 # PRD-0003-Stage0: RFID 연결 검증
 
-**버전**: 1.0.1
-**생성일**: 2026-01-28
-**수정일**: 2026-01-29
-**상위 문서**: [PRD-0003-EBS-RFID-System.md](PRD-0003-EBS-RFID-System.md)
 **목표 기간**: 2026년 상반기 (H1)
 
 ---
@@ -191,7 +222,7 @@ Stage 0는 본격적인 개발(Stage 1-3) 전에 하드웨어 연결 가능성�
 
 ### 5.2 배선도
 
-![ESP32-MFRC522 배선도](../images/stage-0/02-wiring-diagram.png)
+![ESP32-MFRC522 배선도](../images/1-stage0/02-wiring-diagram.png)
 *그림 5.1: ESP32 ↔ MFRC522 배선도*
 
 **핀 연결 요약:**

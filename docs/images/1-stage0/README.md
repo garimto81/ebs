@@ -78,7 +78,7 @@ curl -O https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2024/11/Rea
 ![ESP32 핀아웃](https://i0.wp.com/randomnerdtutorials.com/...)
 
 # 변경 후 (로컬)
-![ESP32 핀아웃](../images/stage-0/esp32-wroom32-pinout.png)
+![ESP32 핀아웃](../images/1-stage0/esp32-wroom32-pinout.png)
 ```
 
 ## 라이선스 및 저작권
