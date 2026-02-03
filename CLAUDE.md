@@ -4,28 +4,31 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Status
 
-> **Current Phase: 🟡 Stage-Pre** (진행 중)
+> **Current Phase: 🟡 Phase-Pre** (진행 중)
 >
 > | 단계 | 상태 | 설명 |
 > |------|:----:|------|
-> | **Stage-Pre** | 🟡 | 기획/관리 체계 수립 ← **현재** |
-> | Stage 0 | ⏳ | RFID 연결 검증 (Stage-Pre 완료 후) |
-> | Stage 1-3 | ⏳ | 개발 단계 |
+> | **Phase-Pre** | 🟡 | 업체 선정, 준비 ← **현재** |
+> | 1단계 | ⏳ | PokerGFX 동일 제품 개발 |
+> | 2단계 | ⏳ | 운영 효율화 (1단계 완료 후) |
 >
-> 현재는 문서 작업, 업체 리서치, 관리 시스템 구축이 주요 작업입니다.
+> **마일스톤**: RFID POC (Q2) → PokerGFX 복제 (Q4) → WSOPLIVE 연동 (27Q4) → 자동화 (28Q4)
 
 ## Project Overview
 
-EBS (Event Broadcasting System)는 RFID 기반 포커 카드 인식 시스템입니다.
+> **BRACELET STUDIO** | EBS (Event Broadcasting System)
 
-**Goal**: WSOP STUDIO DB 자산 내재화 + 방송 워크플로우 자동화
+EBS는 **포커 방송 프로덕션 전체 워크플로우의 인프라스트럭처**입니다.
+
+**핵심 목표**:
+- **자산 내재화/독립화**: 자체 시스템 소유
+- **운영 효율화**: 30명 → 15~20명 (자막 연출 자동화)
 
 ## Architecture
 
 ```
 Hardware: RFID Card → MFRC522/ST25R3911B → ESP32 → USB Serial
 Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
-Database: SQLite (cards.db)
 ```
 
 **3-Layer Structure**:
@@ -36,8 +39,8 @@ Database: SQLite (cards.db)
 **RFID 모듈**:
 | 용도 | 모듈 | 비고 |
 |------|------|------|
-| 학습용 | MFRC522 | Stage 0 Phase 0-1~0-2 |
-| **프로덕션** | **ST25R3911B** | Stage 0 Phase 0-3~0-4, Stage 1+ |
+| 학습용 | MFRC522 | Phase 0 (초기 프로토타입) |
+| **프로덕션** | **ST25R3911B** | 업체 선정 후 도입 |
 
 ## Current Tools (Available Now)
 
@@ -75,7 +78,7 @@ sqlite3 server/db/cards.db < server/db/init.sql
 
 ## Build & Run Commands (Planned)
 
-> ⚠️ Stage 0 완료 후 실제 구현 시 사용 예정
+> ⚠️ 1단계 진행 시 실제 구현 예정
 
 ```powershell
 # Server (Python)
@@ -120,16 +123,31 @@ cd C:\claude\ebs\frontend && npm test
 
 문서 네비게이션: `docs/README.md`
 
-### 디렉토리 구조 (숫자 순서 = 진행 순서)
+### 디렉토리 구조
 
 ```
 docs/
-├── 0-pre/      # Stage-Pre: 기획/준비 ◀ 현재
-├── 1-stage0/   # Stage 0: RFID 검증
-├── 2-stage1/   # Stage 1: GFX 복제
-├── 3-stage2/   # Stage 2: DB 연동
-├── 4-stage3/   # Stage 3: 자동화
-└── operations/ # 업무 관리 문서
+├── README.md                           # 네비게이션
+├── PRD-0003-EBS-RFID-System.md        # Master PRD
+│
+├── phase-pre/                          # Phase-Pre: 기획/준비
+│   └── CONCEPT-EBS-Vision.md          # EBS 비전
+│
+├── phase-0/                            # 1단계: PokerGFX 동일 제품
+│   ├── PRD-0003-Phase0-PokerGFX-Clone.md
+│   ├── PokerGFX-Feature-Checklist.md  # 119개 기능
+│   └── BEGINNER-Hardware-Quickstart.md
+│
+├── phase-1/                            # (미래) DB 연동
+│   └── PRD-0003-Phase1-WSOP-Integration.md
+│
+├── phase-2/                            # (미래) 자동화
+│   └── PRD-0003-Phase2-EBS-Automation.md
+│
+└── operations/                         # 운영 문서
+    ├── EBS-WORK-DASHBOARD.md
+    ├── VENDOR-MANAGEMENT.md
+    └── PHASE-PROGRESSION.md
 ```
 
 ### 주요 문서
@@ -137,24 +155,20 @@ docs/
 | 문서 유형 | 경로 | 용도 |
 |----------|------|------|
 | Master PRD | `docs/PRD-0003-EBS-RFID-System.md` | 비전/전략 |
+| EBS 비전 | `docs/phase-pre/CONCEPT-EBS-Vision.md` | 프로덕션 인프라 역할 |
 | 업무 대시보드 | `docs/operations/EBS-WORK-DASHBOARD.md` | 현재 작업 현황 |
-| Stage 진행 가이드 | `docs/operations/STAGE-PROGRESSION.md` | Stage 순서/조건 |
-| Stage-Pre 문서 | `docs/0-pre/` | 기획 문서 |
-| Stage 0 문서 | `docs/1-stage0/` | RFID 검증 |
-| 하드웨어 설계 | `docs/1-stage0/DESIGN-RFID-Hardware.md` | 배선도/MCU 비교 |
-| 초보자 가이드 | `docs/1-stage0/BEGINNER-Hardware-Quickstart.md` | 하드웨어 입문 |
+| Phase 진행 가이드 | `docs/operations/PHASE-PROGRESSION.md` | Phase 순서/조건 |
+| 초보자 가이드 | `docs/phase-0/BEGINNER-Hardware-Quickstart.md` | 하드웨어 입문 |
 
-## Stage 0 Gate 조건
+## 1단계 완료 조건
 
-Stage 1 진입을 위해 다음 조건 충족 필요:
+PokerGFX 동일 제품 완성 기준:
 
-- [ ] RFID 읽기: 5장 카드 100% 인식
-- [ ] E2E 지연: 카드→화면 < 1초
-- [ ] 연속 운영: 4시간 무중단
-- [ ] **ST25R3911B 검증**: SPEC 문서 10항목 PASS
-- [ ] 팀 합의: "Stage 1 진행 가능"
-
-**Latency Target**: < 200ms E2E
+- [ ] **PokerGFX 100% 복제**: UI/UX 완전 동일
+- [ ] **카드 표시 정확도**: 52장 카드 100% 정확
+- [ ] **실시간 성능**: 카드→화면 < 1초 (목표 < 200ms)
+- [ ] **OBS 오버레이**: 투명도/크로마키 정상 작동
+- [ ] **안정성**: 4시간 연속 운영 무중단
 
 ---
 
