@@ -448,15 +448,14 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 
 | 유형 | 문서 | 용도 |
 |------|------|------|
-| **Phase PRD** | [CONCEPT-EBS-Vision](phase-0/CONCEPT-EBS-Vision.md) | Phase-Pre 비전 |
-| | [Phase0-PokerGFX-Clone](phase-1/PRD-0003-Phase1-PokerGFX-Clone.md) | Phase 0 계획 |
-| | [Phase1-WSOP-Integration](phase-2/PRD-0003-Phase2-WSOP-Integration.md) | Phase 1 계획 |
-| | [Phase2-EBS-Automation](phase-3/PRD-0003-Phase3-EBS-Automation.md) | Phase 2 계획 |
+| **Phase PRD** | [Phase1-PokerGFX-Clone](phase-1/PRD-0003-Phase1-PokerGFX-Clone.md) | Phase 1 계획 |
+| | [Phase2-WSOP-Integration](phase-2/PRD-0003-Phase2-WSOP-Integration.md) | Phase 2 계획 |
+| | [Phase3-EBS-Automation](phase-3/PRD-0003-Phase3-EBS-Automation.md) | Phase 3 계획 |
 | **운영** | [PHASE-PROGRESSION](operations/PHASE-PROGRESSION.md) | Phase 진행 가이드 |
 | | [VENDOR-MANAGEMENT](operations/VENDOR-MANAGEMENT.md) | 업체 관리 |
 | | [EBS-WORK-DASHBOARD](operations/EBS-WORK-DASHBOARD.md) | 업무 현황 |
 | **기능** | [PokerGFX-Feature-Checklist](phase-1/PokerGFX-Feature-Checklist.md) | 기능 체크리스트 |
-| | [BEGINNER-Hardware-Quickstart](phase-1/BEGINNER-Hardware-Quickstart.md) | 하드웨어 입문 |
+| | [VENDOR-SELECTION-CHECKLIST](phase-0/VENDOR-SELECTION-CHECKLIST.md) | 업체 선정 체크리스트 |
 
 ---
 
