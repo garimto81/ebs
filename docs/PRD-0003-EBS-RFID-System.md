@@ -14,11 +14,13 @@ depends_on: []
 
 related_docs:
   - "docs/phase-pre/CONCEPT-EBS-Vision.md"
-  - "docs/phase-pre/STRATEGY-Lean-Production.md"
-  - "docs/phase-pre/INFRA-EBS-Platform-Architecture.md"
   - "docs/phase-0/PRD-0003-Phase0-PokerGFX-Clone.md"
+  - "docs/phase-0/PokerGFX-Feature-Checklist.md"
+  - "docs/phase-0/BEGINNER-Hardware-Quickstart.md"
   - "docs/phase-1/PRD-0003-Phase1-WSOP-Integration.md"
   - "docs/phase-2/PRD-0003-Phase2-EBS-Automation.md"
+  - "docs/operations/PHASE-PROGRESSION.md"
+  - "docs/operations/VENDOR-MANAGEMENT.md"
 
 stakeholders:
   - "방송팀"
@@ -61,7 +63,7 @@ EBS는 단순한 RFID 카드 인식 시스템이 아닙니다. EBS는:
 | **API 제공자** | 외부 시스템에 실시간/배치 데이터 제공 |
 | **분석 기반** | 콘텐츠, 통계, 인사이트의 원천 |
 
-상세 아키텍처: [INFRA-EBS-Platform-Architecture.md](phase-pre/INFRA-EBS-Platform-Architecture.md)
+상세 비전: [CONCEPT-EBS-Vision.md](phase-pre/CONCEPT-EBS-Vision.md)
 
 ## 1.2 핵심 가치 제안 (Value Proposition)
 
@@ -101,10 +103,10 @@ EBS는 **하드웨어 검증과 소프트웨어 개발의 병렬 진행**을 통
 - 전체 일정 단축 (약 4-6주 절감)
 
 **상세 기획서:**
-- [Phase-Pre: 업체 선정 전략](phase-pre/STRATEGY-Lean-Production.md)
+- [Phase-Pre: EBS 비전](phase-pre/CONCEPT-EBS-Vision.md)
 - [Phase 0: PokerGFX 완전 복제](phase-0/PRD-0003-Phase0-PokerGFX-Clone.md)
 - [Phase 1: WSOPLIVE DB 연동](phase-1/PRD-0003-Phase1-WSOP-Integration.md)
-- [Phase 2: EBS 독창적 자동화](phase-2/PRD-0003-Phase2-EBS-Automation.md)
+- [Phase 2: EBS 자동화 프로토콜](phase-2/PRD-0003-Phase2-EBS-Automation.md)
 
 ## 1.4 v3.0 vs v4.0 방향 전환
 
@@ -360,20 +362,12 @@ EBS는 세 가지 핵심 기능 영역을 제공합니다:
 다음 목업은 **최종 스펙이 아닌 비전 전달 목적**입니다.
 Phase 0 개발 중 변경될 수 있습니다.
 
-### Viewer Overlay 컨셉
-시청자 화면 레이아웃
+### 컨셉 목업 (Phase 0 개발 시 정의)
 
-![Viewer Overlay 컨셉](images/mockups/01-viewer-overlay.png)
-
-### Action Tracker 컨셉
-운영자 입력 화면
-
-![Action Tracker 컨셉](images/mockups/02-action-tracker.png)
-
-### Production Dashboard 컨셉
-프로덕션 통합
-
-![Production Dashboard 컨셉](images/mockups/03-production-dashboard.png)
+Phase 0 개발 중 다음 목업이 작성됩니다:
+- **Viewer Overlay**: 시청자 화면 레이아웃
+- **Action Tracker**: 운영자 입력 화면
+- **Production Dashboard**: 프로덕션 통합
 
 > **상세 UI 명세, 워크플로우, 성능 목표**는 Phase PRD를 참조하세요.
 
@@ -481,7 +475,7 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 
 | Phase | 문서 | 주요 내용 |
 |-------|------|----------|
-| Pre | [STRATEGY-Lean-Production.md](phase-pre/STRATEGY-Lean-Production.md) | 업체 선정 기준, 관리 체계 |
+| Pre | [CONCEPT-EBS-Vision.md](phase-pre/CONCEPT-EBS-Vision.md) | EBS 비전, 프로젝트 목표 |
 | 0 | [PRD-0003-Phase0-PokerGFX-Clone.md](phase-0/PRD-0003-Phase0-PokerGFX-Clone.md) | 기능 매핑, 주차별 계획, Gate 조건 |
 | 1 | [PRD-0003-Phase1-WSOP-Integration.md](phase-1/PRD-0003-Phase1-WSOP-Integration.md) | API 명세, 동기화 로직, 에러 핸들링 |
 | 2 | [PRD-0003-Phase2-EBS-Automation.md](phase-2/PRD-0003-Phase2-EBS-Automation.md) | 자동화 알고리즘, 성능 요구사항 |
@@ -582,7 +576,7 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 | RPO | 1핸드 | 최대 데이터 손실 |
 | RTO | 5분 | 복구 시간 |
 
-상세: [INFRA-EBS-Platform-Architecture.md](phase-pre/INFRA-EBS-Platform-Architecture.md)
+상세: [CONCEPT-EBS-Vision.md](phase-pre/CONCEPT-EBS-Vision.md)
 
 ---
 
@@ -606,26 +600,30 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 
 | 문서 | 용도 |
 |------|------|
-| [phase-pre/STRATEGY-Lean-Production.md](phase-pre/STRATEGY-Lean-Production.md) | Phase-Pre: 업체 선정 전략 |
+| [phase-pre/CONCEPT-EBS-Vision.md](phase-pre/CONCEPT-EBS-Vision.md) | Phase-Pre: EBS 비전 및 목표 |
 | [phase-0/PRD-0003-Phase0-PokerGFX-Clone.md](phase-0/PRD-0003-Phase0-PokerGFX-Clone.md) | Phase 0: PokerGFX 복제 계획 |
 | [phase-1/PRD-0003-Phase1-WSOP-Integration.md](phase-1/PRD-0003-Phase1-WSOP-Integration.md) | Phase 1: WSOPLIVE 연동 계획 |
 | [phase-2/PRD-0003-Phase2-EBS-Automation.md](phase-2/PRD-0003-Phase2-EBS-Automation.md) | Phase 2: 자동화 시스템 계획 |
 
-### 기술 설계 (구현 시 참조)
+### 운영 문서
 
 | 문서 | 용도 |
 |------|------|
-| [phase-0/ARCHITECTURE-RFID-Software.md](phase-0/ARCHITECTURE-RFID-Software.md) | 소프트웨어 아키텍처 상세 (3-Layer 구조) |
-| [phase-0/DESIGN-RFID-Hardware.md](phase-0/DESIGN-RFID-Hardware.md) | 하드웨어 설계 상세 (ESP32+ST25R3911B 배선) |
-| [phase-0/GUIDE-RFID-Implementation.md](phase-0/GUIDE-RFID-Implementation.md) | 구현 가이드 (Week별 체크리스트) |
+| [operations/PHASE-PROGRESSION.md](operations/PHASE-PROGRESSION.md) | Phase 진행 가이드 |
+| [operations/VENDOR-MANAGEMENT.md](operations/VENDOR-MANAGEMENT.md) | 업체 관리 |
+| [operations/EBS-WORK-DASHBOARD.md](operations/EBS-WORK-DASHBOARD.md) | 업무 현황 대시보드 |
+
+### 기능 명세
+
+| 문서 | 용도 |
+|------|------|
 | [phase-0/PokerGFX-Feature-Checklist.md](phase-0/PokerGFX-Feature-Checklist.md) | Phase 0 기능 추적 체크리스트 |
+| [phase-0/BEGINNER-Hardware-Quickstart.md](phase-0/BEGINNER-Hardware-Quickstart.md) | 하드웨어 입문 가이드 |
 
-### 리서치 (의사결정 근거)
+### 참고 자료
 
-| 문서 | 용도 |
+| 파일 | 용도 |
 |------|------|
-| [phase-0/REPORT-PokerGFX-Server-Analysis.md](phase-0/REPORT-PokerGFX-Server-Analysis.md) | 경쟁사 서버 분석 |
-| [research/RESEARCH-RFID-Poker-Suppliers.md](research/RESEARCH-RFID-Poker-Suppliers.md) | RFID 공급망 조사 |
 | `PokerGFX_Security.pdf` | 경쟁사 보안 분석 |
 
 ---
@@ -664,3 +662,4 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 | **6.0.0** | **2026-02-03** | **Stage → Phase 전환, 5단계 → 4단계 통합 (Phase-Pre/0 병렬 진행), 하드웨어 검증 Phase-Pre로 흡수** | Product Team |
 | **6.1.0** | **2026-02-03** | **회사명 BRACELET STUDIO 통일** | BRACELET STUDIO |
 | **7.0.0** | **2026-02-03** | **일정 전면 수정 (Q2/Q4 마일스톤), WSOP+ → WSOPLIVE 변경, 듀얼 소스 아키텍처 정의** | BRACELET STUDIO |
+| **7.1.0** | **2026-02-03** | **끊어진 링크 정리, 삭제된 문서 참조 제거, related_docs 업데이트** | BRACELET STUDIO |
