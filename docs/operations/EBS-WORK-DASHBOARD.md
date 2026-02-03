@@ -3,8 +3,8 @@
 > **BRACELET STUDIO** | EBS Project
 
 **Updated**: 2026-02-03
-**Current Phase**: 🟡 Phase-Pre (RFID 업체 선정 + POC 검증)
-**목표**: Phase-Pre 완료 (2026 Q2) → Phase 0 시작
+**Current Phase**: 🟡 Phase 0 (RFID 업체 선정 + POC 검증)
+**목표**: Phase 0 완료 (2026 Q2) → Phase 1 시작
 
 ---
 
@@ -12,14 +12,14 @@
 
 | 시점 | Phase | 목표 |
 |:----:|-------|------|
-| 2026 Q2 | Phase-Pre | RFID 업체 선정 + POC 검증 |
-| 2026 Q4 | Phase 0 | PokerGFX 복제 완료 |
-| 2027 Q4 | Phase 1 | WSOPLIVE DB 연동 |
-| 2028 Q4 | Phase 2 | 자동화 프로토콜 |
+| 2026 Q2 | Phase 0 | RFID 업체 선정 + POC 검증 |
+| 2026 Q4 | Phase 1 | PokerGFX 복제 완료 |
+| 2027 Q4 | Phase 2 | WSOPLIVE DB 연동 |
+| 2028 Q4 | Phase 3 | 자동화 프로토콜 |
 
 ---
 
-## Phase-Pre 진행 (업체 선정)
+## Phase 0 진행 (업체 선정)
 
 | # | 항목 | 상태 |
 |:-:|------|:----:|
@@ -32,7 +32,7 @@
 
 ---
 
-## Phase 0 진행 (PokerGFX 복제)
+## Phase 1 진행 (PokerGFX 복제)
 
 | # | 항목 | 상태 |
 |:-:|------|:----:|

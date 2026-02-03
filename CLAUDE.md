@@ -4,13 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Status
 
-> **Current Phase: 🟡 Phase-Pre** (진행 중)
+> **Current Phase: 🟡 Phase 0** (진행 중)
 >
 > | 단계 | 상태 | 설명 |
 > |------|:----:|------|
-> | **Phase-Pre** | 🟡 | 업체 선정, 준비 ← **현재** |
-> | 1단계 | ⏳ | PokerGFX 동일 제품 개발 |
-> | 2단계 | ⏳ | 운영 효율화 (1단계 완료 후) |
+> | **Phase 0** | 🟡 | 업체 선정, 준비 ← **현재** |
+> | Phase 1 | ⏳ | PokerGFX 동일 제품 개발 |
+> | Phase 2 | ⏳ | WSOPLIVE DB 연동 |
+> | Phase 3 | ⏳ | 자동화 프로토콜 |
 >
 > **마일스톤**: RFID POC (Q2) → PokerGFX 복제 (Q4) → WSOPLIVE 연동 (27Q4) → 자동화 (28Q4)
 
@@ -39,7 +40,7 @@ Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
 **RFID 모듈**:
 | 용도 | 모듈 | 비고 |
 |------|------|------|
-| 학습용 | MFRC522 | Phase 0 (초기 프로토타입) |
+| 학습용 | MFRC522 | Phase 1 (초기 프로토타입) |
 | **프로덕션** | **ST25R3911B** | 업체 선정 후 도입 |
 
 ## Current Tools (Available Now)
@@ -78,7 +79,7 @@ sqlite3 server/db/cards.db < server/db/init.sql
 
 ## Build & Run Commands (Planned)
 
-> ⚠️ 1단계 진행 시 실제 구현 예정
+> ⚠️ Phase 1 진행 시 실제 구현 예정
 
 ```powershell
 # Server (Python)
@@ -130,19 +131,19 @@ docs/
 ├── README.md                           # 네비게이션
 ├── PRD-0003-EBS-RFID-System.md        # Master PRD
 │
-├── phase-pre/                          # Phase-Pre: 기획/준비
+├── phase-0/                            # Phase 0: 업체 선정, 준비
 │   └── CONCEPT-EBS-Vision.md          # EBS 비전
 │
-├── phase-0/                            # 1단계: PokerGFX 동일 제품
-│   ├── PRD-0003-Phase0-PokerGFX-Clone.md
+├── phase-1/                            # Phase 1: PokerGFX 동일 제품
+│   ├── PRD-0003-Phase1-PokerGFX-Clone.md
 │   ├── PokerGFX-Feature-Checklist.md  # 119개 기능
 │   └── BEGINNER-Hardware-Quickstart.md
 │
-├── phase-1/                            # (미래) DB 연동
-│   └── PRD-0003-Phase1-WSOP-Integration.md
+├── phase-2/                            # Phase 2: DB 연동
+│   └── PRD-0003-Phase2-WSOP-Integration.md
 │
-├── phase-2/                            # (미래) 자동화
-│   └── PRD-0003-Phase2-EBS-Automation.md
+├── phase-3/                            # Phase 3: 자동화
+│   └── PRD-0003-Phase3-EBS-Automation.md
 │
 └── operations/                         # 운영 문서
     ├── EBS-WORK-DASHBOARD.md
@@ -155,12 +156,12 @@ docs/
 | 문서 유형 | 경로 | 용도 |
 |----------|------|------|
 | Master PRD | `docs/PRD-0003-EBS-RFID-System.md` | 비전/전략 |
-| EBS 비전 | `docs/phase-pre/CONCEPT-EBS-Vision.md` | 프로덕션 인프라 역할 |
+| EBS 비전 | `docs/phase-0/CONCEPT-EBS-Vision.md` | 프로덕션 인프라 역할 |
 | 업무 대시보드 | `docs/operations/EBS-WORK-DASHBOARD.md` | 현재 작업 현황 |
 | Phase 진행 가이드 | `docs/operations/PHASE-PROGRESSION.md` | Phase 순서/조건 |
-| 초보자 가이드 | `docs/phase-0/BEGINNER-Hardware-Quickstart.md` | 하드웨어 입문 |
+| 초보자 가이드 | `docs/phase-1/BEGINNER-Hardware-Quickstart.md` | 하드웨어 입문 |
 
-## 1단계 완료 조건
+## Phase 1 완료 조건
 
 PokerGFX 동일 제품 완성 기준:
 
