@@ -13,10 +13,10 @@ priority: "critical"
 depends_on: []
 
 related_docs:
-  - "docs/phase-0/CONCEPT-EBS-Vision.md"
+  - "docs/phase-0/VENDOR-SELECTION-CHECKLIST.md"
   - "docs/phase-1/PRD-0003-Phase1-PokerGFX-Clone.md"
   - "docs/phase-1/PokerGFX-Feature-Checklist.md"
-  - "docs/phase-1/BEGINNER-Hardware-Quickstart.md"
+  - "docs/phase-1/reference/"
   - "docs/phase-2/PRD-0003-Phase2-WSOP-Integration.md"
   - "docs/phase-3/PRD-0003-Phase3-EBS-Automation.md"
   - "docs/operations/PHASE-PROGRESSION.md"

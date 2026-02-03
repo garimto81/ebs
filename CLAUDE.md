@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 > | 단계 | 상태 | 설명 |
 > |------|:----:|------|
 > | **Phase 0** | 🟡 | 업체 선정, 준비 ← **현재** |
-> | Phase 1 | ⏳ | PokerGFX 동일 제품 개발 |
+> | Phase 1 | ⏳ | PokerGFX 복제 |
 > | Phase 2 | ⏳ | WSOPLIVE DB 연동 |
 > | Phase 3 | ⏳ | 자동화 프로토콜 |
 >
@@ -40,8 +40,8 @@ Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
 **RFID 모듈**:
 | 용도 | 모듈 | 비고 |
 |------|------|------|
-| 학습용 | MFRC522 | Phase 1 (초기 프로토타입) |
-| **프로덕션** | **ST25R3911B** | 업체 선정 후 도입 |
+| 테스트용 | MFRC522 | Phase 1 초기 |
+| **프로덕션** | **ST25R3911B** | Phase 0 업체 선정 |
 
 ## Current Tools (Available Now)
 
@@ -129,15 +129,18 @@ cd C:\claude\ebs\frontend && npm test
 ```
 docs/
 ├── README.md                           # 네비게이션
-├── PRD-0003-EBS-RFID-System.md        # Master PRD
+├── PRD-0003-EBS-RFID-System.md        # Master PRD (비전/전략)
 │
-├── phase-0/                            # Phase 0: 업체 선정, 준비
-│   └── CONCEPT-EBS-Vision.md          # EBS 비전
+├── phase-0/                            # Phase 0: 업체 선정
+│   └── VENDOR-SELECTION-CHECKLIST.md  # 업체 선정 체크리스트
 │
-├── phase-1/                            # Phase 1: PokerGFX 동일 제품
+├── phase-1/                            # Phase 1: PokerGFX 복제
 │   ├── PRD-0003-Phase1-PokerGFX-Clone.md
 │   ├── PokerGFX-Feature-Checklist.md  # 119개 기능
-│   └── BEGINNER-Hardware-Quickstart.md
+│   └── reference/                      # PokerGFX 참조 자료
+│       ├── PokerGFX_Security.pdf
+│       ├── user-manual_split/
+│       └── user-manual_images/
 │
 ├── phase-2/                            # Phase 2: DB 연동
 │   └── PRD-0003-Phase2-WSOP-Integration.md
@@ -155,15 +158,15 @@ docs/
 
 | 문서 유형 | 경로 | 용도 |
 |----------|------|------|
-| Master PRD | `docs/PRD-0003-EBS-RFID-System.md` | 비전/전략 |
-| EBS 비전 | `docs/phase-0/CONCEPT-EBS-Vision.md` | 프로덕션 인프라 역할 |
+| Master PRD | `docs/PRD-0003-EBS-RFID-System.md` | 비전/전략/로드맵 |
+| 업체 선정 | `docs/phase-0/VENDOR-SELECTION-CHECKLIST.md` | 업체 선정 기준/체크리스트 |
+| 기능 체크리스트 | `docs/phase-1/PokerGFX-Feature-Checklist.md` | 119개 복제 대상 기능 |
+| 참조 자료 | `docs/phase-1/reference/` | PokerGFX 매뉴얼/보안 문서 |
 | 업무 대시보드 | `docs/operations/EBS-WORK-DASHBOARD.md` | 현재 작업 현황 |
-| Phase 진행 가이드 | `docs/operations/PHASE-PROGRESSION.md` | Phase 순서/조건 |
-| 초보자 가이드 | `docs/phase-1/BEGINNER-Hardware-Quickstart.md` | 하드웨어 입문 |
 
 ## Phase 1 완료 조건
 
-PokerGFX 동일 제품 완성 기준:
+PokerGFX 100% 복제 완성 기준:
 
 - [ ] **PokerGFX 100% 복제**: UI/UX 완전 동일
 - [ ] **카드 표시 정확도**: 52장 카드 100% 정확
@@ -173,8 +176,12 @@ PokerGFX 동일 제품 완성 기준:
 
 ---
 
-## Google Docs 동기화
+## 시스템 파일 위치
 
-| 문서 | Google Docs ID |
-|------|---------------|
-| BEGINNER-Hardware-Quickstart | `1Q61fgxFZeU1L0epB44ybSJ1dKxXslvmLorqAqmLcotc` |
+| 파일 유형 | 위치 | 설명 |
+|----------|------|------|
+| bkit 상태 | `.omc/bkit/` | PDCA 상태, 스냅샷 |
+| Claude 설정 | `.claude/` | 커맨드, 스킬, 에이전트 |
+| OMC 상태 | `.omc/` | oh-my-claudecode 상태 |
+
+**⚠️ 주의**: `.omc/bkit/` 폴더는 bkit 플러그인의 작업 상태를 저장합니다. 삭제하지 마세요.
