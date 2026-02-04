@@ -17,7 +17,20 @@ OUTPUT_DIR = Path("C:/claude/ebs/docs/operations/daily-briefings")
 # ===========================================
 SLACK_CHANNEL_ID = "C09N8J3UJN9"  # #ggpnotice
 SLACK_CHANNEL_NAME = "ggpnotice"
-SLACK_LIST_ID = "F0ABWAE20K1"  # EBS 업체 관리
+SLACK_LIST_ID = "F0ADFE95U00"  # EBS 업체 관리 (5컬럼)
+SLACK_LIST_ID_ARCHIVED = [
+    "F0ABWAE20K1",  # v0: 단일컬럼
+    "F0ACJPEE52S",  # v1: 4컬럼 (설명 없음)
+]
+
+# Multi-Column List Schema (v2)
+SLACK_LIST_COLUMNS = {
+    "name": "Col0ACQP79Y1J",        # 업체명 (primary)
+    "category": "Col0ACEPEKNRZ",    # 카테고리
+    "description": "Col0ACM5EBF1Q", # 설명
+    "contact": "Col0ACHNF1G93",     # 연락처
+    "status": "Col0AC5MSUPPZ",      # 상태
+}
 SLACK_USER_ID = "U05U07C2EAV"  # Aiden
 
 # ===========================================

@@ -164,6 +164,56 @@ class ListsCollector:
         print(f"Updating item {item_id} status to {status}...")
         return True
 
+    def update_item_text(
+        self,
+        item_id: str,
+        name: str,
+        url: str,
+        info: str,
+    ) -> bool:
+        """
+        Update an item's text content in the list.
+
+        Args:
+            item_id: Item ID (e.g., "Rec0AC9422B7X") - this is the row_id
+            name: Vendor name (link text)
+            url: Vendor website URL
+            info: Description text after the link
+
+        Returns:
+            True if successful
+        """
+        try:
+            response = self.client._client.api_call(
+                "slackLists.items.update",
+                json={
+                    "list_id": self.list_id,
+                    "cells": [{
+                        "column_id": "Col0AD62WARNC",  # Primary column
+                        "row_id": item_id,  # Row ID is the item_id
+                        "rich_text": [{
+                            "type": "rich_text",
+                            "elements": [{
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {"type": "link", "url": url, "text": name},
+                                    {"type": "text", "text": f" | {info}"}
+                                ]
+                            }]
+                        }]
+                    }]
+                }
+            )
+            success = response.data.get("ok", False)
+            if success:
+                print(f"Successfully updated item {item_id}")
+            else:
+                print(f"Failed to update item {item_id}: {response.data}")
+            return success
+        except Exception as e:
+            print(f"Error updating item: {e}")
+            return False
+
     def add_vendor(
         self,
         name: str,

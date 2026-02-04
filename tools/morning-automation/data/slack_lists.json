@@ -75,18 +75,18 @@
     },
     {
       "id": "Rec0AC9422B7X",
-      "name": "PokerGFX | RFID 완제품 시스템 | 벤치마크 대상",
+      "name": "PokerGFX | RFID 완제품 시스템 | 현재 사용 중 (원본)",
       "url": "https://www.videopokertable.net/",
       "vendor_key": "pokergfx",
       "raw_fields": [
         {
           "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"uL4Lw\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.videopokertable.net\\/\",\"text\":\"PokerGFX\"},{\"type\":\"text\",\"text\":\" | RFID \\uc644\\uc81c\\ud488 \\uc2dc\\uc2a4\\ud15c | \\ubca4\\uce58\\ub9c8\\ud06c \\ub300\\uc0c1\"}]}]}]",
-          "text": "PokerGFX | RFID 완제품 시스템 | 벤치마크 대상",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"8TCC1\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.videopokertable.net\\/\",\"text\":\"PokerGFX\"},{\"type\":\"text\",\"text\":\" | RFID \\uc644\\uc81c\\ud488 \\uc2dc\\uc2a4\\ud15c | \\ud604\\uc7ac \\uc0ac\\uc6a9 \\uc911 (\\uc6d0\\ubcf8)\"}]}]}]",
+          "text": "PokerGFX | RFID 완제품 시스템 | 현재 사용 중 (원본)",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "uL4Lw",
+              "block_id": "8TCC1",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -97,7 +97,7 @@
                       "type": "link"
                     },
                     {
-                      "text": " | RFID 완제품 시스템 | 벤치마크 대상",
+                      "text": " | RFID 완제품 시스템 | 현재 사용 중 (원본)",
                       "type": "text"
                     }
                   ]
@@ -548,6 +548,13 @@
       "vendor_key": "feig",
       "raw_fields": [
         {
+          "key": "Col0AC5G00ERZ",
+          "value": null,
+          "text": "",
+          "rich_text": [],
+          "column_id": "Col0ACQR5BFU1"
+        },
+        {
           "key": "name",
           "value": "[{\"type\":\"rich_text\",\"block_id\":\"gCLhM\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.feig.de\\/en\",\"text\":\"FEIG Electronic\"},{\"type\":\"text\",\"text\":\" | HF \\ub9ac\\ub354 \\ucd5c\\uace0 \\uc131\\ub2a5, \\ud55c\\uad6d \\ub300\\ub9ac\\uc810(MINU) \\uc788\\uc74c\"}]}]}]",
           "text": "FEIG Electronic | HF 리더 최고 성능, 한국 대리점(MINU) 있음",
@@ -694,6 +701,13 @@
         "url": "https://www.feig.de/en",
         "vendor_key": "feig",
         "raw_fields": [
+          {
+            "key": "Col0AC5G00ERZ",
+            "value": null,
+            "text": "",
+            "rich_text": [],
+            "column_id": "Col0ACQR5BFU1"
+          },
           {
             "key": "name",
             "value": "[{\"type\":\"rich_text\",\"block_id\":\"gCLhM\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.feig.de\\/en\",\"text\":\"FEIG Electronic\"},{\"type\":\"text\",\"text\":\" | HF \\ub9ac\\ub354 \\ucd5c\\uace0 \\uc131\\ub2a5, \\ud55c\\uad6d \\ub300\\ub9ac\\uc810(MINU) \\uc788\\uc74c\"}]}]}]",
@@ -1092,18 +1106,18 @@
       },
       {
         "id": "Rec0AC9422B7X",
-        "name": "PokerGFX | RFID 완제품 시스템 | 벤치마크 대상",
+        "name": "PokerGFX | RFID 완제품 시스템 | 현재 사용 중 (원본)",
         "url": "https://www.videopokertable.net/",
         "vendor_key": "pokergfx",
         "raw_fields": [
           {
             "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"uL4Lw\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.videopokertable.net\\/\",\"text\":\"PokerGFX\"},{\"type\":\"text\",\"text\":\" | RFID \\uc644\\uc81c\\ud488 \\uc2dc\\uc2a4\\ud15c | \\ubca4\\uce58\\ub9c8\\ud06c \\ub300\\uc0c1\"}]}]}]",
-            "text": "PokerGFX | RFID 완제품 시스템 | 벤치마크 대상",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"8TCC1\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.videopokertable.net\\/\",\"text\":\"PokerGFX\"},{\"type\":\"text\",\"text\":\" | RFID \\uc644\\uc81c\\ud488 \\uc2dc\\uc2a4\\ud15c | \\ud604\\uc7ac \\uc0ac\\uc6a9 \\uc911 (\\uc6d0\\ubcf8)\"}]}]}]",
+            "text": "PokerGFX | RFID 완제품 시스템 | 현재 사용 중 (원본)",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "uL4Lw",
+                "block_id": "8TCC1",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -1114,7 +1128,7 @@
                         "type": "link"
                       },
                       {
-                        "text": " | RFID 완제품 시스템 | 벤치마크 대상",
+                        "text": " | RFID 완제품 시스템 | 현재 사용 중 (원본)",
                         "type": "text"
                       }
                     ]
@@ -1165,5 +1179,5 @@
     ],
     "uncategorized": []
   },
-  "collected_at": "2026-02-02T18:02:41.142663"
+  "collected_at": "2026-02-03T15:56:05.691352"
 }

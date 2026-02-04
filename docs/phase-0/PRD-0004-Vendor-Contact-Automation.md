@@ -450,3 +450,204 @@ def apply_vendor_labels(email_id: str, vendor: Vendor, action: str):
 | Sun-Fly | 웹사이트 직접 연락처 없음 | 폼 통해 문의 |
 | S.I.T. Korea | 403 차단 | 대체 경로 탐색 |
 | ST Microelectronics | 일반 지원만 제공 | 디스트리뷰터 통해 |
+
+---
+
+## 11. 실시간 이메일 알림 시스템
+
+### 11.1 아키텍처 옵션 비교
+
+| 방식 | 지연 시간 | 복잡도 | 인프라 | 추천 |
+|------|:--------:|:------:|:------:|:----:|
+| **Option A: Gmail Push (Pub/Sub)** | ~1초 | 높음 | GCP 필요 | ⭐ |
+| **Option B: Polling** | 1~5분 | 낮음 | 로컬만 | 초기 |
+| **Option C: IMAP IDLE** | ~5초 | 중간 | 상시 연결 | - |
+
+### 11.2 Option A: Gmail Pub/Sub Push (권장)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                   Gmail Push Notification 아키텍처               │
+└─────────────────────────────────────────────────────────────────┘
+
+                    ┌──────────────┐
+                    │    Gmail     │
+                    │   Inbox      │
+                    └──────┬───────┘
+                           │ 새 메일 도착
+                           ▼
+                    ┌──────────────┐
+                    │  Gmail API   │
+                    │   Watch      │
+                    └──────┬───────┘
+                           │ Push 이벤트
+                           ▼
+                    ┌──────────────┐
+                    │  GCP Pub/Sub │
+                    │    Topic     │
+                    └──────┬───────┘
+                           │ HTTP Push
+                           ▼
+            ┌──────────────────────────────┐
+            │      Webhook Handler          │
+            │  (Tailscale Funnel / ngrok)   │
+            └──────────────┬───────────────┘
+                           │
+         ┌─────────────────┼─────────────────┐
+         ▼                 ▼                 ▼
+  ┌────────────┐   ┌────────────┐   ┌────────────┐
+  │   Slack    │   │ Slack List │   │  Morning   │
+  │  알림 전송  │   │ 상태 업데이트│   │ Automation │
+  └────────────┘   └────────────┘   └────────────┘
+```
+
+**필요 구성요소:**
+
+| 구성요소 | 용도 | 상태 |
+|----------|------|------|
+| GCP Project | Pub/Sub 호스팅 | 이미 있음 (OAuth용) |
+| Pub/Sub Topic | 메시지 라우팅 | 생성 필요 |
+| Webhook Server | Push 수신 | 구현 필요 |
+| Tailscale Funnel | Public HTTPS | 설정 필요 |
+
+**설정 명령어:**
+
+```bash
+# 1. API 활성화
+gcloud services enable gmail.googleapis.com pubsub.googleapis.com
+
+# 2. Topic 생성
+gcloud pubsub topics create ebs-gmail-watch
+
+# 3. Gmail 권한 부여
+gcloud pubsub topics add-iam-policy-binding ebs-gmail-watch \
+  --member=serviceAccount:gmail-api-push@system.gserviceaccount.com \
+  --role=roles/pubsub.publisher
+
+# 4. Watch 시작 (Python)
+from lib.gmail import GmailClient
+client = GmailClient()
+client.service.users().watch(
+    userId='me',
+    body={
+        'topicName': 'projects/<project-id>/topics/ebs-gmail-watch',
+        'labelIds': ['INBOX']
+    }
+).execute()
+```
+
+### 11.3 Option B: Polling (간단한 대안)
+
+```python
+# tools/morning-automation/services/email_poller.py
+
+import schedule
+import time
+from datetime import datetime
+from lib.gmail import GmailClient
+
+class EmailPoller:
+    def __init__(self, check_interval_minutes: int = 5):
+        self.client = GmailClient()
+        self.last_check = datetime.now()
+        self.check_interval = check_interval_minutes
+        self.vendor_emails = self._load_vendor_emails()
+
+    def check_new_emails(self):
+        """주기적으로 새 이메일 확인"""
+        query = f"is:unread after:{self.last_check.strftime('%Y/%m/%d')}"
+
+        for vendor_email in self.vendor_emails:
+            emails = self.client.list_emails(
+                query=f"from:{vendor_email} {query}",
+                max_results=10
+            )
+
+            for email in emails:
+                self._handle_vendor_response(email)
+
+        self.last_check = datetime.now()
+
+    def _handle_vendor_response(self, email):
+        """업체 응답 처리"""
+        # 1. Slack 알림
+        self._notify_slack(email)
+
+        # 2. Slack List 상태 업데이트
+        self._update_vendor_status(email.sender, 'RESPONDED')
+
+        # 3. Gmail 라벨 적용
+        self.client.modify_labels(
+            email.id,
+            add_labels=['EBS/Vendor/Responded']
+        )
+
+    def run(self):
+        """Polling 시작"""
+        schedule.every(self.check_interval).minutes.do(self.check_new_emails)
+        while True:
+            schedule.run_pending()
+            time.sleep(60)
+```
+
+### 11.4 Option C: IMAP IDLE (실시간, 간단)
+
+```python
+# IMAP IDLE 프로토콜로 실시간 이메일 감지
+# 연결 유지 필요 (29분마다 재연결)
+
+import imaplib
+from lib.gmail import get_credentials
+
+class IMAPWatcher:
+    def __init__(self):
+        self.imap = imaplib.IMAP4_SSL('imap.gmail.com')
+        self._login_oauth()
+
+    def watch(self, callback):
+        self.imap.select('INBOX')
+        while True:
+            self.imap.send(b'IDLE\r\n')
+            response = self.imap.readline()
+            if b'EXISTS' in response:
+                self.imap.send(b'DONE\r\n')
+                callback()
+```
+
+### 11.5 권장 구현 전략
+
+| Phase | 방식 | 시기 | 이유 |
+|:-----:|------|------|------|
+| **1** | Polling (5분) | 즉시 | 빠른 구현, 검증 |
+| **2** | Gmail Pub/Sub | 필요 시 | 실시간 필요할 때 |
+
+### 11.6 Slack 알림 형식
+
+```
+🔔 *EBS 업체 응답 도착*
+
+*From:* FEIG Electronic <info@feig.de>
+*Subject:* Re: [Inquiry] RFID Solution - GG Production
+*Time:* 2026-02-03 14:32 KST
+
+> Thank you for your inquiry. Please find attached...
+
+*Actions:*
+• <view_email|Gmail에서 보기>
+• <update_status|상태 업데이트>
+```
+
+### 11.7 구현 체크리스트
+
+**Phase 1 (Polling):**
+- [ ] `email_poller.py` 구현
+- [ ] 업체 이메일 목록 연동
+- [ ] Slack 알림 전송
+- [ ] Slack List 상태 자동 업데이트
+- [ ] Windows Task Scheduler 등록
+
+**Phase 2 (Push - 선택):**
+- [ ] GCP Pub/Sub Topic 생성
+- [ ] Gmail Watch 설정
+- [ ] Webhook Handler 구현
+- [ ] Tailscale Funnel 설정
