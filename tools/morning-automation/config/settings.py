@@ -10,7 +10,7 @@ from pathlib import Path
 # ===========================================
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "data"
-OUTPUT_DIR = Path("C:/claude/ebs/docs/operations/daily-briefings")
+OUTPUT_DIR = Path("C:/claude/ebs/docs/5-operations/daily-briefings")
 
 # ===========================================
 # Slack Configuration
@@ -70,6 +70,9 @@ VENDOR_KEYWORDS = {
     "waveshare": ["waveshare", "웨이브쉐어"],
     "adafruit": ["adafruit", "pn532"],
     "sparkfun": ["sparkfun"],
+
+    # Integrated Partner Candidates (Category A)
+    "emfoplus": ["엠포플러스", "emfoplus", "emfo plus"],
 
     # Benchmarks
     "pokergfx": ["pokergfx", "poker gfx", "videopokertable"],

@@ -2,6 +2,23 @@
   "total_emails": 3,
   "emails": [
     {
+      "id": "19c2325a20033780",
+      "thread_id": "19c2325a20033780",
+      "subject": "Re:Fw: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "SUN-FLY Susie <susie.su@sun-fly.com>",
+      "date": "2026-02-03T18:55:46+08:00",
+      "is_unread": false,
+      "labels": [
+        "YELLOW_STAR",
+        "IMPORTANT",
+        "STARRED",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hello Aiden, Thanks for your email. We are interested in cooperating with you to develop a Poker RFID GFX system although we have no direct delivery experience yet, we can customize a workable solution",
+      "vendor": "sunfly"
+    },
+    {
       "id": "19bfa03c1cece8b2",
       "thread_id": "19bfa03c1cece8b2",
       "subject": "회의록: “Pokercaster GFX Module Meeting” 2026년 1월 26일",
@@ -31,47 +48,11 @@
       ],
       "snippet": "Hi Aiden, The PokerGFX live hand API (a json file that updates at the completion of each hand) is no longer available by request. This feature is now only available with an Enterprise license. If you",
       "vendor": "pokergfx"
-    },
-    {
-      "id": "19c2325a20033780",
-      "thread_id": "19c2325a20033780",
-      "subject": "Re:Fw: Inquiry regarding Poker RFID GFX development experience",
-      "sender": "SUN-FLY Susie <susie.su@sun-fly.com>",
-      "date": "2026-02-03T18:55:46+08:00",
-      "is_unread": false,
-      "labels": [
-        "YELLOW_STAR",
-        "IMPORTANT",
-        "STARRED",
-        "CATEGORY_PERSONAL",
-        "Label_4886549615727008050"
-      ],
-      "snippet": "Hello Aiden, Thanks for your email. We are interested in cooperating with you to develop a Poker RFID GFX system although we have no direct delivery experience yet, we can customize a workable solution",
-      "vendor": "sunfly"
     }
   ],
   "awaiting_reply": [],
   "needs_followup": [],
   "vendor_emails": {
-    "pokergfx": [
-      {
-        "id": "19bebde00213bcf7",
-        "thread_id": "19bebde00213bcf7",
-        "subject": "Re: New Contact Us Request",
-        "sender": "\"support@pokergfx.io\" <support@pokergfx.io>",
-        "date": "2026-01-23T17:19:12+00:00",
-        "is_unread": false,
-        "labels": [
-          "YELLOW_STAR",
-          "IMPORTANT",
-          "STARRED",
-          "CATEGORY_PERSONAL",
-          "Label_4886549615727008050"
-        ],
-        "snippet": "Hi Aiden, The PokerGFX live hand API (a json file that updates at the completion of each hand) is no longer available by request. This feature is now only available with an Enterprise license. If you",
-        "vendor": "pokergfx"
-      }
-    ],
     "sunfly": [
       {
         "id": "19c2325a20033780",
@@ -90,8 +71,27 @@
         "snippet": "Hello Aiden, Thanks for your email. We are interested in cooperating with you to develop a Poker RFID GFX system although we have no direct delivery experience yet, we can customize a workable solution",
         "vendor": "sunfly"
       }
+    ],
+    "pokergfx": [
+      {
+        "id": "19bebde00213bcf7",
+        "thread_id": "19bebde00213bcf7",
+        "subject": "Re: New Contact Us Request",
+        "sender": "\"support@pokergfx.io\" <support@pokergfx.io>",
+        "date": "2026-01-23T17:19:12+00:00",
+        "is_unread": false,
+        "labels": [
+          "YELLOW_STAR",
+          "IMPORTANT",
+          "STARRED",
+          "CATEGORY_PERSONAL",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi Aiden, The PokerGFX live hand API (a json file that updates at the completion of each hand) is no longer available by request. This feature is now only available with an Enterprise license. If you",
+        "vendor": "pokergfx"
+      }
     ]
   },
-  "collected_at": "2026-02-02T17:45:15.359507",
-  "last_updated": "2026-02-04T17:39:59.935466"
+  "collected_at": "2026-02-05T11:36:34.126476",
+  "last_updated": "2026-02-05T11:46:04.826385"
 }

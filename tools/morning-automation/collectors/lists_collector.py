@@ -16,7 +16,7 @@ from typing import Optional, List, Dict
 sys.path.insert(0, "C:/claude")
 
 from lib.slack.client import SlackUserClient
-from config.settings import SLACK_LIST_ID, DATA_DIR, VENDOR_KEYWORDS
+from config.settings import SLACK_LIST_ID, SLACK_LIST_COLUMNS, DATA_DIR, VENDOR_KEYWORDS
 
 
 class ListsCollector:
@@ -114,33 +114,90 @@ class ListsCollector:
     def _categorize_items(self, items: list) -> dict:
         """Categorize items by type."""
         categories = {
-            "rfid_readers": [],
-            "casino_solutions": [],
-            "diy_development": [],
-            "benchmarks": [],
+            "A": [],
+            "B": [],
+            "C": [],
             "uncategorized": [],
         }
 
-        rfid_readers = ["feig", "gao", "pongee", "identiv"]
-        casino_solutions = ["sit_korea", "sunfly", "matsui", "abbiati"]
-        diy_development = ["st_micro", "waveshare", "adafruit", "sparkfun"]
-        benchmarks = ["pokergfx", "rfpoker", "fadedspade", "angel"]
+        cat_a = {"sunfly", "angel", "emfoplus"}
+        cat_c = {"pokergfx", "rfpoker", "abbiati", "matsui", "sit_korea"}
 
         for item in items:
             vendor_key = item.get("vendor_key")
 
-            if vendor_key in rfid_readers:
-                categories["rfid_readers"].append(item)
-            elif vendor_key in casino_solutions:
-                categories["casino_solutions"].append(item)
-            elif vendor_key in diy_development:
-                categories["diy_development"].append(item)
-            elif vendor_key in benchmarks:
-                categories["benchmarks"].append(item)
+            if vendor_key in cat_a:
+                categories["A"].append(item)
+            elif vendor_key in cat_c:
+                categories["C"].append(item)
+            elif vendor_key:
+                categories["B"].append(item)
             else:
                 categories["uncategorized"].append(item)
 
         return categories
+
+    def _build_rich_text_cell(self, column_id: str, row_id: str, text: str) -> dict:
+        """Build a rich_text cell payload for Slack Lists API."""
+        return {
+            "column_id": column_id,
+            "row_id": row_id,
+            "rich_text": [{
+                "type": "rich_text",
+                "elements": [{
+                    "type": "rich_text_section",
+                    "elements": [
+                        {"type": "text", "text": text}
+                    ]
+                }]
+            }]
+        }
+
+    def update_item_fields(
+        self,
+        item_id: str,
+        fields: Dict[str, str],
+    ) -> bool:
+        """
+        Update multiple fields of an item in the list.
+
+        Args:
+            item_id: Item ID (row_id)
+            fields: Dict of field_name -> value.
+                     Keys: "status", "category", "contact", "description"
+
+        Returns:
+            True if successful
+        """
+        cells = []
+        for field_name, value in fields.items():
+            column_id = SLACK_LIST_COLUMNS.get(field_name)
+            if not column_id:
+                print(f"Unknown field: {field_name}")
+                continue
+            cells.append(self._build_rich_text_cell(column_id, item_id, value))
+
+        if not cells:
+            print("No valid fields to update")
+            return False
+
+        try:
+            response = self.client._client.api_call(
+                "slackLists.items.update",
+                json={
+                    "list_id": self.list_id,
+                    "cells": cells,
+                }
+            )
+            success = response.data.get("ok", False)
+            if success:
+                print(f"Updated item {item_id}: {list(fields.keys())}")
+            else:
+                print(f"Failed to update {item_id}: {response.data}")
+            return success
+        except Exception as e:
+            print(f"Error updating item {item_id}: {e}")
+            return False
 
     def update_item_status(
         self,
@@ -153,16 +210,13 @@ class ListsCollector:
 
         Args:
             item_id: Item ID
-            status: New status (candidate, rfp_sent, quote_received, etc.)
+            status: New status (후보, 견적요청, 견적수신, 협상중, 계약, 보류, 제외)
             notes: Optional notes
 
         Returns:
             True if successful
         """
-        # Note: Slack Lists API for updating items requires specific column IDs
-        # This is a placeholder for actual implementation
-        print(f"Updating item {item_id} status to {status}...")
-        return True
+        return self.update_item_fields(item_id, {"status": status})
 
     def update_item_text(
         self,
@@ -219,42 +273,78 @@ class ListsCollector:
         name: str,
         url: str,
         info: str,
-    ) -> bool:
+        category: str = "",
+        contact: str = "",
+        status: str = "후보",
+    ) -> Optional[str]:
         """
-        Add a new vendor to the list.
+        Add a new vendor to the list with all fields.
 
         Args:
             name: Vendor name
             url: Vendor website URL
             info: Brief info/description
+            category: Category (e.g., "카테고리 A")
+            contact: Contact email or info
+            status: Initial status (default: "후보")
 
         Returns:
-            True if successful
+            New item ID if successful, None otherwise
         """
+        def _text_field(column_id: str, text: str) -> dict:
+            return {
+                "column_id": column_id,
+                "rich_text": [{
+                    "type": "rich_text",
+                    "elements": [{
+                        "type": "rich_text_section",
+                        "elements": [{"type": "text", "text": text}]
+                    }]
+                }]
+            }
+
+        def _link_field(column_id: str, url: str, text: str) -> dict:
+            return {
+                "column_id": column_id,
+                "rich_text": [{
+                    "type": "rich_text",
+                    "elements": [{
+                        "type": "rich_text_section",
+                        "elements": [{"type": "link", "url": url, "text": text}]
+                    }]
+                }]
+            }
+
         try:
+            fields = [
+                _link_field(SLACK_LIST_COLUMNS["name"], url, name),
+            ]
+            if status:
+                fields.append(_text_field(SLACK_LIST_COLUMNS["status"], status))
+            if category:
+                fields.append(_text_field(SLACK_LIST_COLUMNS["category"], category))
+            if contact:
+                fields.append(_text_field(SLACK_LIST_COLUMNS["contact"], contact))
+            if info:
+                fields.append(_text_field(SLACK_LIST_COLUMNS["description"], info))
+
             response = self.client._client.api_call(
                 "slackLists.items.create",
                 json={
                     "list_id": self.list_id,
-                    "initial_fields": [{
-                        "column_id": "Col0AD62WARNC",  # Primary column
-                        "rich_text": [{
-                            "type": "rich_text",
-                            "elements": [{
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {"type": "link", "url": url, "text": name},
-                                    {"type": "text", "text": f" | {info}"}
-                                ]
-                            }]
-                        }]
-                    }]
+                    "initial_fields": fields,
                 }
             )
-            return response.data.get("ok", False)
+            if response.data.get("ok"):
+                item_id = response.data.get("item", {}).get("id", "")
+                print(f"Added vendor '{name}' (ID: {item_id})")
+                return item_id
+            else:
+                print(f"Failed to add vendor '{name}': {response.data}")
+                return None
         except Exception as e:
-            print(f"Error adding vendor: {e}")
-            return False
+            print(f"Error adding vendor '{name}': {e}")
+            return None
 
     def sync_from_analysis(
         self,
@@ -318,10 +408,9 @@ class ListsCollector:
 
         return {
             "total": data.get("total_items", 0),
-            "rfid_readers": len(by_category.get("rfid_readers", [])),
-            "casino_solutions": len(by_category.get("casino_solutions", [])),
-            "diy_development": len(by_category.get("diy_development", [])),
-            "benchmarks": len(by_category.get("benchmarks", [])),
+            "A": len(by_category.get("A", [])),
+            "B": len(by_category.get("B", [])),
+            "C": len(by_category.get("C", [])),
             "uncategorized": len(by_category.get("uncategorized", [])),
             "collected_at": data.get("collected_at"),
         }
@@ -349,8 +438,7 @@ if __name__ == "__main__":
     print(f"  Total items: {result.get('total_items', 0)}")
 
     by_cat = result.get("by_category", {})
-    print(f"  RFID Readers: {len(by_cat.get('rfid_readers', []))}")
-    print(f"  Casino Solutions: {len(by_cat.get('casino_solutions', []))}")
-    print(f"  DIY/Development: {len(by_cat.get('diy_development', []))}")
-    print(f"  Benchmarks: {len(by_cat.get('benchmarks', []))}")
+    print(f"  Category A (통합 파트너): {len(by_cat.get('A', []))}")
+    print(f"  Category B (부품 공급): {len(by_cat.get('B', []))}")
+    print(f"  Category C (벤치마크): {len(by_cat.get('C', []))}")
     print(f"  Uncategorized: {len(by_cat.get('uncategorized', []))}")

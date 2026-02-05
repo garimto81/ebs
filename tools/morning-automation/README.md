@@ -55,7 +55,7 @@ python main.py --full --notify --post
 
 ### Markdown 리포트
 
-`C:\claude\ebs\docs\operations\daily-briefings\YYYY-MM-DD.md`
+`C:\claude\ebs\docs\5-operations\daily-briefings\YYYY-MM-DD.md`
 
 ### JSON 데이터
 
@@ -114,4 +114,4 @@ pip install -r requirements.txt
 ## 관련 문서
 
 - [PRD-Morning-Automation.md](../../docs/0-pre/PRD-Morning-Automation.md)
-- [SLACK-LISTS-KANBAN.md](../../docs/operations/SLACK-LISTS-KANBAN.md)
+- [SLACK-LISTS-KANBAN.md](../../docs/5-operations/SLACK-LISTS-KANBAN.md)

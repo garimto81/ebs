@@ -15,7 +15,7 @@ sys.path.insert(0, "C:/claude")
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from lib.slack.client import SlackClient
-from config.settings import SLACK_CHANNEL_ID, GFX_LICENSE_EXPIRY, DATA_DIR
+from config.settings import SLACK_CHANNEL_ID, DATA_DIR
 
 # Store the message timestamp for updates
 MESSAGE_TS_FILE = DATA_DIR / "vendor_message_ts.txt"
@@ -121,124 +121,113 @@ class SlackPoster:
         except Exception as e:
             return {"ok": False, "error": str(e)}
 
+    # Category A vendors (integrated partner candidates: RFID card + reader)
+    CATEGORY_A_KEYS = {"sunfly", "angel", "emfoplus"}
+
+    # Category C vendors (benchmarks/references, no email needed)
+    CATEGORY_C_KEYS = {"pokergfx", "rfpoker", "abbiati", "matsui", "sit_korea"}
+
+    def _classify_vendor(self, vendor_key: str) -> str:
+        """Classify vendor into A/B/C category."""
+        if vendor_key in self.CATEGORY_A_KEYS:
+            return "A"
+        if vendor_key in self.CATEGORY_C_KEYS:
+            return "C"
+        return "B"
+
+    def _format_vendor_item(self, item: dict) -> str:
+        """Format a single vendor item as a Slack line."""
+        vendor_key = item.get("vendor_key", "")
+        url = item.get("url", "")
+        # Extract vendor name from the raw 'name' field (last segment)
+        raw_name = item.get("name", "")
+        # Try to find fields for cleaner data
+        fields = {f.get("key"): f.get("text", "") for f in item.get("raw_fields", [])}
+        display_name = fields.get("name", "") or vendor_key.replace("_", " ").title()
+        contact = fields.get("contact", "")
+        description = fields.get("description", "")
+
+        parts = []
+        if url:
+            parts.append(f"<{url}|{display_name}>")
+        else:
+            parts.append(display_name)
+        if description:
+            parts.append(description)
+
+        return "• " + " | ".join(parts)
+
+    # Email contacts for Category A vendors (for status detection)
+    CATEGORY_A_CONTACTS = {
+        "sunfly": "sun-fly.com",
+        "angel": "angel-group.co.jp",
+        "emfoplus": "emfoplus.co.kr",
+    }
+
+    def _get_email_status(self, vendor_key: str, list_status: str, gmail_data: dict) -> str:
+        """Detect email status for a vendor from List status + Gmail data."""
+        domain = self.CATEGORY_A_CONTACTS.get(vendor_key, "")
+
+        # Check Gmail for incoming mail from vendor
+        received = False
+        if gmail_data and domain:
+            for email in gmail_data.get("all_emails", gmail_data.get("emails", [])):
+                sender = email.get("from", email.get("sender", ""))
+                if isinstance(sender, str) and domain in sender:
+                    received = True
+                    break
+
+        # Determine status from List status + received flag
+        sent = list_status in ("견적요청", "견적수신", "협상중", "계약")
+
+        if received and sent:
+            return ":arrows_counterclockwise: 회신 수신"
+        elif received:
+            return ":incoming_envelope: 수신"
+        elif sent:
+            return ":outbox_tray: RFI 발송"
+        return ""
+
     def _format_vendor_summary(
         self,
         lists_data: dict,
         slack_data: dict = None,
         gmail_data: dict = None,
     ) -> str:
-        """Format vendor management summary message with optional briefing stats."""
-        date_str = datetime.now().strftime("%Y-%m-%d")
-        by_category = lists_data.get("by_category", {})
+        """Format concise vendor management summary with List link and email status."""
+        items = lists_data.get("items", [])
 
-        rfid = by_category.get("rfid_readers", [])
-        casino = by_category.get("casino_solutions", [])
-        diy = by_category.get("diy_development", [])
-        benchmark = by_category.get("benchmarks", [])
+        # Classify items
+        cat_a = []
+        counts = {"A": 0, "B": 0, "C": 0}
+        for item in items:
+            vk = item.get("vendor_key", "")
+            cat = self._classify_vendor(vk)
+            counts[cat] = counts.get(cat, 0) + 1
+            if cat == "A":
+                cat_a.append(item)
 
         lines = [
-            "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*",
+            "*EBS 업체 관리 - 통합 파트너 선정*",
             "",
-            "포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.",
-            "",
-            f"*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>",
-            "",
+            f":clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> ({len(items)}개 업체)",
+            f"카테고리 A: {counts['A']}개 | B: {counts['B']}개 | C: {counts['C']}개",
         ]
 
-        # Add briefing stats if available
-        if slack_data or gmail_data:
-            # GFX license days
-            gfx_expiry = datetime.strptime(GFX_LICENSE_EXPIRY, "%Y-%m-%d")
-            gfx_days = (gfx_expiry - datetime.now()).days
-
-            lines.append(f"*Daily Status ({date_str})*")
-
-            if gfx_days <= 60:
-                lines.append(f":warning: GFX 라이선스: D-{gfx_days}")
-
-            if gmail_data:
-                followup_count = len(gmail_data.get("needs_followup", []))
-                if followup_count > 0:
-                    lines.append(f":email: Follow-up 필요: {followup_count}건")
-
-            if slack_data:
-                pending = [
-                    m for m in slack_data.get("mentions_to_me", [])
-                    if not m.get("completed", False)
-                    and "채널에 참여함" not in m.get("text", "")
-                ]
-                if pending:
-                    lines.append(f":memo: 미완료 작업: {len(pending)}건")
-
+        # Category A email status
+        if cat_a:
             lines.append("")
+            lines.append("*RFI 현황:*")
+            for item in cat_a:
+                vk = item.get("vendor_key", "")
+                fields = {f.get("key"): f.get("text", "") for f in item.get("raw_fields", [])}
+                name = fields.get("name", vk.replace("_", " ").title())
+                status = fields.get("status", "후보")
+                email_status = self._get_email_status(vk, status, gmail_data)
+                lines.append(f"• {name}: {status} {email_status}")
 
-        lines.append(f"*RFID 리더/모듈 전문 업체 ({len(rfid)}개)*")
-
-        for item in rfid:
-            name = item.get("name", "").split("|")[0].strip()
-            url = item.get("url", "")
-            # Extract info after the name
-            full_text = item.get("name", "")
-            info = full_text.split("|")[1].strip() if "|" in full_text else ""
-            if url and info:
-                lines.append(f"• <{url}|{name}> | {info}")
-            elif url:
-                lines.append(f"• <{url}|{name}>")
-            else:
-                lines.append(f"• {name}")
-
-        lines.extend([
-            "",
-            f"*카지노 통합 솔루션 업체 ({len(casino)}개)*",
-        ])
-        for item in casino:
-            name = item.get("name", "").split("|")[0].strip()
-            url = item.get("url", "")
-            full_text = item.get("name", "")
-            info = full_text.split("|")[1].strip() if "|" in full_text else ""
-            if url and info:
-                lines.append(f"• <{url}|{name}> | {info}")
-            elif url:
-                lines.append(f"• <{url}|{name}>")
-            else:
-                lines.append(f"• {name}")
-
-        lines.extend([
-            "",
-            f"*DIY/개발 친화 업체 ({len(diy)}개)*",
-        ])
-        for item in diy:
-            name = item.get("name", "").split("|")[0].strip()
-            url = item.get("url", "")
-            full_text = item.get("name", "")
-            info = full_text.split("|")[1].strip() if "|" in full_text else ""
-            if url and info:
-                lines.append(f"• <{url}|{name}> | {info}")
-            elif url:
-                lines.append(f"• <{url}|{name}>")
-            else:
-                lines.append(f"• {name}")
-
-        lines.extend([
-            "",
-            f"*완제품 벤치마크 업체 ({len(benchmark)}개)*",
-        ])
-        for item in benchmark:
-            name = item.get("name", "").split("|")[0].strip()
-            url = item.get("url", "")
-            full_text = item.get("name", "")
-            info = full_text.split("|")[1].strip() if "|" in full_text else ""
-            if url and info:
-                lines.append(f"• <{url}|{name}> | {info}")
-            elif url:
-                lines.append(f"• <{url}|{name}>")
-            else:
-                lines.append(f"• {name}")
-
-        lines.extend([
-            "",
-            f"_마지막 업데이트: {datetime.now().strftime('%Y-%m-%d %H:%M')}_",
-        ])
+        lines.append("")
+        lines.append(f"_업데이트: {datetime.now().strftime('%Y-%m-%d %H:%M')}_")
 
         return "\n".join(lines)
 

@@ -136,6 +136,6 @@ if __name__ == "__main__":
         sample_slack,
         sample_gmail,
         sample_lists,
-        "C:/claude/ebs/docs/operations/daily-briefings/test.md"
+        "C:/claude/ebs/docs/5-operations/daily-briefings/test.md"
     )
     print(f"Sent: {result}")

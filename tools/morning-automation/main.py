@@ -216,9 +216,9 @@ def print_summary(results: dict):
     by_cat = lists.get("by_category", {})
     print(f"🏢 Vendors:")
     print(f"   - Total: {lists.get('total_items', 0)}")
-    print(f"   - RFID Readers: {len(by_cat.get('rfid_readers', []))}")
-    print(f"   - Casino Solutions: {len(by_cat.get('casino_solutions', []))}")
-    print(f"   - DIY/Development: {len(by_cat.get('diy_development', []))}")
+    print(f"   - Category A (통합 파트너): {len(by_cat.get('A', []))}")
+    print(f"   - Category B (부품 공급): {len(by_cat.get('B', []))}")
+    print(f"   - Category C (벤치마크): {len(by_cat.get('C', []))}")
     print()
 
 
