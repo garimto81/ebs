@@ -86,7 +86,7 @@ Python 실행 결과에서 다음 정보 추출:
 
 | 항목 | 값 |
 |------|-----|
-| 리포트 | `docs/operations/daily-briefings/2026-02-04.md` |
+| 리포트 | `docs/5-operations/daily-briefings/2026-02-04.md` |
 | Slack 메시지 | N개 수집 |
 | Gmail 이메일 | N개 수집 |
 | 등록 업체 | N개 |
@@ -132,7 +132,7 @@ Gmail/Slack 분석 결과를 바탕으로 자동 생성:
 |------|------|
 | `tools/morning-automation/main.py` | 메인 오케스트레이터 |
 | `tools/morning-automation/config/settings.py` | 설정 (채널ID, 임계값) |
-| `docs/operations/daily-briefings/` | 일일 리포트 저장 |
+| `docs/5-operations/daily-briefings/` | 일일 리포트 저장 |
 
 ---
 

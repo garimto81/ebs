@@ -4,212 +4,172 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Status
 
-> **Current Phase: 🟡 Phase 0** (진행 중)
+> **Current Phase: Phase 0** (업체 선정, 준비)
 >
 > | 단계 | 상태 | 설명 |
 > |------|:----:|------|
-> | **Phase 0** | 🟡 | 업체 선정, 준비 ← **현재** |
-> | Phase 1 | ⏳ | PokerGFX 복제 |
-> | Phase 2 | ⏳ | WSOPLIVE DB 연동 |
-> | Phase 3 | ⏳ | 자동화 프로토콜 |
->
-> **마일스톤**: RFID POC (Q2) → PokerGFX 복제 (Q4) → WSOPLIVE 연동 (27Q4) → 자동화 (28Q4)
+> | **Phase 0** | 진행 중 | 업체 선정, 준비 |
+> | Phase 1 | 대기 | PokerGFX 복제 |
+> | Phase 2 | 대기 | WSOPLIVE DB 연동 |
+> | Phase 3 | 대기 | 자동화 프로토콜 |
 
 ## Project Overview
 
-> **BRACELET STUDIO** | EBS (Event Broadcasting System)
-
-EBS는 **포커 방송 프로덕션 전체 워크플로우의 인프라스트럭처**입니다.
+EBS (Event Broadcasting System)는 포커 방송 프로덕션 전체 워크플로우의 인프라스트럭처.
 
 **핵심 목표**:
-- **자산 내재화/독립화**: 자체 시스템 소유
-- **운영 효율화**: 30명 → 15~20명 (자막 연출 자동화)
+- **자산 내재화**: 자체 RFID 시스템 구축 (완제품 도입이 아닌 자체 개발)
+- **운영 효율화**: 30명 -> 15~20명 (자막 연출 자동화)
+
+**PokerGFX는 구매/도입 대상이 아니라 소프트웨어 벤치마크/복제 대상이다.**
 
 ## Architecture
 
 ```
-Hardware: RFID Card → MFRC522/ST25R3911B → ESP32 → USB Serial
-Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
+RFID Card -> ST25R3911B -> ESP32 -> USB Serial -> FastAPI -> WebSocket -> React
 ```
 
-**3-Layer Structure**:
-- **Firmware (Arduino/C++)**: ESP32에서 RFID 태그 읽기, JSON Serial 출력
-- **Server (Python/FastAPI)**: Serial 수신, DB 조회, WebSocket 브로드캐스트
-- **Frontend (React/TypeScript)**: 실시간 카드 UI, OBS 오버레이
+| Layer | 기술 | 역할 |
+|-------|------|------|
+| Firmware | Arduino/C++, ESP32 | RFID 태그 읽기, JSON Serial 출력 |
+| Server | Python, FastAPI | Serial 수신, DB 조회, WebSocket 브로드캐스트 |
+| Frontend | React, TypeScript | 실시간 카드 UI, OBS 오버레이 |
 
-**RFID 모듈**:
-| 용도 | 모듈 | 비고 |
-|------|------|------|
-| 테스트용 | MFRC522 | Phase 1 초기 |
-| **프로덕션** | **ST25R3911B** | Phase 0 업체 선정 |
+**RFID 모듈**: 테스트용 MFRC522, 프로덕션 ST25R3911B (Phase 0 업체 선정 중)
 
-## Current Tools (Available Now)
+## Build & Run Commands
 
-`tools/` 디렉토리에 문서 처리 유틸리티가 있습니다:
+### 현재 사용 가능한 도구
 
 ```powershell
-# 의존성 설치
-pip install -r tools/requirements.txt
+# PDF 도구 의존성 설치
+pip install -r C:\claude\ebs\tools\requirements.txt
 
-# PDF 페이지 분할 (20페이지씩)
-python tools/split_pdf.py <input.pdf> 20
-
-# 특정 페이지 범위 추출
-python tools/split_pdf.py <input.pdf> --extract <start> <end>
+# PDF 페이지 분할
+python C:\claude\ebs\tools\split_pdf.py <input.pdf> 20
 
 # PDF 이미지 추출
-python tools/extract_images.py <input.pdf> --output-dir <output/>
+python C:\claude\ebs\tools\extract_images.py <input.pdf> --output-dir <output/>
 
 # PDF 토큰 기반 청킹
-python tools/pdf_chunker.py <input.pdf>
+python C:\claude\ebs\tools\pdf_chunker.py <input.pdf>
 ```
 
-**의존성**: `pymupdf>=1.24.0`, `tiktoken>=0.5.0`
-
-## Database
-
-카드 DB 초기화 스크립트: `server/db/init.sql`
-- 54장 카드 (52장 + 조커 2장) 초기 데이터 포함
-- UID 매핑 전 상태로 생성
+### Morning Automation (데일리 브리핑)
 
 ```powershell
-# SQLite DB 초기화
-sqlite3 server/db/cards.db < server/db/init.sql
+# 의존성: slack-sdk, google-api-python-client, python-dateutil, rich
+pip install -r C:\claude\ebs\tools\morning-automation\requirements.txt
+
+# 실행
+python C:\claude\ebs\tools\morning-automation\main.py
 ```
 
-## Build & Run Commands (Planned)
+구조: `collectors/` (Slack, Gmail, Lists 수집) -> `reporters/` (Markdown 리포트, Slack 게시)
 
-> ⚠️ Phase 1 진행 시 실제 구현 예정
+### Database
 
 ```powershell
-# Server (Python)
-cd C:\claude\ebs\server
-python -m venv venv && .\venv\Scripts\activate
-pip install -r requirements.txt
+# SQLite 카드 DB 초기화 (54장: 52장 + 조커 2장, UID 미매핑 상태)
+sqlite3 C:\claude\ebs\server\db\cards.db < C:\claude\ebs\server\db\init.sql
+```
+
+### Phase 1 이후 (미구현)
+
+```powershell
+# Server
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
-# Frontend (React)
-cd C:\claude\ebs\frontend
-npm install && npm run dev  # localhost:5173
+# Frontend
+npm run dev  # localhost:5173
 
 # Tests
-cd C:\claude\ebs\server && pytest tests/ -v
-cd C:\claude\ebs\frontend && npm test
+pytest tests/ -v    # server
+npm test            # frontend
 ```
-
-## Hardware Wiring (ESP32 → MFRC522)
-
-| ESP32 | MFRC522 | Function |
-|-------|---------|----------|
-| 3.3V  | VCC     | Power (3.3V 필수!) |
-| GND   | GND     | Ground   |
-| GPIO5 | SDA     | SPI SS   |
-| GPIO18| SCK     | SPI Clock|
-| GPIO23| MOSI    | SPI MOSI |
-| GPIO19| MISO    | SPI MISO |
-| GPIO4 | RST     | Reset    |
 
 ## Serial/WebSocket Protocol
 
 ```jsonc
-// ESP32 → Server
+// ESP32 -> Server
 {"type": "card_read", "uid": "04:A2:B3:C4", "reader_id": 0, "timestamp": 123456}
 
-// Server → Client
+// Server -> Client
 {"type": "card_detected", "uid": "...", "card": {"suit": "spades", "rank": "A", "display": "A♠"}}
 {"type": "reader_status", "connected": true, "port": "COM3"}
 ```
 
-## Documentation
+## Hardware Wiring (ESP32 -> MFRC522)
 
-문서 네비게이션: `docs/README.md`
+| ESP32 | MFRC522 | Function |
+|-------|---------|----------|
+| 3.3V  | VCC     | Power (3.3V 필수) |
+| GND   | GND     | Ground |
+| GPIO5 | SDA     | SPI SS |
+| GPIO18| SCK     | SPI Clock |
+| GPIO23| MOSI    | SPI MOSI |
+| GPIO19| MISO    | SPI MISO |
+| GPIO4 | RST     | Reset |
 
-### 디렉토리 구조
+## Project Rules
 
-```
-docs/
-├── README.md                           # 네비게이션
-├── PRD-0003-EBS-RFID-System.md        # Master PRD (비전/전략)
-│
-├── phase-0/                            # Phase 0: 업체 선정
-│   └── VENDOR-SELECTION-CHECKLIST.md  # 업체 선정 체크리스트
-│
-├── phase-1/                            # Phase 1: PokerGFX 복제
-│   ├── PRD-0003-Phase1-PokerGFX-Clone.md
-│   ├── PokerGFX-Feature-Checklist.md  # 119개 기능
-│   └── reference/                      # PokerGFX 참조 자료
-│       ├── PokerGFX_Security.pdf
-│       ├── user-manual_split/
-│       └── user-manual_images/
-│
-├── phase-2/                            # Phase 2: DB 연동
-│   └── PRD-0003-Phase2-WSOP-Integration.md
-│
-├── phase-3/                            # Phase 3: 자동화
-│   └── PRD-0003-Phase3-EBS-Automation.md
-│
-└── operations/                         # 운영 문서
-    ├── EBS-WORK-DASHBOARD.md
-    ├── VENDOR-MANAGEMENT.md
-    └── PHASE-PROGRESSION.md
-```
+### 외부 커뮤니케이션 규칙
 
-### 주요 문서
+외부 업체 이메일 작성 시 반드시 준수. 상세: `docs/5-operations/COMMUNICATION-RULES.md`
 
-| 문서 유형 | 경로 | 용도 |
-|----------|------|------|
-| Master PRD | `docs/PRD-0003-EBS-RFID-System.md` | 비전/전략/로드맵 |
-| 업체 선정 | `docs/phase-0/VENDOR-SELECTION-CHECKLIST.md` | 업체 선정 기준/체크리스트 |
-| 기능 체크리스트 | `docs/phase-1/PokerGFX-Feature-Checklist.md` | 119개 복제 대상 기능 |
-| 참조 자료 | `docs/phase-1/reference/` | PokerGFX 매뉴얼/보안 문서 |
-| 업무 대시보드 | `docs/operations/EBS-WORK-DASHBOARD.md` | 현재 작업 현황 |
-
-## Phase 1 완료 조건
-
-PokerGFX 100% 복제 완성 기준:
-
-- [ ] **PokerGFX 100% 복제**: UI/UX 완전 동일
-- [ ] **카드 표시 정확도**: 52장 카드 100% 정확
-- [ ] **실시간 성능**: 카드→화면 < 1초 (목표 < 200ms)
-- [ ] **OBS 오버레이**: 투명도/크로마키 정상 작동
-- [ ] **안정성**: 4시간 연속 운영 무중단
-
----
-
-## 시스템 파일 위치
-
-| 파일 유형 | 위치 | 설명 |
-|----------|------|------|
-| bkit 상태 | `.omc/bkit/` | PDCA 상태, 스냅샷 |
-| Claude 설정 | `.claude/` | 커맨드, 스킬, 에이전트 |
-| OMC 상태 | `.omc/` | oh-my-claudecode 상태 |
-
-**⚠️ 주의**: `.omc/bkit/` 폴더는 bkit 플러그인의 작업 상태를 저장합니다. 삭제하지 마세요.
-
----
-
-## 문서 작성 규칙
-
-### 변경 이력 위치 (CRITICAL)
-
-**모든 문서의 변경 이력/핵심 변경사항/버전 히스토리는 반드시 문서 최하단에 배치합니다.**
-
-| 규칙 | 설명 |
+| 규칙 | 내용 |
 |------|------|
-| **변경 이력 = 최하단** | 독자는 변경 이력보다 내용에 관심 |
-| **Version 푸터 = 변경 이력 직후** | 날짜/버전 정보는 맨 마지막 |
-| **금지: 중간 배치** | 변경 이력이 문서 중간에 있으면 최하단으로 이동 |
+| 회사명 비공개 | "BRACELET STUDIO"를 외부 이메일에 절대 노출하지 않음 |
+| 기술 스펙 비공개 | 주파수, 프로토콜, IC 칩명 언급 안 함 |
+| 서명 | 이름만, 회사명 없음 |
 
-**올바른 문서 구조:**
+### 용어 규칙
+
+| 금지 | 사용 | 이유 |
+|------|------|------|
+| chips (카지노 맥락) | 베팅 토큰 | 반도체 칩과 혼동 방지 |
+| chips (반도체 맥락) | IC, 반도체 | 위와 구분 |
+
+### 문서 작성 규칙
+
+변경 이력은 반드시 문서 최하단에 배치:
+
 ```markdown
 # 문서 제목
-## 1. 핵심 내용
-## 2. 상세 내용
-...
-## N. 참고 자료
+## 핵심 내용
+## 상세 내용
 ---
-## 변경 이력        ← 항상 마지막 섹션
-| 날짜 | 버전 | 변경 내용 |
+## 변경 이력        <- 항상 마지막 섹션
 ---
 **Version**: X.X.X | **Updated**: YYYY-MM-DD
 ```
+
+## Key Documents
+
+| 문서 | 경로 | 용도 |
+|------|------|------|
+| Master PRD | `docs/PRD-0003-EBS-RFID-System.md` | 비전/전략/로드맵 |
+| 업체 관리 | `docs/5-operations/VENDOR-MANAGEMENT.md` | 업체 정보 1차 소스 |
+| 커뮤니케이션 규칙 | `docs/5-operations/COMMUNICATION-RULES.md` | 외부 이메일 규칙 |
+| 업체 선정 체크리스트 | `docs/1-phase-0/VENDOR-SELECTION-CHECKLIST.md` | Phase 0 기준 |
+| 기능 체크리스트 | `docs/2-phase-1/PokerGFX-Feature-Checklist.md` | 119개 복제 대상 |
+| PokerGFX 참조 자료 | `docs/2-phase-1/reference/` | 매뉴얼/보안 PDF |
+| 이메일 드래프트 | `docs/5-operations/email-drafts/` | 업체 컨택 이메일 |
+| 데일리 브리핑 | `docs/5-operations/daily-briefings/` | 일일 현황 보고 |
+| 문서 네비게이션 | `docs/README.md` | 전체 문서 색인 |
+
+## System Files
+
+| 위치 | 설명 |
+|------|------|
+| `.omc/bkit/` | bkit PDCA 상태, 스냅샷 (삭제 금지) |
+| `.omc/plans/` | 작업 계획 문서 |
+| `.claude/` | Claude 커맨드, 스킬, 에이전트 설정 |
+
+### Slack/Gmail 자동화 제약
+
+| 규칙 | 내용 |
+|------|------|
+| `--notify` 사용 금지 | `chat:write:bot` scope 없음 |
+| `--post`만 사용 | 채널 메시지 갱신만 가능 |
+| DM 발송 불가 | Slack API 제한 |
