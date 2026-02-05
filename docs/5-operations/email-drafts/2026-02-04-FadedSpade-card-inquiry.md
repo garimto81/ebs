@@ -1,34 +1,10 @@
-# Faded Spade 제품 문의
+# [폐기] Faded Spade 카드 문의
 
-**상태**: 검토 대기
-**작성일**: 2026-02-04
-**규칙 준수**: COMMUNICATION-RULES.md 적용
-
----
-
-## 이메일 내용
-
-**To**: sales@fadedspade.com
-**Subject**: Sample Request - RFID Playing Cards
+**상태**: 폐기
+**폐기 사유**: 카테고리 B (부품 공급/잠재 구매). RFID 카드만 판매하며 리더 하드웨어 역량 없음.
+**대체**: 카테고리 A 업체에서 카드 공급이 어려울 경우 카테고리 B로 승격 검토
 
 ---
 
-Hi,
-
-I'm interested in your RFID playing cards for a broadcast project.
-
-Could you please provide:
-- Product specifications
-- Sample purchase options
-- Pricing information
-
-Thank you.
-[Name]
-
----
-
-## 승인 이력
-
-| 날짜 | 상태 | 비고 |
-|------|------|------|
-| 2026-02-04 | 검토 대기 | 규칙 준수 버전 |
+Faded Spade는 RFID 포커 카드 전문이지만 리더 하드웨어를 제공하지 않습니다.
+통합 파트너 선정 후 카드만 별도 구매가 필요하면 그때 문의합니다.

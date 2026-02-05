@@ -33,9 +33,43 @@
 
 ## 2. 업체 현황 대시보드
 
-### 2.1 전체 업체 현황
+### 2.1 선정 기준
 
-#### PCB/EMS 업체
+**핵심 목표**: RFID 카드 + 리더 하드웨어를 통합 공급할 수 있는 파트너 선정
+
+모든 카테고리 A 업체에 **동일한 RFI**를 발송하여 공정 비교 평가.
+카드 또는 리더 한쪽만 공급 가능한 업체는 카테고리 B로 분류.
+
+### 2.2 카테고리 A: 통합 파트너 후보 (RFI 발송 대상)
+
+RFID 카드 + 리더 하드웨어 통합 공급/개발이 가능하거나 가능성이 있는 업체.
+
+| 업체명 | 국가 | 핵심 역량 | 상태 | RFI 드래프트 |
+|--------|------|----------|:----:|------------|
+| **Sun-Fly** | 중국 | RFID 대량 생산 (연 600만+), 협력 개발 의향 표명 | RFI 발송 대기 | `2026-02-05-SUNFLY-reply.md` |
+| **Angel Playing Cards** | 일본 | 카드 제조 (1949~) + RFID 스마트 테이블 시스템 | RFI 발송 대기 | `2026-02-05-Angel-PlayingCards-RFI.md` |
+| **엠포플러스** | 한국 | HF/UHF RFID 전문, 안테나 설계, 컨설팅 | RFI 발송 대기 | `2026-02-05-EmfoPlus-RFI.md` |
+
+**통일 RFI 템플릿**: `email-drafts/UNIFIED-RFI-TEMPLATE.md`
+
+### 2.3 카테고리 B: 부품/모듈 공급 (별도 구매)
+
+통합 파트너 선정과 별도로, 필요 시 개별 구매하는 업체.
+
+| 업체명 | 국가 | 공급 품목 | Phase | 상태 | 연락처 |
+|--------|------|----------|:-----:|:----:|--------|
+| **Waveshare** | 중국 | ST25R3911B 평가보드 | 0 | 직접 구매 | service.waveshare.com |
+| **ST Microelectronics** | 스위스 | ST25R3911B IC | 0-1 | 핵심 부품 | st.com/contact-us |
+| **FEIG Electronic** | 독일 | HF 리더 모듈 | 1+ | 후보 | info@feig.de |
+| **GAO RFID** | 미국/캐나다 | 산업용 리더 | 1+ | 후보 | sales@gaorfid.com |
+| **Identiv** | 미국 | OEM 모듈 | 1+ | 후보 | sales@identiv.com |
+| **PONGEE Industries** | 대만 | HF 리더 모듈 | 1+ | 후보 | pongee@pongee.com.tw |
+| **Faded Spade** | 미국 | RFID 포커 카드 | 0-1 | 잠재 구매 | sales@fadedspade.com |
+| **SparkFun** | 미국 | DIY RFID 모듈 | 0 | 학습용 | sales@sparkfun.com |
+| **Adafruit** | 미국 | PN532 모듈 | 0 | 학습용 | support@adafruit.com |
+| **서울테크** | 한국 | RF 안테나 | 0 | 후보 | - |
+
+**PCB/EMS 업체 (별도 트랙)**
 
 | 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 |
 |--------|------|------|:-----:|:----:|:--------:|
@@ -43,57 +77,33 @@
 | **PCBWay** | 중국 | PCB+SMT | 0 | 후보 | 대안 |
 | **KOREAECM** | 한국 | EMS | 1-2 | 후보 | 2순위 |
 
-#### RFID 솔루션 업체
+### 2.4 카테고리 C: 벤치마크/참조 (이메일 불필요)
 
-| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 | 연락처 |
-|--------|------|------|:-----:|:----:|:--------:|--------|
-| **PokerGFX** | 미국 | RFID 완제품 | - | 벤치마크 | ⭐ | pokergfx.io |
-| **RF Poker** | 미국(Atlanta) | RFID 테이블 | - | 벤치마크 | - | rfpoker.com (문의폼) |
-| **Faded Spade** | 미국 | RFID 카드 | 0-1 | 조사중 | - | sales@fadedspade.com |
-| **엠포플러스** | 한국 | RFID 컨설팅 | 0-1 | 조사중 | - | emfoplus.com |
-| **서울테크** | 한국 | RF 안테나 | 0 | 후보 | - | - |
+| 업체명 | 국가 | 역할 | 비고 |
+|--------|------|------|------|
+| **PokerGFX** | 미국 | SW 벤치마크/복제 대상 | Enterprise 전용 전환 |
+| **RF Poker** | 미국 | 기술 트렌드 참조 | Seed Stage 스타트업 |
+| **Abbiati Casino** | 이탈리아 | 장비 표준 참조 | 카지노 칩/테이블 중심 |
+| **Matsui Gaming** | 일본 | 장비 표준 참조 | 카지노 장비 유통 |
+| **S.I.T. Korea** | 한국 | 장비 참조 | 카지노 장비 유통 |
 
-#### RFID 하드웨어/부품 업체
-
-| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 | 연락처 |
-|--------|------|------|:-----:|:----:|:--------:|--------|
-| **ST Microelectronics** | 스위스 | ST25R3911B 제조사 | 0-1 | 핵심 | ⭐ | st.com/contact-us |
-| **Waveshare** | 중국 | ST25R3911B 평가보드 | 0 | 조사중 | 1순위 | service.waveshare.com |
-| **FEIG Electronic** | 독일 | HF 리더 | 1-2 | 조사중 | - | info@feig.de |
-| **GAO RFID** | 미국/캐나다 | 산업용 리더 | 1-2 | 후보 | - | sales@gaorfid.com |
-| **Identiv** | 미국 | OEM 모듈 | 1 | 후보 | - | sales@identiv.com |
-| **PONGEE Industries** | 대만 | HF 리더 모듈 | 1 | 후보 | - | pongee@pongee.com.tw |
-
-#### DIY/개발용 부품 업체
-
-| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 | 연락처 |
-|--------|------|------|:-----:|:----:|:--------:|--------|
-| **SparkFun** | 미국 | RFID 모듈 | 0 | 학습용 | - | sales@sparkfun.com |
-| **Adafruit** | 미국 | PN532 모듈 | 0 | 학습용 | - | support@adafruit.com |
-
-#### 카지노 장비 업체
-
-| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 | 연락처 |
-|--------|------|------|:-----:|:----:|:--------:|--------|
-| **Abbiati Casino** | 이탈리아 | RFID 칩/카드 | - | 참조 | - | info@abbiati.com |
-| **Matsui Gaming** | 일본 | 카지노 RFID | - | 참조 | - | matsui-gaming.co.jp |
-| **Sun-Fly** | 중국 | RFID 칩 | - | 회신대기 | - | 웹폼 문의 |
-| **S.I.T. Korea** | 한국 | 카지노 장비 | - | 참조 | - | casinovendors.com 통해 |
-| **Angel Playing Cards** | 일본 | AI+RFID | - | 조사중 | - | angelplayingcards.com |
-
-### 2.2 Phase별 업체 매핑
+### 2.5 Phase별 업체 매핑
 
 ```
-Phase 0 (프로토타입)
+Phase 0 (현재)
+├── 통합 파트너 선정: Sun-Fly, Angel, 엠포플러스 (RFI 진행 중)
+├── 프로토타입 부품: Waveshare ST25R3911B 보드 (직접 구매)
 ├── PCB 제조: JLCPCB (1순위), PCBWay (대안)
-├── SMT 조립: JLCPCB (1순위), PCBWay (대안)
-└── RFID 컨설팅: 엠포플러스 (조사중)
+└── SMT 조립: JLCPCB (1순위), PCBWay (대안)
 
-Phase 1 (소량 10-20개)
+Phase 1 (통합 파트너 확정 후)
+├── RFID 카드+리더: 선정된 카테고리 A 파트너
 ├── PCB+SMT: KOREAECM (1순위), JLCPCB (대안)
+├── 리더 모듈 (필요 시): FEIG, Identiv, PONGEE 중 선택
 └── 하우징: 미정
 
 Phase 2 (양산 50+개)
+├── RFID 카드+리더: 카테고리 A 파트너
 ├── PCB+SMT: KOREAECM (1순위)
 ├── 하우징: 미정
 └── 조립: 미정
@@ -230,7 +240,7 @@ Phase 2 (양산 50+개)
 
 ---
 
-### 3.4 엠포플러스
+### 3.4 엠포플러스 ⭐ 카테고리 A (통합 파트너 후보)
 
 **기본 정보:**
 
@@ -241,14 +251,18 @@ Phase 2 (양산 50+개)
 | **주요 서비스** | RFID 솔루션 컨설팅, 커스텀 개발 |
 | **특징** | HF/UHF RFID 전문, 안테나 설계 |
 
-**조사 필요 항목:**
+**카테고리 A 근거 (RFI로 검증 필요):**
 
-- [ ] HF 13.56MHz 안테나 커스텀 설계 가능 여부
-- [ ] ST25R3911B 경험 유무
-- [ ] 최소 주문 수량
-- [ ] 대략적인 비용 범위
+- HF/UHF RFID 전문 + 안테나 설계 역량
+- 리더 하드웨어 + 안테나 통합 개발 가능
+- 국내 업체로 한국어 소통 가능
+- 카드 공급 가능 여부는 미확인 (RFI를 통해 확인)
 
-**상태:** 추가 조사 필요
+**다음 액션:**
+
+- [ ] 통일 RFI 발송 (`email-drafts/2026-02-05-EmfoPlus-RFI.md`)
+- [ ] RFID 카드+리더 통합 프로젝트 수행 가능 여부 확인
+- [ ] 파일럿 일정/비용 확인
 
 ---
 
@@ -299,7 +313,7 @@ Phase 2 (양산 50+개)
 
 ---
 
-### 3.7 Angel Playing Cards
+### 3.7 Angel Playing Cards ⭐ 카테고리 A (통합 파트너 후보)
 
 **기본 정보:**
 
@@ -309,18 +323,25 @@ Phase 2 (양산 50+개)
 | **본사** | 일본 교토 |
 | **주소** | 8-1-5 Seikadai, Seikacho Soraku-gun, Kyoto 619-0238, Japan |
 | **전화** | +81 75 354 8525 |
+| **이메일 (해외영업)** | overseas@angel-group.co.jp |
 | **문의폼** | [온라인 문의폼](https://ws.formzu.net/dist/S31266024/) |
-| **이메일 도메인** | @angelplayingcards.com |
+| **이메일 도메인** | @angelplayingcards.com, @angel-group.co.jp |
 | **설립** | 1949년 (창업), 1956년 (법인화) |
 | **주요 서비스** | AI+RFID 스마트 테이블 시스템, 카지노 카드, Hanafuda |
 | **글로벌 거점** | 일본, 싱가포르, 마카오, 호주, 필리핀, 미국, 프랑스 |
 | **특징** | 아시아, 오세아니아, 유럽, 북미 지사 보유 |
 
-**적합 용도:**
+**카테고리 A 근거 (RFI로 검증 필요):**
 
-- 고급 AI+RFID 시스템 참조
-- 대규모 카지노 솔루션 벤치마크
-- RFID 읽기 시스템 및 AI/광학 인식 시스템 참조
+- 카드 제조 (1949년~, 70년+ 업력) + RFID 스마트 테이블 시스템 자체 보유
+- 카드와 리더를 모두 제조/공급할 수 있는 몇 안 되는 업체
+- 글로벌 7개국 거점으로 기술 지원 가능
+
+**다음 액션:**
+
+- [ ] 통일 RFI 발송 (`email-drafts/2026-02-05-Angel-PlayingCards-RFI.md`)
+- [ ] 카드+리더 통합 공급 가능 여부 확인
+- [ ] 파일럿 일정/비용 확인
 
 ---
 
@@ -514,23 +535,39 @@ Phase 2 (양산 50+개)
 
 ---
 
-### 3.16 Sun-Fly Casino Chips
+### 3.16 Sun-Fly ⭐ 카테고리 A (통합 파트너 후보)
 
 **기본 정보:**
 
 | 항목 | 내용 |
 |------|------|
 | **웹사이트** | https://www.sunflycasinochips.com |
+| **담당자** | Susie Su (susie.su@sun-fly.com) |
 | **본사** | 중국 |
 | **설립** | 2004년 |
 | **주요 서비스** | RFID 카지노 칩, PJM 3.0 |
-| **생산량** | 연간 600만+ 칩 |
-| **특징** | 세계 최대 세라믹 칩 제조사 |
+| **생산량** | 연간 600만+ RFID 제품 |
+| **특징** | 세계 최대 세라믹 RFID 칩 제조사, Poker RFID GFX 협력 의향 표명 |
 
-**적합 용도:**
+**카테고리 A 근거 (RFI로 검증 필요):**
 
-- RFID 칩 기술 참조
-- 카지노 RFID 표준 참조
+- RFID 내장 제품 대량 생산 역량 (연 600만+)
+- 2026-02-03 "Poker RFID GFX 시스템 협력 개발" 의향 표명
+- "customizable solution" 제안 (카드+리더 통합 가능성)
+- RFID 태그 내장 제조 노하우 보유 (세라믹 칩 → 카드로 전이 가능)
+
+**컨택 이력:**
+
+| 날짜 | 내용 |
+|------|------|
+| 2026-02-03 | Susie가 협력 개발 의향 회신 |
+| 2026-02-05 | 통일 RFI 기반 회신 드래프트 작성 (검토 대기) |
+
+**다음 액션:**
+
+- [ ] 통일 RFI 회신 발송 (`email-drafts/2026-02-05-SUNFLY-reply.md`)
+- [ ] 카드+리더 통합 공급 가능 여부 확인
+- [ ] 파일럿 일정/비용 확인
 
 ---
 
@@ -635,98 +672,98 @@ Phase 2 (양산 50+개)
 
 ## 5. 커뮤니케이션 가이드
 
-### 5.1 RFQ 템플릿 (영문)
+### 5.1 RFQ 템플릿 (영문 - PCB/EMS 업체용)
+
+> **주의**: 외부 발송 시 COMMUNICATION-RULES.md 준수 필수.
+> PCB/EMS 업체에는 제조에 필요한 기술 정보 제공이 불가피하므로 예외 허용.
+> 단, **회사명은 절대 포함하지 않음**.
 
 ```
-Subject: [EBS RFID Project] Request for Quotation
+Subject: Request for Quotation - Custom PCB Assembly
 
-Dear [Company Name] Team,
+Hi,
 
-We are developing an RFID-based card detection system for poker broadcasting.
-We would like to request a quotation for the following:
-
-■ Project Overview
-- Application: RFID poker card recognition
-- Frequency: 13.56MHz (HF)
-- RFID IC: ST25R3911B
-- MCU: ESP32-WROOM-32
+I'm developing a card reader device and need PCB fabrication and SMT assembly.
 
 ■ PCB Specifications
 - Layers: 2L
-- Dimensions: 100mm x 80mm (TBD)
+- Dimensions: approximately 100mm x 80mm
 - Quantity: [수량] pcs
-- Surface Finish: HASL/ENIG
+- Surface Finish: HASL or ENIG
 
 ■ Assembly Requirements
 - SMT Assembly: Yes
 - Through-hole: Minimal (headers only)
-- Components: Customer-provided or sourced by you
+- Components: I can provide BOM; please advise if you can source
+
+■ Key Components (for sourcing check)
+- NFC reader IC (will provide part number with order)
+- MCU module
+- Passive components per BOM
 
 ■ Questions
-1. Do you have experience with ST25R3911B?
-2. Can you provide antenna design support?
+1. Do you have experience assembling RF/NFC-related boards?
+2. Can you provide antenna tuning support?
 3. What is the expected lead time?
 4. What is the estimated total cost?
 
-Please provide a quotation at your earliest convenience.
+I'll share the complete Gerber, BOM, and pick-and-place files once we proceed.
 
 Best regards,
 [이름]
-BRACELET STUDIO
-[연락처]
 ```
 
-### 5.2 RFQ 템플릿 (국문)
+### 5.2 RFQ 템플릿 (국문 - PCB/EMS 업체용)
+
+> **주의**: 외부 발송 시 COMMUNICATION-RULES.md 준수 필수.
 
 ```
-제목: [EBS RFID 프로젝트] 견적 요청
+제목: 견적 요청 - 커스텀 PCB 조립
 
 안녕하세요,
 
-포커 방송용 RFID 카드 인식 시스템을 개발 중입니다.
-아래 사양으로 견적 요청드립니다.
-
-■ 프로젝트 개요
-- 용도: RFID 포커 카드 인식
-- 주파수: 13.56MHz (HF)
-- RFID IC: ST25R3911B
-- MCU: ESP32-WROOM-32
+카드 리더 장치를 개발 중이며 PCB 제작 및 SMT 조립 견적을 요청드립니다.
 
 ■ PCB 사양
 - 레이어: 2층
-- 크기: 100mm x 80mm (예상)
+- 크기: 약 100mm x 80mm
 - 수량: [수량]개
 - 표면처리: HASL 또는 ENIG
 
 ■ 조립 요구사항
 - SMT 조립: 필요
 - 스루홀: 최소 (커넥터만)
-- 부품: 지급 또는 업체 소싱
+- 부품: BOM 제공 예정, 소싱 가능 여부 확인 요청
+
+■ 주요 부품 (소싱 확인용)
+- NFC 리더 IC (발주 시 부품 번호 제공)
+- MCU 모듈
+- BOM 기준 수동 부품
 
 ■ 문의사항
-1. ST25R3911B 작업 경험이 있으신가요?
-2. 안테나 설계 지원이 가능한가요?
+1. RF/NFC 관련 보드 조립 경험이 있으신가요?
+2. 안테나 튜닝 지원이 가능한가요?
 3. 예상 리드타임은 어떻게 되나요?
 4. 예상 총 비용은 얼마인가요?
 
-빠른 회신 부탁드립니다.
+진행 시 Gerber, BOM, Pick & Place 파일을 공유하겠습니다.
 
 감사합니다.
 [이름]
-BRACELET STUDIO
-[연락처]
 ```
 
 ### 5.3 필수 문의 항목
 
 | 항목 | 질문 | 이유 |
 |------|------|------|
-| ST25R3911B 경험 | "Have you worked with ST25R3911B before?" | RF 부품 납땜 경험 확인 |
+| NFC 보드 경험 | "Have you assembled RF/NFC boards before?" | RF 부품 납땜 경험 확인 |
 | 안테나 설계 | "Can you design/tune the antenna?" | 안테나 성능이 핵심 |
 | 리드타임 | "What is the lead time for [수량] pcs?" | 일정 계획 |
 | 부품 소싱 | "Can you source components or should we provide?" | 비용/시간 최적화 |
 | MOQ | "What is your minimum order quantity?" | 소량 주문 가능 여부 |
 | 샘플 비용 | "Is there additional cost for prototypes?" | 추가 비용 확인 |
+
+> **COMMUNICATION-RULES 체크**: 템플릿에 회사명, 특정 IC 이름(ST25R3911B), 주파수(13.56MHz) 포함 여부 확인 후 발송
 
 ---
 
@@ -805,6 +842,7 @@ BRACELET STUDIO
 
 | 날짜 | 버전 | 변경 내용 |
 |------|------|----------|
+| 2026-02-05 | 6.0.0 | 분류 체계 전면 개편: 카테고리 A(통합 파트너)/B(부품 공급)/C(벤치마크). Sun-Fly/Angel/엠포플러스를 카테고리 A로 승격. 통일 RFI 기반 선정 프로세스 도입 |
 | 2026-02-04 | 5.0.0 | 미확보 연락처 업체 조사 완료: SparkFun, Adafruit, Faded Spade, Matsui, RF Poker, Angel 등 |
 | 2026-02-03 | 4.0.0 | Slack List 기반 업체 16개 통합, 연락처 정보 추가 |
 | 2026-02-03 | 3.1.0 | 회사명 BRACELET STUDIO 통일 |
@@ -813,4 +851,4 @@ BRACELET STUDIO
 
 ---
 
-**Version**: 5.0.0 | **Updated**: 2026-02-04 | **BRACELET STUDIO**
+**Version**: 6.0.0 | **Updated**: 2026-02-05 | **BRACELET STUDIO**
