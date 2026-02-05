@@ -1,0 +1,70 @@
+{
+  "version": "2.0.0",
+  "updated": "2026-02-05",
+  "drive_root_id": "1GlDqSgEDs9z8j5VY6iX3QndTLb6_8-PF",
+  "folders": {
+    ".": "1GlDqSgEDs9z8j5VY6iX3QndTLb6_8-PF",
+    "1-phase-0": "1AKvKghcaorH5A-kg9pD4rHxF5ueQWJgS",
+    "2-phase-1": "18Oz-iP3JIEQgjG-x-3zhW1RJfODrnh5s",
+    "3-phase-2": "1d3R2gdhJrUKTEzxBKng8VTR9Dv3qxBi-",
+    "4-phase-3": "1-4o14wikrZcSYCH8Y0gMT5drXQ5h5V7k",
+    "5-operations": "1fKZLKl5K7xEPsD1lXntxWTHBTSbIJo8-"
+  },
+  "files": {
+    "README.md": {
+      "source": "docs/README.md",
+      "doc_id": "1SQ_cx83kGliBpFAxO9vDeltnc6EetwILFbuRGY8C384",
+      "folder": "."
+    },
+    "PRD-0003-EBS-RFID-System.md": {
+      "source": "docs/PRD-0003-EBS-RFID-System.md",
+      "doc_id": "17qt7bq4tvesEMub7Cfc-8QIIGUhkE6csqvmdOwskzIg",
+      "folder": "."
+    },
+    "1-phase-0/VENDOR-SELECTION-CHECKLIST.md": {
+      "source": "docs/1-phase-0/VENDOR-SELECTION-CHECKLIST.md",
+      "doc_id": "1n50iyuiU0TNBjUWDKFW1-88ALwZ1ClYXBuw2dW_qKOY",
+      "folder": "1-phase-0"
+    },
+    "1-phase-0/PRD-0004-Vendor-Contact-Automation.md": {
+      "source": "docs/1-phase-0/PRD-0004-Vendor-Contact-Automation.md",
+      "doc_id": "1K6huVaSnwxoxMI9UPx0MBT-cz_CEa4dIou0USwK0LWQ",
+      "folder": "1-phase-0"
+    },
+    "2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md": {
+      "source": "docs/2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md",
+      "doc_id": "1WmUxqvu18oVuVGWQSjLix54c-ye7mT17ZGRMM22rAio",
+      "folder": "2-phase-1"
+    },
+    "2-phase-1/PokerGFX-Feature-Checklist.md": {
+      "source": "docs/2-phase-1/PokerGFX-Feature-Checklist.md",
+      "doc_id": "1qXdPbUNBEmHNQzPvYlGJA2jgujAEs2qtdANUyVjrR2I",
+      "folder": "2-phase-1"
+    },
+    "3-phase-2/PRD-0003-Phase2-WSOP-Integration.md": {
+      "source": "docs/3-phase-2/PRD-0003-Phase2-WSOP-Integration.md",
+      "doc_id": null,
+      "folder": "3-phase-2"
+    },
+    "4-phase-3/PRD-0003-Phase3-EBS-Automation.md": {
+      "source": "docs/4-phase-3/PRD-0003-Phase3-EBS-Automation.md",
+      "doc_id": null,
+      "folder": "4-phase-3"
+    },
+    "5-operations/EBS-WORK-DASHBOARD.md": {
+      "source": "docs/5-operations/EBS-WORK-DASHBOARD.md",
+      "doc_id": "1eHvgCWm5BxXut5iDyOQFzaIawmFAkFAJ1v2FRbIsbN4",
+      "folder": "5-operations"
+    },
+    "5-operations/VENDOR-MANAGEMENT.md": {
+      "source": "docs/5-operations/VENDOR-MANAGEMENT.md",
+      "doc_id": "125VWBAHqkgm6Fx6oTLVa-M2hz48gTGAjAtmU_ci3-aw",
+      "folder": "5-operations"
+    },
+    "5-operations/PHASE-PROGRESSION.md": {
+      "source": "docs/5-operations/PHASE-PROGRESSION.md",
+      "doc_id": "1d5kOEWgapVOkoo9LQol8MLSH0cPDVMu9HhUy98ZZhP0",
+      "folder": "5-operations"
+    }
+  }
+}
