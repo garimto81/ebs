@@ -45,41 +45,41 @@
 
 #### RFID 솔루션 업체
 
-| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 |
-|--------|------|------|:-----:|:----:|:--------:|
-| **PokerGFX** | 미국 | RFID 완제품 | - | 벤치마크 | ⭐ |
-| **RF Poker** | - | RFID 테이블 | - | 벤치마크 | - |
-| **Faded Spade** | 미국 | RFID 카드 | 0-1 | 조사중 | - |
-| **Angel Playing Cards** | 일본 | AI+RFID 시스템 | - | 조사중 | - |
-| **엠포플러스** | 한국 | RFID 컨설팅 | 0-1 | 조사중 | - |
-| **서울테크** | 한국 | RF 안테나 | 0 | 후보 | - |
+| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 | 연락처 |
+|--------|------|------|:-----:|:----:|:--------:|--------|
+| **PokerGFX** | 미국 | RFID 완제품 | - | 벤치마크 | ⭐ | pokergfx.io |
+| **RF Poker** | 미국(Atlanta) | RFID 테이블 | - | 벤치마크 | - | rfpoker.com (문의폼) |
+| **Faded Spade** | 미국 | RFID 카드 | 0-1 | 조사중 | - | sales@fadedspade.com |
+| **엠포플러스** | 한국 | RFID 컨설팅 | 0-1 | 조사중 | - | emfoplus.com |
+| **서울테크** | 한국 | RF 안테나 | 0 | 후보 | - | - |
 
 #### RFID 하드웨어/부품 업체
 
-| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 |
-|--------|------|------|:-----:|:----:|:--------:|
-| **ST Microelectronics** | 스위스 | ST25R3911B 제조사 | 0-1 | 핵심 | ⭐ |
-| **Waveshare** | 중국 | ST25R3911B 평가보드 | 0 | 조사중 | 1순위 |
-| **FEIG Electronic** | 독일 | HF 리더 | 1-2 | 조사중 | - |
-| **GAO RFID** | 미국/캐나다 | 산업용 리더 | 1-2 | 후보 | - |
-| **Identiv** | 미국 | OEM 모듈 | 1 | 후보 | - |
-| **PONGEE Industries** | 대만 | HF 리더 모듈 | 1 | 후보 | - |
+| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 | 연락처 |
+|--------|------|------|:-----:|:----:|:--------:|--------|
+| **ST Microelectronics** | 스위스 | ST25R3911B 제조사 | 0-1 | 핵심 | ⭐ | st.com/contact-us |
+| **Waveshare** | 중국 | ST25R3911B 평가보드 | 0 | 조사중 | 1순위 | service.waveshare.com |
+| **FEIG Electronic** | 독일 | HF 리더 | 1-2 | 조사중 | - | info@feig.de |
+| **GAO RFID** | 미국/캐나다 | 산업용 리더 | 1-2 | 후보 | - | sales@gaorfid.com |
+| **Identiv** | 미국 | OEM 모듈 | 1 | 후보 | - | sales@identiv.com |
+| **PONGEE Industries** | 대만 | HF 리더 모듈 | 1 | 후보 | - | pongee@pongee.com.tw |
 
 #### DIY/개발용 부품 업체
 
-| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 |
-|--------|------|------|:-----:|:----:|:--------:|
-| **SparkFun** | 미국 | RFID 모듈 | 0 | 학습용 | - |
-| **Adafruit** | 미국 | PN532 모듈 | 0 | 학습용 | - |
+| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 | 연락처 |
+|--------|------|------|:-----:|:----:|:--------:|--------|
+| **SparkFun** | 미국 | RFID 모듈 | 0 | 학습용 | - | sales@sparkfun.com |
+| **Adafruit** | 미국 | PN532 모듈 | 0 | 학습용 | - | support@adafruit.com |
 
 #### 카지노 장비 업체
 
-| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 |
-|--------|------|------|:-----:|:----:|:--------:|
-| **Abbiati Casino** | 이탈리아 | RFID 칩/카드 | - | 참조 | - |
-| **Matsui Gaming** | 일본 | 카지노 RFID | - | 참조 | - |
-| **Sun-Fly** | 중국 | RFID 칩 | - | 참조 | - |
-| **S.I.T. Korea** | 한국 | 카지노 장비 | - | 참조 | - |
+| 업체명 | 국가 | 용도 | Phase | 상태 | 우선순위 | 연락처 |
+|--------|------|------|:-----:|:----:|:--------:|--------|
+| **Abbiati Casino** | 이탈리아 | RFID 칩/카드 | - | 참조 | - | info@abbiati.com |
+| **Matsui Gaming** | 일본 | 카지노 RFID | - | 참조 | - | matsui-gaming.co.jp |
+| **Sun-Fly** | 중국 | RFID 칩 | - | 회신대기 | - | 웹폼 문의 |
+| **S.I.T. Korea** | 한국 | 카지노 장비 | - | 참조 | - | casinovendors.com 통해 |
+| **Angel Playing Cards** | 일본 | AI+RFID | - | 조사중 | - | angelplayingcards.com |
 
 ### 2.2 Phase별 업체 매핑
 
@@ -279,11 +279,14 @@ Phase 2 (양산 50+개)
 | 항목 | 내용 |
 |------|------|
 | **웹사이트** | https://www.fadedspade.com |
-| **이메일** | service@fadedspade.com |
+| **이메일 (영업/도매)** | sales@fadedspade.com |
+| **이메일 (서비스)** | service@fadedspade.com |
+| **문의** | https://www.fadedspade.com/contact |
 | **Twitter** | @FadedSpadeBrand |
 | **Instagram** | @fadedspade |
 | **주요 서비스** | RFID 포커 카드 |
 | **특징** | WPT 공식 카드, Genesis Gaming 협력 |
+| **도매 조건** | 1000세트 이상 시 도매가 적용 |
 
 **회사 소개:**
 
@@ -292,7 +295,7 @@ Phase 2 (양산 50+개)
 **다음 액션:**
 
 - [ ] RFID 카드 스펙 확인
-- [ ] 샘플 구매 문의
+- [ ] 샘플 구매 문의 (sales@fadedspade.com)
 
 ---
 
@@ -303,16 +306,21 @@ Phase 2 (양산 50+개)
 | 항목 | 내용 |
 |------|------|
 | **웹사이트** | https://www.angelplayingcards.com |
-| **본사** | 일본 |
-| **문의** | [온라인 문의폼](https://pro.form-mailer.jp/lp/a6c3dbda218056) |
-| **설립** | 1950년 (창업 75주년, 2025년) |
-| **주요 서비스** | AI+RFID 스마트 테이블 시스템 |
+| **본사** | 일본 교토 |
+| **주소** | 8-1-5 Seikadai, Seikacho Soraku-gun, Kyoto 619-0238, Japan |
+| **전화** | +81 75 354 8525 |
+| **문의폼** | [온라인 문의폼](https://ws.formzu.net/dist/S31266024/) |
+| **이메일 도메인** | @angelplayingcards.com |
+| **설립** | 1949년 (창업), 1956년 (법인화) |
+| **주요 서비스** | AI+RFID 스마트 테이블 시스템, 카지노 카드, Hanafuda |
+| **글로벌 거점** | 일본, 싱가포르, 마카오, 호주, 필리핀, 미국, 프랑스 |
 | **특징** | 아시아, 오세아니아, 유럽, 북미 지사 보유 |
 
 **적합 용도:**
 
 - 고급 AI+RFID 시스템 참조
 - 대규모 카지노 솔루션 벤치마크
+- RFID 읽기 시스템 및 AI/광학 인식 시스템 참조
 
 ---
 
@@ -465,15 +473,19 @@ Phase 2 (양산 50+개)
 | 항목 | 내용 |
 |------|------|
 | **웹사이트** | https://www.sparkfun.com |
+| **이메일 (영업)** | sales@sparkfun.com |
 | **기술지원** | https://forum.sparkfun.com |
-| **본사** | 미국 콜로라도 |
+| **전화** | (303) 284-0979 |
+| **본사** | 미국 콜로라도 Niwot |
 | **주요 서비스** | DIY 전자부품, RFID 모듈 |
 | **특징** | 풍부한 튜토리얼, 오픈소스 |
+| **유통** | DigiKey, Arrow 공식 디스트리뷰터 |
 
 **적합 용도:**
 
 - Phase 0 학습용
 - DIY 프로토타입
+- 대량 구매 시 sales@sparkfun.com 문의
 
 ---
 
@@ -484,11 +496,14 @@ Phase 2 (양산 50+개)
 | 항목 | 내용 |
 |------|------|
 | **웹사이트** | https://www.adafruit.com |
+| **이메일** | support@adafruit.com |
 | **문의** | https://www.adafruit.com/contact_us |
 | **기술지원** | https://forums.adafruit.com |
+| **전화** | +1 646-248-7822 |
 | **본사** | 미국 뉴욕 |
 | **주요 서비스** | PN532 모듈, DIY 전자부품 |
-| **특징** | 풍부한 문서, 학습 자료 |
+| **특징** | 풍부한 문서, 학습 자료, 100% 여성 소유 기업 |
+| **유통** | Arrow 공식 디스트리뷰터 |
 
 **참고:** 소매점 없음, 방문 불가. 포럼을 통한 기술 지원.
 
@@ -516,6 +531,65 @@ Phase 2 (양산 50+개)
 
 - RFID 칩 기술 참조
 - 카지노 RFID 표준 참조
+
+---
+
+### 3.17 Matsui Gaming Machine
+
+**기본 정보:**
+
+| 항목 | 내용 |
+|------|------|
+| **웹사이트** | https://www.matsui-gaming.co.jp/en/ |
+| **본사** | 일본 도쿄 |
+| **미국 법인** | https://www.matsui-americainc.com/en |
+| **유럽 법인** | https://matsuieurope.com/ |
+| **유럽 이메일** | sales@matsuieurope.co.uk |
+| **유럽 전화** | +44 (0)161 736 9011 |
+| **글로벌 거점** | Manchester, Moscow, Las Vegas, Macau, Seoul |
+| **제조 공장** | 일본, 한국 |
+| **주요 서비스** | 카지노 칩, 플레이 카드, 레이아웃, 테이블, 룰렛 휠 |
+| **특징** | 일본 유일 카지노 장비 제조사, 130개국 공급 |
+
+**적합 용도:**
+
+- 카지노 장비 표준 참조
+- 아시아 시장 진출 시 파트너십 후보
+- Bicycle 카드 일본 유통사
+
+**컨택 방법:**
+
+- 유럽: sales@matsuieurope.co.uk
+- 한국: Seoul 지사 통해 연락
+
+---
+
+### 3.18 RF Poker
+
+**기본 정보:**
+
+| 항목 | 내용 |
+|------|------|
+| **웹사이트** | https://rfpoker.com |
+| **이메일** | contact@rf.team |
+| **문의폼** | https://rfpoker.com/contact |
+| **본사** | 미국 애틀랜타 |
+| **설립** | 2021년 (Seed Stage) |
+| **창업자** | Maanit Madan |
+| **투자사** | Chocho Ventures |
+| **모회사** | RF Labs (https://www.rf.team/) |
+| **주요 서비스** | RFID 포커 테이블 시스템 |
+| **기술** | 온보드 컴퓨터, 360° 카메라, 스마트 조명, RFID 칩/카드/버튼 |
+
+**적합 용도:**
+
+- RFID 포커 시스템 벤치마크
+- 차세대 포커 기술 트렌드 참조
+
+**컨택 방법:**
+
+- 일반 문의: contact@rf.team
+- 투자사: sb@chochoventures.com
 
 ---
 
@@ -731,6 +805,7 @@ BRACELET STUDIO
 
 | 날짜 | 버전 | 변경 내용 |
 |------|------|----------|
+| 2026-02-04 | 5.0.0 | 미확보 연락처 업체 조사 완료: SparkFun, Adafruit, Faded Spade, Matsui, RF Poker, Angel 등 |
 | 2026-02-03 | 4.0.0 | Slack List 기반 업체 16개 통합, 연락처 정보 추가 |
 | 2026-02-03 | 3.1.0 | 회사명 BRACELET STUDIO 통일 |
 | 2026-02-03 | 3.0.0 | 상세 정보 복원, 커뮤니케이션 가이드 추가 |
@@ -738,4 +813,4 @@ BRACELET STUDIO
 
 ---
 
-**Version**: 4.0.0 | **Updated**: 2026-02-03 | **BRACELET STUDIO**
+**Version**: 5.0.0 | **Updated**: 2026-02-04 | **BRACELET STUDIO**
