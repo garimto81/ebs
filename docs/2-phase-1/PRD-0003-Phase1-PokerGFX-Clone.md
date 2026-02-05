@@ -486,7 +486,7 @@ Phase 1 진입을 위해 다음 조건을 **모두** 충족해야 합니다:
 ### 10.1 관련 문서
 
 - [PokerGFX Feature Checklist](PokerGFX-Feature-Checklist.md)
-- [Phase Progression Guide](../operations/PHASE-PROGRESSION.md)
+- [Phase Progression Guide](../5-operations/PHASE-PROGRESSION.md)
 
 ### 10.2 외부 참조
 

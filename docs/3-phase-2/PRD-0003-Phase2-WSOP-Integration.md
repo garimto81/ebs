@@ -532,9 +532,9 @@ Phase 2 진입을 위해 다음 조건을 **모두** 충족해야 합니다:
 
 ### 12.1 관련 문서
 
-- [Phase 1 PRD](../phase-1/PRD-0003-Phase1-PokerGFX-Clone.md)
-- [Phase 3 PRD](../phase-3/PRD-0003-Phase3-EBS-Automation.md)
-- [Phase Progression Guide](../operations/PHASE-PROGRESSION.md)
+- [Phase 1 PRD](../2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md)
+- [Phase 3 PRD](../4-phase-3/PRD-0003-Phase3-EBS-Automation.md)
+- [Phase Progression Guide](../5-operations/PHASE-PROGRESSION.md)
 
 ### 12.2 용어 정의
 

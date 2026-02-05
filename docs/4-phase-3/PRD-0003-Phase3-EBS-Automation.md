@@ -673,9 +673,9 @@ Phase 2 완료 후 고려 가능한 확장:
 
 ### 13.1 관련 문서
 
-- [Phase 1 PRD](../phase-1/PRD-0003-Phase1-PokerGFX-Clone.md)
-- [Phase 2 PRD](../phase-2/PRD-0003-Phase2-WSOP-Integration.md)
-- [Phase Progression Guide](../operations/PHASE-PROGRESSION.md)
+- [Phase 1 PRD](../2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md)
+- [Phase 2 PRD](../3-phase-2/PRD-0003-Phase2-WSOP-Integration.md)
+- [Phase Progression Guide](../5-operations/PHASE-PROGRESSION.md)
 
 ### 13.2 용어 정의
 

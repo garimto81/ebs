@@ -356,11 +356,11 @@ Phase 전환: 완료 보고서
 | 문서 | 설명 | 경로 |
 |------|------|------|
 | Master PRD | 프로젝트 비전/전략 | `docs/PRD-0003-EBS-RFID-System.md` |
-| Phase 1 PRD | GFX 복제 상세 기획 | `docs/phase-1/PRD-0003-Phase1-PokerGFX-Clone.md` |
-| 기능 체크리스트 | 복제 대상 목록 | `docs/phase-1/PokerGFX-Feature-Checklist.md` |
-| 업체 관리 | 외주 업체 현황 | `docs/operations/VENDOR-MANAGEMENT.md` |
-| Phase 2 PRD | DB 연동 기획 | `docs/phase-2/PRD-0003-Phase2-WSOP-Integration.md` |
-| Phase 3 PRD | 자동화 기획 | `docs/phase-3/PRD-0003-Phase3-EBS-Automation.md` |
+| Phase 1 PRD | GFX 복제 상세 기획 | `docs/2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md` |
+| 기능 체크리스트 | 복제 대상 목록 | `docs/2-phase-1/PokerGFX-Feature-Checklist.md` |
+| 업체 관리 | 외주 업체 현황 | `docs/5-operations/VENDOR-MANAGEMENT.md` |
+| Phase 2 PRD | DB 연동 기획 | `docs/3-phase-2/PRD-0003-Phase2-WSOP-Integration.md` |
+| Phase 3 PRD | 자동화 기획 | `docs/4-phase-3/PRD-0003-Phase3-EBS-Automation.md` |
 
 ---
 

@@ -143,7 +143,7 @@ Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
 
 ## 6. 이메일 템플릿
 
-> ⚠️ **필수**: 발송 전 `docs/operations/COMMUNICATION-RULES.md` 참조
+> ⚠️ **필수**: 발송 전 `docs/5-operations/COMMUNICATION-RULES.md` 참조
 > - 회사명 노출 금지
 > - 기술 스펙 노출 금지
 
@@ -203,8 +203,8 @@ Thank you.
 | Faded Spade | https://www.fadedspade.com/ |
 | SparkFun RFID | https://www.sparkfun.com/categories/141 |
 | Master PRD | `docs/PRD-0003-EBS-RFID-System.md` |
-| PokerGFX 기능 체크리스트 | `docs/phase-1/PokerGFX-Feature-Checklist.md` |
-| 업체 관리 | `docs/operations/VENDOR-MANAGEMENT.md` |
+| PokerGFX 기능 체크리스트 | `docs/2-phase-1/PokerGFX-Feature-Checklist.md` |
+| 업체 관리 | `docs/5-operations/VENDOR-MANAGEMENT.md` |
 
 ---
 
