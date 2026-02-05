@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS 문서 구조 - Phase 0/1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            background: #ffffff;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #000;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+        }
+        .header .subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .phase-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: 2px solid #000;
+            font-weight: 600;
+        }
+        .phase-badge.active {
+            background: #000;
+            color: #fff;
+        }
+        .phase-badge .status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+        .phase-badge.active .status {
+            background: #fff;
+        }
+
+        /* Tree Structure */
+        .tree-container {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+        }
+        .tree-section {
+            flex: 1;
+            max-width: 500px;
+        }
+        .tree-header {
+            font-size: 18px;
+            font-weight: 700;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border: 2px solid #000;
+            margin-bottom: 0;
+        }
+        .tree-header.phase-0 {
+            background: #000;
+            color: #fff;
+        }
+        .tree-header.phase-1 {
+            background: #e0e0e0;
+        }
+
+        .tree-body {
+            border: 2px solid #000;
+            border-top: none;
+            padding: 20px;
+        }
+        .tree-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .tree-item:last-child {
+            margin-bottom: 0;
+        }
+        .tree-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 16px;
+            height: 2px;
+            background: #000;
+        }
+        .tree-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -16px;
+            width: 2px;
+            height: calc(100% + 4px);
+            background: #000;
+        }
+        .tree-item:first-child::after {
+            top: 12px;
+            height: calc(100% - 12px);
+        }
+        .tree-item:last-child::after {
+            height: 14px;
+        }
+
+        .doc-card {
+            flex: 1;
+            border: 2px solid #000;
+            padding: 12px 16px;
+            background: #fff;
+        }
+        .doc-card.master {
+            border-width: 3px;
+            background: #f9f9f9;
+        }
+        .doc-title {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        .doc-desc {
+            font-size: 11px;
+            color: #666;
+        }
+        .doc-tag {
+            display: inline-block;
+            font-size: 10px;
+            padding: 2px 8px;
+            background: #000;
+            color: #fff;
+            margin-top: 8px;
+        }
+        .doc-tag.checklist {
+            background: #666;
+        }
+        .doc-tag.reference {
+            background: #999;
+        }
+
+        /* Google Drive Structure */
+        .gdrive-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 3px solid #000;
+        }
+        .gdrive-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .gdrive-header h2 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .gdrive-structure {
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: #f5f5f5;
+            border: 2px solid #000;
+            padding: 24px 32px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .gdrive-structure .folder {
+            color: #000;
+            font-weight: 700;
+        }
+        .gdrive-structure .file {
+            color: #444;
+        }
+        .gdrive-structure .indent-1 { margin-left: 24px; }
+        .gdrive-structure .indent-2 { margin-left: 48px; }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+        .legend-box {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #000;
+        }
+        .legend-box.active {
+            background: #000;
+        }
+        .legend-box.pending {
+            background: #e0e0e0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 11px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>EBS 문서 구조 맵</h1>
+            <div class="subtitle">BRACELET STUDIO | Event Broadcasting System | Phase 0-1</div>
+        </div>
+
+        <!-- Phase Indicator -->
+        <div class="phase-indicator">
+            <div class="phase-badge active">
+                <span class="status"></span>
+                Phase 0: 업체 선정
+            </div>
+            <div class="phase-badge">
+                <span class="status"></span>
+                Phase 1: PokerGFX 복제
+            </div>
+        </div>
+
+        <!-- Tree Structure -->
+        <div class="tree-container">
+            <!-- Phase 0 -->
+            <div class="tree-section">
+                <div class="tree-header phase-0">📁 Phase 0: 업체 선정</div>
+                <div class="tree-body">
+                    <div class="tree-item">
+                        <div class="doc-card">
+                            <div class="doc-title">VENDOR-SELECTION-CHECKLIST.md</div>
+                            <div class="doc-desc">업체 선정 기준, 후보 업체, 평가 체크리스트</div>
+                            <span class="doc-tag checklist">CHECKLIST</span>
+                        </div>
+                    </div>
+                    <div class="tree-item">
+                        <div class="doc-card">
+                            <div class="doc-title">PRD-0004-Vendor-Contact-Automation.md</div>
+                            <div class="doc-desc">업체 컨택 자동화 시스템 기획</div>
+                            <span class="doc-tag">PRD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 1 -->
+            <div class="tree-section">
+                <div class="tree-header phase-1">📁 Phase 1: PokerGFX 복제</div>
+                <div class="tree-body">
+                    <div class="tree-item">
+                        <div class="doc-card">
+                            <div class="doc-title">PRD-0003-Phase1-PokerGFX-Clone.md</div>
+                            <div class="doc-desc">PokerGFX 100% 복제 상세 계획</div>
+                            <span class="doc-tag">PRD</span>
+                        </div>
+                    </div>
+                    <div class="tree-item">
+                        <div class="doc-card">
+                            <div class="doc-title">PokerGFX-Feature-Checklist.md</div>
+                            <div class="doc-desc">119개 복제 대상 기능 목록</div>
+                            <span class="doc-tag checklist">CHECKLIST</span>
+                        </div>
+                    </div>
+                    <div class="tree-item">
+                        <div class="doc-card">
+                            <div class="doc-title">reference/</div>
+                            <div class="doc-desc">PokerGFX 매뉴얼, 보안 문서, 이미지</div>
+                            <span class="doc-tag reference">REFERENCE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Master PRD -->
+        <div style="max-width: 500px; margin: 40px auto 0;">
+            <div class="doc-card master" style="text-align: center;">
+                <div class="doc-title" style="font-size: 15px;">📋 PRD-0003-EBS-RFID-System.md</div>
+                <div class="doc-desc">Master PRD - 비전, 전략, 로드맵</div>
+                <span class="doc-tag">MASTER</span>
+            </div>
+        </div>
+
+        <!-- Google Drive Structure -->
+        <div class="gdrive-section">
+            <div class="gdrive-header">
+                <h2>📁 Google Drive 폴더 구조</h2>
+                <div class="subtitle" style="font-size: 12px; color: #666;">동일 구조로 설계</div>
+            </div>
+            <div class="gdrive-structure">
+                <div class="folder">📂 EBS/</div>
+                <div class="indent-1 file">📄 README</div>
+                <div class="indent-1 file">📄 PRD-0003-EBS-RFID-System</div>
+                <div class="indent-1 folder">📂 phase-0/</div>
+                <div class="indent-2 file">📄 VENDOR-SELECTION-CHECKLIST</div>
+                <div class="indent-2 file">📄 PRD-0004-Vendor-Contact-Automation</div>
+                <div class="indent-1 folder">📂 phase-1/</div>
+                <div class="indent-2 file">📄 PRD-0003-Phase1-PokerGFX-Clone</div>
+                <div class="indent-2 file">📄 PokerGFX-Feature-Checklist</div>
+                <div class="indent-2 folder">📂 reference/</div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box active"></div>
+                <span>현재 Phase (진행 중)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box pending"></div>
+                <span>다음 Phase (대기)</span>
+            </div>
+            <div class="legend-item">
+                <span class="doc-tag">PRD</span>
+                <span>기획 문서</span>
+            </div>
+            <div class="legend-item">
+                <span class="doc-tag checklist">CHECKLIST</span>
+                <span>체크리스트</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            BRACELET STUDIO | EBS Documentation Structure | Generated 2026-02-04
+        </div>
+    </div>
+</body>
+</html>
