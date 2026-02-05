@@ -1,8 +1,6 @@
 # PRD-0004: EBS 업체 컨택 자동화 시스템
 
-**Version**: 1.0.0
-**Created**: 2026-02-03
-**Status**: Draft
+> **BRACELET STUDIO** | EBS Project | Phase 0
 
 ---
 
@@ -651,3 +649,16 @@ class IMAPWatcher:
 - [ ] Gmail Watch 설정
 - [ ] Webhook Handler 구현
 - [ ] Tailscale Funnel 설정
+
+---
+
+## 변경 이력
+
+| 날짜 | 버전 | 변경 내용 |
+|------|------|----------|
+| 2026-02-03 | 1.0.0 | 초기 작성 - 상태 머신, 이메일 템플릿, Follow-up 자동화 설계 |
+| 2026-02-04 | 1.0.1 | 문서 헤더 형식 통일 |
+
+---
+
+**Version**: 1.0.1 | **Updated**: 2026-02-04 | **BRACELET STUDIO**

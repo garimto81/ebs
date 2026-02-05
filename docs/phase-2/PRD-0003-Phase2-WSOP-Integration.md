@@ -1,4 +1,4 @@
-# Phase 1: WSOPLIVE DB 연동
+# Phase 2: WSOPLIVE DB 연동
 
 > **BRACELET STUDIO** | EBS Project
 
@@ -8,13 +8,13 @@
 
 ---
 
-## 1. Phase 1 개요
+## 1. Phase 2 개요
 
 ### 1.1 목표
 
 > **"WSOPLIVE 데이터베이스와 연동하여 중복 입력을 제거한다"**
 
-Phase 1은 WSOPLIVE 시스템의 데이터를 EBS와 동기화하여
+Phase 2는 WSOPLIVE 시스템의 데이터를 EBS와 동기화하여
 운영자의 수동 입력 부담을 30% 이상 줄이는 것이 목표입니다.
 
 ### 1.2 핵심 원칙
@@ -514,7 +514,7 @@ def rollback_sync(sync_id: str):
 
 ---
 
-## 11. Phase 1 완료 조건 (Gate)
+## 11. Phase 2 완료 조건 (Gate)
 
 Phase 2 진입을 위해 다음 조건을 **모두** 충족해야 합니다:
 
@@ -532,8 +532,8 @@ Phase 2 진입을 위해 다음 조건을 **모두** 충족해야 합니다:
 
 ### 12.1 관련 문서
 
-- [Phase 0 PRD](../phase-0/PRD-0003-Phase0-PokerGFX-Clone.md)
-- [Phase 2 PRD](../phase-2/PRD-0003-Phase2-EBS-Automation.md)
+- [Phase 1 PRD](../phase-1/PRD-0003-Phase1-PokerGFX-Clone.md)
+- [Phase 3 PRD](../phase-3/PRD-0003-Phase3-EBS-Automation.md)
 - [Phase Progression Guide](../operations/PHASE-PROGRESSION.md)
 
 ### 12.2 용어 정의

@@ -23,7 +23,8 @@ docs/
 ├── PRD-0003-EBS-RFID-System.md        # Master PRD (비전/전략)
 │
 ├── phase-0/                            # Phase 0: 업체 선정
-│   └── VENDOR-SELECTION-CHECKLIST.md  # 업체 선정 체크리스트
+│   ├── VENDOR-SELECTION-CHECKLIST.md  # 업체 선정 체크리스트
+│   └── PRD-0004-Vendor-Contact-Automation.md  # 업체 컨택 자동화
 │
 ├── phase-1/                            # Phase 1: PokerGFX 복제
 │   ├── PRD-0003-Phase1-PokerGFX-Clone.md
@@ -60,6 +61,7 @@ docs/
 | 문서 | 설명 |
 |------|------|
 | [VENDOR-SELECTION-CHECKLIST.md](phase-0/VENDOR-SELECTION-CHECKLIST.md) | 업체 선정 기준, 후보, 체크리스트 |
+| [PRD-0004-Vendor-Contact-Automation.md](phase-0/PRD-0004-Vendor-Contact-Automation.md) | 업체 컨택 자동화 시스템 |
 
 ### Phase 1: PokerGFX 복제
 
@@ -76,6 +78,7 @@ docs/
 | [EBS-WORK-DASHBOARD.md](operations/EBS-WORK-DASHBOARD.md) | 업무 현황 대시보드 |
 | [VENDOR-MANAGEMENT.md](operations/VENDOR-MANAGEMENT.md) | 업체 관리 |
 | [PHASE-PROGRESSION.md](operations/PHASE-PROGRESSION.md) | Phase 진행 조건/가이드 |
+| [GOOGLE-DRIVE-STRUCTURE.md](GOOGLE-DRIVE-STRUCTURE.md) | Google Drive 폴더 구조 |
 
 ### 미래 단계 (Phase 1 완료 후)
 
@@ -141,4 +144,4 @@ Phase 1의 목표는 **PokerGFX의 모든 기능을 100% 복제**하는 것입�
 
 ---
 
-**Version**: 7.1.0 | **Updated**: 2026-02-03 | **BRACELET STUDIO**
+**Version**: 7.2.0 | **Updated**: 2026-02-04 | **BRACELET STUDIO**

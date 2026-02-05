@@ -1,4 +1,4 @@
-# Phase 2: 자동화 프로토콜
+# Phase 3: 자동화 프로토콜
 
 > **BRACELET STUDIO** | EBS Project
 
@@ -8,13 +8,13 @@
 
 ---
 
-## 1. Phase 2 개요
+## 1. Phase 3 개요
 
 ### 1.1 목표
 
 > **"손이 아닌 시스템이 일한다. 운영자는 검증만 한다."**
 
-Phase 2는 EBS만의 독창적인 자동화 시스템을 구현합니다.
+Phase 3는 EBS만의 독창적인 자동화 시스템을 구현합니다.
 팟 계산, 칩 추적, 액션 추론을 자동화하여 운영자의 입력을 최소화합니다.
 
 ### 1.2 핵심 원칙
@@ -641,7 +641,7 @@ class BoardRecognizer:
 
 ---
 
-## 11. Phase 2 완료 조건 (프로젝트 완료)
+## 11. Phase 3 완료 조건 (프로젝트 완료)
 
 프로젝트 완료를 위해 다음 조건을 **모두** 충족해야 합니다:
 
@@ -673,8 +673,8 @@ Phase 2 완료 후 고려 가능한 확장:
 
 ### 13.1 관련 문서
 
-- [Phase 0 PRD](../phase-0/PRD-0003-Phase0-PokerGFX-Clone.md)
-- [Phase 1 PRD](../phase-1/PRD-0003-Phase1-WSOP-Integration.md)
+- [Phase 1 PRD](../phase-1/PRD-0003-Phase1-PokerGFX-Clone.md)
+- [Phase 2 PRD](../phase-2/PRD-0003-Phase2-WSOP-Integration.md)
 - [Phase Progression Guide](../operations/PHASE-PROGRESSION.md)
 
 ### 13.2 용어 정의

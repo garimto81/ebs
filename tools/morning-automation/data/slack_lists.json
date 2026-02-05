@@ -2,30 +2,25 @@
   "total_items": 16,
   "items": [
     {
-      "id": "Rec0AD6RALFEU",
-      "name": "Faded Spade | RFID 카드 | WPT 공식 | Genesis Gaming",
-      "url": "https://www.fadedspade.com/",
-      "vendor_key": "fadedspade",
+      "id": "Rec0ACEPH1DSP",
+      "name": "후보RFID Hardwareinfo@feig.deISO 15693/14443 산업용 RFID 리더FEIG Electronic",
+      "url": "https://feig.de",
+      "vendor_key": "feig",
       "raw_fields": [
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"VKfGI\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.fadedspade.com\\/\",\"text\":\"Faded Spade\"},{\"type\":\"text\",\"text\":\" | RFID \\uce74\\ub4dc | WPT \\uacf5\\uc2dd | Genesis Gaming\"}]}]}]",
-          "text": "Faded Spade | RFID 카드 | WPT 공식 | Genesis Gaming",
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "VKfGI",
+              "block_id": "rsLRj",
               "elements": [
                 {
                   "type": "rich_text_section",
                   "elements": [
                     {
-                      "url": "https://www.fadedspade.com/",
-                      "text": "Faded Spade",
-                      "type": "link"
-                    },
-                    {
-                      "text": " | RFID 카드 | WPT 공식 | Genesis Gaming",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -33,24 +28,209 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
+          "column_id": "Col0AC5MSUPPZ"
+        },
+        {
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"yUhm7\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Hardware\"}]}]}]",
+          "text": "RFID Hardware",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "yUhm7",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "RFID Hardware",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"URHX2\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"info@feig.de\"}]}]}]",
+          "text": "info@feig.de",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "URHX2",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "info@feig.de",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"5grJD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"ISO 15693\\/14443 \\uc0b0\\uc5c5\\uc6a9 RFID \\ub9ac\\ub354\"}]}]}]",
+          "text": "ISO 15693/14443 산업용 RFID 리더",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "5grJD",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "ISO 15693/14443 산업용 RFID 리더",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"qI8A+\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/feig.de\",\"text\":\"FEIG Electronic\"}]}]}]",
+          "text": "FEIG Electronic",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "qI8A+",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "url": "https://feig.de",
+                      "text": "FEIG Electronic",
+                      "type": "link"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
         }
       ]
     },
     {
-      "id": "Rec0AC942AU85",
-      "name": "RF Poker | RFID 테이블 시스템 | 완제품",
+      "id": "Rec0ACK41KSK0",
+      "name": "후보RFID TableN/ARFID 포커 테이블 시스템RF Poker",
       "url": "https://rfpoker.com/",
       "vendor_key": "rfpoker",
       "raw_fields": [
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"1Nn6P\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/rfpoker.com\\/\",\"text\":\"RF Poker\"},{\"type\":\"text\",\"text\":\" | RFID \\ud14c\\uc774\\ube14 \\uc2dc\\uc2a4\\ud15c | \\uc644\\uc81c\\ud488\"}]}]}]",
-          "text": "RF Poker | RFID 테이블 시스템 | 완제품",
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "1Nn6P",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "후보",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0AC5MSUPPZ"
+        },
+        {
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"TUlaQ\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Table\"}]}]}]",
+          "text": "RFID Table",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "TUlaQ",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "RFID Table",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+          "text": "N/A",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "NRNby",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "N/A",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"nBwf9\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID \\ud3ec\\ucee4 \\ud14c\\uc774\\ube14 \\uc2dc\\uc2a4\\ud15c\"}]}]}]",
+          "text": "RFID 포커 테이블 시스템",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "nBwf9",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "RFID 포커 테이블 시스템",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"Z\\/0jw\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/rfpoker.com\\/\",\"text\":\"RF Poker\"}]}]}]",
+          "text": "RF Poker",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "Z/0jw",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -59,9 +239,36 @@
                       "url": "https://rfpoker.com/",
                       "text": "RF Poker",
                       "type": "link"
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
+        }
+      ]
+    },
+    {
+      "id": "Rec0ACHNHBFUM",
+      "name": "후보RFID Cardinfo@fadedspade.comWPT 공식 RFID 카드 (Genesis)Faded Spade",
+      "url": "https://www.fadedspade.com/",
+      "vendor_key": "fadedspade",
+      "raw_fields": [
+        {
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
                     {
-                      "text": " | RFID 테이블 시스템 | 완제품",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -69,24 +276,209 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
+          "column_id": "Col0AC5MSUPPZ"
+        },
+        {
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"t3xhD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Card\"}]}]}]",
+          "text": "RFID Card",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "t3xhD",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "RFID Card",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"9FE4m\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"info@fadedspade.com\"}]}]}]",
+          "text": "info@fadedspade.com",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "9FE4m",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "info@fadedspade.com",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"gduiv\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"WPT \\uacf5\\uc2dd RFID \\uce74\\ub4dc (Genesis)\"}]}]}]",
+          "text": "WPT 공식 RFID 카드 (Genesis)",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "gduiv",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "WPT 공식 RFID 카드 (Genesis)",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"ZJoYH\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.fadedspade.com\\/\",\"text\":\"Faded Spade\"}]}]}]",
+          "text": "Faded Spade",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "ZJoYH",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "url": "https://www.fadedspade.com/",
+                      "text": "Faded Spade",
+                      "type": "link"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
         }
       ]
     },
     {
-      "id": "Rec0AC9422B7X",
-      "name": "PokerGFX | RFID 완제품 시스템 | 현재 사용 중 (원본)",
+      "id": "Rec0AD03AUKS5",
+      "name": "현재 사용 중벤치마크/원본N/A현재 사용 중인 원본 시스템PokerGFX",
       "url": "https://www.videopokertable.net/",
       "vendor_key": "pokergfx",
       "raw_fields": [
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"8TCC1\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.videopokertable.net\\/\",\"text\":\"PokerGFX\"},{\"type\":\"text\",\"text\":\" | RFID \\uc644\\uc81c\\ud488 \\uc2dc\\uc2a4\\ud15c | \\ud604\\uc7ac \\uc0ac\\uc6a9 \\uc911 (\\uc6d0\\ubcf8)\"}]}]}]",
-          "text": "PokerGFX | RFID 완제품 시스템 | 현재 사용 중 (원본)",
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"qR+uQ\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud604\\uc7ac \\uc0ac\\uc6a9 \\uc911\"}]}]}]",
+          "text": "현재 사용 중",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "8TCC1",
+              "block_id": "qR+uQ",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "현재 사용 중",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0AC5MSUPPZ"
+        },
+        {
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"sAGHN\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ubca4\\uce58\\ub9c8\\ud06c\\/\\uc6d0\\ubcf8\"}]}]}]",
+          "text": "벤치마크/원본",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "sAGHN",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "벤치마크/원본",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+          "text": "N/A",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "NRNby",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "N/A",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"qJxb8\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud604\\uc7ac \\uc0ac\\uc6a9 \\uc911\\uc778 \\uc6d0\\ubcf8 \\uc2dc\\uc2a4\\ud15c\"}]}]}]",
+          "text": "현재 사용 중인 원본 시스템",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "qJxb8",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "현재 사용 중인 원본 시스템",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"ZiOAB\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.videopokertable.net\\/\",\"text\":\"PokerGFX\"}]}]}]",
+          "text": "PokerGFX",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "ZiOAB",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -95,9 +487,36 @@
                       "url": "https://www.videopokertable.net/",
                       "text": "PokerGFX",
                       "type": "link"
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
+        }
+      ]
+    },
+    {
+      "id": "Rec0ACM5HCS74",
+      "name": "후보RFID Cardoverseas@angel-group.co.jp일본 RFID 카드 제조사Angel Playing Cards",
+      "url": "https://www.angelplayingcards.com/",
+      "vendor_key": "angel",
+      "raw_fields": [
+        {
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
                     {
-                      "text": " | RFID 완제품 시스템 | 현재 사용 중 (원본)",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -105,24 +524,85 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
-        }
-      ]
-    },
-    {
-      "id": "Rec0ABX3EK2MV",
-      "name": "Angel Playing Cards | 스마트 테이블 시스템 | AI+RFID | 일본",
-      "url": "https://www.angelplayingcards.com/",
-      "vendor_key": "angel",
-      "raw_fields": [
+          "column_id": "Col0AC5MSUPPZ"
+        },
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"H13dF\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.angelplayingcards.com\\/\",\"text\":\"Angel Playing Cards\"},{\"type\":\"text\",\"text\":\" | \\uc2a4\\ub9c8\\ud2b8 \\ud14c\\uc774\\ube14 \\uc2dc\\uc2a4\\ud15c | AI+RFID | \\uc77c\\ubcf8\"}]}]}]",
-          "text": "Angel Playing Cards | 스마트 테이블 시스템 | AI+RFID | 일본",
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"t3xhD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Card\"}]}]}]",
+          "text": "RFID Card",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "H13dF",
+              "block_id": "t3xhD",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "RFID Card",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"WvMNh\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"overseas@angel-group.co.jp\"}]}]}]",
+          "text": "overseas@angel-group.co.jp",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "WvMNh",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "overseas@angel-group.co.jp",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"OTfL6\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uc77c\\ubcf8 RFID \\uce74\\ub4dc \\uc81c\\uc870\\uc0ac\"}]}]}]",
+          "text": "일본 RFID 카드 제조사",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "OTfL6",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "일본 RFID 카드 제조사",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"MzHev\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.angelplayingcards.com\\/\",\"text\":\"Angel Playing Cards\"}]}]}]",
+          "text": "Angel Playing Cards",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "MzHev",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -131,9 +611,36 @@
                       "url": "https://www.angelplayingcards.com/",
                       "text": "Angel Playing Cards",
                       "type": "link"
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
+        }
+      ]
+    },
+    {
+      "id": "Rec0AD03AU00Z",
+      "name": "후보DIY/Developmentcustomerservice@sparkfun.comDIY 전자부품/모듈SparkFun",
+      "url": "https://www.sparkfun.com/products/13285",
+      "vendor_key": "sparkfun",
+      "raw_fields": [
+        {
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
                     {
-                      "text": " | 스마트 테이블 시스템 | AI+RFID | 일본",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -141,24 +648,85 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
-        }
-      ]
-    },
-    {
-      "id": "Rec0ACREAGR8R",
-      "name": "SparkFun | RFID 모듈 다양 | DIY 친화적",
-      "url": "https://www.sparkfun.com/products/13285",
-      "vendor_key": "sparkfun",
-      "raw_fields": [
+          "column_id": "Col0AC5MSUPPZ"
+        },
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"igwfR\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.sparkfun.com\\/products\\/13285\",\"text\":\"SparkFun\"},{\"type\":\"text\",\"text\":\" | RFID \\ubaa8\\ub4c8 \\ub2e4\\uc591 | DIY \\uce5c\\ud654\\uc801\"}]}]}]",
-          "text": "SparkFun | RFID 모듈 다양 | DIY 친화적",
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"7tYAa\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY\\/Development\"}]}]}]",
+          "text": "DIY/Development",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "igwfR",
+              "block_id": "7tYAa",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "DIY/Development",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"kQ9hn\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"customerservice@sparkfun.com\"}]}]}]",
+          "text": "customerservice@sparkfun.com",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "kQ9hn",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "customerservice@sparkfun.com",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"MELNd\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY \\uc804\\uc790\\ubd80\\ud488\\/\\ubaa8\\ub4c8\"}]}]}]",
+          "text": "DIY 전자부품/모듈",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "MELNd",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "DIY 전자부품/모듈",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"vCf45\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.sparkfun.com\\/products\\/13285\",\"text\":\"SparkFun\"}]}]}]",
+          "text": "SparkFun",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "vCf45",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -167,9 +735,36 @@
                       "url": "https://www.sparkfun.com/products/13285",
                       "text": "SparkFun",
                       "type": "link"
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
+        }
+      ]
+    },
+    {
+      "id": "Rec0ACQP9TR5J",
+      "name": "후보DIY/Developmentsupport@adafruit.comPN532 NFC 모듈 제조Adafruit",
+      "url": "https://www.adafruit.com/product/364",
+      "vendor_key": "adafruit",
+      "raw_fields": [
+        {
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
                     {
-                      "text": " | RFID 모듈 다양 | DIY 친화적",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -177,24 +772,85 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
-        }
-      ]
-    },
-    {
-      "id": "Rec0ACREA221F",
-      "name": "Adafruit | PN532 정품 | DIY 문서 풍부 | 학습용",
-      "url": "https://www.adafruit.com/product/364",
-      "vendor_key": "adafruit",
-      "raw_fields": [
+          "column_id": "Col0AC5MSUPPZ"
+        },
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"E9uJd\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.adafruit.com\\/product\\/364\",\"text\":\"Adafruit\"},{\"type\":\"text\",\"text\":\" | PN532 \\uc815\\ud488 | DIY \\ubb38\\uc11c \\ud48d\\ubd80 | \\ud559\\uc2b5\\uc6a9\"}]}]}]",
-          "text": "Adafruit | PN532 정품 | DIY 문서 풍부 | 학습용",
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"7tYAa\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY\\/Development\"}]}]}]",
+          "text": "DIY/Development",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "E9uJd",
+              "block_id": "7tYAa",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "DIY/Development",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"CjadD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"support@adafruit.com\"}]}]}]",
+          "text": "support@adafruit.com",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "CjadD",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "support@adafruit.com",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"JT4YB\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"PN532 NFC \\ubaa8\\ub4c8 \\uc81c\\uc870\"}]}]}]",
+          "text": "PN532 NFC 모듈 제조",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "JT4YB",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "PN532 NFC 모듈 제조",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"P\\/UcY\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.adafruit.com\\/product\\/364\",\"text\":\"Adafruit\"}]}]}]",
+          "text": "Adafruit",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "P/UcY",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -203,9 +859,36 @@
                       "url": "https://www.adafruit.com/product/364",
                       "text": "Adafruit",
                       "type": "link"
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
+        }
+      ]
+    },
+    {
+      "id": "Rec0ACM5GQH98",
+      "name": "후보DIY/Developmentservice@waveshare.comRFID 모듈 및 개발보드Waveshare",
+      "url": "https://www.waveshare.com/wiki/ST25R3911B_NFC_Board",
+      "vendor_key": "waveshare",
+      "raw_fields": [
+        {
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
                     {
-                      "text": " | PN532 정품 | DIY 문서 풍부 | 학습용",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -213,24 +896,85 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
-        }
-      ]
-    },
-    {
-      "id": "Rec0AC655E0H1",
-      "name": "Waveshare | ST25R3911B 평가보드 $50-80 | Stage 0 권장",
-      "url": "https://www.waveshare.com/wiki/ST25R3911B_NFC_Board",
-      "vendor_key": "st_micro",
-      "raw_fields": [
+          "column_id": "Col0AC5MSUPPZ"
+        },
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"OVEiX\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.waveshare.com\\/wiki\\/ST25R3911B_NFC_Board\",\"text\":\"Waveshare\"},{\"type\":\"text\",\"text\":\" | ST25R3911B \\ud3c9\\uac00\\ubcf4\\ub4dc $50-80 | Stage 0 \\uad8c\\uc7a5\"}]}]}]",
-          "text": "Waveshare | ST25R3911B 평가보드 $50-80 | Stage 0 권장",
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"7tYAa\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY\\/Development\"}]}]}]",
+          "text": "DIY/Development",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "OVEiX",
+              "block_id": "7tYAa",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "DIY/Development",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"tz7gh\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"service@waveshare.com\"}]}]}]",
+          "text": "service@waveshare.com",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "tz7gh",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "service@waveshare.com",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"OEvcb\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID \\ubaa8\\ub4c8 \\ubc0f \\uac1c\\ubc1c\\ubcf4\\ub4dc\"}]}]}]",
+          "text": "RFID 모듈 및 개발보드",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "OEvcb",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "RFID 모듈 및 개발보드",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"EW6jR\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.waveshare.com\\/wiki\\/ST25R3911B_NFC_Board\",\"text\":\"Waveshare\"}]}]}]",
+          "text": "Waveshare",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "EW6jR",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -239,9 +983,36 @@
                       "url": "https://www.waveshare.com/wiki/ST25R3911B_NFC_Board",
                       "text": "Waveshare",
                       "type": "link"
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
+        }
+      ]
+    },
+    {
+      "id": "Rec0ACHNHBNHK",
+      "name": "후보DIY/DevelopmentN/AST25R3911B RFID 칩 제조사ST Microelectronics",
+      "url": "https://www.st.com/en/nfc/st25r3911b.html",
+      "vendor_key": "st_micro",
+      "raw_fields": [
+        {
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
                     {
-                      "text": " | ST25R3911B 평가보드 $50-80 | Stage 0 권장",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -249,24 +1020,85 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
-        }
-      ]
-    },
-    {
-      "id": "Rec0AD6RA3DHN",
-      "name": "ST Microelectronics | ST25R3911B 제조사 | 공식 SDK | ⭐ Stage 0-1 핵심",
-      "url": "https://www.st.com/en/nfc/st25r3911b.html",
-      "vendor_key": "st_micro",
-      "raw_fields": [
+          "column_id": "Col0AC5MSUPPZ"
+        },
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"dlNiL\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.st.com\\/en\\/nfc\\/st25r3911b.html\",\"text\":\"ST Microelectronics\"},{\"type\":\"text\",\"text\":\" | ST25R3911B \\uc81c\\uc870\\uc0ac | \\uacf5\\uc2dd SDK | \\u2b50 Stage 0-1 \\ud575\\uc2ec\"}]}]}]",
-          "text": "ST Microelectronics | ST25R3911B 제조사 | 공식 SDK | ⭐ Stage 0-1 핵심",
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"7tYAa\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY\\/Development\"}]}]}]",
+          "text": "DIY/Development",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "dlNiL",
+              "block_id": "7tYAa",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "DIY/Development",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+          "text": "N/A",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "NRNby",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "N/A",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"NmH+t\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"ST25R3911B RFID \\uce69 \\uc81c\\uc870\\uc0ac\"}]}]}]",
+          "text": "ST25R3911B RFID 칩 제조사",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "NmH+t",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "ST25R3911B RFID 칩 제조사",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"N0B\\/F\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.st.com\\/en\\/nfc\\/st25r3911b.html\",\"text\":\"ST Microelectronics\"}]}]}]",
+          "text": "ST Microelectronics",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "N0B/F",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -275,45 +1107,36 @@
                       "url": "https://www.st.com/en/nfc/st25r3911b.html",
                       "text": "ST Microelectronics",
                       "type": "link"
-                    },
-                    {
-                      "text": " | ST25R3911B 제조사 | 공식 SDK | ⭐ Stage 0-1 핵심",
-                      "type": "text"
                     }
                   ]
                 }
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
+          "column_id": "Col0ACQP79Y1J"
         }
       ]
     },
     {
-      "id": "Rec0ACADV6JKG",
-      "name": "Matsui Gaming | 카지노 RFID 전문 | 일본",
-      "url": "https://www.matsuigaming.com/",
-      "vendor_key": "matsui",
+      "id": "Rec0ADFEC3MPS",
+      "name": "후보Casino Solutioninfo@abbiati.com카지노 칩/테이블 장비Abbiati Casino",
+      "url": "https://www.abbiati.com/",
+      "vendor_key": "abbiati",
       "raw_fields": [
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"jgFg0\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.matsuigaming.com\\/\",\"text\":\"Matsui Gaming\"},{\"type\":\"text\",\"text\":\" | \\uce74\\uc9c0\\ub178 RFID \\uc804\\ubb38 | \\uc77c\\ubcf8\"}]}]}]",
-          "text": "Matsui Gaming | 카지노 RFID 전문 | 일본",
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "jgFg0",
+              "block_id": "rsLRj",
               "elements": [
                 {
                   "type": "rich_text_section",
                   "elements": [
                     {
-                      "url": "https://www.matsuigaming.com/",
-                      "text": "Matsui Gaming",
-                      "type": "link"
-                    },
-                    {
-                      "text": " | 카지노 RFID 전문 | 일본",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -321,24 +1144,85 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
-        }
-      ]
-    },
-    {
-      "id": "Rec0ABX25FUKZ",
-      "name": "Abbiati Casino | RFID 칩/카드 | 이탈리아",
-      "url": "https://www.abbiati.com/",
-      "vendor_key": "abbiati",
-      "raw_fields": [
+          "column_id": "Col0AC5MSUPPZ"
+        },
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"NH8Zy\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.abbiati.com\\/\",\"text\":\"Abbiati Casino\"},{\"type\":\"text\",\"text\":\" | RFID \\uce69\\/\\uce74\\ub4dc | \\uc774\\ud0c8\\ub9ac\\uc544\"}]}]}]",
-          "text": "Abbiati Casino | RFID 칩/카드 | 이탈리아",
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"4RxrT\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Casino Solution\"}]}]}]",
+          "text": "Casino Solution",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "NH8Zy",
+              "block_id": "4RxrT",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "Casino Solution",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"uTUBD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"info@abbiati.com\"}]}]}]",
+          "text": "info@abbiati.com",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "uTUBD",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "info@abbiati.com",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"LXmID\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uce74\\uc9c0\\ub178 \\uce69\\/\\ud14c\\uc774\\ube14 \\uc7a5\\ube44\"}]}]}]",
+          "text": "카지노 칩/테이블 장비",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "LXmID",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "카지노 칩/테이블 장비",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"oufXO\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.abbiati.com\\/\",\"text\":\"Abbiati Casino\"}]}]}]",
+          "text": "Abbiati Casino",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "oufXO",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -347,9 +1231,36 @@
                       "url": "https://www.abbiati.com/",
                       "text": "Abbiati Casino",
                       "type": "link"
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
+        }
+      ]
+    },
+    {
+      "id": "Rec0ACM5GPQHY",
+      "name": "후보Casino SolutionN/A일본 카지노 장비Matsui Gaming",
+      "url": "https://www.matsuigaming.com/",
+      "vendor_key": "matsui",
+      "raw_fields": [
+        {
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
                     {
-                      "text": " | RFID 칩/카드 | 이탈리아",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -357,24 +1268,209 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
+          "column_id": "Col0AC5MSUPPZ"
+        },
+        {
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"4RxrT\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Casino Solution\"}]}]}]",
+          "text": "Casino Solution",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "4RxrT",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "Casino Solution",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+          "text": "N/A",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "NRNby",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "N/A",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"EmcPH\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uc77c\\ubcf8 \\uce74\\uc9c0\\ub178 \\uc7a5\\ube44\"}]}]}]",
+          "text": "일본 카지노 장비",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "EmcPH",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "일본 카지노 장비",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"GECJd\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.matsuigaming.com\\/\",\"text\":\"Matsui Gaming\"}]}]}]",
+          "text": "Matsui Gaming",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "GECJd",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "url": "https://www.matsuigaming.com/",
+                      "text": "Matsui Gaming",
+                      "type": "link"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
         }
       ]
     },
     {
-      "id": "Rec0AC63X8MCK",
-      "name": "Sun-Fly | PJM 3.0 | 칩+카드 RFID | G2E Asia",
+      "id": "Rec0AC5MVCX8F",
+      "name": "후보Casino SolutionN/A카지노 칩/플레이카드Sun-Fly",
       "url": "https://www.sunflycasinochips.com/rfid-anti-counterfeiting-pjm",
       "vendor_key": "sunfly",
       "raw_fields": [
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"QP0+1\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.sunflycasinochips.com\\/rfid-anti-counterfeiting-pjm\",\"text\":\"Sun-Fly\"},{\"type\":\"text\",\"text\":\" | PJM 3.0 | \\uce69+\\uce74\\ub4dc RFID | G2E Asia\"}]}]}]",
-          "text": "Sun-Fly | PJM 3.0 | 칩+카드 RFID | G2E Asia",
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "QP0+1",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "후보",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0AC5MSUPPZ"
+        },
+        {
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"4RxrT\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Casino Solution\"}]}]}]",
+          "text": "Casino Solution",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "4RxrT",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "Casino Solution",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+          "text": "N/A",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "NRNby",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "N/A",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"+8rno\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uce74\\uc9c0\\ub178 \\uce69\\/\\ud50c\\ub808\\uc774\\uce74\\ub4dc\"}]}]}]",
+          "text": "카지노 칩/플레이카드",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "+8rno",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "카지노 칩/플레이카드",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"5U7ZA\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.sunflycasinochips.com\\/rfid-anti-counterfeiting-pjm\",\"text\":\"Sun-Fly\"}]}]}]",
+          "text": "Sun-Fly",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "5U7ZA",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -383,9 +1479,36 @@
                       "url": "https://www.sunflycasinochips.com/rfid-anti-counterfeiting-pjm",
                       "text": "Sun-Fly",
                       "type": "link"
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
+        }
+      ]
+    },
+    {
+      "id": "Rec0ACK41D370",
+      "name": "후보UncategorizedN/A한국 카지노 솔루션S.I.T. Korea",
+      "url": "https://www.casinovendors.com/vendor/s-i-t-korea-co-ltd/",
+      "vendor_key": "sit_korea",
+      "raw_fields": [
+        {
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
                     {
-                      "text": " | PJM 3.0 | 칩+카드 RFID | G2E Asia",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -393,24 +1516,85 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
-        }
-      ]
-    },
-    {
-      "id": "Rec0ACRAYFRND",
-      "name": "S.I.T. Korea | 국내 업체, Paradise City 납품 실적",
-      "url": "https://www.casinovendors.com/vendor/s-i-t-korea-co-ltd/",
-      "vendor_key": "sit_korea",
-      "raw_fields": [
+          "column_id": "Col0AC5MSUPPZ"
+        },
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"Gcw4G\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.casinovendors.com\\/vendor\\/s-i-t-korea-co-ltd\\/\",\"text\":\"S.I.T. Korea\"},{\"type\":\"text\",\"text\":\" | \\uad6d\\ub0b4 \\uc5c5\\uccb4, Paradise City \\ub0a9\\ud488 \\uc2e4\\uc801\"}]}]}]",
-          "text": "S.I.T. Korea | 국내 업체, Paradise City 납품 실적",
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"HZ95y\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Uncategorized\"}]}]}]",
+          "text": "Uncategorized",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "Gcw4G",
+              "block_id": "HZ95y",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "Uncategorized",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+          "text": "N/A",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "NRNby",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "N/A",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"hZ1Sy\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud55c\\uad6d \\uce74\\uc9c0\\ub178 \\uc194\\ub8e8\\uc158\"}]}]}]",
+          "text": "한국 카지노 솔루션",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "hZ1Sy",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "한국 카지노 솔루션",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"tSYVq\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.casinovendors.com\\/vendor\\/s-i-t-korea-co-ltd\\/\",\"text\":\"S.I.T. Korea\"}]}]}]",
+          "text": "S.I.T. Korea",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "tSYVq",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -419,45 +1603,36 @@
                       "url": "https://www.casinovendors.com/vendor/s-i-t-korea-co-ltd/",
                       "text": "S.I.T. Korea",
                       "type": "link"
-                    },
-                    {
-                      "text": " | 국내 업체, Paradise City 납품 실적",
-                      "type": "text"
                     }
                   ]
                 }
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
+          "column_id": "Col0ACQP79Y1J"
         }
       ]
     },
     {
-      "id": "Rec0ABX02R2KH",
-      "name": "Identiv | uTrust OEM 모듈, SDK 지원",
-      "url": "https://www.identiv.com",
-      "vendor_key": "identiv",
+      "id": "Rec0ACEPGNWQK",
+      "name": "후보RFID Hardwarepongee@pongee.com.tw대만 RFID 리더 제조사PONGEE Industries",
+      "url": "https://www.pongee.com",
+      "vendor_key": "pongee",
       "raw_fields": [
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"8z5x5\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.identiv.com\",\"text\":\"Identiv\"},{\"type\":\"text\",\"text\":\" | uTrust OEM \\ubaa8\\ub4c8, SDK \\uc9c0\\uc6d0\"}]}]}]",
-          "text": "Identiv | uTrust OEM 모듈, SDK 지원",
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "8z5x5",
+              "block_id": "rsLRj",
               "elements": [
                 {
                   "type": "rich_text_section",
                   "elements": [
                     {
-                      "url": "https://www.identiv.com",
-                      "text": "Identiv",
-                      "type": "link"
-                    },
-                    {
-                      "text": " | uTrust OEM 모듈, SDK 지원",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -465,24 +1640,85 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
-        }
-      ]
-    },
-    {
-      "id": "Rec0AC61TH42F",
-      "name": "PONGEE Industries | HF 리더 모듈, OEM/ODM 전문 (대만)",
-      "url": "https://www.pongee.com",
-      "vendor_key": "pongee",
-      "raw_fields": [
+          "column_id": "Col0AC5MSUPPZ"
+        },
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"V\\/f4Q\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.pongee.com\",\"text\":\"PONGEE Industries\"},{\"type\":\"text\",\"text\":\" | HF \\ub9ac\\ub354 \\ubaa8\\ub4c8, OEM\\/ODM \\uc804\\ubb38 (\\ub300\\ub9cc)\"}]}]}]",
-          "text": "PONGEE Industries | HF 리더 모듈, OEM/ODM 전문 (대만)",
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"yUhm7\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Hardware\"}]}]}]",
+          "text": "RFID Hardware",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "V/f4Q",
+              "block_id": "yUhm7",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "RFID Hardware",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"08wzN\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"pongee@pongee.com.tw\"}]}]}]",
+          "text": "pongee@pongee.com.tw",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "08wzN",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "pongee@pongee.com.tw",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"oCgZ1\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ub300\\ub9cc RFID \\ub9ac\\ub354 \\uc81c\\uc870\\uc0ac\"}]}]}]",
+          "text": "대만 RFID 리더 제조사",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "oCgZ1",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "대만 RFID 리더 제조사",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"tuOOV\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.pongee.com\",\"text\":\"PONGEE Industries\"}]}]}]",
+          "text": "PONGEE Industries",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "tuOOV",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -491,9 +1727,36 @@
                       "url": "https://www.pongee.com",
                       "text": "PONGEE Industries",
                       "type": "link"
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
+        }
+      ]
+    },
+    {
+      "id": "Rec0AD03AHT7B",
+      "name": "후보RFID Hardwaresales@identiv.comNFC/RFID 보안 솔루션Identiv",
+      "url": "https://www.identiv.com",
+      "vendor_key": "identiv",
+      "raw_fields": [
+        {
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
                     {
-                      "text": " | HF 리더 모듈, OEM/ODM 전문 (대만)",
+                      "text": "후보",
                       "type": "text"
                     }
                   ]
@@ -501,24 +1764,209 @@
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
+          "column_id": "Col0AC5MSUPPZ"
+        },
+        {
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"yUhm7\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Hardware\"}]}]}]",
+          "text": "RFID Hardware",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "yUhm7",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "RFID Hardware",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"4yEMD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"sales@identiv.com\"}]}]}]",
+          "text": "sales@identiv.com",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "4yEMD",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "sales@identiv.com",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"PQF4q\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"NFC\\/RFID \\ubcf4\\uc548 \\uc194\\ub8e8\\uc158\"}]}]}]",
+          "text": "NFC/RFID 보안 솔루션",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "PQF4q",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "NFC/RFID 보안 솔루션",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"JvHTk\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.identiv.com\",\"text\":\"Identiv\"}]}]}]",
+          "text": "Identiv",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "JvHTk",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "url": "https://www.identiv.com",
+                      "text": "Identiv",
+                      "type": "link"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACQP79Y1J"
         }
       ]
     },
     {
-      "id": "Rec0AD6MZF5UY",
-      "name": "GAO RFID | 안티콜리전 50태그/초, 산업용 리더",
+      "id": "Rec0ACK40S406",
+      "name": "후보RFID Hardwaresales@gaorfid.com다양한 주파수 RFID 솔루션GAO RFID",
       "url": "https://gaorfid.com",
       "vendor_key": "gao",
       "raw_fields": [
         {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"r4wLA\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/gaorfid.com\",\"text\":\"GAO RFID\"},{\"type\":\"text\",\"text\":\" | \\uc548\\ud2f0\\ucf5c\\ub9ac\\uc804 50\\ud0dc\\uadf8\\/\\ucd08, \\uc0b0\\uc5c5\\uc6a9 \\ub9ac\\ub354\"}]}]}]",
-          "text": "GAO RFID | 안티콜리전 50태그/초, 산업용 리더",
+          "key": "status",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+          "text": "후보",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "r4wLA",
+              "block_id": "rsLRj",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "후보",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0AC5MSUPPZ"
+        },
+        {
+          "key": "category",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"yUhm7\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Hardware\"}]}]}]",
+          "text": "RFID Hardware",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "yUhm7",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "RFID Hardware",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACEPEKNRZ"
+        },
+        {
+          "key": "contact",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"1ipBf\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"sales@gaorfid.com\"}]}]}]",
+          "text": "sales@gaorfid.com",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "1ipBf",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "sales@gaorfid.com",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACHNF1G93"
+        },
+        {
+          "key": "description",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"8UpLo\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ub2e4\\uc591\\ud55c \\uc8fc\\ud30c\\uc218 RFID \\uc194\\ub8e8\\uc158\"}]}]}]",
+          "text": "다양한 주파수 RFID 솔루션",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "8UpLo",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "text": "다양한 주파수 RFID 솔루션",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "column_id": "Col0ACM5EBF1Q"
+        },
+        {
+          "key": "name",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"TMtGH\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/gaorfid.com\",\"text\":\"GAO RFID\"}]}]}]",
+          "text": "GAO RFID",
+          "rich_text": [
+            {
+              "type": "rich_text",
+              "block_id": "TMtGH",
               "elements": [
                 {
                   "type": "rich_text_section",
@@ -527,60 +1975,13 @@
                       "url": "https://gaorfid.com",
                       "text": "GAO RFID",
                       "type": "link"
-                    },
-                    {
-                      "text": " | 안티콜리전 50태그/초, 산업용 리더",
-                      "type": "text"
                     }
                   ]
                 }
               ]
             }
           ],
-          "column_id": "Col0AD62WARNC"
-        }
-      ]
-    },
-    {
-      "id": "Rec0ACCD3SU66",
-      "name": "FEIG Electronic | HF 리더 최고 성능, 한국 대리점(MINU) 있음",
-      "url": "https://www.feig.de/en",
-      "vendor_key": "feig",
-      "raw_fields": [
-        {
-          "key": "Col0AC5G00ERZ",
-          "value": null,
-          "text": "",
-          "rich_text": [],
-          "column_id": "Col0ACQR5BFU1"
-        },
-        {
-          "key": "name",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"gCLhM\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.feig.de\\/en\",\"text\":\"FEIG Electronic\"},{\"type\":\"text\",\"text\":\" | HF \\ub9ac\\ub354 \\ucd5c\\uace0 \\uc131\\ub2a5, \\ud55c\\uad6d \\ub300\\ub9ac\\uc810(MINU) \\uc788\\uc74c\"}]}]}]",
-          "text": "FEIG Electronic | HF 리더 최고 성능, 한국 대리점(MINU) 있음",
-          "rich_text": [
-            {
-              "type": "rich_text",
-              "block_id": "gCLhM",
-              "elements": [
-                {
-                  "type": "rich_text_section",
-                  "elements": [
-                    {
-                      "url": "https://www.feig.de/en",
-                      "text": "FEIG Electronic",
-                      "type": "link"
-                    },
-                    {
-                      "text": " | HF 리더 최고 성능, 한국 대리점(MINU) 있음",
-                      "type": "text"
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "column_id": "Col0AD62WARNC"
+          "column_id": "Col0ACQP79Y1J"
         }
       ]
     }
@@ -588,30 +1989,25 @@
   "by_category": {
     "rfid_readers": [
       {
-        "id": "Rec0ABX02R2KH",
-        "name": "Identiv | uTrust OEM 모듈, SDK 지원",
-        "url": "https://www.identiv.com",
-        "vendor_key": "identiv",
+        "id": "Rec0ACEPH1DSP",
+        "name": "후보RFID Hardwareinfo@feig.deISO 15693/14443 산업용 RFID 리더FEIG Electronic",
+        "url": "https://feig.de",
+        "vendor_key": "feig",
         "raw_fields": [
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"8z5x5\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.identiv.com\",\"text\":\"Identiv\"},{\"type\":\"text\",\"text\":\" | uTrust OEM \\ubaa8\\ub4c8, SDK \\uc9c0\\uc6d0\"}]}]}]",
-            "text": "Identiv | uTrust OEM 모듈, SDK 지원",
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "8z5x5",
+                "block_id": "rsLRj",
                 "elements": [
                   {
                     "type": "rich_text_section",
                     "elements": [
                       {
-                        "url": "https://www.identiv.com",
-                        "text": "Identiv",
-                        "type": "link"
-                      },
-                      {
-                        "text": " | uTrust OEM 모듈, SDK 지원",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -619,24 +2015,209 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
+            "column_id": "Col0AC5MSUPPZ"
+          },
+          {
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"yUhm7\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Hardware\"}]}]}]",
+            "text": "RFID Hardware",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "yUhm7",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "RFID Hardware",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"URHX2\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"info@feig.de\"}]}]}]",
+            "text": "info@feig.de",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "URHX2",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "info@feig.de",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"5grJD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"ISO 15693\\/14443 \\uc0b0\\uc5c5\\uc6a9 RFID \\ub9ac\\ub354\"}]}]}]",
+            "text": "ISO 15693/14443 산업용 RFID 리더",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "5grJD",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "ISO 15693/14443 산업용 RFID 리더",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"qI8A+\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/feig.de\",\"text\":\"FEIG Electronic\"}]}]}]",
+            "text": "FEIG Electronic",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "qI8A+",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "url": "https://feig.de",
+                        "text": "FEIG Electronic",
+                        "type": "link"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
           }
         ]
       },
       {
-        "id": "Rec0AC61TH42F",
-        "name": "PONGEE Industries | HF 리더 모듈, OEM/ODM 전문 (대만)",
+        "id": "Rec0ACEPGNWQK",
+        "name": "후보RFID Hardwarepongee@pongee.com.tw대만 RFID 리더 제조사PONGEE Industries",
         "url": "https://www.pongee.com",
         "vendor_key": "pongee",
         "raw_fields": [
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"V\\/f4Q\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.pongee.com\",\"text\":\"PONGEE Industries\"},{\"type\":\"text\",\"text\":\" | HF \\ub9ac\\ub354 \\ubaa8\\ub4c8, OEM\\/ODM \\uc804\\ubb38 (\\ub300\\ub9cc)\"}]}]}]",
-            "text": "PONGEE Industries | HF 리더 모듈, OEM/ODM 전문 (대만)",
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "V/f4Q",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "후보",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0AC5MSUPPZ"
+          },
+          {
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"yUhm7\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Hardware\"}]}]}]",
+            "text": "RFID Hardware",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "yUhm7",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "RFID Hardware",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"08wzN\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"pongee@pongee.com.tw\"}]}]}]",
+            "text": "pongee@pongee.com.tw",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "08wzN",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "pongee@pongee.com.tw",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"oCgZ1\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ub300\\ub9cc RFID \\ub9ac\\ub354 \\uc81c\\uc870\\uc0ac\"}]}]}]",
+            "text": "대만 RFID 리더 제조사",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "oCgZ1",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "대만 RFID 리더 제조사",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"tuOOV\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.pongee.com\",\"text\":\"PONGEE Industries\"}]}]}]",
+            "text": "PONGEE Industries",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "tuOOV",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -645,9 +2226,36 @@
                         "url": "https://www.pongee.com",
                         "text": "PONGEE Industries",
                         "type": "link"
-                      },
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
+          }
+        ]
+      },
+      {
+        "id": "Rec0AD03AHT7B",
+        "name": "후보RFID Hardwaresales@identiv.comNFC/RFID 보안 솔루션Identiv",
+        "url": "https://www.identiv.com",
+        "vendor_key": "identiv",
+        "raw_fields": [
+          {
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
                       {
-                        "text": " | HF 리더 모듈, OEM/ODM 전문 (대만)",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -655,24 +2263,209 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
+            "column_id": "Col0AC5MSUPPZ"
+          },
+          {
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"yUhm7\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Hardware\"}]}]}]",
+            "text": "RFID Hardware",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "yUhm7",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "RFID Hardware",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"4yEMD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"sales@identiv.com\"}]}]}]",
+            "text": "sales@identiv.com",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "4yEMD",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "sales@identiv.com",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"PQF4q\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"NFC\\/RFID \\ubcf4\\uc548 \\uc194\\ub8e8\\uc158\"}]}]}]",
+            "text": "NFC/RFID 보안 솔루션",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "PQF4q",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "NFC/RFID 보안 솔루션",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"JvHTk\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.identiv.com\",\"text\":\"Identiv\"}]}]}]",
+            "text": "Identiv",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "JvHTk",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "url": "https://www.identiv.com",
+                        "text": "Identiv",
+                        "type": "link"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
           }
         ]
       },
       {
-        "id": "Rec0AD6MZF5UY",
-        "name": "GAO RFID | 안티콜리전 50태그/초, 산업용 리더",
+        "id": "Rec0ACK40S406",
+        "name": "후보RFID Hardwaresales@gaorfid.com다양한 주파수 RFID 솔루션GAO RFID",
         "url": "https://gaorfid.com",
         "vendor_key": "gao",
         "raw_fields": [
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"r4wLA\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/gaorfid.com\",\"text\":\"GAO RFID\"},{\"type\":\"text\",\"text\":\" | \\uc548\\ud2f0\\ucf5c\\ub9ac\\uc804 50\\ud0dc\\uadf8\\/\\ucd08, \\uc0b0\\uc5c5\\uc6a9 \\ub9ac\\ub354\"}]}]}]",
-            "text": "GAO RFID | 안티콜리전 50태그/초, 산업용 리더",
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "r4wLA",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "후보",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0AC5MSUPPZ"
+          },
+          {
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"yUhm7\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Hardware\"}]}]}]",
+            "text": "RFID Hardware",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "yUhm7",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "RFID Hardware",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"1ipBf\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"sales@gaorfid.com\"}]}]}]",
+            "text": "sales@gaorfid.com",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "1ipBf",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "sales@gaorfid.com",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"8UpLo\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ub2e4\\uc591\\ud55c \\uc8fc\\ud30c\\uc218 RFID \\uc194\\ub8e8\\uc158\"}]}]}]",
+            "text": "다양한 주파수 RFID 솔루션",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "8UpLo",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "다양한 주파수 RFID 솔루션",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"TMtGH\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/gaorfid.com\",\"text\":\"GAO RFID\"}]}]}]",
+            "text": "GAO RFID",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "TMtGH",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -681,90 +2474,38 @@
                         "url": "https://gaorfid.com",
                         "text": "GAO RFID",
                         "type": "link"
-                      },
-                      {
-                        "text": " | 안티콜리전 50태그/초, 산업용 리더",
-                        "type": "text"
                       }
                     ]
                   }
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
-          }
-        ]
-      },
-      {
-        "id": "Rec0ACCD3SU66",
-        "name": "FEIG Electronic | HF 리더 최고 성능, 한국 대리점(MINU) 있음",
-        "url": "https://www.feig.de/en",
-        "vendor_key": "feig",
-        "raw_fields": [
-          {
-            "key": "Col0AC5G00ERZ",
-            "value": null,
-            "text": "",
-            "rich_text": [],
-            "column_id": "Col0ACQR5BFU1"
-          },
-          {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"gCLhM\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.feig.de\\/en\",\"text\":\"FEIG Electronic\"},{\"type\":\"text\",\"text\":\" | HF \\ub9ac\\ub354 \\ucd5c\\uace0 \\uc131\\ub2a5, \\ud55c\\uad6d \\ub300\\ub9ac\\uc810(MINU) \\uc788\\uc74c\"}]}]}]",
-            "text": "FEIG Electronic | HF 리더 최고 성능, 한국 대리점(MINU) 있음",
-            "rich_text": [
-              {
-                "type": "rich_text",
-                "block_id": "gCLhM",
-                "elements": [
-                  {
-                    "type": "rich_text_section",
-                    "elements": [
-                      {
-                        "url": "https://www.feig.de/en",
-                        "text": "FEIG Electronic",
-                        "type": "link"
-                      },
-                      {
-                        "text": " | HF 리더 최고 성능, 한국 대리점(MINU) 있음",
-                        "type": "text"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "column_id": "Col0AD62WARNC"
+            "column_id": "Col0ACQP79Y1J"
           }
         ]
       }
     ],
     "casino_solutions": [
       {
-        "id": "Rec0ACADV6JKG",
-        "name": "Matsui Gaming | 카지노 RFID 전문 | 일본",
-        "url": "https://www.matsuigaming.com/",
-        "vendor_key": "matsui",
+        "id": "Rec0ADFEC3MPS",
+        "name": "후보Casino Solutioninfo@abbiati.com카지노 칩/테이블 장비Abbiati Casino",
+        "url": "https://www.abbiati.com/",
+        "vendor_key": "abbiati",
         "raw_fields": [
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"jgFg0\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.matsuigaming.com\\/\",\"text\":\"Matsui Gaming\"},{\"type\":\"text\",\"text\":\" | \\uce74\\uc9c0\\ub178 RFID \\uc804\\ubb38 | \\uc77c\\ubcf8\"}]}]}]",
-            "text": "Matsui Gaming | 카지노 RFID 전문 | 일본",
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "jgFg0",
+                "block_id": "rsLRj",
                 "elements": [
                   {
                     "type": "rich_text_section",
                     "elements": [
                       {
-                        "url": "https://www.matsuigaming.com/",
-                        "text": "Matsui Gaming",
-                        "type": "link"
-                      },
-                      {
-                        "text": " | 카지노 RFID 전문 | 일본",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -772,24 +2513,85 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
-          }
-        ]
-      },
-      {
-        "id": "Rec0ABX25FUKZ",
-        "name": "Abbiati Casino | RFID 칩/카드 | 이탈리아",
-        "url": "https://www.abbiati.com/",
-        "vendor_key": "abbiati",
-        "raw_fields": [
+            "column_id": "Col0AC5MSUPPZ"
+          },
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"NH8Zy\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.abbiati.com\\/\",\"text\":\"Abbiati Casino\"},{\"type\":\"text\",\"text\":\" | RFID \\uce69\\/\\uce74\\ub4dc | \\uc774\\ud0c8\\ub9ac\\uc544\"}]}]}]",
-            "text": "Abbiati Casino | RFID 칩/카드 | 이탈리아",
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"4RxrT\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Casino Solution\"}]}]}]",
+            "text": "Casino Solution",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "NH8Zy",
+                "block_id": "4RxrT",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "Casino Solution",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"uTUBD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"info@abbiati.com\"}]}]}]",
+            "text": "info@abbiati.com",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "uTUBD",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "info@abbiati.com",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"LXmID\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uce74\\uc9c0\\ub178 \\uce69\\/\\ud14c\\uc774\\ube14 \\uc7a5\\ube44\"}]}]}]",
+            "text": "카지노 칩/테이블 장비",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "LXmID",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "카지노 칩/테이블 장비",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"oufXO\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.abbiati.com\\/\",\"text\":\"Abbiati Casino\"}]}]}]",
+            "text": "Abbiati Casino",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "oufXO",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -798,9 +2600,36 @@
                         "url": "https://www.abbiati.com/",
                         "text": "Abbiati Casino",
                         "type": "link"
-                      },
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
+          }
+        ]
+      },
+      {
+        "id": "Rec0ACM5GPQHY",
+        "name": "후보Casino SolutionN/A일본 카지노 장비Matsui Gaming",
+        "url": "https://www.matsuigaming.com/",
+        "vendor_key": "matsui",
+        "raw_fields": [
+          {
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
                       {
-                        "text": " | RFID 칩/카드 | 이탈리아",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -808,24 +2637,209 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
+            "column_id": "Col0AC5MSUPPZ"
+          },
+          {
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"4RxrT\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Casino Solution\"}]}]}]",
+            "text": "Casino Solution",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "4RxrT",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "Casino Solution",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+            "text": "N/A",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "NRNby",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "N/A",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"EmcPH\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uc77c\\ubcf8 \\uce74\\uc9c0\\ub178 \\uc7a5\\ube44\"}]}]}]",
+            "text": "일본 카지노 장비",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "EmcPH",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "일본 카지노 장비",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"GECJd\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.matsuigaming.com\\/\",\"text\":\"Matsui Gaming\"}]}]}]",
+            "text": "Matsui Gaming",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "GECJd",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "url": "https://www.matsuigaming.com/",
+                        "text": "Matsui Gaming",
+                        "type": "link"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
           }
         ]
       },
       {
-        "id": "Rec0AC63X8MCK",
-        "name": "Sun-Fly | PJM 3.0 | 칩+카드 RFID | G2E Asia",
+        "id": "Rec0AC5MVCX8F",
+        "name": "후보Casino SolutionN/A카지노 칩/플레이카드Sun-Fly",
         "url": "https://www.sunflycasinochips.com/rfid-anti-counterfeiting-pjm",
         "vendor_key": "sunfly",
         "raw_fields": [
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"QP0+1\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.sunflycasinochips.com\\/rfid-anti-counterfeiting-pjm\",\"text\":\"Sun-Fly\"},{\"type\":\"text\",\"text\":\" | PJM 3.0 | \\uce69+\\uce74\\ub4dc RFID | G2E Asia\"}]}]}]",
-            "text": "Sun-Fly | PJM 3.0 | 칩+카드 RFID | G2E Asia",
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "QP0+1",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "후보",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0AC5MSUPPZ"
+          },
+          {
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"4RxrT\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Casino Solution\"}]}]}]",
+            "text": "Casino Solution",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "4RxrT",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "Casino Solution",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+            "text": "N/A",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "NRNby",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "N/A",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"+8rno\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uce74\\uc9c0\\ub178 \\uce69\\/\\ud50c\\ub808\\uc774\\uce74\\ub4dc\"}]}]}]",
+            "text": "카지노 칩/플레이카드",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "+8rno",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "카지노 칩/플레이카드",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"5U7ZA\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.sunflycasinochips.com\\/rfid-anti-counterfeiting-pjm\",\"text\":\"Sun-Fly\"}]}]}]",
+            "text": "Sun-Fly",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "5U7ZA",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -834,9 +2848,36 @@
                         "url": "https://www.sunflycasinochips.com/rfid-anti-counterfeiting-pjm",
                         "text": "Sun-Fly",
                         "type": "link"
-                      },
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
+          }
+        ]
+      },
+      {
+        "id": "Rec0ACK41D370",
+        "name": "후보UncategorizedN/A한국 카지노 솔루션S.I.T. Korea",
+        "url": "https://www.casinovendors.com/vendor/s-i-t-korea-co-ltd/",
+        "vendor_key": "sit_korea",
+        "raw_fields": [
+          {
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
                       {
-                        "text": " | PJM 3.0 | 칩+카드 RFID | G2E Asia",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -844,24 +2885,85 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
-          }
-        ]
-      },
-      {
-        "id": "Rec0ACRAYFRND",
-        "name": "S.I.T. Korea | 국내 업체, Paradise City 납품 실적",
-        "url": "https://www.casinovendors.com/vendor/s-i-t-korea-co-ltd/",
-        "vendor_key": "sit_korea",
-        "raw_fields": [
+            "column_id": "Col0AC5MSUPPZ"
+          },
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"Gcw4G\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.casinovendors.com\\/vendor\\/s-i-t-korea-co-ltd\\/\",\"text\":\"S.I.T. Korea\"},{\"type\":\"text\",\"text\":\" | \\uad6d\\ub0b4 \\uc5c5\\uccb4, Paradise City \\ub0a9\\ud488 \\uc2e4\\uc801\"}]}]}]",
-            "text": "S.I.T. Korea | 국내 업체, Paradise City 납품 실적",
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"HZ95y\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Uncategorized\"}]}]}]",
+            "text": "Uncategorized",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "Gcw4G",
+                "block_id": "HZ95y",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "Uncategorized",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+            "text": "N/A",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "NRNby",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "N/A",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"hZ1Sy\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud55c\\uad6d \\uce74\\uc9c0\\ub178 \\uc194\\ub8e8\\uc158\"}]}]}]",
+            "text": "한국 카지노 솔루션",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "hZ1Sy",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "한국 카지노 솔루션",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"tSYVq\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.casinovendors.com\\/vendor\\/s-i-t-korea-co-ltd\\/\",\"text\":\"S.I.T. Korea\"}]}]}]",
+            "text": "S.I.T. Korea",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "tSYVq",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -870,9 +2972,38 @@
                         "url": "https://www.casinovendors.com/vendor/s-i-t-korea-co-ltd/",
                         "text": "S.I.T. Korea",
                         "type": "link"
-                      },
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
+          }
+        ]
+      }
+    ],
+    "diy_development": [
+      {
+        "id": "Rec0AD03AU00Z",
+        "name": "후보DIY/Developmentcustomerservice@sparkfun.comDIY 전자부품/모듈SparkFun",
+        "url": "https://www.sparkfun.com/products/13285",
+        "vendor_key": "sparkfun",
+        "raw_fields": [
+          {
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
                       {
-                        "text": " | 국내 업체, Paradise City 납품 실적",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -880,26 +3011,85 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
-          }
-        ]
-      }
-    ],
-    "diy_development": [
-      {
-        "id": "Rec0ACREAGR8R",
-        "name": "SparkFun | RFID 모듈 다양 | DIY 친화적",
-        "url": "https://www.sparkfun.com/products/13285",
-        "vendor_key": "sparkfun",
-        "raw_fields": [
+            "column_id": "Col0AC5MSUPPZ"
+          },
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"igwfR\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.sparkfun.com\\/products\\/13285\",\"text\":\"SparkFun\"},{\"type\":\"text\",\"text\":\" | RFID \\ubaa8\\ub4c8 \\ub2e4\\uc591 | DIY \\uce5c\\ud654\\uc801\"}]}]}]",
-            "text": "SparkFun | RFID 모듈 다양 | DIY 친화적",
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"7tYAa\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY\\/Development\"}]}]}]",
+            "text": "DIY/Development",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "igwfR",
+                "block_id": "7tYAa",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "DIY/Development",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"kQ9hn\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"customerservice@sparkfun.com\"}]}]}]",
+            "text": "customerservice@sparkfun.com",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "kQ9hn",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "customerservice@sparkfun.com",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"MELNd\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY \\uc804\\uc790\\ubd80\\ud488\\/\\ubaa8\\ub4c8\"}]}]}]",
+            "text": "DIY 전자부품/모듈",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "MELNd",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "DIY 전자부품/모듈",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"vCf45\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.sparkfun.com\\/products\\/13285\",\"text\":\"SparkFun\"}]}]}]",
+            "text": "SparkFun",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "vCf45",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -908,9 +3098,36 @@
                         "url": "https://www.sparkfun.com/products/13285",
                         "text": "SparkFun",
                         "type": "link"
-                      },
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
+          }
+        ]
+      },
+      {
+        "id": "Rec0ACQP9TR5J",
+        "name": "후보DIY/Developmentsupport@adafruit.comPN532 NFC 모듈 제조Adafruit",
+        "url": "https://www.adafruit.com/product/364",
+        "vendor_key": "adafruit",
+        "raw_fields": [
+          {
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
                       {
-                        "text": " | RFID 모듈 다양 | DIY 친화적",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -918,24 +3135,85 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
-          }
-        ]
-      },
-      {
-        "id": "Rec0ACREA221F",
-        "name": "Adafruit | PN532 정품 | DIY 문서 풍부 | 학습용",
-        "url": "https://www.adafruit.com/product/364",
-        "vendor_key": "adafruit",
-        "raw_fields": [
+            "column_id": "Col0AC5MSUPPZ"
+          },
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"E9uJd\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.adafruit.com\\/product\\/364\",\"text\":\"Adafruit\"},{\"type\":\"text\",\"text\":\" | PN532 \\uc815\\ud488 | DIY \\ubb38\\uc11c \\ud48d\\ubd80 | \\ud559\\uc2b5\\uc6a9\"}]}]}]",
-            "text": "Adafruit | PN532 정품 | DIY 문서 풍부 | 학습용",
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"7tYAa\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY\\/Development\"}]}]}]",
+            "text": "DIY/Development",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "E9uJd",
+                "block_id": "7tYAa",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "DIY/Development",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"CjadD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"support@adafruit.com\"}]}]}]",
+            "text": "support@adafruit.com",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "CjadD",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "support@adafruit.com",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"JT4YB\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"PN532 NFC \\ubaa8\\ub4c8 \\uc81c\\uc870\"}]}]}]",
+            "text": "PN532 NFC 모듈 제조",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "JT4YB",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "PN532 NFC 모듈 제조",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"P\\/UcY\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.adafruit.com\\/product\\/364\",\"text\":\"Adafruit\"}]}]}]",
+            "text": "Adafruit",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "P/UcY",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -944,9 +3222,36 @@
                         "url": "https://www.adafruit.com/product/364",
                         "text": "Adafruit",
                         "type": "link"
-                      },
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
+          }
+        ]
+      },
+      {
+        "id": "Rec0ACM5GQH98",
+        "name": "후보DIY/Developmentservice@waveshare.comRFID 모듈 및 개발보드Waveshare",
+        "url": "https://www.waveshare.com/wiki/ST25R3911B_NFC_Board",
+        "vendor_key": "waveshare",
+        "raw_fields": [
+          {
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
                       {
-                        "text": " | PN532 정품 | DIY 문서 풍부 | 학습용",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -954,24 +3259,85 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
-          }
-        ]
-      },
-      {
-        "id": "Rec0AC655E0H1",
-        "name": "Waveshare | ST25R3911B 평가보드 $50-80 | Stage 0 권장",
-        "url": "https://www.waveshare.com/wiki/ST25R3911B_NFC_Board",
-        "vendor_key": "st_micro",
-        "raw_fields": [
+            "column_id": "Col0AC5MSUPPZ"
+          },
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"OVEiX\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.waveshare.com\\/wiki\\/ST25R3911B_NFC_Board\",\"text\":\"Waveshare\"},{\"type\":\"text\",\"text\":\" | ST25R3911B \\ud3c9\\uac00\\ubcf4\\ub4dc $50-80 | Stage 0 \\uad8c\\uc7a5\"}]}]}]",
-            "text": "Waveshare | ST25R3911B 평가보드 $50-80 | Stage 0 권장",
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"7tYAa\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY\\/Development\"}]}]}]",
+            "text": "DIY/Development",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "OVEiX",
+                "block_id": "7tYAa",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "DIY/Development",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"tz7gh\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"service@waveshare.com\"}]}]}]",
+            "text": "service@waveshare.com",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "tz7gh",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "service@waveshare.com",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"OEvcb\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID \\ubaa8\\ub4c8 \\ubc0f \\uac1c\\ubc1c\\ubcf4\\ub4dc\"}]}]}]",
+            "text": "RFID 모듈 및 개발보드",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "OEvcb",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "RFID 모듈 및 개발보드",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"EW6jR\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.waveshare.com\\/wiki\\/ST25R3911B_NFC_Board\",\"text\":\"Waveshare\"}]}]}]",
+            "text": "Waveshare",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "EW6jR",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -980,9 +3346,36 @@
                         "url": "https://www.waveshare.com/wiki/ST25R3911B_NFC_Board",
                         "text": "Waveshare",
                         "type": "link"
-                      },
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
+          }
+        ]
+      },
+      {
+        "id": "Rec0ACHNHBNHK",
+        "name": "후보DIY/DevelopmentN/AST25R3911B RFID 칩 제조사ST Microelectronics",
+        "url": "https://www.st.com/en/nfc/st25r3911b.html",
+        "vendor_key": "st_micro",
+        "raw_fields": [
+          {
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
                       {
-                        "text": " | ST25R3911B 평가보드 $50-80 | Stage 0 권장",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -990,24 +3383,85 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
-          }
-        ]
-      },
-      {
-        "id": "Rec0AD6RA3DHN",
-        "name": "ST Microelectronics | ST25R3911B 제조사 | 공식 SDK | ⭐ Stage 0-1 핵심",
-        "url": "https://www.st.com/en/nfc/st25r3911b.html",
-        "vendor_key": "st_micro",
-        "raw_fields": [
+            "column_id": "Col0AC5MSUPPZ"
+          },
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"dlNiL\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.st.com\\/en\\/nfc\\/st25r3911b.html\",\"text\":\"ST Microelectronics\"},{\"type\":\"text\",\"text\":\" | ST25R3911B \\uc81c\\uc870\\uc0ac | \\uacf5\\uc2dd SDK | \\u2b50 Stage 0-1 \\ud575\\uc2ec\"}]}]}]",
-            "text": "ST Microelectronics | ST25R3911B 제조사 | 공식 SDK | ⭐ Stage 0-1 핵심",
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"7tYAa\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"DIY\\/Development\"}]}]}]",
+            "text": "DIY/Development",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "dlNiL",
+                "block_id": "7tYAa",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "DIY/Development",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+            "text": "N/A",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "NRNby",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "N/A",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"NmH+t\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"ST25R3911B RFID \\uce69 \\uc81c\\uc870\\uc0ac\"}]}]}]",
+            "text": "ST25R3911B RFID 칩 제조사",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "NmH+t",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "ST25R3911B RFID 칩 제조사",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"N0B\\/F\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.st.com\\/en\\/nfc\\/st25r3911b.html\",\"text\":\"ST Microelectronics\"}]}]}]",
+            "text": "ST Microelectronics",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "N0B/F",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -1016,47 +3470,38 @@
                         "url": "https://www.st.com/en/nfc/st25r3911b.html",
                         "text": "ST Microelectronics",
                         "type": "link"
-                      },
-                      {
-                        "text": " | ST25R3911B 제조사 | 공식 SDK | ⭐ Stage 0-1 핵심",
-                        "type": "text"
                       }
                     ]
                   }
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
+            "column_id": "Col0ACQP79Y1J"
           }
         ]
       }
     ],
     "benchmarks": [
       {
-        "id": "Rec0AD6RALFEU",
-        "name": "Faded Spade | RFID 카드 | WPT 공식 | Genesis Gaming",
-        "url": "https://www.fadedspade.com/",
-        "vendor_key": "fadedspade",
+        "id": "Rec0ACK41KSK0",
+        "name": "후보RFID TableN/ARFID 포커 테이블 시스템RF Poker",
+        "url": "https://rfpoker.com/",
+        "vendor_key": "rfpoker",
         "raw_fields": [
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"VKfGI\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.fadedspade.com\\/\",\"text\":\"Faded Spade\"},{\"type\":\"text\",\"text\":\" | RFID \\uce74\\ub4dc | WPT \\uacf5\\uc2dd | Genesis Gaming\"}]}]}]",
-            "text": "Faded Spade | RFID 카드 | WPT 공식 | Genesis Gaming",
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "VKfGI",
+                "block_id": "rsLRj",
                 "elements": [
                   {
                     "type": "rich_text_section",
                     "elements": [
                       {
-                        "url": "https://www.fadedspade.com/",
-                        "text": "Faded Spade",
-                        "type": "link"
-                      },
-                      {
-                        "text": " | RFID 카드 | WPT 공식 | Genesis Gaming",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -1064,24 +3509,85 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
-          }
-        ]
-      },
-      {
-        "id": "Rec0AC942AU85",
-        "name": "RF Poker | RFID 테이블 시스템 | 완제품",
-        "url": "https://rfpoker.com/",
-        "vendor_key": "rfpoker",
-        "raw_fields": [
+            "column_id": "Col0AC5MSUPPZ"
+          },
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"1Nn6P\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/rfpoker.com\\/\",\"text\":\"RF Poker\"},{\"type\":\"text\",\"text\":\" | RFID \\ud14c\\uc774\\ube14 \\uc2dc\\uc2a4\\ud15c | \\uc644\\uc81c\\ud488\"}]}]}]",
-            "text": "RF Poker | RFID 테이블 시스템 | 완제품",
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"TUlaQ\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Table\"}]}]}]",
+            "text": "RFID Table",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "1Nn6P",
+                "block_id": "TUlaQ",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "RFID Table",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+            "text": "N/A",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "NRNby",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "N/A",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"nBwf9\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID \\ud3ec\\ucee4 \\ud14c\\uc774\\ube14 \\uc2dc\\uc2a4\\ud15c\"}]}]}]",
+            "text": "RFID 포커 테이블 시스템",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "nBwf9",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "RFID 포커 테이블 시스템",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"Z\\/0jw\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/rfpoker.com\\/\",\"text\":\"RF Poker\"}]}]}]",
+            "text": "RF Poker",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "Z/0jw",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -1090,9 +3596,36 @@
                         "url": "https://rfpoker.com/",
                         "text": "RF Poker",
                         "type": "link"
-                      },
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
+          }
+        ]
+      },
+      {
+        "id": "Rec0ACHNHBFUM",
+        "name": "후보RFID Cardinfo@fadedspade.comWPT 공식 RFID 카드 (Genesis)Faded Spade",
+        "url": "https://www.fadedspade.com/",
+        "vendor_key": "fadedspade",
+        "raw_fields": [
+          {
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
                       {
-                        "text": " | RFID 테이블 시스템 | 완제품",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -1100,24 +3633,209 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
+            "column_id": "Col0AC5MSUPPZ"
+          },
+          {
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"t3xhD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Card\"}]}]}]",
+            "text": "RFID Card",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "t3xhD",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "RFID Card",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"9FE4m\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"info@fadedspade.com\"}]}]}]",
+            "text": "info@fadedspade.com",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "9FE4m",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "info@fadedspade.com",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"gduiv\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"WPT \\uacf5\\uc2dd RFID \\uce74\\ub4dc (Genesis)\"}]}]}]",
+            "text": "WPT 공식 RFID 카드 (Genesis)",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "gduiv",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "WPT 공식 RFID 카드 (Genesis)",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"ZJoYH\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.fadedspade.com\\/\",\"text\":\"Faded Spade\"}]}]}]",
+            "text": "Faded Spade",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "ZJoYH",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "url": "https://www.fadedspade.com/",
+                        "text": "Faded Spade",
+                        "type": "link"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
           }
         ]
       },
       {
-        "id": "Rec0AC9422B7X",
-        "name": "PokerGFX | RFID 완제품 시스템 | 현재 사용 중 (원본)",
+        "id": "Rec0AD03AUKS5",
+        "name": "현재 사용 중벤치마크/원본N/A현재 사용 중인 원본 시스템PokerGFX",
         "url": "https://www.videopokertable.net/",
         "vendor_key": "pokergfx",
         "raw_fields": [
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"8TCC1\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.videopokertable.net\\/\",\"text\":\"PokerGFX\"},{\"type\":\"text\",\"text\":\" | RFID \\uc644\\uc81c\\ud488 \\uc2dc\\uc2a4\\ud15c | \\ud604\\uc7ac \\uc0ac\\uc6a9 \\uc911 (\\uc6d0\\ubcf8)\"}]}]}]",
-            "text": "PokerGFX | RFID 완제품 시스템 | 현재 사용 중 (원본)",
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"qR+uQ\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud604\\uc7ac \\uc0ac\\uc6a9 \\uc911\"}]}]}]",
+            "text": "현재 사용 중",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "8TCC1",
+                "block_id": "qR+uQ",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "현재 사용 중",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0AC5MSUPPZ"
+          },
+          {
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"sAGHN\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ubca4\\uce58\\ub9c8\\ud06c\\/\\uc6d0\\ubcf8\"}]}]}]",
+            "text": "벤치마크/원본",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "sAGHN",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "벤치마크/원본",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"NRNby\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"N\\/A\"}]}]}]",
+            "text": "N/A",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "NRNby",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "N/A",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"qJxb8\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud604\\uc7ac \\uc0ac\\uc6a9 \\uc911\\uc778 \\uc6d0\\ubcf8 \\uc2dc\\uc2a4\\ud15c\"}]}]}]",
+            "text": "현재 사용 중인 원본 시스템",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "qJxb8",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "현재 사용 중인 원본 시스템",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"ZiOAB\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.videopokertable.net\\/\",\"text\":\"PokerGFX\"}]}]}]",
+            "text": "PokerGFX",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "ZiOAB",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -1126,9 +3844,36 @@
                         "url": "https://www.videopokertable.net/",
                         "text": "PokerGFX",
                         "type": "link"
-                      },
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACQP79Y1J"
+          }
+        ]
+      },
+      {
+        "id": "Rec0ACM5HCS74",
+        "name": "후보RFID Cardoverseas@angel-group.co.jp일본 RFID 카드 제조사Angel Playing Cards",
+        "url": "https://www.angelplayingcards.com/",
+        "vendor_key": "angel",
+        "raw_fields": [
+          {
+            "key": "status",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"rsLRj\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\ud6c4\\ubcf4\"}]}]}]",
+            "text": "후보",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "rsLRj",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
                       {
-                        "text": " | RFID 완제품 시스템 | 현재 사용 중 (원본)",
+                        "text": "후보",
                         "type": "text"
                       }
                     ]
@@ -1136,24 +3881,85 @@
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
-          }
-        ]
-      },
-      {
-        "id": "Rec0ABX3EK2MV",
-        "name": "Angel Playing Cards | 스마트 테이블 시스템 | AI+RFID | 일본",
-        "url": "https://www.angelplayingcards.com/",
-        "vendor_key": "angel",
-        "raw_fields": [
+            "column_id": "Col0AC5MSUPPZ"
+          },
           {
-            "key": "name",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"H13dF\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.angelplayingcards.com\\/\",\"text\":\"Angel Playing Cards\"},{\"type\":\"text\",\"text\":\" | \\uc2a4\\ub9c8\\ud2b8 \\ud14c\\uc774\\ube14 \\uc2dc\\uc2a4\\ud15c | AI+RFID | \\uc77c\\ubcf8\"}]}]}]",
-            "text": "Angel Playing Cards | 스마트 테이블 시스템 | AI+RFID | 일본",
+            "key": "category",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"t3xhD\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"RFID Card\"}]}]}]",
+            "text": "RFID Card",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "H13dF",
+                "block_id": "t3xhD",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "RFID Card",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACEPEKNRZ"
+          },
+          {
+            "key": "contact",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"WvMNh\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"overseas@angel-group.co.jp\"}]}]}]",
+            "text": "overseas@angel-group.co.jp",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "WvMNh",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "overseas@angel-group.co.jp",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACHNF1G93"
+          },
+          {
+            "key": "description",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"OTfL6\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uc77c\\ubcf8 RFID \\uce74\\ub4dc \\uc81c\\uc870\\uc0ac\"}]}]}]",
+            "text": "일본 RFID 카드 제조사",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "OTfL6",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "text": "일본 RFID 카드 제조사",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "column_id": "Col0ACM5EBF1Q"
+          },
+          {
+            "key": "name",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"MzHev\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"link\",\"url\":\"https:\\/\\/www.angelplayingcards.com\\/\",\"text\":\"Angel Playing Cards\"}]}]}]",
+            "text": "Angel Playing Cards",
+            "rich_text": [
+              {
+                "type": "rich_text",
+                "block_id": "MzHev",
                 "elements": [
                   {
                     "type": "rich_text_section",
@@ -1162,22 +3968,18 @@
                         "url": "https://www.angelplayingcards.com/",
                         "text": "Angel Playing Cards",
                         "type": "link"
-                      },
-                      {
-                        "text": " | 스마트 테이블 시스템 | AI+RFID | 일본",
-                        "type": "text"
                       }
                     ]
                   }
                 ]
               }
             ],
-            "column_id": "Col0AD62WARNC"
+            "column_id": "Col0ACQP79Y1J"
           }
         ]
       }
     ],
     "uncategorized": []
   },
-  "collected_at": "2026-02-03T15:56:05.691352"
+  "collected_at": "2026-02-04T17:40:00.729776"
 }

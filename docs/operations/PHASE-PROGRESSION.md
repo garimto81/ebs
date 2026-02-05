@@ -355,7 +355,7 @@ Phase 전환: 완료 보고서
 
 | 문서 | 설명 | 경로 |
 |------|------|------|
-| EBS 비전 | 프로젝트 배경/목표 | `docs/phase-0/CONCEPT-EBS-Vision.md` |
+| Master PRD | 프로젝트 비전/전략 | `docs/PRD-0003-EBS-RFID-System.md` |
 | Phase 1 PRD | GFX 복제 상세 기획 | `docs/phase-1/PRD-0003-Phase1-PokerGFX-Clone.md` |
 | 기능 체크리스트 | 복제 대상 목록 | `docs/phase-1/PokerGFX-Feature-Checklist.md` |
 | 업체 관리 | 외주 업체 현황 | `docs/operations/VENDOR-MANAGEMENT.md` |

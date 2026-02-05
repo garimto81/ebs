@@ -1,4 +1,4 @@
-# Phase 0: PokerGFX 100% 복제
+# Phase 1: PokerGFX 100% 복제
 
 > **BRACELET STUDIO** | EBS Project
 
@@ -8,13 +8,13 @@
 
 ---
 
-## 1. Phase 0 개요
+## 1. Phase 1 개요
 
 ### 1.1 목표
 
 > **"PokerGFX를 100% 복제한다. 새로운 기능 추가 금지."**
 
-Phase 0은 기존 PokerGFX 시스템을 완벽하게 복제하는 단계입니다.
+Phase 1은 기존 PokerGFX 시스템을 완벽하게 복제하는 단계입니다.
 운영자가 기존 워크플로우 변경 없이 새 시스템으로 전환할 수 있어야 합니다.
 
 ### 1.2 핵심 원칙
@@ -467,7 +467,7 @@ CREATE TABLE actions (
 
 ---
 
-## 9. Phase 0 완료 조건 (Gate)
+## 9. Phase 1 완료 조건 (Gate)
 
 Phase 1 진입을 위해 다음 조건을 **모두** 충족해야 합니다:
 
@@ -486,7 +486,6 @@ Phase 1 진입을 위해 다음 조건을 **모두** 충족해야 합니다:
 ### 10.1 관련 문서
 
 - [PokerGFX Feature Checklist](PokerGFX-Feature-Checklist.md)
-- [BEGINNER Hardware Quickstart](BEGINNER-Hardware-Quickstart.md)
 - [Phase Progression Guide](../operations/PHASE-PROGRESSION.md)
 
 ### 10.2 외부 참조

@@ -7,7 +7,6 @@ owner: "BRACELET STUDIO"
 last_updated: "2026-01-15"
 next_review: "2026-07-01"
 phase: "master"
-phase: "planning"
 priority: "critical"
 
 depends_on: []
@@ -63,7 +62,7 @@ EBS는 단순한 RFID 카드 인식 시스템이 아닙니다. EBS는:
 | **API 제공자** | 외부 시스템에 실시간/배치 데이터 제공 |
 | **분석 기반** | 콘텐츠, 통계, 인사이트의 원천 |
 
-상세 비전: [CONCEPT-EBS-Vision.md](phase-0/CONCEPT-EBS-Vision.md)
+상세 비전은 본 문서 Section 1을 참조하세요.
 
 ## 1.2 핵심 가치 제안 (Value Proposition)
 
@@ -103,7 +102,6 @@ EBS는 **하드웨어 검증과 소프트웨어 개발의 병렬 진행**을 통
 - 전체 일정 단축 (약 4-6주 절감)
 
 **상세 기획서:**
-- [Phase 0: EBS 비전](phase-0/CONCEPT-EBS-Vision.md)
 - [Phase 1: PokerGFX 완전 복제](phase-1/PRD-0003-Phase1-PokerGFX-Clone.md)
 - [Phase 2: WSOPLIVE DB 연동](phase-2/PRD-0003-Phase2-WSOP-Integration.md)
 - [Phase 3: EBS 자동화 프로토콜](phase-3/PRD-0003-Phase3-EBS-Automation.md)
@@ -325,7 +323,7 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 
 | Phase | 문서 | 주요 내용 |
 |-------|------|----------|
-| 0 | [CONCEPT-EBS-Vision.md](phase-0/CONCEPT-EBS-Vision.md) | EBS 비전, 프로젝트 목표 |
+| 0 | [VENDOR-SELECTION-CHECKLIST.md](phase-0/VENDOR-SELECTION-CHECKLIST.md) | 업체 선정 기준, 체크리스트 |
 | 1 | [PRD-0003-Phase1-PokerGFX-Clone.md](phase-1/PRD-0003-Phase1-PokerGFX-Clone.md) | 기능 매핑, 주차별 계획, Gate 조건 |
 | 2 | [PRD-0003-Phase2-WSOP-Integration.md](phase-2/PRD-0003-Phase2-WSOP-Integration.md) | API 명세, 동기화 로직, 에러 핸들링 |
 | 3 | [PRD-0003-Phase3-EBS-Automation.md](phase-3/PRD-0003-Phase3-EBS-Automation.md) | 자동화 알고리즘, 성능 요구사항 |
@@ -426,7 +424,7 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 | RPO | 1핸드 | 최대 데이터 손실 |
 | RTO | 5분 | 복구 시간 |
 
-상세: [CONCEPT-EBS-Vision.md](phase-0/CONCEPT-EBS-Vision.md)
+상세는 본 문서 Section 8을 참조하세요.
 
 ---
 
@@ -505,3 +503,8 @@ EBS는 사용 시나리오에 따라 두 가지 보안 모드를 지원합니다
 | **7.1.0** | **2026-02-03** | **끊어진 링크 정리, 삭제된 문서 참조 제거, related_docs 업데이트** | BRACELET STUDIO |
 | 7.2.0 | 2026-02-03 | 섹션 1.4 "v3.0 vs v4.0 방향 전환"을 부록(10.2)으로 이동, 문서 업데이트 내용 최하단 배치 원칙 적용 | BRACELET STUDIO |
 | **8.0.0** | **2026-02-03** | **중복 제거 리팩터링: Section 2 통합(38줄→15줄), 페르소나 압축(100줄→30줄), Phase 테이블 단일화(§7.1), 참조문서 통합** | BRACELET STUDIO |
+| **8.1.0** | **2026-02-04** | **문서 정합성 수정: YAML 중복 키 제거, 끊어진 CONCEPT 링크 수정, Phase 테이블 링크 업데이트** | BRACELET STUDIO |
+
+---
+
+**Version**: 8.1.0 | **Updated**: 2026-02-04 | **BRACELET STUDIO**
