@@ -350,6 +350,7 @@ class ListsCollector:
         self,
         slack_data: dict,
         gmail_data: dict,
+        auto_update: bool = True,
     ) -> dict:
         """
         Sync list based on collected Slack and Gmail data.
@@ -357,6 +358,7 @@ class ListsCollector:
         Args:
             slack_data: Collected Slack message data
             gmail_data: Collected Gmail email data
+            auto_update: If True, automatically update Slack List statuses
 
         Returns:
             Sync result with changes made
@@ -365,15 +367,17 @@ class ListsCollector:
             "new_vendors": [],
             "status_updates": [],
             "activity_updates": [],
+            "delivery_failures": [],
         }
 
         # Get current list items
         current_items = self.collect()
-        existing_vendors = {
-            item["vendor_key"]
+        items_by_vendor = {
+            item["vendor_key"]: item
             for item in current_items.get("items", [])
             if item.get("vendor_key")
         }
+        existing_vendors = set(items_by_vendor.keys())
 
         # Check for new vendors mentioned in communications
         slack_vendors = set(slack_data.get("vendor_mentions", {}).keys())
@@ -385,6 +389,37 @@ class ListsCollector:
         if new_vendors:
             print(f"Found {len(new_vendors)} new vendors mentioned: {new_vendors}")
             changes["new_vendors"] = list(new_vendors)
+
+        # Check delivery failures and update status
+        delivery_failures = gmail_data.get("delivery_failures", [])
+        for failure in delivery_failures:
+            recipient = failure.get("recipient", "")
+            # Find matching vendor by email domain
+            for vendor_key, item in items_by_vendor.items():
+                # Check contact field for matching email
+                for field in item.get("raw_fields", []):
+                    if field.get("key") == "contact":
+                        contact_text = field.get("text", "")
+                        if contact_text and contact_text in recipient:
+                            changes["delivery_failures"].append({
+                                "vendor": vendor_key,
+                                "item_id": item["id"],
+                                "recipient": recipient,
+                            })
+                            # Auto-update status to "전송실패"
+                            if auto_update:
+                                success = self.update_item_fields(
+                                    item["id"],
+                                    {"status": "전송실패"}
+                                )
+                                if success:
+                                    changes["status_updates"].append({
+                                        "vendor": vendor_key,
+                                        "old_status": "견적요청",
+                                        "new_status": "전송실패",
+                                        "reason": f"Email delivery failed to {recipient}",
+                                    })
+                            break
 
         # Check email activity to update status
         for vendor, emails in gmail_data.get("vendor_emails", {}).items():

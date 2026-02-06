@@ -1,5 +1,5 @@
 {
-  "total_messages": 44,
+  "total_messages": 45,
   "action_items": [],
   "mentions_to_me": [
     {
@@ -39,91 +39,63 @@
     "feig": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ],
     "gao": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ],
     "pongee": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ],
     "identiv": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "sit_korea": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ],
     "sunfly": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "matsui": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "abbiati": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "st_micro": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ],
     "waveshare": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ],
     "adafruit": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ],
     "sparkfun": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ],
     "pokergfx": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       },
       {
@@ -147,27 +119,20 @@
         "timestamp": "2026-01-13T17:08:44.840839"
       }
     ],
-    "rfpoker": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
     "fadedspade": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ],
     "angel": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - RFID 리더/모듈 전문 업체*\n\n포커 카드 RFID 시스템 구축을 위한 전문 업체 리스트입니다.\n\n*리스트 바로가기:* <https://slack.com/lists/T03QGJ73GBB/F0ABWAE20K1|EBS 업체 관리>\n\n*Daily Status (2026-02-05)*\n:warning: GFX 라이선스: D-39\n\n*RFI",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
         "timestamp": "2026-02-02T14:54:38.051859"
       }
     ]
   },
-  "collected_at": "2026-02-05T11:13:21.575529"
+  "collected_at": "2026-02-06T11:54:14.309837"
 }

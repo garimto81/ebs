@@ -1,11 +1,365 @@
 {
-  "total_emails": 3,
+  "total_emails": 26,
   "emails": [
+    {
+      "id": "19c2f507351fb6a1",
+      "thread_id": "19c2f507351fb6a1",
+      "subject": "Re: Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "Larry Cheng <larryz@thegaogroup.com>",
+      "recipients": [
+        "Aiden Kim <aiden.kim@ggproduction.net>"
+      ],
+      "date": "2026-02-05T14:38:36-05:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi Aiden, Thank you for reaching out. This is Larry from GAORFID Inc. For poker chip or card detection applications in casinos and gaming environments, 13.56MHz ISO15693 tags are commonly used. You may",
+      "vendor": "gao",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2e976bdd4d8e5",
+      "thread_id": "19c2bab83218769e",
+      "subject": "Re: Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "Susan M from SparkFun <support@sparkfun.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-02-05T09:16:41-07:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_UPDATES",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hello, Thank you for reaching out. Unfortunately we are not able to manufacture custom boards or products. This is a service we offered years ago but it has been discontinued. I apologize for the",
+      "vendor": "sparkfun",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2e70b49752dbd",
+      "thread_id": "19c2bab7212189ab",
+      "subject": "Re: Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "Tom Wheaton <tom@fadedspade.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-02-05T10:34:12-05:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Aiden, thanks for reaching out. Jeff Platt had some good things to say about you and your team. Yes, we&#39;d be interested and will reply early next week with our proposal. Can you provide any more",
+      "vendor": "fadedspade",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2e4cf067709f8",
+      "thread_id": "19c2e4cf067709f8",
+      "subject": "FEIG Electronic GmbH - GDPR message #:039300209",
+      "sender": "\"DSGVO, FEIG\" <DSGVO@feig.de>",
+      "recipients": [
+        "Aiden Kim <aiden.kim@ggproduction.net>"
+      ],
+      "date": "2026-02-05T14:55:16+00:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Dear Mr. Aiden Kim, Thank you for your interest in our company and products. We have stored your data in our systems and are processing that data in accordance with our Data Protection Policy. If you",
+      "vendor": "feig",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2d6c45e8a8728",
+      "thread_id": "19c2325a20033780",
+      "subject": "Re:Re:Fw: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "SUN-FLY Susie <susie.su@sun-fly.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-02-05T18:49:08+08:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi Aiden, Please find our reply regarding your questions: 1. Yes, Sun-Fly supply both the RFID cards and the reader hardware. 2. Yes, for both. 3. Our partners and clients are mainly offline casinos,",
+      "vendor": "sunfly",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab862dc5505",
+      "thread_id": "19c2bab862dc5505",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "support@adafruit.com"
+      ],
+      "date": "2026-02-04T18:39:47-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "adafruit",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab83218769e",
+      "thread_id": "19c2bab83218769e",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "customerservice@sparkfun.com"
+      ],
+      "date": "2026-02-04T18:39:46-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "sparkfun",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab7e95e24c4",
+      "thread_id": "19c2bab7e95e24c4",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "sales@gaorfid.com"
+      ],
+      "date": "2026-02-04T18:39:45-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "gao",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab7d19a4177",
+      "thread_id": "19c2bab7d19a4177",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "sales@identiv.com"
+      ],
+      "date": "2026-02-04T18:39:44-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "identiv",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab7922ec80c",
+      "thread_id": "19c2bab7922ec80c",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "pongee@pongee.com.tw"
+      ],
+      "date": "2026-02-04T18:39:44-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "pongee",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab77f02f6ca",
+      "thread_id": "19c2bab77f02f6ca",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "service@waveshare.com"
+      ],
+      "date": "2026-02-04T18:39:43-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "waveshare",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab7212189ab",
+      "thread_id": "19c2bab7212189ab",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "info@fadedspade.com"
+      ],
+      "date": "2026-02-04T18:39:42-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "fadedspade",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab6e85e5f3b",
+      "thread_id": "19c2bab6e85e5f3b",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "info@feig.de"
+      ],
+      "date": "2026-02-04T18:39:41-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "feig",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2ba77ddedfcf9",
+      "thread_id": "19c2ba77ddedfcf9",
+      "subject": "파트너십 문의 - 포커 방송용 RFID 카드 인식 시스템",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "biz@emfoplus.co.kr"
+      ],
+      "date": "2026-02-04T18:35:22-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "안녕하세요, 실시간 포커 방송에서 카드를 자동으로 인식해 방송 화면에 표시하는 시스템을 개발하고 있습니다. RFID가 내장된 포커 카드와 리더 하드웨어를 통합으로 제공할 수 있는 파트너를 찾고 있습니다. 필요 사항: 1. RFID 포커 카드 - 표준 포커 카드 크기 (63 x 88mm), 카드마다 RFID 태그 내장 - 덱당 54장 (52장 + 조커 2장),",
+      "vendor": null,
+      "recipient_vendor": "emfoplus",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2ba37aaa684bb",
+      "thread_id": "19c2ba3767ea3780",
+      "subject": "Delivery Status Notification (Failure)",
+      "sender": "Mail Delivery Subsystem <mailer-daemon@googlemail.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-02-04T18:30:59-08:00",
+      "is_unread": false,
+      "labels": [
+        "IMPORTANT",
+        "CATEGORY_UPDATES",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "주소를 찾을 수 없음 angel-group.co.jp 도메인을 찾지 못하여 overseas@angel-group.co.jp 주소로 메일을 전송하지 못했습니다. 오타나 불필요한 공백이 있는지 확인한 후 다시 시도하세요. 자세히 알아보기 응답은 다음과 같습니다. DNS Error: DNS type &#39;mx&#39; lookup of angel-group.",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": true
+    },
+    {
+      "id": "19c2ba3767ea3780",
+      "thread_id": "19c2ba3767ea3780",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "overseas@angel-group.co.jp"
+      ],
+      "date": "2026-02-04T18:30:58-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "angel",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2ba3753b04f1b",
+      "thread_id": "19c2325a20033780",
+      "subject": "Re:Fw: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "SUN-FLY Susie <susie.su@sun-fly.com>"
+      ],
+      "date": "2026-02-04T18:30:58-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi Susie, Thank you for your positive response. It&#39;s encouraging to hear that Sun-Fly is interested in working together on this. Let me share more details about what we&#39;re looking for, so you",
+      "vendor": null,
+      "recipient_vendor": "sunfly",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
     {
       "id": "19c2325a20033780",
       "thread_id": "19c2325a20033780",
       "subject": "Re:Fw: Inquiry regarding Poker RFID GFX development experience",
       "sender": "SUN-FLY Susie <susie.su@sun-fly.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
       "date": "2026-02-03T18:55:46+08:00",
       "is_unread": false,
       "labels": [
@@ -16,13 +370,79 @@
         "Label_4886549615727008050"
       ],
       "snippet": "Hello Aiden, Thanks for your email. We are interested in cooperating with you to develop a Poker RFID GFX system although we have no direct delivery experience yet, we can customize a workable solution",
-      "vendor": "sunfly"
+      "vendor": "sunfly",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c0e8648c2fc107",
+      "thread_id": "19c0e842dcc81ef6",
+      "subject": "Fwd: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+      "recipients": [
+        "info@abbiati.com"
+      ],
+      "date": "2026-01-30T19:50:07+09:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c0e8585c14b534",
+      "thread_id": "19c0e842dcc81ef6",
+      "subject": "Fwd: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+      "recipients": [
+        "machida@matsui-gaming.co.jp"
+      ],
+      "date": "2026-01-30T19:49:17+09:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c0e848ab633952",
+      "thread_id": "19c0e842dcc81ef6",
+      "subject": "Inquiry regarding Poker RFID GFX development experience",
+      "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+      "recipients": [
+        "info@sun-fly.com"
+      ],
+      "date": "2026-01-30T19:48:13+09:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+      "vendor": null,
+      "recipient_vendor": "sunfly",
+      "is_sent": true,
+      "is_delivery_failure": false
     },
     {
       "id": "19bfa03c1cece8b2",
       "thread_id": "19bfa03c1cece8b2",
       "subject": "회의록: “Pokercaster GFX Module Meeting” 2026년 1월 26일",
       "sender": "Gemini <gemini-notes@google.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
       "date": "2026-01-26T11:15:08+00:00",
       "is_unread": false,
       "labels": [
@@ -30,13 +450,19 @@
         "Label_4886549615727008050"
       ],
       "snippet": "“Pokercaster GFX Module Meeting” 회의록 회의록이 조직의 초대된 참석자님에게 전송되었습니다. 회의록 열기 이 콘텐츠는 January 26, 2026, 8:13 PM KST에 자동 생성되었으며, 오류가 있을 수 있습니다. 요약 Marcus Kim, Tony Park, Ken Ahn, Chris You, Kate Han, Aiden",
-      "vendor": null
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
     },
     {
       "id": "19bebde00213bcf7",
       "thread_id": "19bebde00213bcf7",
       "subject": "Re: New Contact Us Request",
       "sender": "\"support@pokergfx.io\" <support@pokergfx.io>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
       "date": "2026-01-23T17:19:12+00:00",
       "is_unread": false,
       "labels": [
@@ -47,18 +473,770 @@
         "Label_4886549615727008050"
       ],
       "snippet": "Hi Aiden, The PokerGFX live hand API (a json file that updates at the completion of each hand) is no longer available by request. This feature is now only available with an Enterprise license. If you",
-      "vendor": "pokergfx"
+      "vendor": "pokergfx",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "180f55cc96f080b2",
+      "thread_id": "17fdf334290db06e",
+      "subject": "Fwd: 요구 사항 정리 및 요청 사항 전달의 건",
+      "sender": "Aiden Kim <aiden.kim@nsuslab.com>",
+      "recipients": [
+        "Jayden Lim <jayden.lim@nsuslab.com>"
+      ],
+      "date": "2022-05-24T18:18:59+09:00",
+      "is_unread": false,
+      "labels": [
+        "Label_2",
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "---------- Forwarded message --------- 보낸사람: Aiden Kim &lt;aiden.kim@nsuslab.com&gt; Date: 2022년 3월 31일 (목) 오후 7:42 Subject: Re: 요구 사항 정리 및 요청 사항 전달의 건 To: 장민정 &lt;leula.jmj@aceenter.com&gt; 안녕하세요 앤서스랩",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "17fdf92253a7886e",
+      "thread_id": "17fdf334290db06e",
+      "subject": "Re: 요구 사항 정리 및 요청 사항 전달의 건",
+      "sender": "Aiden Kim <aiden.kim@nsuslab.com>",
+      "recipients": [
+        "\"장민정\" <leula.jmj@aceenter.com>"
+      ],
+      "date": "2022-03-31T19:42:51+09:00",
+      "is_unread": false,
+      "labels": [
+        "Label_2",
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "안녕하세요 앤서스랩코리아의 김동수 PD 입니다 저희가 이번에 제공해드리는 홍보 제안은 다음과 같습니다 4. 영상 말미 크레딧에 제품 협찬 으로 저희 회사명과 제품명이 노출되는 방안 5. 영상 시작시 하단 PPL 6. 카드 덱 로고 저희는 지속적으로 홀덤 대형 콘텐츠를 제작하는 업체니, 스타팅을 안전하게 시작하시고, 저희 콘텐츠를 모니터링 하시면서, 저희가",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "17fdf334290db06e",
+      "thread_id": "17fdf334290db06e",
+      "subject": "요구 사항 정리 및 요청 사항 전달의 건",
+      "sender": "\"\\\"장민정\\\"\" <leula.jmj@aceenter.com>",
+      "recipients": [
+        "jayden.lim@nsuslab.com"
+      ],
+      "date": "2022-03-31T17:59:09+09:00",
+      "is_unread": false,
+      "labels": [
+        "Label_2",
+        "IMPORTANT",
+        "CATEGORY_PERSONAL"
+      ],
+      "snippet": "안녕하세요. 에이스엔터테인먼트 장민정주임입니다. 오늘 미팅과 전화내용을 바탕으로 여쭤보고 싶은 사항과 요청사항 정리하여 전달드리고자 합니다. 우선, 저희 플레이어 템플릿을 사용하는 데 있어 요청하실 디자인 파일 이 메일로 보내 주시면 될 것 같습니다. 그리고 플랜 B를 말씀하셨는데, 추후 편집에 직접 플레이어 템플릿 작업을 하신다면, 모든 핸드에 대한 게임",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
     }
   ],
-  "awaiting_reply": [],
-  "needs_followup": [],
+  "awaiting_reply": [
+    {
+      "id": "19c2f507351fb6a1",
+      "thread_id": "19c2f507351fb6a1",
+      "subject": "Re: Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "Larry Cheng <larryz@thegaogroup.com>",
+      "recipients": [
+        "Aiden Kim <aiden.kim@ggproduction.net>"
+      ],
+      "date": "2026-02-05T14:38:36-05:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi Aiden, Thank you for reaching out. This is Larry from GAORFID Inc. For poker chip or card detection applications in casinos and gaming environments, 13.56MHz ISO15693 tags are commonly used. You may",
+      "vendor": "gao",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2e976bdd4d8e5",
+      "thread_id": "19c2bab83218769e",
+      "subject": "Re: Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "Susan M from SparkFun <support@sparkfun.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-02-05T09:16:41-07:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_UPDATES",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hello, Thank you for reaching out. Unfortunately we are not able to manufacture custom boards or products. This is a service we offered years ago but it has been discontinued. I apologize for the",
+      "vendor": "sparkfun",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2e70b49752dbd",
+      "thread_id": "19c2bab7212189ab",
+      "subject": "Re: Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "Tom Wheaton <tom@fadedspade.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-02-05T10:34:12-05:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Aiden, thanks for reaching out. Jeff Platt had some good things to say about you and your team. Yes, we&#39;d be interested and will reply early next week with our proposal. Can you provide any more",
+      "vendor": "fadedspade",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2e4cf067709f8",
+      "thread_id": "19c2e4cf067709f8",
+      "subject": "FEIG Electronic GmbH - GDPR message #:039300209",
+      "sender": "\"DSGVO, FEIG\" <DSGVO@feig.de>",
+      "recipients": [
+        "Aiden Kim <aiden.kim@ggproduction.net>"
+      ],
+      "date": "2026-02-05T14:55:16+00:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Dear Mr. Aiden Kim, Thank you for your interest in our company and products. We have stored your data in our systems and are processing that data in accordance with our Data Protection Policy. If you",
+      "vendor": "feig",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2d6c45e8a8728",
+      "thread_id": "19c2325a20033780",
+      "subject": "Re:Re:Fw: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "SUN-FLY Susie <susie.su@sun-fly.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-02-05T18:49:08+08:00",
+      "is_unread": true,
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi Aiden, Please find our reply regarding your questions: 1. Yes, Sun-Fly supply both the RFID cards and the reader hardware. 2. Yes, for both. 3. Our partners and clients are mainly offline casinos,",
+      "vendor": "sunfly",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2325a20033780",
+      "thread_id": "19c2325a20033780",
+      "subject": "Re:Fw: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "SUN-FLY Susie <susie.su@sun-fly.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-02-03T18:55:46+08:00",
+      "is_unread": false,
+      "labels": [
+        "YELLOW_STAR",
+        "IMPORTANT",
+        "STARRED",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hello Aiden, Thanks for your email. We are interested in cooperating with you to develop a Poker RFID GFX system although we have no direct delivery experience yet, we can customize a workable solution",
+      "vendor": "sunfly",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19bebde00213bcf7",
+      "thread_id": "19bebde00213bcf7",
+      "subject": "Re: New Contact Us Request",
+      "sender": "\"support@pokergfx.io\" <support@pokergfx.io>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-01-23T17:19:12+00:00",
+      "is_unread": false,
+      "labels": [
+        "YELLOW_STAR",
+        "IMPORTANT",
+        "STARRED",
+        "CATEGORY_PERSONAL",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi Aiden, The PokerGFX live hand API (a json file that updates at the completion of each hand) is no longer available by request. This feature is now only available with an Enterprise license. If you",
+      "vendor": "pokergfx",
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": false
+    }
+  ],
+  "needs_followup": [
+    {
+      "id": "19c0e8648c2fc107",
+      "thread_id": "19c0e842dcc81ef6",
+      "subject": "Fwd: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+      "recipients": [
+        "info@abbiati.com"
+      ],
+      "date": "2026-01-30T19:50:07+09:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false,
+      "days_elapsed": 6
+    },
+    {
+      "id": "19c0e8585c14b534",
+      "thread_id": "19c0e842dcc81ef6",
+      "subject": "Fwd: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+      "recipients": [
+        "machida@matsui-gaming.co.jp"
+      ],
+      "date": "2026-01-30T19:49:17+09:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false,
+      "days_elapsed": 6
+    },
+    {
+      "id": "19c0e848ab633952",
+      "thread_id": "19c0e842dcc81ef6",
+      "subject": "Inquiry regarding Poker RFID GFX development experience",
+      "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+      "recipients": [
+        "info@sun-fly.com"
+      ],
+      "date": "2026-01-30T19:48:13+09:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+      "vendor": null,
+      "recipient_vendor": "sunfly",
+      "is_sent": true,
+      "is_delivery_failure": false,
+      "days_elapsed": 6
+    },
+    {
+      "id": "180f55cc96f080b2",
+      "thread_id": "17fdf334290db06e",
+      "subject": "Fwd: 요구 사항 정리 및 요청 사항 전달의 건",
+      "sender": "Aiden Kim <aiden.kim@nsuslab.com>",
+      "recipients": [
+        "Jayden Lim <jayden.lim@nsuslab.com>"
+      ],
+      "date": "2022-05-24T18:18:59+09:00",
+      "is_unread": false,
+      "labels": [
+        "Label_2",
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "---------- Forwarded message --------- 보낸사람: Aiden Kim &lt;aiden.kim@nsuslab.com&gt; Date: 2022년 3월 31일 (목) 오후 7:42 Subject: Re: 요구 사항 정리 및 요청 사항 전달의 건 To: 장민정 &lt;leula.jmj@aceenter.com&gt; 안녕하세요 앤서스랩",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false,
+      "days_elapsed": 1353
+    },
+    {
+      "id": "17fdf92253a7886e",
+      "thread_id": "17fdf334290db06e",
+      "subject": "Re: 요구 사항 정리 및 요청 사항 전달의 건",
+      "sender": "Aiden Kim <aiden.kim@nsuslab.com>",
+      "recipients": [
+        "\"장민정\" <leula.jmj@aceenter.com>"
+      ],
+      "date": "2022-03-31T19:42:51+09:00",
+      "is_unread": false,
+      "labels": [
+        "Label_2",
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "안녕하세요 앤서스랩코리아의 김동수 PD 입니다 저희가 이번에 제공해드리는 홍보 제안은 다음과 같습니다 4. 영상 말미 크레딧에 제품 협찬 으로 저희 회사명과 제품명이 노출되는 방안 5. 영상 시작시 하단 PPL 6. 카드 덱 로고 저희는 지속적으로 홀덤 대형 콘텐츠를 제작하는 업체니, 스타팅을 안전하게 시작하시고, 저희 콘텐츠를 모니터링 하시면서, 저희가",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false,
+      "days_elapsed": 1407
+    }
+  ],
+  "sent_emails": [
+    {
+      "id": "19c2bab862dc5505",
+      "thread_id": "19c2bab862dc5505",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "support@adafruit.com"
+      ],
+      "date": "2026-02-04T18:39:47-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "adafruit",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab83218769e",
+      "thread_id": "19c2bab83218769e",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "customerservice@sparkfun.com"
+      ],
+      "date": "2026-02-04T18:39:46-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "sparkfun",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab7e95e24c4",
+      "thread_id": "19c2bab7e95e24c4",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "sales@gaorfid.com"
+      ],
+      "date": "2026-02-04T18:39:45-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "gao",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab7d19a4177",
+      "thread_id": "19c2bab7d19a4177",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "sales@identiv.com"
+      ],
+      "date": "2026-02-04T18:39:44-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "identiv",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab7922ec80c",
+      "thread_id": "19c2bab7922ec80c",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "pongee@pongee.com.tw"
+      ],
+      "date": "2026-02-04T18:39:44-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "pongee",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab77f02f6ca",
+      "thread_id": "19c2bab77f02f6ca",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "service@waveshare.com"
+      ],
+      "date": "2026-02-04T18:39:43-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "waveshare",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab7212189ab",
+      "thread_id": "19c2bab7212189ab",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "info@fadedspade.com"
+      ],
+      "date": "2026-02-04T18:39:42-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "fadedspade",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2bab6e85e5f3b",
+      "thread_id": "19c2bab6e85e5f3b",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "info@feig.de"
+      ],
+      "date": "2026-02-04T18:39:41-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "feig",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2ba77ddedfcf9",
+      "thread_id": "19c2ba77ddedfcf9",
+      "subject": "파트너십 문의 - 포커 방송용 RFID 카드 인식 시스템",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "biz@emfoplus.co.kr"
+      ],
+      "date": "2026-02-04T18:35:22-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "안녕하세요, 실시간 포커 방송에서 카드를 자동으로 인식해 방송 화면에 표시하는 시스템을 개발하고 있습니다. RFID가 내장된 포커 카드와 리더 하드웨어를 통합으로 제공할 수 있는 파트너를 찾고 있습니다. 필요 사항: 1. RFID 포커 카드 - 표준 포커 카드 크기 (63 x 88mm), 카드마다 RFID 태그 내장 - 덱당 54장 (52장 + 조커 2장),",
+      "vendor": null,
+      "recipient_vendor": "emfoplus",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2ba3767ea3780",
+      "thread_id": "19c2ba3767ea3780",
+      "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "overseas@angel-group.co.jp"
+      ],
+      "date": "2026-02-04T18:30:58-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+      "vendor": null,
+      "recipient_vendor": "angel",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c2ba3753b04f1b",
+      "thread_id": "19c2325a20033780",
+      "subject": "Re:Fw: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "aiden.kim@ggproduction.net",
+      "recipients": [
+        "SUN-FLY Susie <susie.su@sun-fly.com>"
+      ],
+      "date": "2026-02-04T18:30:58-08:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "Hi Susie, Thank you for your positive response. It&#39;s encouraging to hear that Sun-Fly is interested in working together on this. Let me share more details about what we&#39;re looking for, so you",
+      "vendor": null,
+      "recipient_vendor": "sunfly",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c0e8648c2fc107",
+      "thread_id": "19c0e842dcc81ef6",
+      "subject": "Fwd: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+      "recipients": [
+        "info@abbiati.com"
+      ],
+      "date": "2026-01-30T19:50:07+09:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c0e8585c14b534",
+      "thread_id": "19c0e842dcc81ef6",
+      "subject": "Fwd: Inquiry regarding Poker RFID GFX development experience",
+      "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+      "recipients": [
+        "machida@matsui-gaming.co.jp"
+      ],
+      "date": "2026-01-30T19:49:17+09:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "19c0e848ab633952",
+      "thread_id": "19c0e842dcc81ef6",
+      "subject": "Inquiry regarding Poker RFID GFX development experience",
+      "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+      "recipients": [
+        "info@sun-fly.com"
+      ],
+      "date": "2026-01-30T19:48:13+09:00",
+      "is_unread": false,
+      "labels": [
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+      "vendor": null,
+      "recipient_vendor": "sunfly",
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "180f55cc96f080b2",
+      "thread_id": "17fdf334290db06e",
+      "subject": "Fwd: 요구 사항 정리 및 요청 사항 전달의 건",
+      "sender": "Aiden Kim <aiden.kim@nsuslab.com>",
+      "recipients": [
+        "Jayden Lim <jayden.lim@nsuslab.com>"
+      ],
+      "date": "2022-05-24T18:18:59+09:00",
+      "is_unread": false,
+      "labels": [
+        "Label_2",
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "---------- Forwarded message --------- 보낸사람: Aiden Kim &lt;aiden.kim@nsuslab.com&gt; Date: 2022년 3월 31일 (목) 오후 7:42 Subject: Re: 요구 사항 정리 및 요청 사항 전달의 건 To: 장민정 &lt;leula.jmj@aceenter.com&gt; 안녕하세요 앤서스랩",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false
+    },
+    {
+      "id": "17fdf92253a7886e",
+      "thread_id": "17fdf334290db06e",
+      "subject": "Re: 요구 사항 정리 및 요청 사항 전달의 건",
+      "sender": "Aiden Kim <aiden.kim@nsuslab.com>",
+      "recipients": [
+        "\"장민정\" <leula.jmj@aceenter.com>"
+      ],
+      "date": "2022-03-31T19:42:51+09:00",
+      "is_unread": false,
+      "labels": [
+        "Label_2",
+        "SENT",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "안녕하세요 앤서스랩코리아의 김동수 PD 입니다 저희가 이번에 제공해드리는 홍보 제안은 다음과 같습니다 4. 영상 말미 크레딧에 제품 협찬 으로 저희 회사명과 제품명이 노출되는 방안 5. 영상 시작시 하단 PPL 6. 카드 덱 로고 저희는 지속적으로 홀덤 대형 콘텐츠를 제작하는 업체니, 스타팅을 안전하게 시작하시고, 저희 콘텐츠를 모니터링 하시면서, 저희가",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": true,
+      "is_delivery_failure": false
+    }
+  ],
+  "delivery_failures": [
+    {
+      "id": "19c2ba37aaa684bb",
+      "thread_id": "19c2ba3767ea3780",
+      "subject": "Delivery Status Notification (Failure)",
+      "sender": "Mail Delivery Subsystem <mailer-daemon@googlemail.com>",
+      "recipients": [
+        "aiden.kim@ggproduction.net"
+      ],
+      "date": "2026-02-04T18:30:59-08:00",
+      "is_unread": false,
+      "labels": [
+        "IMPORTANT",
+        "CATEGORY_UPDATES",
+        "Label_4886549615727008050"
+      ],
+      "snippet": "주소를 찾을 수 없음 angel-group.co.jp 도메인을 찾지 못하여 overseas@angel-group.co.jp 주소로 메일을 전송하지 못했습니다. 오타나 불필요한 공백이 있는지 확인한 후 다시 시도하세요. 자세히 알아보기 응답은 다음과 같습니다. DNS Error: DNS type &#39;mx&#39; lookup of angel-group.",
+      "vendor": null,
+      "recipient_vendor": null,
+      "is_sent": false,
+      "is_delivery_failure": true,
+      "recipient": "overseas@angel-group.co.jp"
+    }
+  ],
   "vendor_emails": {
+    "feig": [
+      {
+        "id": "19c2e4cf067709f8",
+        "thread_id": "19c2e4cf067709f8",
+        "subject": "FEIG Electronic GmbH - GDPR message #:039300209",
+        "sender": "\"DSGVO, FEIG\" <DSGVO@feig.de>",
+        "recipients": [
+          "Aiden Kim <aiden.kim@ggproduction.net>"
+        ],
+        "date": "2026-02-05T14:55:16+00:00",
+        "is_unread": true,
+        "labels": [
+          "UNREAD",
+          "IMPORTANT",
+          "CATEGORY_PERSONAL",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Dear Mr. Aiden Kim, Thank you for your interest in our company and products. We have stored your data in our systems and are processing that data in accordance with our Data Protection Policy. If you",
+        "vendor": "feig",
+        "recipient_vendor": null,
+        "is_sent": false,
+        "is_delivery_failure": false
+      }
+    ],
+    "gao": [
+      {
+        "id": "19c2f507351fb6a1",
+        "thread_id": "19c2f507351fb6a1",
+        "subject": "Re: Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "Larry Cheng <larryz@thegaogroup.com>",
+        "recipients": [
+          "Aiden Kim <aiden.kim@ggproduction.net>"
+        ],
+        "date": "2026-02-05T14:38:36-05:00",
+        "is_unread": true,
+        "labels": [
+          "UNREAD",
+          "IMPORTANT",
+          "CATEGORY_PERSONAL",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi Aiden, Thank you for reaching out. This is Larry from GAORFID Inc. For poker chip or card detection applications in casinos and gaming environments, 13.56MHz ISO15693 tags are commonly used. You may",
+        "vendor": "gao",
+        "recipient_vendor": null,
+        "is_sent": false,
+        "is_delivery_failure": false
+      }
+    ],
     "sunfly": [
+      {
+        "id": "19c2d6c45e8a8728",
+        "thread_id": "19c2325a20033780",
+        "subject": "Re:Re:Fw: Inquiry regarding Poker RFID GFX development experience",
+        "sender": "SUN-FLY Susie <susie.su@sun-fly.com>",
+        "recipients": [
+          "aiden.kim@ggproduction.net"
+        ],
+        "date": "2026-02-05T18:49:08+08:00",
+        "is_unread": true,
+        "labels": [
+          "UNREAD",
+          "IMPORTANT",
+          "CATEGORY_PERSONAL",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi Aiden, Please find our reply regarding your questions: 1. Yes, Sun-Fly supply both the RFID cards and the reader hardware. 2. Yes, for both. 3. Our partners and clients are mainly offline casinos,",
+        "vendor": "sunfly",
+        "recipient_vendor": null,
+        "is_sent": false,
+        "is_delivery_failure": false
+      },
       {
         "id": "19c2325a20033780",
         "thread_id": "19c2325a20033780",
         "subject": "Re:Fw: Inquiry regarding Poker RFID GFX development experience",
         "sender": "SUN-FLY Susie <susie.su@sun-fly.com>",
+        "recipients": [
+          "aiden.kim@ggproduction.net"
+        ],
         "date": "2026-02-03T18:55:46+08:00",
         "is_unread": false,
         "labels": [
@@ -69,7 +1247,34 @@
           "Label_4886549615727008050"
         ],
         "snippet": "Hello Aiden, Thanks for your email. We are interested in cooperating with you to develop a Poker RFID GFX system although we have no direct delivery experience yet, we can customize a workable solution",
-        "vendor": "sunfly"
+        "vendor": "sunfly",
+        "recipient_vendor": null,
+        "is_sent": false,
+        "is_delivery_failure": false
+      }
+    ],
+    "sparkfun": [
+      {
+        "id": "19c2e976bdd4d8e5",
+        "thread_id": "19c2bab83218769e",
+        "subject": "Re: Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "Susan M from SparkFun <support@sparkfun.com>",
+        "recipients": [
+          "aiden.kim@ggproduction.net"
+        ],
+        "date": "2026-02-05T09:16:41-07:00",
+        "is_unread": true,
+        "labels": [
+          "UNREAD",
+          "IMPORTANT",
+          "CATEGORY_UPDATES",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hello, Thank you for reaching out. Unfortunately we are not able to manufacture custom boards or products. This is a service we offered years ago but it has been discontinued. I apologize for the",
+        "vendor": "sparkfun",
+        "recipient_vendor": null,
+        "is_sent": false,
+        "is_delivery_failure": false
       }
     ],
     "pokergfx": [
@@ -78,6 +1283,9 @@
         "thread_id": "19bebde00213bcf7",
         "subject": "Re: New Contact Us Request",
         "sender": "\"support@pokergfx.io\" <support@pokergfx.io>",
+        "recipients": [
+          "aiden.kim@ggproduction.net"
+        ],
         "date": "2026-01-23T17:19:12+00:00",
         "is_unread": false,
         "labels": [
@@ -88,10 +1296,300 @@
           "Label_4886549615727008050"
         ],
         "snippet": "Hi Aiden, The PokerGFX live hand API (a json file that updates at the completion of each hand) is no longer available by request. This feature is now only available with an Enterprise license. If you",
-        "vendor": "pokergfx"
+        "vendor": "pokergfx",
+        "recipient_vendor": null,
+        "is_sent": false,
+        "is_delivery_failure": false
+      }
+    ],
+    "fadedspade": [
+      {
+        "id": "19c2e70b49752dbd",
+        "thread_id": "19c2bab7212189ab",
+        "subject": "Re: Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "Tom Wheaton <tom@fadedspade.com>",
+        "recipients": [
+          "aiden.kim@ggproduction.net"
+        ],
+        "date": "2026-02-05T10:34:12-05:00",
+        "is_unread": true,
+        "labels": [
+          "UNREAD",
+          "IMPORTANT",
+          "CATEGORY_PERSONAL",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Aiden, thanks for reaching out. Jeff Platt had some good things to say about you and your team. Yes, we&#39;d be interested and will reply early next week with our proposal. Can you provide any more",
+        "vendor": "fadedspade",
+        "recipient_vendor": null,
+        "is_sent": false,
+        "is_delivery_failure": false
       }
     ]
   },
-  "collected_at": "2026-02-05T11:36:34.126476",
-  "last_updated": "2026-02-05T11:46:04.826385"
+  "vendor_sent": {
+    "adafruit": [
+      {
+        "id": "19c2bab862dc5505",
+        "thread_id": "19c2bab862dc5505",
+        "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "support@adafruit.com"
+        ],
+        "date": "2026-02-04T18:39:47-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+        "vendor": null,
+        "recipient_vendor": "adafruit",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "sparkfun": [
+      {
+        "id": "19c2bab83218769e",
+        "thread_id": "19c2bab83218769e",
+        "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "customerservice@sparkfun.com"
+        ],
+        "date": "2026-02-04T18:39:46-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+        "vendor": null,
+        "recipient_vendor": "sparkfun",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "gao": [
+      {
+        "id": "19c2bab7e95e24c4",
+        "thread_id": "19c2bab7e95e24c4",
+        "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "sales@gaorfid.com"
+        ],
+        "date": "2026-02-04T18:39:45-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+        "vendor": null,
+        "recipient_vendor": "gao",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "identiv": [
+      {
+        "id": "19c2bab7d19a4177",
+        "thread_id": "19c2bab7d19a4177",
+        "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "sales@identiv.com"
+        ],
+        "date": "2026-02-04T18:39:44-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+        "vendor": null,
+        "recipient_vendor": "identiv",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "pongee": [
+      {
+        "id": "19c2bab7922ec80c",
+        "thread_id": "19c2bab7922ec80c",
+        "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "pongee@pongee.com.tw"
+        ],
+        "date": "2026-02-04T18:39:44-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+        "vendor": null,
+        "recipient_vendor": "pongee",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "waveshare": [
+      {
+        "id": "19c2bab77f02f6ca",
+        "thread_id": "19c2bab77f02f6ca",
+        "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "service@waveshare.com"
+        ],
+        "date": "2026-02-04T18:39:43-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+        "vendor": null,
+        "recipient_vendor": "waveshare",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "fadedspade": [
+      {
+        "id": "19c2bab7212189ab",
+        "thread_id": "19c2bab7212189ab",
+        "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "info@fadedspade.com"
+        ],
+        "date": "2026-02-04T18:39:42-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+        "vendor": null,
+        "recipient_vendor": "fadedspade",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "feig": [
+      {
+        "id": "19c2bab6e85e5f3b",
+        "thread_id": "19c2bab6e85e5f3b",
+        "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "info@feig.de"
+        ],
+        "date": "2026-02-04T18:39:41-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+        "vendor": null,
+        "recipient_vendor": "feig",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "emfoplus": [
+      {
+        "id": "19c2ba77ddedfcf9",
+        "thread_id": "19c2ba77ddedfcf9",
+        "subject": "파트너십 문의 - 포커 방송용 RFID 카드 인식 시스템",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "biz@emfoplus.co.kr"
+        ],
+        "date": "2026-02-04T18:35:22-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "안녕하세요, 실시간 포커 방송에서 카드를 자동으로 인식해 방송 화면에 표시하는 시스템을 개발하고 있습니다. RFID가 내장된 포커 카드와 리더 하드웨어를 통합으로 제공할 수 있는 파트너를 찾고 있습니다. 필요 사항: 1. RFID 포커 카드 - 표준 포커 카드 크기 (63 x 88mm), 카드마다 RFID 태그 내장 - 덱당 54장 (52장 + 조커 2장),",
+        "vendor": null,
+        "recipient_vendor": "emfoplus",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "angel": [
+      {
+        "id": "19c2ba3767ea3780",
+        "thread_id": "19c2ba3767ea3780",
+        "subject": "Partnership Inquiry - RFID Card Recognition System for Live Poker Broadcasting",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "overseas@angel-group.co.jp"
+        ],
+        "date": "2026-02-04T18:30:58-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi, I&#39;m developing a real-time card recognition system for live poker broadcasting. The system needs to automatically identify each playing card as it&#39;s dealt and display the information on the",
+        "vendor": null,
+        "recipient_vendor": "angel",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ],
+    "sunfly": [
+      {
+        "id": "19c2ba3753b04f1b",
+        "thread_id": "19c2325a20033780",
+        "subject": "Re:Fw: Inquiry regarding Poker RFID GFX development experience",
+        "sender": "aiden.kim@ggproduction.net",
+        "recipients": [
+          "SUN-FLY Susie <susie.su@sun-fly.com>"
+        ],
+        "date": "2026-02-04T18:30:58-08:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "Hi Susie, Thank you for your positive response. It&#39;s encouraging to hear that Sun-Fly is interested in working together on this. Let me share more details about what we&#39;re looking for, so you",
+        "vendor": null,
+        "recipient_vendor": "sunfly",
+        "is_sent": true,
+        "is_delivery_failure": false
+      },
+      {
+        "id": "19c0e848ab633952",
+        "thread_id": "19c0e842dcc81ef6",
+        "subject": "Inquiry regarding Poker RFID GFX development experience",
+        "sender": "Aiden Kim <aiden.kim@ggproduction.net>",
+        "recipients": [
+          "info@sun-fly.com"
+        ],
+        "date": "2026-01-30T19:48:13+09:00",
+        "is_unread": false,
+        "labels": [
+          "SENT",
+          "Label_4886549615727008050"
+        ],
+        "snippet": "We are currently preparing to develop a Poker RFID GFX system. We would like to know if you have any prior experience in supplying or delivering Poker GFX solutions",
+        "vendor": null,
+        "recipient_vendor": "sunfly",
+        "is_sent": true,
+        "is_delivery_failure": false
+      }
+    ]
+  },
+  "collected_at": "2026-02-06T11:54:27.450284"
 }

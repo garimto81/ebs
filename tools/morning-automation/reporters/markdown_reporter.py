@@ -12,7 +12,7 @@ from typing import Optional
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from config.settings import OUTPUT_DIR, GFX_LICENSE_EXPIRY
+from config.settings import OUTPUT_DIR
 
 
 class MarkdownReporter:
@@ -68,10 +68,6 @@ class MarkdownReporter:
         date_str = date.strftime("%Y-%m-%d")
         time_str = date.strftime("%H:%M")
 
-        # Calculate GFX license days remaining
-        gfx_expiry = datetime.strptime(GFX_LICENSE_EXPIRY, "%Y-%m-%d")
-        gfx_days = (gfx_expiry - date).days
-
         lines = [
             f"# EBS 아침 브리핑 - {date_str}",
             "",
@@ -83,7 +79,7 @@ class MarkdownReporter:
         ]
 
         # Urgent alerts section
-        alerts = self._generate_alerts(gmail_data, gfx_days)
+        alerts = self._generate_alerts(gmail_data)
         if alerts:
             lines.extend([
                 "## 🚨 긴급 알림",
@@ -116,14 +112,9 @@ class MarkdownReporter:
 
         return "\n".join(lines)
 
-    def _generate_alerts(self, gmail_data: dict, gfx_days: int) -> list:
+    def _generate_alerts(self, gmail_data: dict) -> list:
         """Generate urgent alerts."""
         alerts = []
-
-        # GFX license alert
-        if gfx_days <= 60:
-            emoji = "🔴" if gfx_days <= 30 else "⚠️"
-            alerts.append(f"- {emoji} GFX 라이선스 만료: **D-{gfx_days}**")
 
         # Follow-up needed
         needs_followup = gmail_data.get("needs_followup", [])
@@ -131,6 +122,12 @@ class MarkdownReporter:
             vendor = item.get("vendor", "Unknown")
             days = item.get("days_elapsed", 0)
             alerts.append(f"- 🔴 Follow-up 필요: {vendor} ({days}일 무응답)")
+
+        # Delivery failures
+        delivery_failures = gmail_data.get("delivery_failures", [])
+        for item in delivery_failures[:3]:
+            recipient = item.get("recipient", "Unknown")
+            alerts.append(f"- ❌ 메일 전송 실패: {recipient}")
 
         return alerts
 
@@ -141,11 +138,79 @@ class MarkdownReporter:
             "",
         ]
 
-        # Awaiting reply
+        # Sent emails by vendor
+        vendor_sent = gmail_data.get("vendor_sent", {})
+        sent_emails = gmail_data.get("sent_emails", [])
+        if sent_emails:
+            lines.extend([
+                "### 📤 발송 현황",
+                "",
+                "| 수신 업체 | 수신자 | 제목 | 발송일 |",
+                "|----------|--------|------|--------|",
+            ])
+            for email in sent_emails[:15]:
+                # Get recipient vendor (detected from email domain)
+                recipient_vendor = email.get("recipient_vendor") or "-"
+
+                # Format recipients (first recipient email)
+                recipients = email.get("recipients", [])
+                recipient_display = "-"
+                if recipients:
+                    # Extract email from "Name <email>" format
+                    import re
+                    first_recipient = recipients[0]
+                    email_match = re.search(r'<([^>]+)>', first_recipient)
+                    recipient_display = email_match.group(1) if email_match else first_recipient
+                    # Truncate if too long
+                    if len(recipient_display) > 30:
+                        recipient_display = recipient_display[:27] + "..."
+
+                subject = email.get("subject", "")[:35]
+                date = email.get("date", "")[:10] if email.get("date") else "-"
+                lines.append(f"| {recipient_vendor} | {recipient_display} | {subject} | {date} |")
+            lines.append("")
+
+        # Delivery failures
+        failures = gmail_data.get("delivery_failures", [])
+        if failures:
+            lines.extend([
+                "### ❌ 전송 실패",
+                "",
+                "| 수신자 | 날짜 |",
+                "|--------|------|",
+            ])
+            for email in failures[:5]:
+                recipient = email.get("recipient", "-")
+                date = email.get("date", "")[:10] if email.get("date") else "-"
+                lines.append(f"| {recipient} | {date} |")
+            lines.append("")
+
+        # Vendor received emails
+        vendor_emails = gmail_data.get("vendor_emails", {})
+        if vendor_emails:
+            lines.extend([
+                "### 📥 업체 수신 메일",
+                "",
+                "| 업체 | 발신자 | 제목 | 수신일 |",
+                "|------|--------|------|--------|",
+            ])
+            for vendor, emails in sorted(vendor_emails.items()):
+                for email in emails[:3]:
+                    sender = email.get("sender", "-")
+                    # Extract name from "Name <email>" format
+                    import re
+                    name_match = re.match(r'^([^<]+)<', sender)
+                    sender_display = name_match.group(1).strip().strip('"') if name_match else sender[:25]
+                    subject = email.get("subject", "")[:35]
+                    date = email.get("date", "")[:10] if email.get("date") else "-"
+                    lines.append(f"| {vendor} | {sender_display} | {subject} | {date} |")
+            lines.append("")
+
+        # Awaiting reply (received emails needing response)
         awaiting = gmail_data.get("awaiting_reply", [])
         if awaiting:
             lines.extend([
-                "### 새 메일 (응답 대기)",
+                "### 📬 회신 필요",
                 "",
                 "| 업체 | 제목 | 수신일 |",
                 "|------|------|--------|",
@@ -167,7 +232,7 @@ class MarkdownReporter:
                 "|------|------|--------|--------|",
             ])
             for email in followup[:10]:
-                vendor = email.get("vendor", "-")
+                vendor = email.get("recipient_vendor") or email.get("vendor", "-")
                 subject = email.get("subject", "")[:30]
                 date = email.get("date", "")[:10] if email.get("date") else "-"
                 days = email.get("days_elapsed", 0)
@@ -180,6 +245,8 @@ class MarkdownReporter:
             "### 통계",
             "",
             f"- 전체 이메일: {total}건",
+            f"- 발송: {len(sent_emails)}건",
+            f"- 전송 실패: {len(failures)}건",
             f"- 응답 대기: {len(awaiting)}건",
             f"- Follow-up 필요: {len(followup)}건",
             "",
@@ -338,6 +405,23 @@ class MarkdownReporter:
 
         return text.strip()
 
+    # All vendors that should receive RFI (same as slack_poster.py)
+    ALL_RFI_VENDORS = {
+        # Category A (통합 파트너 후보)
+        "sunfly": {"name": "Sun-Fly", "email": "susie.su@sun-fly.com", "cat": "A"},
+        "angel": {"name": "Angel Playing Cards", "email": "overseas@angel-group.co.jp", "cat": "A"},
+        "emfoplus": {"name": "엠포플러스", "email": "biz@emfoplus.co.kr", "cat": "A"},
+        # Category B (부품 공급)
+        "feig": {"name": "FEIG", "email": "info@feig.de", "cat": "B"},
+        "gao": {"name": "GAO RFID", "email": "sales@gaorfid.com", "cat": "B"},
+        "identiv": {"name": "Identiv", "email": "sales@identiv.com", "cat": "B"},
+        "pongee": {"name": "PONGEE", "email": "pongee@pongee.com.tw", "cat": "B"},
+        "waveshare": {"name": "Waveshare", "email": "service@waveshare.com", "cat": "B"},
+        "sparkfun": {"name": "SparkFun", "email": "sales@sparkfun.com", "cat": "B"},
+        "adafruit": {"name": "Adafruit", "email": "support@adafruit.com", "cat": "B"},
+        "fadedspade": {"name": "Faded Spade", "email": "sales@fadedspade.com", "cat": "B"},
+    }
+
     def _generate_tasks_section(self, slack_data: dict, gmail_data: dict) -> list:
         """Generate today's tasks section."""
         lines = [
@@ -347,13 +431,34 @@ class MarkdownReporter:
 
         task_num = 1
 
-        # Follow-up emails
+        # Analyze sent/failed/unsent vendors
+        sent_vendors = set(gmail_data.get("vendor_sent", {}).keys())
+        failed_vendors = set()
+        for failure in gmail_data.get("delivery_failures", []):
+            recipient = failure.get("recipient", "")
+            for vk, info in self.ALL_RFI_VENDORS.items():
+                if info["email"] in recipient or recipient in info["email"]:
+                    failed_vendors.add(vk)
+
+        # Priority 1: Unsent Category A vendors (CRITICAL)
+        for vk, info in self.ALL_RFI_VENDORS.items():
+            if info["cat"] == "A" and vk not in sent_vendors and vk not in failed_vendors:
+                lines.append(f"{task_num}. [ ] **[CRITICAL]** {info['name']} RFI 발송 ({info['email']})")
+                task_num += 1
+
+        # Priority 2: Failed deliveries (need alternative email)
+        for vk in failed_vendors:
+            info = self.ALL_RFI_VENDORS.get(vk, {})
+            lines.append(f"{task_num}. [ ] {info.get('name', vk)} 대체 이메일 확인 및 재발송")
+            task_num += 1
+
+        # Priority 3: Follow-up emails
         for email in gmail_data.get("needs_followup", [])[:3]:
             vendor = email.get("vendor", "Unknown")
             lines.append(f"{task_num}. [ ] {vendor} Follow-up 메일 발송")
             task_num += 1
 
-        # Pending Slack items
+        # Priority 4: Pending Slack items
         mentions = slack_data.get("mentions_to_me", [])
         pending = [m for m in mentions if not m.get("completed", False)]
         for item in pending[:3]:

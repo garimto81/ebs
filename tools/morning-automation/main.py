@@ -80,6 +80,22 @@ def run_full_collection():
     print(f"   ✅ {results['lists'].get('total_items', 0)} items collected")
     print()
 
+    # 4. Sync analysis (auto-update delivery failures)
+    print("4️⃣ Syncing analysis with Slack Lists...")
+    sync_result = lists_collector.sync_from_analysis(
+        results["slack"],
+        results["gmail"],
+        auto_update=True,
+    )
+    if sync_result.get("status_updates"):
+        for update in sync_result["status_updates"]:
+            print(f"   🔄 {update['vendor']}: {update['old_status']} → {update['new_status']}")
+    if sync_result.get("delivery_failures"):
+        print(f"   ⚠️ {len(sync_result['delivery_failures'])} delivery failure(s) detected")
+    else:
+        print("   ✅ No status updates needed")
+    print()
+
     return results
 
 
@@ -122,12 +138,28 @@ def run_incremental_collection():
     print(f"   ✅ {results['lists'].get('total_items', 0)} items")
     print()
 
+    # 4. Sync analysis (auto-update delivery failures)
+    print("4️⃣ Syncing analysis with Slack Lists...")
+    sync_result = lists_collector.sync_from_analysis(
+        results["slack"],
+        results["gmail"],
+        auto_update=True,
+    )
+    if sync_result.get("status_updates"):
+        for update in sync_result["status_updates"]:
+            print(f"   🔄 {update['vendor']}: {update['old_status']} → {update['new_status']}")
+    if sync_result.get("delivery_failures"):
+        print(f"   ⚠️ {len(sync_result['delivery_failures'])} delivery failure(s) detected")
+    else:
+        print("   ✅ No status updates needed")
+    print()
+
     return results
 
 
 def generate_report(results: dict, date: datetime = None) -> str:
     """Generate markdown report."""
-    print("4️⃣ Generating report...")
+    print("5️⃣ Generating report...")
 
     reporter = MarkdownReporter()
     report_path = reporter.generate(
@@ -145,7 +177,7 @@ def generate_report(results: dict, date: datetime = None) -> str:
 
 def send_notification(results: dict, report_path: str) -> bool:
     """Send Slack DM notification."""
-    print("5️⃣ Sending Slack notification...")
+    print("6️⃣ Sending Slack notification...")
 
     notifier = SlackNotifier()
     success = notifier.send_briefing(
@@ -166,7 +198,7 @@ def send_notification(results: dict, report_path: str) -> bool:
 
 def post_to_channel(results: dict, post_type: str = "vendors") -> bool:
     """Update existing Slack channel message (NOT post new)."""
-    print(f"6️⃣ Updating channel message ({post_type})...")
+    print(f"7️⃣ Updating channel message ({post_type})...")
 
     poster = SlackPoster()
 

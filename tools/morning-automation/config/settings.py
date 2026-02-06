@@ -47,15 +47,14 @@ GMAIL_EBS_LABEL_ID = "Label_4886549615727008050"
 # Analysis Settings
 # ===========================================
 FOLLOWUP_THRESHOLD_HOURS = 72  # 무응답 Follow-up 알림 기준
-GFX_LICENSE_EXPIRY = "2026-03-17"  # PokerGFX 라이선스 만료일
 
 # ===========================================
 # Vendor Keywords for Detection
 # ===========================================
 VENDOR_KEYWORDS = {
     # RFID Readers/Modules
-    "feig": ["feig", "feig electronic"],
-    "gao": ["gao rfid", "gao-rfid"],
+    "feig": ["feig", "feig electronic", "dsgvo@feig"],
+    "gao": ["gao rfid", "gao-rfid", "gaorfid", "thegaogroup"],
     "pongee": ["pongee", "pongee industries"],
     "identiv": ["identiv", "utrust"],
 
@@ -77,8 +76,8 @@ VENDOR_KEYWORDS = {
     # Benchmarks
     "pokergfx": ["pokergfx", "poker gfx", "videopokertable"],
     "rfpoker": ["rfpoker", "rf poker"],
-    "fadedspade": ["faded spade", "fadedspade", "genesis"],
-    "angel": ["angel playing cards", "angel cards"],
+    "fadedspade": ["faded spade", "fadedspade", "genesis", "tom wheaton"],
+    "angel": ["angel playing cards", "angel cards", "angel-group"],
 }
 
 # ===========================================
@@ -90,3 +89,33 @@ ACTION_PATTERNS = [
     r"\[ \]\s*(.+)",
     r"Action:?\s*(.+)",
 ]
+
+# ===========================================
+# Vendor Email Domains (for recipient detection)
+# ===========================================
+VENDOR_EMAIL_DOMAINS = {
+    # RFID Readers/Modules
+    "feig": ["feig.de"],
+    "gao": ["gaorfid.com"],
+    "pongee": ["pongee.com.tw"],
+    "identiv": ["identiv.com"],
+
+    # Casino Solutions
+    "sunfly": ["sun-fly.com"],
+    "angel": ["angel-group.co.jp"],
+    "matsui": ["matsui-gaming.com"],
+    "abbiati": ["abbiati.it"],
+
+    # DIY/Development
+    "waveshare": ["waveshare.com"],
+    "adafruit": ["adafruit.com"],
+    "sparkfun": ["sparkfun.com"],
+
+    # Integrated Partners
+    "emfoplus": ["emfoplus.co.kr"],
+
+    # Benchmarks
+    "pokergfx": ["pokergfx.io"],
+    "rfpoker": ["rfpoker.com"],
+    "fadedspade": ["fadedspadepoker.com", "fadedspade.com"],
+}

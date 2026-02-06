@@ -1,10 +1,21 @@
 {
   "active": false,
-  "mode": "ralph-ultrawork",
-  "task": "PRD 전면 재설계 - 상용 솔루션 + 암호화 체계 + 사업적 비전",
-  "started_at": "2026-01-27T13:00:00Z",
-  "completed_at": "2026-01-27T13:15:00Z",
-  "iteration": 2,
+  "mode": "daily-ralph",
+  "task": "EBS 데일리 브리핑 자동 실행",
+  "started_at": null,
+  "completed_at": "2026-02-05T14:50:00Z",
+  "iteration": 1,
   "result": "APPROVED",
-  "final_version": "2.1.1"
+  "checks": {
+    "gmail_collection": true,
+    "slack_collection": true,
+    "lists_collection": true,
+    "report_generated": true,
+    "channel_updated": true
+  },
+  "alerts": {
+    "delivery_failures": 1,
+    "followup_needed": 0,
+    "pending_tasks": 3
+  }
 }

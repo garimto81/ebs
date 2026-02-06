@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, "C:/claude")
 
 from lib.slack.client import SlackUserClient
-from config.settings import SLACK_USER_ID, GFX_LICENSE_EXPIRY
+from config.settings import SLACK_USER_ID
 
 
 class SlackNotifier:
@@ -67,16 +67,15 @@ class SlackNotifier:
         # Calculate alerts
         alerts = []
 
-        # GFX license
-        gfx_expiry = datetime.strptime(GFX_LICENSE_EXPIRY, "%Y-%m-%d")
-        gfx_days = (gfx_expiry - datetime.now()).days
-        if gfx_days <= 60:
-            alerts.append(f"GFX 라이선스 D-{gfx_days}")
-
         # Follow-up needed
         followup_count = len(gmail_data.get("needs_followup", []))
         if followup_count > 0:
             alerts.append(f"Follow-up 필요 {followup_count}건")
+
+        # Delivery failures
+        delivery_failures = len(gmail_data.get("delivery_failures", []))
+        if delivery_failures > 0:
+            alerts.append(f"메일 전송 실패 {delivery_failures}건")
 
         # Pending items
         mentions = slack_data.get("mentions_to_me", [])

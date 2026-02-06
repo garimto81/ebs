@@ -1,15 +1,34 @@
 #!/usr/bin/env python3
 """
-Unified State Manager - v13.0 통합 상태 관리
+Unified State Manager - v14.0 통합 상태 관리
 
 Context Manager, Phase Gate, Circuit Breaker를 단일 진입점으로 통합.
 .omc/state/unified-session.json에 모든 상태를 저장.
+
+v14.0 변경사항:
+- Circuit Breaker 단일 소스화 (context_graph.json 참조)
+- PDCA 단계 추적 추가
+- 스키마 버전 필드 추가
 """
 
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Any
+from typing import Optional, Any, List
+from enum import Enum
+
+
+class PDCAPhase(Enum):
+    """PDCA 사이클 단계"""
+    PLAN = "plan"
+    DESIGN = "design"
+    DO = "do"
+    CHECK = "check"
+    ACT = "act"
+    COMPLETE = "complete"
+
+
+SCHEMA_VERSION = "2.0.0"
 
 # 동적 프로젝트 루트 감지
 def _get_project_root() -> Path:
@@ -43,22 +62,41 @@ class UnifiedStateManager:
 
         self.session_id = session_id or f"unified_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
-        # 기본 상태 구조
+        # 기본 상태 구조 (v2.0.0)
         self.state = {
+            "schema_version": SCHEMA_VERSION,
             "session_id": self.session_id,
             "created_at": datetime.now().isoformat(),
             "updated_at": datetime.now().isoformat(),
             "components": {
                 "context_manager": {"active": False, "file": str(LEGACY_PATHS["context"])},
                 "phase_gate": {"active": False, "current_phase": None},
-                "circuit_breaker": {"active": False, "failures": {}},
-                "verification": {"checks": {}},
+                # Circuit Breaker: context_graph.json을 단일 소스로 참조
+                "circuit_breaker": {
+                    "active": False,
+                    "source": str(LEGACY_PATHS["context"]),  # 실제 데이터는 context_graph.json
+                    "failures_ref": "circuit_breaker.failure_counts"  # 참조 경로
+                },
+                "verification": {"checks": []},  # v2.0: array 형식으로 통일
             },
             "workflow": {
                 "mode": None,  # "auto", "ultrawork", "ralph", "ecomode"
                 "iteration": 0,
                 "max_iterations": 10,
                 "status": "idle",  # "idle", "running", "paused", "completed", "failed"
+            },
+            # v2.0: PDCA 사이클 추적 추가
+            "pdca": {
+                "phase": None,  # "plan", "design", "do", "check", "act", "complete"
+                "feature": None,  # 작업 중인 기능명
+                "iteration": 0,
+                "gap_percentage": None,  # 마지막 gap-detector 결과
+                "documents": {
+                    "plan": None,  # docs/01-plan/*.plan.md 경로
+                    "design": None,  # docs/02-design/*.design.md 경로
+                    "analysis": None,  # docs/03-analysis/*.analysis.md 경로
+                    "report": None,  # docs/04-report/*.report.md 경로
+                },
             },
             "metadata": {},
         }
@@ -187,30 +225,135 @@ class UnifiedStateManager:
             del cb["failures"][task_key]
             self._save()
 
-    # === Verification 연동 ===
+    # === Verification 연동 (v2.0: array 형식) ===
 
     def record_check(self, check_type: str, passed: bool, evidence: str = ""):
-        """검증 체크 기록"""
-        self.state["components"]["verification"]["checks"][check_type] = {
+        """검증 체크 기록 (v2.0: array 형식)"""
+        checks = self.state["components"]["verification"]["checks"]
+
+        # 기존 항목 업데이트 또는 새로 추가
+        check_record = {
+            "type": check_type,
             "passed": passed,
             "evidence": evidence,
             "timestamp": datetime.now().isoformat(),
         }
+
+        # 같은 타입의 기존 체크 제거 후 새로 추가
+        if isinstance(checks, list):
+            self.state["components"]["verification"]["checks"] = [
+                c for c in checks if c.get("type") != check_type
+            ]
+            self.state["components"]["verification"]["checks"].append(check_record)
+        else:
+            # dict 형식(v1.0)에서 마이그레이션
+            self.state["components"]["verification"]["checks"] = [check_record]
+
         self._save()
 
     def is_check_fresh(self, check_type: str, max_age_seconds: int = 300) -> bool:
         """검증 결과 freshness 확인"""
         checks = self.state["components"]["verification"]["checks"]
-        if check_type not in checks:
+
+        # v2.0: array 형식
+        if isinstance(checks, list):
+            for check in checks:
+                if check.get("type") == check_type:
+                    timestamp = check.get("timestamp")
+                    if timestamp:
+                        check_time = datetime.fromisoformat(timestamp)
+                        age = (datetime.now() - check_time).total_seconds()
+                        return age < max_age_seconds
             return False
 
+        # v1.0: dict 형식 (레거시 호환)
+        if check_type not in checks:
+            return False
         timestamp = checks[check_type].get("timestamp")
         if not timestamp:
             return False
-
         check_time = datetime.fromisoformat(timestamp)
         age = (datetime.now() - check_time).total_seconds()
         return age < max_age_seconds
+
+    def get_latest_check(self, check_type: str) -> Optional[dict]:
+        """최신 검증 결과 조회"""
+        checks = self.state["components"]["verification"]["checks"]
+
+        if isinstance(checks, list):
+            for check in reversed(checks):  # 최신 항목부터
+                if check.get("type") == check_type:
+                    return check
+            return None
+        else:
+            return checks.get(check_type)
+
+    # === PDCA 사이클 관리 (v2.0) ===
+
+    def start_pdca(self, feature: str, initial_phase: str = "plan"):
+        """PDCA 사이클 시작"""
+        self.state["pdca"] = {
+            "phase": initial_phase,
+            "feature": feature,
+            "iteration": 0,
+            "gap_percentage": None,
+            "documents": {
+                "plan": None,
+                "design": None,
+                "analysis": None,
+                "report": None,
+            },
+            "started_at": datetime.now().isoformat(),
+        }
+        self._save()
+
+    def set_pdca_phase(self, phase: str):
+        """PDCA 단계 설정"""
+        if "pdca" not in self.state:
+            self.state["pdca"] = {}
+        self.state["pdca"]["phase"] = phase
+        self.state["pdca"]["updated_at"] = datetime.now().isoformat()
+        self._save()
+
+    def get_pdca_phase(self) -> Optional[str]:
+        """현재 PDCA 단계 조회"""
+        return self.state.get("pdca", {}).get("phase")
+
+    def record_pdca_document(self, doc_type: str, path: str):
+        """PDCA 문서 경로 기록"""
+        if "pdca" not in self.state:
+            self.state["pdca"] = {"documents": {}}
+        if "documents" not in self.state["pdca"]:
+            self.state["pdca"]["documents"] = {}
+        self.state["pdca"]["documents"][doc_type] = path
+        self._save()
+
+    def record_gap_result(self, percentage: float):
+        """gap-detector 결과 기록"""
+        if "pdca" not in self.state:
+            self.state["pdca"] = {}
+        self.state["pdca"]["gap_percentage"] = percentage
+        self.state["pdca"]["iteration"] = self.state["pdca"].get("iteration", 0) + 1
+        self._save()
+
+    def is_pdca_complete(self, threshold: float = 90.0) -> bool:
+        """PDCA 완료 여부 (gap >= threshold)"""
+        gap = self.state.get("pdca", {}).get("gap_percentage")
+        if gap is None:
+            return False
+        return gap >= threshold
+
+    def get_pdca_status(self) -> dict:
+        """PDCA 상태 요약"""
+        pdca = self.state.get("pdca", {})
+        return {
+            "phase": pdca.get("phase"),
+            "feature": pdca.get("feature"),
+            "iteration": pdca.get("iteration", 0),
+            "gap_percentage": pdca.get("gap_percentage"),
+            "is_complete": self.is_pdca_complete(),
+            "documents": pdca.get("documents", {}),
+        }
 
     # === 메타데이터 ===
 

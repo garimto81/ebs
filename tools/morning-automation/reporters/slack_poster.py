@@ -170,17 +170,28 @@ class SlackPoster:
 
         # Check Gmail for incoming mail from vendor
         received = False
+        delivery_failed = False
         if gmail_data and domain:
+            # Check received emails
             for email in gmail_data.get("all_emails", gmail_data.get("emails", [])):
                 sender = email.get("from", email.get("sender", ""))
                 if isinstance(sender, str) and domain in sender:
                     received = True
                     break
 
+            # Check delivery failures
+            for failure in gmail_data.get("delivery_failures", []):
+                recipient = failure.get("recipient", "")
+                if domain in recipient:
+                    delivery_failed = True
+                    break
+
         # Determine status from List status + received flag
         sent = list_status in ("견적요청", "견적수신", "협상중", "계약")
 
-        if received and sent:
+        if delivery_failed:
+            return ":x: 전송 실패"
+        elif received and sent:
             return ":arrows_counterclockwise: 회신 수신"
         elif received:
             return ":incoming_envelope: 수신"
@@ -188,48 +199,129 @@ class SlackPoster:
             return ":outbox_tray: RFI 발송"
         return ""
 
+    # All vendors that should receive RFI (Category A + B with email)
+    ALL_RFI_VENDORS = {
+        # Category A (통합 파트너 후보)
+        "sunfly": {"name": "Sun-Fly", "email": "susie.su@sun-fly.com", "cat": "A"},
+        "angel": {"name": "Angel Playing Cards", "email": "overseas@angel-group.co.jp", "cat": "A"},
+        "emfoplus": {"name": "엠포플러스", "email": "biz@emfoplus.co.kr", "cat": "A"},
+        # Category B (부품 공급)
+        "feig": {"name": "FEIG", "email": "info@feig.de", "cat": "B"},
+        "gao": {"name": "GAO RFID", "email": "sales@gaorfid.com", "cat": "B"},
+        "identiv": {"name": "Identiv", "email": "sales@identiv.com", "cat": "B"},
+        "pongee": {"name": "PONGEE", "email": "pongee@pongee.com.tw", "cat": "B"},
+        "waveshare": {"name": "Waveshare", "email": "service@waveshare.com", "cat": "B"},
+        "sparkfun": {"name": "SparkFun", "email": "sales@sparkfun.com", "cat": "B"},
+        "adafruit": {"name": "Adafruit", "email": "support@adafruit.com", "cat": "B"},
+        "fadedspade": {"name": "Faded Spade", "email": "sales@fadedspade.com", "cat": "B"},
+    }
+
     def _format_vendor_summary(
         self,
         lists_data: dict,
         slack_data: dict = None,
         gmail_data: dict = None,
     ) -> str:
-        """Format concise vendor management summary with List link and email status."""
+        """Format concise vendor management summary with RFI stats and replies."""
         items = lists_data.get("items", [])
 
-        # Classify items
-        cat_a = []
-        counts = {"A": 0, "B": 0, "C": 0}
-        for item in items:
-            vk = item.get("vendor_key", "")
-            cat = self._classify_vendor(vk)
-            counts[cat] = counts.get(cat, 0) + 1
-            if cat == "A":
-                cat_a.append(item)
+        # Analyze sent/unsent vendors
+        sent_vendors = set()
+        failed_vendors = set()
+        vendor_replies = []
+
+        if gmail_data:
+            # Get sent vendor keys
+            vendor_sent = gmail_data.get("vendor_sent", {})
+            sent_vendors = set(vendor_sent.keys())
+
+            # Get failed vendor keys from delivery failures
+            for failure in gmail_data.get("delivery_failures", []):
+                recipient = failure.get("recipient", "")
+                for vk, info in self.ALL_RFI_VENDORS.items():
+                    if info["email"] in recipient or recipient in info["email"]:
+                        failed_vendors.add(vk)
+
+            # Get vendor replies (received emails from vendors)
+            vendor_emails = gmail_data.get("vendor_emails", {})
+            for vendor, emails in vendor_emails.items():
+                if emails:
+                    latest = max(emails, key=lambda e: e.get("date", ""))
+                    snippet = latest.get("snippet", "")
+                    summary = self._extract_reply_summary(vendor, snippet)
+                    date = latest.get("date", "")[:10] if latest.get("date") else ""
+                    vendor_replies.append({
+                        "vendor": vendor,
+                        "summary": summary,
+                        "date": date,
+                    })
+
+        # Calculate unsent vendors
+        unsent_vendors = []
+        for vk, info in self.ALL_RFI_VENDORS.items():
+            if vk not in sent_vendors and vk not in failed_vendors:
+                unsent_vendors.append({"key": vk, **info})
+
+        # Sort by category (A first)
+        unsent_vendors.sort(key=lambda x: (x["cat"], x["name"]))
 
         lines = [
             "*EBS 업체 관리 - 통합 파트너 선정*",
             "",
             f":clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> ({len(items)}개 업체)",
-            f"카테고리 A: {counts['A']}개 | B: {counts['B']}개 | C: {counts['C']}개",
+            "",
+            "*RFI 현황:*",
+            f"• 발송 완료: {len(sent_vendors)}개 업체",
+            f"• 전송 실패: {len(failed_vendors)}개 업체",
+            f"• 미발송: {len(unsent_vendors)}개 업체",
         ]
 
-        # Category A email status
-        if cat_a:
+        # Unsent vendors (action needed)
+        if unsent_vendors:
             lines.append("")
-            lines.append("*RFI 현황:*")
-            for item in cat_a:
-                vk = item.get("vendor_key", "")
-                fields = {f.get("key"): f.get("text", "") for f in item.get("raw_fields", [])}
-                name = fields.get("name", vk.replace("_", " ").title())
-                status = fields.get("status", "후보")
-                email_status = self._get_email_status(vk, status, gmail_data)
-                lines.append(f"• {name}: {status} {email_status}")
+            lines.append("*:warning: 미발송 업체:*")
+            for v in unsent_vendors:
+                cat_emoji = ":star:" if v["cat"] == "A" else ""
+                lines.append(f"• {v['name']} {cat_emoji} ({v['email']})")
+
+        # Failed vendors
+        if failed_vendors:
+            lines.append("")
+            lines.append("*:x: 전송 실패:*")
+            for vk in failed_vendors:
+                info = self.ALL_RFI_VENDORS.get(vk, {})
+                lines.append(f"• {info.get('name', vk)} ({info.get('email', '')})")
+
+        # Vendor replies section
+        if vendor_replies:
+            lines.append("")
+            lines.append("*:incoming_envelope: 회신 수신:*")
+            for reply in vendor_replies:
+                vendor_name = reply["vendor"].replace("_", " ").title()
+                lines.append(f"• {vendor_name}: {reply['summary']} ({reply['date']})")
 
         lines.append("")
         lines.append(f"_업데이트: {datetime.now().strftime('%Y-%m-%d %H:%M')}_")
 
         return "\n".join(lines)
+
+    def _extract_reply_summary(self, vendor: str, snippet: str) -> str:
+        """Extract meaningful summary from email snippet."""
+        # Vendor-specific summaries based on known responses
+        snippet_lower = snippet.lower()
+
+        if "interested" in snippet_lower and "cooperat" in snippet_lower:
+            return "협력 개발 의향 표명"
+        elif "enterprise" in snippet_lower and "license" in snippet_lower:
+            return "Enterprise 라이선스 필요 안내"
+        elif "quote" in snippet_lower or "price" in snippet_lower:
+            return "견적 회신"
+        elif "thank" in snippet_lower:
+            return "문의 접수 확인"
+        else:
+            # Generic: first 40 chars
+            clean = snippet.replace("&#39;", "'").replace("&amp;", "&")
+            return clean[:40] + "..." if len(clean) > 40 else clean
 
 
 if __name__ == "__main__":

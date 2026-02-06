@@ -623,24 +623,24 @@
     },
     {
       "id": "Rec0ACM5HCS74",
-      "name": "견적요청카테고리 Aoverseas@angel-group.co.jpRFID 카드 제조 + 스마트 테이블 시스템. 통합 솔루션 가능.Angel Playing Cards",
+      "name": "전송실패카테고리 Aoverseas@angel-group.co.jpRFID 카드 제조 + 스마트 테이블 시스템. 통합 솔루션 가능.Angel Playing Cards",
       "url": "https://www.angelplayingcards.com/",
       "vendor_key": "angel",
       "raw_fields": [
         {
           "key": "status",
-          "value": "[{\"type\":\"rich_text\",\"block_id\":\"kOg5D\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uacac\\uc801\\uc694\\uccad\"}]}]}]",
-          "text": "견적요청",
+          "value": "[{\"type\":\"rich_text\",\"block_id\":\"warPF\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uc804\\uc1a1\\uc2e4\\ud328\"}]}]}]",
+          "text": "전송실패",
           "rich_text": [
             {
               "type": "rich_text",
-              "block_id": "kOg5D",
+              "block_id": "warPF",
               "elements": [
                 {
                   "type": "rich_text_section",
                   "elements": [
                     {
-                      "text": "견적요청",
+                      "text": "전송실패",
                       "type": "text"
                     }
                   ]
@@ -2238,24 +2238,24 @@
       },
       {
         "id": "Rec0ACM5HCS74",
-        "name": "견적요청카테고리 Aoverseas@angel-group.co.jpRFID 카드 제조 + 스마트 테이블 시스템. 통합 솔루션 가능.Angel Playing Cards",
+        "name": "전송실패카테고리 Aoverseas@angel-group.co.jpRFID 카드 제조 + 스마트 테이블 시스템. 통합 솔루션 가능.Angel Playing Cards",
         "url": "https://www.angelplayingcards.com/",
         "vendor_key": "angel",
         "raw_fields": [
           {
             "key": "status",
-            "value": "[{\"type\":\"rich_text\",\"block_id\":\"kOg5D\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uacac\\uc801\\uc694\\uccad\"}]}]}]",
-            "text": "견적요청",
+            "value": "[{\"type\":\"rich_text\",\"block_id\":\"warPF\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"\\uc804\\uc1a1\\uc2e4\\ud328\"}]}]}]",
+            "text": "전송실패",
             "rich_text": [
               {
                 "type": "rich_text",
-                "block_id": "kOg5D",
+                "block_id": "warPF",
                 "elements": [
                   {
                     "type": "rich_text_section",
                     "elements": [
                       {
-                        "text": "견적요청",
+                        "text": "전송실패",
                         "type": "text"
                       }
                     ]
@@ -4227,5 +4227,5 @@
     ],
     "uncategorized": []
   },
-  "collected_at": "2026-02-05T11:46:05.647027"
+  "collected_at": "2026-02-06T11:54:29.262070"
 }

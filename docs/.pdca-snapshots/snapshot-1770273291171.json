@@ -1,0 +1,361 @@
+{
+  "timestamp": "2026-02-05T06:34:51.171Z",
+  "reason": "compaction",
+  "status": {
+    "version": "2.0",
+    "lastUpdated": "2026-02-05T05:50:01.630Z",
+    "activeFeatures": [
+      "morning-automation",
+      "tools",
+      "reporters",
+      "collectors",
+      "config",
+      "scratchpad"
+    ],
+    "primaryFeature": "morning-automation",
+    "features": {
+      "morning-automation": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-04T07:27:56.699Z",
+          "lastUpdated": "2026-02-05T02:44:39.514Z"
+        },
+        "lastFile": "C:\\claude\\ebs\\tools\\morning-automation\\main.py"
+      },
+      "tools": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-04T08:13:48.222Z",
+          "lastUpdated": "2026-02-04T08:41:22.398Z"
+        },
+        "lastFile": "C:\\claude\\ebs\\tools\\gdrive_organizer.py"
+      },
+      "reporters": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-05T02:14:43.315Z",
+          "lastUpdated": "2026-02-05T05:50:01.630Z"
+        },
+        "lastFile": "C:\\claude\\ebs\\tools\\morning-automation\\reporters\\slack_poster.py"
+      },
+      "collectors": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-05T02:23:03.889Z",
+          "lastUpdated": "2026-02-05T05:49:29.878Z"
+        },
+        "lastFile": "C:\\claude\\ebs\\tools\\morning-automation\\collectors\\gmail_collector.py"
+      },
+      "config": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-05T02:24:30.725Z",
+          "lastUpdated": "2026-02-05T05:48:32.339Z"
+        },
+        "lastFile": "C:\\claude\\ebs\\tools\\morning-automation\\config\\settings.py"
+      },
+      "scratchpad": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-05T02:24:42.797Z",
+          "lastUpdated": "2026-02-05T02:39:31.490Z"
+        },
+        "lastFile": "C:\\Users\\AidenKim\\AppData\\Local\\Temp\\claude\\C--claude-ebs\\147f8a52-6cbd-43db-bbb7-ac0a81f35182\\scratchpad\\send_category_b.py"
+      }
+    },
+    "pipeline": {
+      "currentPhase": 1,
+      "level": "Dynamic",
+      "phaseHistory": []
+    },
+    "session": {
+      "startedAt": "2026-02-03T08:39:45.978Z",
+      "onboardingCompleted": false,
+      "lastActivity": "2026-02-05T05:50:01.630Z"
+    },
+    "history": [
+      {
+        "timestamp": "2026-02-04T07:27:56.699Z",
+        "feature": "morning-automation",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-04T08:13:48.222Z",
+        "feature": "tools",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-04T08:27:57.294Z",
+        "feature": "tools",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-04T08:41:22.398Z",
+        "feature": "tools",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:14:43.315Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:23:03.889Z",
+        "feature": "collectors",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:23:12.744Z",
+        "feature": "collectors",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:23:25.884Z",
+        "feature": "collectors",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:24:30.725Z",
+        "feature": "config",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:24:42.797Z",
+        "feature": "scratchpad",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:25:01.330Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:25:12.193Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:25:26.860Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:25:33.421Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:29:23.052Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:30:48.668Z",
+        "feature": "scratchpad",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:31:19.925Z",
+        "feature": "scratchpad",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:33:59.208Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:34:20.115Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:35:13.167Z",
+        "feature": "scratchpad",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:35:43.946Z",
+        "feature": "scratchpad",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:36:16.786Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:36:21.720Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:39:31.490Z",
+        "feature": "scratchpad",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:44:16.051Z",
+        "feature": "collectors",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:44:23.869Z",
+        "feature": "collectors",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:44:31.891Z",
+        "feature": "collectors",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:44:39.514Z",
+        "feature": "morning-automation",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:48:27.264Z",
+        "feature": "config",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T02:48:37.231Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:43:26.581Z",
+        "feature": "collectors",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:43:30.704Z",
+        "feature": "collectors",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:48:32.339Z",
+        "feature": "config",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:48:33.400Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:48:39.748Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:48:41.113Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:48:46.796Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:48:55.603Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:48:58.573Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:49:29.878Z",
+        "feature": "collectors",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:49:48.756Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T05:50:01.630Z",
+        "feature": "reporters",
+        "phase": "do",
+        "action": "updated"
+      }
+    ]
+  }
+}
