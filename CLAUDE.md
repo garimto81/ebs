@@ -37,35 +37,45 @@ RFID Card -> ST25R3911B -> ESP32 -> USB Serial -> FastAPI -> WebSocket -> React
 
 **RFID 모듈**: 테스트용 MFRC522, 프로덕션 ST25R3911B (Phase 0 업체 선정 중)
 
+**현재 구현 상태**: Server/Frontend/Firmware 코드는 아직 없음. DB 스키마와 운영 도구만 존재.
+
 ## Build & Run Commands
-
-### 현재 사용 가능한 도구
-
-```powershell
-# PDF 도구 의존성 설치
-pip install -r C:\claude\ebs\tools\requirements.txt
-
-# PDF 페이지 분할
-python C:\claude\ebs\tools\split_pdf.py <input.pdf> 20
-
-# PDF 이미지 추출
-python C:\claude\ebs\tools\extract_images.py <input.pdf> --output-dir <output/>
-
-# PDF 토큰 기반 청킹
-python C:\claude\ebs\tools\pdf_chunker.py <input.pdf>
-```
 
 ### Morning Automation (데일리 브리핑)
 
+Phase 0의 핵심 운영 도구. Slack, Gmail, Slack Lists에서 업체 관련 데이터를 수집하여 일일 브리핑을 생성한다.
+
 ```powershell
-# 의존성: slack-sdk, google-api-python-client, python-dateutil, rich
+# 의존성 설치
 pip install -r C:\claude\ebs\tools\morning-automation\requirements.txt
 
-# 실행
+# 기본 실행 (incremental, 전일 데이터)
 python C:\claude\ebs\tools\morning-automation\main.py
+
+# 전체 수집 (초기 실행 또는 전체 재수집)
+python C:\claude\ebs\tools\morning-automation\main.py --full
+
+# Slack 채널에 업체 현황 갱신
+python C:\claude\ebs\tools\morning-automation\main.py --post
+
+# 특정 날짜 리포트
+python C:\claude\ebs\tools\morning-automation\main.py --date 2026-02-01
+
+# 리포트 파일 생성 건너뛰기
+python C:\claude\ebs\tools\morning-automation\main.py --no-report
 ```
 
-구조: `collectors/` (Slack, Gmail, Lists 수집) -> `reporters/` (Markdown 리포트, Slack 게시)
+**제약**: `--notify` 사용 금지 (`chat:write:bot` scope 없음). `--post`만 사용 가능 (채널 메시지 갱신). DM 발송 불가.
+
+### PDF 도구
+
+```powershell
+pip install -r C:\claude\ebs\tools\requirements.txt
+
+python C:\claude\ebs\tools\split_pdf.py <input.pdf> 20              # 페이지 분할
+python C:\claude\ebs\tools\extract_images.py <input.pdf> --output-dir <output/>  # 이미지 추출
+python C:\claude\ebs\tools\pdf_chunker.py <input.pdf>               # 토큰 기반 청킹
+```
 
 ### Database
 
@@ -74,27 +84,40 @@ python C:\claude\ebs\tools\morning-automation\main.py
 sqlite3 C:\claude\ebs\server\db\cards.db < C:\claude\ebs\server\db\init.sql
 ```
 
-### Phase 1 이후 (미구현)
+## Code Architecture
 
-```powershell
-# Server
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+### Morning Automation (`tools/morning-automation/`)
 
-# Frontend
-npm run dev  # localhost:5173
+유일한 실행 가능 코드베이스 (~2,400 LOC, Python).
 
-# Tests
-pytest tests/ -v    # server
-npm test            # frontend
 ```
+main.py                 # CLI 진입점 (argparse)
+config/settings.py      # Slack channel/list ID, Gmail label ID, 분석 설정
+collectors/
+  slack_collector.py    # #ggpnotice 채널 메시지 수집, 업체 언급 감지
+  gmail_collector.py    # EBS 라벨 이메일 수집, 대기/회신 상태 분류
+  lists_collector.py    # Slack Lists 5컬럼 업체 관리 데이터 동기화
+reporters/
+  markdown_reporter.py  # docs/5-operations/daily-briefings/ 에 Markdown 생성
+  slack_poster.py       # Slack 채널 메시지 갱신 (기존 메시지 update)
+  slack_notifier.py     # DM 알림 (현재 scope 부족으로 비활성)
+```
+
+**데이터 흐름**: Collectors가 Slack/Gmail API로 원시 데이터 수집 -> Reporters가 Markdown 파일 생성 및 Slack 채널 갱신
+
+**외부 의존성**: `C:\claude\lib\slack\client.py`, `C:\claude\lib\gmail\client.py` (공유 라이브러리)
+
+### Database Schema (`server/db/init.sql`)
+
+`cards` 테이블: 54장 카드 (suit, rank, display, value). `uid` 컬럼은 초기 NULL이며, RFID 매핑 시 업데이트.
 
 ## Serial/WebSocket Protocol
 
 ```jsonc
-// ESP32 -> Server
+// ESP32 -> Server (계획)
 {"type": "card_read", "uid": "04:A2:B3:C4", "reader_id": 0, "timestamp": 123456}
 
-// Server -> Client
+// Server -> Client (계획)
 {"type": "card_detected", "uid": "...", "card": {"suit": "spades", "rank": "A", "display": "A♠"}}
 {"type": "reader_status", "connected": true, "port": "COM3"}
 ```
@@ -165,11 +188,3 @@ npm test            # frontend
 | `.omc/bkit/` | bkit PDCA 상태, 스냅샷 (삭제 금지) |
 | `.omc/plans/` | 작업 계획 문서 |
 | `.claude/` | Claude 커맨드, 스킬, 에이전트 설정 |
-
-### Slack/Gmail 자동화 제약
-
-| 규칙 | 내용 |
-|------|------|
-| `--notify` 사용 금지 | `chat:write:bot` scope 없음 |
-| `--post`만 사용 | 채널 메시지 갱신만 가능 |
-| DM 발송 불가 | Slack API 제한 |

@@ -52,32 +52,18 @@ FOLLOWUP_THRESHOLD_HOURS = 72  # 무응답 Follow-up 알림 기준
 # Vendor Keywords for Detection
 # ===========================================
 VENDOR_KEYWORDS = {
-    # RFID Readers/Modules
-    "feig": ["feig", "feig electronic", "dsgvo@feig"],
-    "gao": ["gao rfid", "gao-rfid", "gaorfid", "thegaogroup"],
-    "pongee": ["pongee", "pongee industries"],
-    "identiv": ["identiv", "utrust"],
-
-    # Casino Solutions
-    "sit_korea": ["s.i.t", "sit korea", "에스아이티"],
+    # Category A: Integrated Partners
     "sunfly": ["sun-fly", "sunfly", "선플라이"],
-    "matsui": ["matsui", "마츠이"],
-    "abbiati": ["abbiati", "아비아티"],
-
-    # DIY/Development
-    "st_micro": ["st25r3911b", "stm", "st micro", "stmicroelectronics"],
-    "waveshare": ["waveshare", "웨이브쉐어"],
-    "adafruit": ["adafruit", "pn532"],
-    "sparkfun": ["sparkfun"],
-
-    # Integrated Partner Candidates (Category A)
-    "emfoplus": ["엠포플러스", "emfoplus", "emfo plus"],
-
-    # Benchmarks
-    "pokergfx": ["pokergfx", "poker gfx", "videopokertable"],
-    "rfpoker": ["rfpoker", "rf poker"],
-    "fadedspade": ["faded spade", "fadedspade", "genesis", "tom wheaton"],
     "angel": ["angel playing cards", "angel cards", "angel-group"],
+
+    # Category B: Parts/Modules
+    "gao": ["gao rfid", "gao-rfid", "gaorfid", "thegaogroup"],
+    "fadedspade": ["faded spade", "fadedspade", "genesis", "tom wheaton"],
+
+    # Category C: Benchmarks/Reference
+    "pokergfx": ["pokergfx", "poker gfx", "videopokertable"],
+    "sit_korea": ["s.i.t", "sit korea", "에스아이티"],
+    "abbiati": ["abbiati", "아비아티"],
 }
 
 # ===========================================
@@ -94,28 +80,15 @@ ACTION_PATTERNS = [
 # Vendor Email Domains (for recipient detection)
 # ===========================================
 VENDOR_EMAIL_DOMAINS = {
-    # RFID Readers/Modules
-    "feig": ["feig.de"],
-    "gao": ["gaorfid.com"],
-    "pongee": ["pongee.com.tw"],
-    "identiv": ["identiv.com"],
-
-    # Casino Solutions
+    # Category A: Integrated Partners
     "sunfly": ["sun-fly.com"],
     "angel": ["angel-group.co.jp"],
-    "matsui": ["matsui-gaming.com"],
-    "abbiati": ["abbiati.it"],
 
-    # DIY/Development
-    "waveshare": ["waveshare.com"],
-    "adafruit": ["adafruit.com"],
-    "sparkfun": ["sparkfun.com"],
-
-    # Integrated Partners
-    "emfoplus": ["emfoplus.co.kr"],
-
-    # Benchmarks
-    "pokergfx": ["pokergfx.io"],
-    "rfpoker": ["rfpoker.com"],
+    # Category B: Parts/Modules
+    "gao": ["gaorfid.com"],
     "fadedspade": ["fadedspadepoker.com", "fadedspade.com"],
+
+    # Category C: Benchmarks/Reference
+    "pokergfx": ["pokergfx.io"],
+    "abbiati": ["abbiati.it"],
 }

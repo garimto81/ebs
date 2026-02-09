@@ -112,7 +112,7 @@ EBS는 **DB 자산을 활용**하는 네 가지 핵심 역할을 위해 설계�
 
 ## 3.1 Phase 1 기능 (확정)
 
-Phase 1은 **PokerGFX 100% 복제**가 목표입니다. 복제 대상 기능 전체 목록은 [PokerGFX Feature Checklist (119개)](2-phase-1/PokerGFX-Feature-Checklist.md)를 참조하세요.
+Phase 1은 **PokerGFX 100% 복제**가 목표입니다. 복제 대상 기능 전체 목록은 [PokerGFX Feature Checklist (149개)](2-phase-1/PokerGFX-Feature-Checklist.md)를 참조하세요.
 
 **카테고리별 요약:**
 
@@ -201,12 +201,12 @@ Phase 1 완료 후 실제 운영 경험을 바탕으로 재설계합니다.
 
 | 항목 | 내용 |
 |------|------|
-| **문서 버전** | 9.0.0 |
-| **작성일** | 2026-02-05 |
+| **문서 버전** | 9.1.0 |
+| **작성일** | 2026-02-09 |
 | **작성자** | BRACELET STUDIO |
 | **검토자** | Technical Architect |
 | **승인자** | Product Owner |
-| **상태** | **Draft** |
+| **상태** | **Approved** |
 | **분류** | Confidential |
 
 ## 6.2 v3.0 vs v4.0 방향 전환
@@ -243,7 +243,8 @@ Phase 1 완료 후 실제 운영 경험을 바탕으로 재설계합니다.
 | **8.0.0** | **2026-02-03** | **중복 제거 리팩터링: Section 2 통합(38줄→15줄), 페르소나 압축(100줄→30줄), Phase 테이블 단일화(§7.1), 참조문서 통합** | BRACELET STUDIO |
 | **8.1.0** | **2026-02-04** | **문서 정합성 수정: YAML 중복 키 제거, 끊어진 CONCEPT 링크 수정, Phase 테이블 링크 업데이트** | BRACELET STUDIO |
 | **9.0.0** | **2026-02-05** | **구조 전면 재설계: Section 2/5/8/9 삭제, Section 1/4/6/7 통합/축소, Phase 0 확장(PokerGFX 기획 포함), Phase 2 슬로건 변경, 보안 섹션 수정(Trustless 오해 교정)** | BRACELET STUDIO |
+| **9.1.0** | **2026-02-09** | **기능 수 119→149 통일 (Feature Checklist v4.0.0 반영), 상태 Draft→Approved 일치** | BRACELET STUDIO |
 
 ---
 
-**Version**: 9.0.0 | **Updated**: 2026-02-05 | **BRACELET STUDIO**
+**Version**: 9.1.0 | **Updated**: 2026-02-09 | **BRACELET STUDIO**

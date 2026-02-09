@@ -64,11 +64,15 @@ Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
 
 ### 3.1 Tier 1: RFID 모듈/평가보드 (최우선)
 
+> ⚠️ **업체 현황 변경 (2026-02-09)**: VENDOR-MANAGEMENT v8.0.0 기준, Waveshare/Adafruit/SparkFun은 무응답 또는 미관련으로 제거되었습니다.
+
 | 순위 | 업체 | 제품 | 가격 | 테스트 가능 | 상태 |
 |:----:|------|------|-----:|:----------:|:----:|
-| **1** | **Waveshare** | ST25R3911B NFC Board | ~$60 | ✅ 즉시 구매 | 🔄 문의 |
-| 2 | SparkFun | RFID 모듈 | ~$30 | ✅ | ⏳ |
-| 3 | Adafruit | PN532 NFC | ~$40 | ✅ | ⏳ |
+| ~~1~~ | ~~Waveshare~~ | ~~ST25R3911B NFC Board~~ | ~~$60~~ | - | ❌ 무응답 제거 |
+| ~~2~~ | ~~SparkFun~~ | ~~RFID 모듈~~ | ~~$30~~ | - | ❌ 미관련 제거 |
+| ~~3~~ | ~~Adafruit~~ | ~~PN532 NFC~~ | ~~$40~~ | - | ❌ 무응답 제거 |
+
+**현재 대안**: 카테고리 A 통합 파트너(Sun-Fly, Angel Playing Cards)에서 RFID 리더 포함 공급 검토 중
 
 ### 3.2 Tier 2: RFID 카드
 
@@ -81,10 +85,10 @@ Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
 
 | 업체 | 용도 | 연락처 | 상태 |
 |------|------|--------|:----:|
-| FEIG Electronic | 고성능 HF 리더 | info@feig.de | ⏳ |
-| GAO RFID | 산업용 리더 | sales@gaorfid.com | ⏳ |
-| Identiv | OEM 모듈 | sales@identiv.com | ⏳ |
-| PONGEE | HF 리더 모듈 | pongee@pongee.com.tw | ⏳ |
+| ~~FEIG Electronic~~ | ~~고성능 HF 리더~~ | info@feig.de | ❌ 무응답 제거 |
+| **GAO RFID** | 산업용 리더 | sales@gaorfid.com | ✅ RFI 회신 |
+| ~~Identiv~~ | ~~OEM 모듈~~ | sales@identiv.com | ❌ 무응답 제거 |
+| ~~PONGEE~~ | ~~HF 리더 모듈~~ | pongee@pongee.com.tw | ❌ 무응답 제거 |
 
 ---
 
@@ -92,13 +96,15 @@ Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
 
 ### 4.1 프로토타입 구성 (권장)
 
+> ⚠️ **업데이트 필요**: Waveshare 무응답으로 RFID 모듈 대체 방안 검토 중
+
 | 항목 | 제품 | 수량 | 예상 가격 | 용도 |
 |------|------|:----:|----------:|------|
-| RFID 모듈 | Waveshare ST25R3911B Board | 2 | $120 | 메인 + 백업 |
+| RFID 모듈 | TBD (카테고리 A 파트너 또는 GAO RFID) | 2 | TBD | 메인 + 백업 |
 | MCU | ESP32-WROOM-32 DevKit | 2 | $20 | 컨트롤러 |
 | 테스트 카드 | ISO 14443A RFID 카드 | 54 | $30 | 52장 + 조커 |
 | 점퍼 와이어 | 각종 | 1세트 | $10 | 연결용 |
-| **소계** | | | **~$180** | |
+| **소계** | | | **TBD** | |
 
 ### 4.2 옵션: Faded Spade 카드
 
@@ -113,8 +119,9 @@ Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
 
 ### 5.1 Phase 0-A: 부품 확보 (Week 1-2)
 
-- [ ] **Waveshare ST25R3911B Board 구매**
-  - [ ] 공식 사이트 또는 AliExpress
+- [ ] **RFID 모듈 확보** (Waveshare 무응답으로 대체 방안 필요)
+  - [ ] 카테고리 A 통합 파트너(Sun-Fly/Angel)의 리더 모듈 문의
+  - [ ] 또는 GAO RFID 산업용 리더 검토
   - [ ] 배송 추적
 - [ ] **ESP32 DevKit 구매**
 - [ ] **테스트용 RFID 카드 구매** (ISO 14443A)
@@ -137,7 +144,7 @@ Software: ESP32 → Python Server (FastAPI) → WebSocket → React Frontend
 
 - [ ] POC 결과 정리
 - [ ] Phase 1 상세 계획 수립
-- [ ] 필요 시 산업용 리더 검토 (FEIG, GAO 등)
+- [ ] 필요 시 산업용 리더 검토 (GAO RFID)
 
 ---
 

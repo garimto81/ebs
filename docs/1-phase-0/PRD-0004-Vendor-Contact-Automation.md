@@ -8,7 +8,7 @@
 
 ### 1.1 배경
 
-EBS 프로젝트 Phase-Pre 단계에서 RFID 업체 선정을 위해 다수의 업체에 연락해야 합니다. 현재 Slack List에 16개 업체가 등록되어 있으며, 이 중 10개 업체의 연락처가 확보되었습니다.
+EBS 프로젝트 Phase 0 단계에서 RFID 업체 선정을 위해 다수의 업체에 연락해야 합니다. 현재 Slack List에 16개 업체가 등록되어 있으며, 이 중 10개 업체의 연락처가 확보되었습니다.
 
 ### 1.2 목표
 
@@ -146,34 +146,26 @@ templates/
 | `{{vendor_name}}` | 업체명 | FEIG Electronic |
 | `{{contact_name}}` | 담당자명 | (확보 시) |
 | `{{category}}` | 업체 카테고리 | RFID Hardware |
-| `{{our_company}}` | 당사명 | GG Production |
+| `{{our_company}}` | 당사명 | *(사용 금지 - COMMUNICATION-RULES 참조)* |
 | `{{sender_name}}` | 발신자명 | Aiden Kim |
 | `{{sender_title}}` | 발신자 직함 | Technical Director |
 | `{{sent_date}}` | 발송일 | 2026-02-03 |
 | `{{deadline}}` | 응답 기한 | 2026-02-17 |
-| `{{project_name}}` | 프로젝트명 | BRACELET STUDIO |
+| `{{project_name}}` | 프로젝트명 | *(내부용 - 외부 노출 금지)* |
 
 ### 3.3 RFI 템플릿 (초기 정보 요청)
 
 ```markdown
-Subject: [Inquiry] RFID Solution for Professional Poker Broadcasting - {{our_company}}
+Subject: Product Inquiry - RFID Card Reader
 
 Dear {{vendor_name}} Team,
 
-I am {{sender_name}}, {{sender_title}} at {{our_company}}, a broadcast production company specializing in professional poker events including WSOP (World Series of Poker).
+I am interested in your RFID reader products for a broadcast project.
 
-We are currently evaluating RFID solutions for our live poker broadcasting system and are interested in learning more about your products.
+Could you please provide the following information:
 
-**Our Requirements:**
-- HF (13.56MHz) RFID reader compatible with ISO 15693 or ISO 14443
-- Fast read speed (< 100ms per card)
-- Multi-tag reading capability (2+ cards simultaneously)
-- USB or Serial interface for PC integration
-- Compact form factor for table integration
-
-**Information Requested:**
-1. Product catalog for applicable RFID readers
-2. Technical specifications
+1. Product catalog for card-sized RFID readers
+2. Technical specifications and documentation
 3. Pricing information (unit price and volume discounts)
 4. Lead time and minimum order quantity
 5. Sample availability
@@ -181,12 +173,10 @@ We are currently evaluating RFID solutions for our live poker broadcasting syste
 We would appreciate a response by {{deadline}}.
 
 Best regards,
-
 {{sender_name}}
-{{sender_title}}
-{{our_company}}
-Email: aiden.kim@ggproduction.net
 ```
+
+> **⚠️ COMMUNICATION-RULES 준수**: 회사명, 기술 스펙(주파수, 프로토콜, IC), 시스템 구조 노출 금지. 상세: `docs/5-operations/COMMUNICATION-RULES.md`
 
 ### 3.4 Follow-up 템플릿
 
@@ -438,14 +428,14 @@ def apply_vendor_labels(email_id: str, vendor: Vendor, action: str):
 | Faded Spade | info@fadedspade.com | RFID Card | ⭐ |
 | Angel Playing Cards | overseas@angel-group.co.jp | RFID Card | ⭐ |
 
-### 10.2 연락처 미확보 업체 (6개)
+### 10.2 연락처 미확보 업체
 
 | 업체 | 사유 | 대응 |
 |------|------|------|
 | PokerGFX | 현재 사용 중 (원본) | 컨택 불필요 |
 | RF Poker | 웹사이트 연락처 없음 | 폼 통해 문의 |
 | Matsui Gaming | 도메인 미응답 | 대체 연락처 탐색 |
-| Sun-Fly | 웹사이트 직접 연락처 없음 | 폼 통해 문의 |
+| Sun-Fly | ~~미확보~~ 연락처 확보 완료 | Susie Su (susie.su@sun-fly.com) - 카테고리 A 승격 |
 | S.I.T. Korea | 403 차단 | 대체 경로 탐색 |
 | ST Microelectronics | 일반 지원만 제공 | 디스트리뷰터 통해 |
 
@@ -658,7 +648,8 @@ class IMAPWatcher:
 |------|------|----------|
 | 2026-02-03 | 1.0.0 | 초기 작성 - 상태 머신, 이메일 템플릿, Follow-up 자동화 설계 |
 | 2026-02-04 | 1.0.1 | 문서 헤더 형식 통일 |
+| 2026-02-09 | 2.0.0 | COMMUNICATION-RULES 준수: RFI 템플릿 보안 수정(사명/기술스펙 제거), Phase-Pre→Phase 0 용어 통일, 미확보 업체 상태 갱신 |
 
 ---
 
-**Version**: 1.0.1 | **Updated**: 2026-02-04 | **BRACELET STUDIO**
+**Version**: 2.0.0 | **Updated**: 2026-02-09 | **BRACELET STUDIO**

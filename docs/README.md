@@ -28,7 +28,8 @@ docs/
 │
 ├── 2-phase-1/                          # Phase 1: PokerGFX 복제
 │   ├── PRD-0003-Phase1-PokerGFX-Clone.md
-│   ├── PokerGFX-Feature-Checklist.md  # 119개 기능 체크리스트
+│   ├── PokerGFX-Feature-Checklist.md  # 149개 기능 체크리스트
+│   ├── PokerGFX-UI-Analysis.md       # PokerGFX UI 스크린샷 분석
 │   └── reference/                      # PokerGFX 참조 자료
 │       ├── PokerGFX_Security.pdf
 │       ├── user-manual_split/         # 매뉴얼 PDF (6개 파일)
@@ -43,7 +44,10 @@ docs/
 └── 5-operations/                       # 운영 문서
     ├── EBS-WORK-DASHBOARD.md          # 업무 현황
     ├── VENDOR-MANAGEMENT.md           # 업체 관리
-    └── PHASE-PROGRESSION.md           # Phase 진행 가이드
+    ├── PHASE-PROGRESSION.md           # Phase 진행 가이드
+    ├── COMMUNICATION-RULES.md         # 외부 커뮤니케이션 규칙
+    ├── daily-briefings/               # 일일 브리핑 보고서
+    └── email-drafts/                  # 업체 이메일 드래프트
 ```
 
 ---
@@ -68,7 +72,8 @@ docs/
 | 문서 | 설명 |
 |------|------|
 | [PRD-0003-Phase1-PokerGFX-Clone.md](2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md) | Phase 1 상세 계획 |
-| [PokerGFX-Feature-Checklist.md](2-phase-1/PokerGFX-Feature-Checklist.md) | 119개 기능 체크리스트 |
+| [PokerGFX-Feature-Checklist.md](2-phase-1/PokerGFX-Feature-Checklist.md) | 149개 기능 체크리스트 |
+| [PokerGFX-UI-Analysis.md](2-phase-1/PokerGFX-UI-Analysis.md) | PokerGFX UI 스크린샷 분석 (v3.0.0) |
 | [reference/](2-phase-1/reference/) | PokerGFX 매뉴얼, 보안 문서 |
 
 ### 운영
@@ -78,6 +83,9 @@ docs/
 | [EBS-WORK-DASHBOARD.md](5-operations/EBS-WORK-DASHBOARD.md) | 업무 현황 대시보드 |
 | [VENDOR-MANAGEMENT.md](5-operations/VENDOR-MANAGEMENT.md) | 업체 관리 |
 | [PHASE-PROGRESSION.md](5-operations/PHASE-PROGRESSION.md) | Phase 진행 조건/가이드 |
+| [COMMUNICATION-RULES.md](5-operations/COMMUNICATION-RULES.md) | 외부 커뮤니케이션 규칙 |
+| [daily-briefings/](5-operations/daily-briefings/) | 일일 브리핑 보고서 |
+| [email-drafts/](5-operations/email-drafts/) | 업체 이메일 드래프트 |
 | [GOOGLE-DRIVE-STRUCTURE.md](GOOGLE-DRIVE-STRUCTURE.md) | Google Drive 폴더 구조 |
 
 ### 미래 단계 (Phase 1 완료 후)
@@ -144,4 +152,4 @@ Phase 1의 목표는 **PokerGFX의 모든 기능을 100% 복제**하는 것입�
 
 ---
 
-**Version**: 7.2.0 | **Updated**: 2026-02-04 | **BRACELET STUDIO**
+**Version**: 8.0.0 | **Updated**: 2026-02-09 | **BRACELET STUDIO**

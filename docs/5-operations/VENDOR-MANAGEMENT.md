@@ -47,8 +47,7 @@ RFID 카드 + 리더 하드웨어 통합 공급/개발이 가능하거나 가능
 | 업체명 | 국가 | 핵심 역량 | 상태 | RFI 드래프트 |
 |--------|------|----------|:----:|------------|
 | **Sun-Fly** | 중국 | RFID 대량 생산 (연 600만+), 협력 개발 의향 표명 | RFI 발송 대기 | `2026-02-05-SUNFLY-reply.md` |
-| **Angel Playing Cards** | 일본 | 카드 제조 (1949~) + RFID 스마트 테이블 시스템 | RFI 발송 대기 | `2026-02-05-Angel-PlayingCards-RFI.md` |
-| **엠포플러스** | 한국 | HF/UHF RFID 전문, 안테나 설계, 컨설팅 | RFI 발송 대기 | `2026-02-05-EmfoPlus-RFI.md` |
+| **Angel Playing Cards** | 일본 | 카드 제조 (1949~) + RFID 스마트 테이블 시스템 | 홈페이지 문의폼 RFI 발송 | `2026-02-05-Angel-PlayingCards-RFI.md` |
 
 **통일 RFI 템플릿**: `email-drafts/UNIFIED-RFI-TEMPLATE.md`
 
@@ -58,15 +57,8 @@ RFID 카드 + 리더 하드웨어 통합 공급/개발이 가능하거나 가능
 
 | 업체명 | 국가 | 공급 품목 | Phase | 상태 | 연락처 |
 |--------|------|----------|:-----:|:----:|--------|
-| **Waveshare** | 중국 | ST25R3911B 평가보드 | 0 | 직접 구매 | service.waveshare.com |
-| **ST Microelectronics** | 스위스 | ST25R3911B IC | 0-1 | 핵심 부품 | st.com/contact-us |
-| **FEIG Electronic** | 독일 | HF 리더 모듈 | 1+ | 후보 | info@feig.de |
-| **GAO RFID** | 미국/캐나다 | 산업용 리더 | 1+ | 후보 | sales@gaorfid.com |
-| **Identiv** | 미국 | OEM 모듈 | 1+ | 후보 | sales@identiv.com |
-| **PONGEE Industries** | 대만 | HF 리더 모듈 | 1+ | 후보 | pongee@pongee.com.tw |
-| **Faded Spade** | 미국 | RFID 포커 카드 | 0-1 | 잠재 구매 | sales@fadedspade.com |
-| **SparkFun** | 미국 | DIY RFID 모듈 | 0 | 학습용 | sales@sparkfun.com |
-| **Adafruit** | 미국 | PN532 모듈 | 0 | 학습용 | support@adafruit.com |
+| **GAO RFID** | 미국/캐나다 | 산업용 리더 | 1+ | RFI 회신 | sales@gaorfid.com |
+| **Faded Spade** | 미국 | RFID 포커 카드 | 0-1 | RFI 회신 | sales@fadedspade.com |
 | **서울테크** | 한국 | RF 안테나 | 0 | 후보 | - |
 
 **PCB/EMS 업체 (별도 트랙)**
@@ -82,24 +74,21 @@ RFID 카드 + 리더 하드웨어 통합 공급/개발이 가능하거나 가능
 | 업체명 | 국가 | 역할 | 비고 |
 |--------|------|------|------|
 | **PokerGFX** | 미국 | SW 벤치마크/복제 대상 | Enterprise 전용 전환 |
-| **RF Poker** | 미국 | 기술 트렌드 참조 | Seed Stage 스타트업 |
 | **Abbiati Casino** | 이탈리아 | 장비 표준 참조 | 카지노 칩/테이블 중심 |
-| **Matsui Gaming** | 일본 | 장비 표준 참조 | 카지노 장비 유통 |
 | **S.I.T. Korea** | 한국 | 장비 참조 | 카지노 장비 유통 |
 
 ### 2.5 Phase별 업체 매핑
 
 ```
 Phase 0 (현재)
-├── 통합 파트너 선정: Sun-Fly, Angel, 엠포플러스 (RFI 진행 중)
-├── 프로토타입 부품: Waveshare ST25R3911B 보드 (직접 구매)
+├── 통합 파트너 선정: Sun-Fly, Angel (RFI 진행 중)
 ├── PCB 제조: JLCPCB (1순위), PCBWay (대안)
 └── SMT 조립: JLCPCB (1순위), PCBWay (대안)
 
 Phase 1 (통합 파트너 확정 후)
 ├── RFID 카드+리더: 선정된 카테고리 A 파트너
 ├── PCB+SMT: KOREAECM (1순위), JLCPCB (대안)
-├── 리더 모듈 (필요 시): FEIG, Identiv, PONGEE 중 선택
+├── 리더 모듈 (필요 시): GAO RFID
 └── 하우징: 미정
 
 Phase 2 (양산 50+개)
@@ -240,33 +229,7 @@ Phase 2 (양산 50+개)
 
 ---
 
-### 3.4 엠포플러스 ⭐ 카테고리 A (통합 파트너 후보)
-
-**기본 정보:**
-
-| 항목 | 내용 |
-|------|------|
-| **웹사이트** | https://www.emfoplus.com |
-| **위치** | 한국 (서울) |
-| **주요 서비스** | RFID 솔루션 컨설팅, 커스텀 개발 |
-| **특징** | HF/UHF RFID 전문, 안테나 설계 |
-
-**카테고리 A 근거 (RFI로 검증 필요):**
-
-- HF/UHF RFID 전문 + 안테나 설계 역량
-- 리더 하드웨어 + 안테나 통합 개발 가능
-- 국내 업체로 한국어 소통 가능
-- 카드 공급 가능 여부는 미확인 (RFI를 통해 확인)
-
-**다음 액션:**
-
-- [ ] 통일 RFI 발송 (`email-drafts/2026-02-05-EmfoPlus-RFI.md`)
-- [ ] RFID 카드+리더 통합 프로젝트 수행 가능 여부 확인
-- [ ] 파일럿 일정/비용 확인
-
----
-
-### 3.5 PokerGFX ⭐ 현재 사용 중 (원본 제품)
+### 3.4 PokerGFX ⭐ 현재 사용 중 (원본 제품)
 
 **기본 정보:**
 
@@ -286,7 +249,7 @@ Phase 2 (양산 50+개)
 
 ---
 
-### 3.6 Faded Spade
+### 3.5 Faded Spade
 
 **기본 정보:**
 
@@ -313,7 +276,7 @@ Phase 2 (양산 50+개)
 
 ---
 
-### 3.7 Angel Playing Cards ⭐ 카테고리 A (통합 파트너 후보)
+### 3.6 Angel Playing Cards ⭐ 카테고리 A (통합 파트너 후보)
 
 **기본 정보:**
 
@@ -323,8 +286,8 @@ Phase 2 (양산 50+개)
 | **본사** | 일본 교토 |
 | **주소** | 8-1-5 Seikadai, Seikacho Soraku-gun, Kyoto 619-0238, Japan |
 | **전화** | +81 75 354 8525 |
-| **이메일 (해외영업)** | overseas@angel-group.co.jp |
-| **문의폼** | [온라인 문의폼](https://ws.formzu.net/dist/S31266024/) |
+| **이메일 (해외영업)** | overseas@angel-group.co.jp (바운스 확인 2026-02-04) |
+| **문의폼** | [온라인 문의폼](https://ws.formzu.net/dist/S31266024/) ← RFI 발송 경로 |
 | **이메일 도메인** | @angelplayingcards.com, @angel-group.co.jp |
 | **설립** | 1949년 (창업), 1956년 (법인화) |
 | **주요 서비스** | AI+RFID 스마트 테이블 시스템, 카지노 카드, Hanafuda |
@@ -337,15 +300,22 @@ Phase 2 (양산 50+개)
 - 카드와 리더를 모두 제조/공급할 수 있는 몇 안 되는 업체
 - 글로벌 7개국 거점으로 기술 지원 가능
 
+**컨택 이력:**
+
+| 날짜 | 내용 |
+|------|------|
+| 2026-02-04 | overseas@angel-group.co.jp 이메일 발송 → 바운스 |
+| 2026-02-09 | 홈페이지 문의폼으로 RFI 재발송 예정 |
+
 **다음 액션:**
 
-- [ ] 통일 RFI 발송 (`email-drafts/2026-02-05-Angel-PlayingCards-RFI.md`)
+- [ ] 홈페이지 문의폼으로 RFI 발송 (https://ws.formzu.net/dist/S31266024/)
 - [ ] 카드+리더 통합 공급 가능 여부 확인
 - [ ] 파일럿 일정/비용 확인
 
 ---
 
-### 3.8 Abbiati Casino Equipment
+### 3.7 Abbiati Casino Equipment
 
 **기본 정보:**
 
@@ -367,29 +337,7 @@ Phase 2 (양산 50+개)
 
 ---
 
-### 3.9 FEIG Electronic
-
-**기본 정보:**
-
-| 항목 | 내용 |
-|------|------|
-| **웹사이트** | https://www.feig.de/en |
-| **본사** | 독일 헤센 |
-| **전화** | +49-6471-3109-0 |
-| **운영시간** | 월-목 8am-4pm, 금 8am-1pm |
-| **설립** | 50년+ 역사 |
-| **직원** | 500명+ |
-| **주요 서비스** | HF/LF/UHF RFID 리더, 접근 제어 |
-| **특징** | 한국 대리점(MINU) 있음 |
-
-**적합 용도:**
-
-- Phase 1-2 고성능 HF 리더 후보
-- 독일 품질 RFID 솔루션
-
----
-
-### 3.10 GAO RFID
+### 3.8 GAO RFID
 
 **기본 정보:**
 
@@ -412,130 +360,7 @@ Phase 2 (양산 50+개)
 
 ---
 
-### 3.11 Identiv
-
-**기본 정보:**
-
-| 항목 | 내용 |
-|------|------|
-| **웹사이트** | https://www.identiv.com |
-| **본사** | 미국 캘리포니아 |
-| **이메일 (영업)** | sales@identiv.com |
-| **이메일 (IR)** | IR@identiv.com |
-| **전화** | +1 866-358-1029 (무료) |
-| **주소** | 1900-B Carnegie Avenue, Santa Ana, CA 92705 |
-| **주요 서비스** | uTrust OEM 모듈, RFID/BLE IoT 솔루션 |
-| **특징** | SDK 지원, 다양한 산업 적용 |
-
-**적합 용도:**
-
-- OEM 모듈 필요 시
-- Phase 1 커스텀 리더 개발
-
----
-
-### 3.12 PONGEE Industries
-
-**기본 정보:**
-
-| 항목 | 내용 |
-|------|------|
-| **웹사이트** | https://www.pongee.com |
-| **본사** | 대만 뉴타이베이시 |
-| **이메일** | pongee@pongee.com.tw |
-| **전화** | +886-2-8228-0198 |
-| **팩스** | +886-2-8228-0191 |
-| **주소** | 5F., No.738, Chung-Cheng Rd., Chung-Ho District, New Taipei City 235603, Taiwan |
-| **주요 서비스** | HF 리더 모듈, OEM/ODM |
-| **특징** | RFID 접근 제어, 전자 잠금장치 |
-
-**적합 용도:**
-
-- Phase 1 OEM 모듈 후보
-- 대만 제조 옵션
-
----
-
-### 3.13 Waveshare
-
-**기본 정보:**
-
-| 항목 | 내용 |
-|------|------|
-| **웹사이트** | https://www.waveshare.com |
-| **제품 페이지** | https://www.waveshare.com/wiki/ST25R3911B_NFC_Board |
-| **기술지원** | https://service.waveshare.com |
-| **운영시간** | 9AM-6PM GMT+8 (월-금) |
-| **예상 가격** | $50-80 |
-
-**ST25R3911B NFC Board 스펙:**
-
-| 항목 | 내용 |
-|------|------|
-| NFC 칩 | ST25R3911B |
-| 주파수 | 13.56MHz |
-| 최대 출력 | 1.4W |
-| 인터페이스 | SPI |
-| 프로토콜 | ISO18092, ISO14443A/B, ISO15693, FeliCa |
-| 컨트롤러 | AT32F413RBT7 |
-| 디스플레이 | 1.3" OLED |
-
-**적합 용도:**
-
-- Phase 0 프로토타입 개발
-- ST25R3911B 학습/평가
-
----
-
-### 3.14 SparkFun
-
-**기본 정보:**
-
-| 항목 | 내용 |
-|------|------|
-| **웹사이트** | https://www.sparkfun.com |
-| **이메일 (영업)** | sales@sparkfun.com |
-| **기술지원** | https://forum.sparkfun.com |
-| **전화** | (303) 284-0979 |
-| **본사** | 미국 콜로라도 Niwot |
-| **주요 서비스** | DIY 전자부품, RFID 모듈 |
-| **특징** | 풍부한 튜토리얼, 오픈소스 |
-| **유통** | DigiKey, Arrow 공식 디스트리뷰터 |
-
-**적합 용도:**
-
-- Phase 0 학습용
-- DIY 프로토타입
-- 대량 구매 시 sales@sparkfun.com 문의
-
----
-
-### 3.15 Adafruit
-
-**기본 정보:**
-
-| 항목 | 내용 |
-|------|------|
-| **웹사이트** | https://www.adafruit.com |
-| **이메일** | support@adafruit.com |
-| **문의** | https://www.adafruit.com/contact_us |
-| **기술지원** | https://forums.adafruit.com |
-| **전화** | +1 646-248-7822 |
-| **본사** | 미국 뉴욕 |
-| **주요 서비스** | PN532 모듈, DIY 전자부품 |
-| **특징** | 풍부한 문서, 학습 자료, 100% 여성 소유 기업 |
-| **유통** | Arrow 공식 디스트리뷰터 |
-
-**참고:** 소매점 없음, 방문 불가. 포럼을 통한 기술 지원.
-
-**적합 용도:**
-
-- Phase 0 학습용
-- PN532 기반 프로토타입
-
----
-
-### 3.16 Sun-Fly ⭐ 카테고리 A (통합 파트너 후보)
+### 3.9 Sun-Fly ⭐ 카테고리 A (통합 파트너 후보)
 
 **기본 정보:**
 
@@ -570,63 +395,6 @@ Phase 2 (양산 50+개)
 - [ ] 파일럿 일정/비용 확인
 
 ---
-
-### 3.17 Matsui Gaming Machine
-
-**기본 정보:**
-
-| 항목 | 내용 |
-|------|------|
-| **웹사이트** | https://www.matsui-gaming.co.jp/en/ |
-| **본사** | 일본 도쿄 |
-| **미국 법인** | https://www.matsui-americainc.com/en |
-| **유럽 법인** | https://matsuieurope.com/ |
-| **유럽 이메일** | sales@matsuieurope.co.uk |
-| **유럽 전화** | +44 (0)161 736 9011 |
-| **글로벌 거점** | Manchester, Moscow, Las Vegas, Macau, Seoul |
-| **제조 공장** | 일본, 한국 |
-| **주요 서비스** | 카지노 칩, 플레이 카드, 레이아웃, 테이블, 룰렛 휠 |
-| **특징** | 일본 유일 카지노 장비 제조사, 130개국 공급 |
-
-**적합 용도:**
-
-- 카지노 장비 표준 참조
-- 아시아 시장 진출 시 파트너십 후보
-- Bicycle 카드 일본 유통사
-
-**컨택 방법:**
-
-- 유럽: sales@matsuieurope.co.uk
-- 한국: Seoul 지사 통해 연락
-
----
-
-### 3.18 RF Poker
-
-**기본 정보:**
-
-| 항목 | 내용 |
-|------|------|
-| **웹사이트** | https://rfpoker.com |
-| **이메일** | contact@rf.team |
-| **문의폼** | https://rfpoker.com/contact |
-| **본사** | 미국 애틀랜타 |
-| **설립** | 2021년 (Seed Stage) |
-| **창업자** | Maanit Madan |
-| **투자사** | Chocho Ventures |
-| **모회사** | RF Labs (https://www.rf.team/) |
-| **주요 서비스** | RFID 포커 테이블 시스템 |
-| **기술** | 온보드 컴퓨터, 360° 카메라, 스마트 조명, RFID 칩/카드/버튼 |
-
-**적합 용도:**
-
-- RFID 포커 시스템 벤치마크
-- 차세대 포커 기술 트렌드 참조
-
-**컨택 방법:**
-
-- 일반 문의: contact@rf.team
-- 투자사: sb@chochoventures.com
 
 ---
 
@@ -842,6 +610,8 @@ Best regards,
 
 | 날짜 | 버전 | 변경 내용 |
 |------|------|----------|
+| 2026-02-09 | 8.0.0 | 미관련 업체 정리: Matsui Gaming(RFID 미취급), ST Microelectronics(미관련), SparkFun(미관련), RF Poker(기성품 업체) 제거. 7개 업체로 축소 |
+| 2026-02-09 | 7.0.0 | RFI 무응답 업체 정리: Adafruit, Identiv, Pongee, Waveshare, FEIG, 엠포플러스 제거. Angel Playing Cards 문의폼 RFI 발송 경로 업데이트. GAO/FadedSpade/SparkFun RFI 회신 상태 반영 |
 | 2026-02-05 | 6.0.0 | 분류 체계 전면 개편: 카테고리 A(통합 파트너)/B(부품 공급)/C(벤치마크). Sun-Fly/Angel/엠포플러스를 카테고리 A로 승격. 통일 RFI 기반 선정 프로세스 도입 |
 | 2026-02-04 | 5.0.0 | 미확보 연락처 업체 조사 완료: SparkFun, Adafruit, Faded Spade, Matsui, RF Poker, Angel 등 |
 | 2026-02-03 | 4.0.0 | Slack List 기반 업체 16개 통합, 연락처 정보 추가 |
@@ -851,4 +621,4 @@ Best regards,
 
 ---
 
-**Version**: 6.0.0 | **Updated**: 2026-02-05 | **BRACELET STUDIO**
+**Version**: 8.0.0 | **Updated**: 2026-02-09 | **BRACELET STUDIO**

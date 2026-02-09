@@ -122,10 +122,10 @@ class SlackPoster:
             return {"ok": False, "error": str(e)}
 
     # Category A vendors (integrated partner candidates: RFID card + reader)
-    CATEGORY_A_KEYS = {"sunfly", "angel", "emfoplus"}
+    CATEGORY_A_KEYS = {"sunfly", "angel"}
 
     # Category C vendors (benchmarks/references, no email needed)
-    CATEGORY_C_KEYS = {"pokergfx", "rfpoker", "abbiati", "matsui", "sit_korea"}
+    CATEGORY_C_KEYS = {"pokergfx", "abbiati", "sit_korea"}
 
     def _classify_vendor(self, vendor_key: str) -> str:
         """Classify vendor into A/B/C category."""
@@ -161,7 +161,6 @@ class SlackPoster:
     CATEGORY_A_CONTACTS = {
         "sunfly": "sun-fly.com",
         "angel": "angel-group.co.jp",
-        "emfoplus": "emfoplus.co.kr",
     }
 
     def _get_email_status(self, vendor_key: str, list_status: str, gmail_data: dict) -> str:
@@ -204,15 +203,8 @@ class SlackPoster:
         # Category A (통합 파트너 후보)
         "sunfly": {"name": "Sun-Fly", "email": "susie.su@sun-fly.com", "cat": "A"},
         "angel": {"name": "Angel Playing Cards", "email": "overseas@angel-group.co.jp", "cat": "A"},
-        "emfoplus": {"name": "엠포플러스", "email": "biz@emfoplus.co.kr", "cat": "A"},
         # Category B (부품 공급)
-        "feig": {"name": "FEIG", "email": "info@feig.de", "cat": "B"},
         "gao": {"name": "GAO RFID", "email": "sales@gaorfid.com", "cat": "B"},
-        "identiv": {"name": "Identiv", "email": "sales@identiv.com", "cat": "B"},
-        "pongee": {"name": "PONGEE", "email": "pongee@pongee.com.tw", "cat": "B"},
-        "waveshare": {"name": "Waveshare", "email": "service@waveshare.com", "cat": "B"},
-        "sparkfun": {"name": "SparkFun", "email": "sales@sparkfun.com", "cat": "B"},
-        "adafruit": {"name": "Adafruit", "email": "support@adafruit.com", "cat": "B"},
         "fadedspade": {"name": "Faded Spade", "email": "sales@fadedspade.com", "cat": "B"},
     }
 
