@@ -31,6 +31,8 @@ from .fallback_handler import FallbackHandler
 from ..adapters.html_adapter import HTMLAdapter
 from ..adapters.stitch_adapter import StitchAdapter
 from ..adapters.mermaid_adapter import MermaidAdapter
+from .document_scanner import DocumentScanner, DocumentScanResult, SectionClassification
+from .document_embedder import DocumentEmbedder
 
 
 class MockupRouter:
@@ -83,6 +85,26 @@ class MockupRouter:
         output_dir = output_dir or DEFAULT_MOCKUP_DIR
         image_dir = image_dir or DEFAULT_IMAGE_DIR
 
+        # 0. 파일 경로 감지 → 문서 모드
+        prompt_path = Path(prompt)
+        if prompt_path.suffix in ('.md', '.markdown') and prompt_path.exists():
+            self.route_document(
+                doc_path=prompt_path,
+                options=options,
+                output_dir=output_dir,
+                image_dir=image_dir,
+            )
+            # 문서 모드는 별도 결과 반환
+            return MockupResult(
+                backend=MockupBackend.MERMAID,
+                reason=SelectionReason.DEFAULT,
+                html_path=prompt_path,
+                image_path=None,
+                success=True,
+                message=f"📄 문서 기반 목업 생성 완료: {prompt_path}",
+                fallback_used=False,
+            )
+
         # 1. 프롬프트 분석
         analysis = self.analyzer.analyze(prompt, options)
         backend_info = self.analyzer.get_backend_info(analysis.backend)
@@ -108,6 +130,78 @@ class MockupRouter:
         )
 
         return result
+
+    def route_document(
+        self,
+        doc_path: Path,
+        options: Optional[MockupOptions] = None,
+        output_dir: Optional[Path] = None,
+        image_dir: Optional[Path] = None,
+        force: bool = False,
+        dry_run: bool = False,
+    ) -> DocumentScanResult:
+        """
+        문서 기반 일괄 목업 생성
+
+        문서를 스캔하여 시각화 필요 섹션을 발견하고,
+        각 섹션에 적합한 목업을 자동 생성하여 문서에 삽입합니다.
+
+        Args:
+            doc_path: 마크다운 문서 경로
+            options: 목업 옵션
+            output_dir: HTML 출력 디렉토리
+            image_dir: 이미지 출력 디렉토리
+            force: True면 기존 시각화도 재생성
+            dry_run: True면 스캔만 하고 생성하지 않음
+
+        Returns:
+            DocumentScanResult 객체
+        """
+        options = options or MockupOptions()
+        output_dir = output_dir or DEFAULT_MOCKUP_DIR
+        image_dir = image_dir or DEFAULT_IMAGE_DIR
+
+        scanner = DocumentScanner()
+        embedder = DocumentEmbedder()
+
+        # 1. 문서 스캔
+        scan_result = scanner.scan(doc_path, force=force)
+
+        if dry_run:
+            return scan_result
+
+        if scan_result.mockup_count == 0:
+            return scan_result
+
+        # 2. 각 NEED 섹션에 대해 목업 생성
+        generation_results = []
+        for section in scan_result.need_sections:
+            # 섹션의 suggested_tier를 force 옵션으로 변환
+            section_options = MockupOptions(
+                bnw=options.bnw,
+                force_mermaid=section.suggested_tier == MockupBackend.MERMAID,
+                force_html=section.suggested_tier == MockupBackend.HTML,
+                force_hifi=section.suggested_tier == MockupBackend.STITCH,
+                prd=options.prd,
+            )
+
+            # 섹션 제목 + 본문을 프롬프트로 사용
+            heading_text = section.heading.lstrip('#').strip()
+            prompt = f"{heading_text}: {section.content[:200]}"
+
+            mockup_result = self.route(
+                prompt=prompt,
+                options=section_options,
+                output_dir=output_dir,
+                image_dir=image_dir,
+            )
+
+            generation_results.append((section, mockup_result))
+
+        # 3. 문서에 결과 삽입
+        embed_results = embedder.embed_batch(doc_path, generation_results)
+
+        return scan_result
 
     def _execute_backend(
         self,

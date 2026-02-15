@@ -2,9 +2,9 @@
 
 > **BRACELET STUDIO** | EBS Project
 
-**총 149개 기능** | **완료: 0/149**
+**총 149개 기능** | **EBS 대상: 147개** (Commentary 2개 배제) | **완료: 0/147**
 
-이 문서는 PokerGFX의 모든 기능을 개별적으로 나열합니다. Phase 1에서 100% 복제해야 하는 대상입니다.
+이 문서는 PokerGFX의 모든 기능을 개별적으로 나열합니다. Phase 1에서 복제해야 하는 대상입니다. Commentary 탭 기능(SV-021, SV-022)은 기존 프로덕션 미사용으로 배제합니다.
 
 > **v4.1.0**: 실제 PokerGFX 3.111 스크린샷 분석으로 30개 기능 추가 (Server 관리 카테고리 신설)
 > 상세 분석: `docs/01_PokerGFX_Analysis/PokerGFX-UI-Analysis.md`
@@ -22,7 +22,7 @@
 | Security | 11 | 0/11 | 보안 및 딜레이 모드 |
 | Equity & Stats | 19 | 0/19 | 승률 계산 및 통계 |
 | Hand History | 11 | 0/11 | 핸드 히스토리 관리 |
-| **Server 관리** | **30** | **0/30** | **비디오 입출력, 스킨, 시스템** |
+| **Server 관리** | **30** | **0/28** | **비디오 입출력, 스킨, 시스템** (Commentary 2개 배제) |
 
 ---
 
@@ -343,12 +343,14 @@ PokerGFX Server 3.111의 7개 탭 + Skin Editor + Graphic Editor에서 발견된
 | SV-019 | BB 표시 모드 | 칩 수량 대신 Big Blind 배수로 표시 | P1 | [ ] |
 | SV-020 | 통화 기호 설정 | ₩/$/€ 등 통화 기호 + 후행 배치 옵션 | P1 | [ ] |
 
-### 8.5 해설자 - Commentary 탭 (2개)
+### 8.5 해설자 - Commentary 탭 (2개) — EBS 배제
+
+> **배제 사유**: Commentary 탭은 기존 프로덕션에서 사용하지 않는 기능이므로 EBS에서 배제한다.
 
 | ID | 기능 | 설명 | 우선순위 | 완료 |
 |----|------|------|:--------:|:----:|
-| SV-021 | Commentary Mode | 해설자 원격 접속 (비밀번호 인증, 통계 전용 모드) | P1 | [ ] |
-| SV-022 | Picture In Picture | 해설자 카메라 PIP 오버레이 설정 | P1 | [ ] |
+| SV-021 | Commentary Mode | 해설자 원격 접속 (비밀번호 인증, 통계 전용 모드) | ~~P1~~ | [-] |
+| SV-022 | Picture In Picture | 해설자 카메라 PIP 오버레이 설정 | ~~P1~~ | [-] |
 
 ### 8.6 시스템 - System 탭 (4개)
 

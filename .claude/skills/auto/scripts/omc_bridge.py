@@ -77,11 +77,12 @@ class AgentInfo:
 
 @dataclass
 class AgentConfig:
-    """에이전트 호출 설정"""
+    """에이전트 호출 설정 (Agent Teams 패턴)"""
     agent_type: str
     model: ModelTier
     prompt: str
-    background: bool = False
+    name: str = ""        # Agent Teams: teammate 이름 (필수)
+    team_name: str = ""   # Agent Teams: 팀 이름 (필수)
 
 
 @dataclass
@@ -518,13 +519,20 @@ class OMCBridge:
     # -------------------------------------------------------------------------
 
     def build_task_call(self, agent_config: AgentConfig) -> str:
-        """Task tool 호출 코드 생성"""
+        """Task tool 호출 코드 생성 (Agent Teams 패턴)
+
+        Agent Teams 필수: name + team_name 포함.
+        생성된 코드는 TeamCreate → Task(name, team_name) → SendMessage 패턴을 따름.
+        """
         return f'''Task(
     subagent_type="{agent_config.agent_type}",
+    name="{agent_config.name}",
+    team_name="{agent_config.team_name}",
     model="{agent_config.model.value}",
-    prompt="""{agent_config.prompt}""",
-    run_in_background={str(agent_config.background).lower()}
-)'''
+    prompt="""{agent_config.prompt}"""
+)
+SendMessage(type="message", recipient="{agent_config.name}",
+    content="Task 할당. 완료 후 TaskUpdate로 completed 처리.")'''
 
     def build_task_call_with_fallback(self, agent_config: AgentConfig) -> Tuple[str, bool, str]:
         """Task tool 호출 코드 생성 (BKIT 폴백 자동 처리)"""
@@ -539,7 +547,8 @@ class OMCBridge:
             agent_type=actual_agent,
             model=actual_model,
             prompt=agent_config.prompt,
-            background=agent_config.background
+            name=agent_config.name,
+            team_name=agent_config.team_name
         )
 
         task_call = self.build_task_call(updated_config)
@@ -561,18 +570,22 @@ class OMCBridge:
         self,
         design_doc: str,
         implementation: str,
-        gap_threshold: int = 90
+        gap_threshold: int = 90,
+        team_name: str = "pdca-verify"
     ) -> str:
-        """설계-구현 검증을 위한 병렬 비교 호출 (Architect + gap-detector)"""
+        """설계-구현 검증을 위한 순차 비교 호출 (Agent Teams 패턴: Architect → gap-detector)"""
         return f'''# ============================================================
-# 이중 검증: OMC Architect + BKIT gap-detector
+# 이중 검증: OMC Architect + BKIT gap-detector (Agent Teams)
 # ============================================================
 
-# OMC Architect 검증 (기능적 완성도)
+# 팀은 이미 생성되어 있어야 함 (team_name="{team_name}")
+
+# 1. OMC Architect 검증 (기능적 완성도) - 순차 teammate
 Task(
     subagent_type="oh-my-claudecode:architect",
+    name="verifier",
+    team_name="{team_name}",
     model="opus",
-    description="[OMC] Architect 검증",
     prompt="""## 설계 문서
 {design_doc}
 
@@ -590,12 +603,16 @@ Task(
 - issues: [발견된 이슈 목록]
 - feedback: 상세 피드백"""
 )
+SendMessage(type="message", recipient="verifier",
+    content="검증 시작. APPROVE/REJECT 판정 후 TaskUpdate 처리.")
+# verifier 완료 대기 → shutdown_request
 
-# BKIT gap-detector 검증 (설계-구현 일치도)
+# 2. BKIT gap-detector 검증 (설계-구현 일치도) - verifier 완료 후 순차 실행
 Task(
     subagent_type="bkit:gap-detector",
+    name="gap-checker",
+    team_name="{team_name}",
     model="opus",
-    description="[BKIT] 설계-구현 갭 분석",
     prompt="""## 설계 문서
 {design_doc}
 
@@ -618,6 +635,9 @@ Task(
 - extras: [구현에 있으나 설계에 없는 항목]
 - recommendations: [권장 조치사항]"""
 )
+SendMessage(type="message", recipient="gap-checker",
+    content="갭 분석 시작. 완료 후 TaskUpdate 처리.")
+# gap-checker 완료 대기 → shutdown_request
 
 # 두 검증 결과를 종합하여 최종 판정
 # - Architect APPROVED + gap >= {gap_threshold}% -> 완료

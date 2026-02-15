@@ -58,14 +58,15 @@ from src.agents.teams import Coordinator
 result = Coordinator.run_single_team("{팀명}", "작업 설명")
 ```
 
-또는 OMC 에이전트로 위임:
+또는 Agent Teams로 위임:
 ```
-Task(
-  subagent_type="oh-my-claudecode:executor",
-  model="sonnet",
-  prompt="src/agents/teams/{팀명}_team.py의 {팀}Team을 실행하세요.
-  태스크: {작업 설명}"
-)
+TeamCreate(team_name="teamwork-{팀명}")
+Task(subagent_type="oh-my-claudecode:executor", name="team-runner",
+     team_name="teamwork-{팀명}", model="sonnet",
+     prompt="src/agents/teams/{팀명}_team.py의 {팀}Team을 실행하세요.
+     태스크: {작업 설명}")
+SendMessage(type="message", recipient="team-runner", content="팀 실행 시작.")
+# 완료 대기 → shutdown_request → TeamDelete()
 ```
 
 ### `/teamwork "프로젝트"` 실행 시

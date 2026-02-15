@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1024">
+<title>EBS Server v1.0 — UI Wireframe</title>
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-deep:#111125;--bg-main:#1a1a2e;--bg-panel:#16213e;--bg-card:#0f3460;
+  --bg-input:#2a2a4a;--border:#3a3a5c;--border-light:#555;
+  --accent:#e94560;--accent-hover:#ff6b81;--green:#2ecc71;--yellow:#f39c12;--red:#e74c3c;
+  --text:#ffffff;--text-sec:#b0b0b0;--text-dim:#777;
+  --chroma:#0000FF;--radius:4px;
+}
+html{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;color:var(--text);background:var(--bg-deep)}
+body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh;padding:10px;background:var(--bg-deep)}
+
+/* ===== APP WINDOW ===== */
+.app{width:1024px;min-height:720px;background:var(--bg-main);border:1px solid var(--border);border-radius:6px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.6)}
+
+/* ===== TITLE BAR ===== */
+.titlebar{display:flex;align-items:center;justify-content:space-between;background:#0d0d1a;padding:4px 12px;border-bottom:1px solid var(--border);height:30px}
+.titlebar-left{display:flex;align-items:center;gap:8px}
+.titlebar-left .app-icon{width:16px;height:16px;background:var(--accent);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff}
+.titlebar-title{font-size:13px;color:var(--text-sec);letter-spacing:.3px}
+.titlebar-title span{color:var(--text);font-weight:600}
+.titlebar-controls{display:flex;gap:2px}
+.titlebar-controls button{width:36px;height:22px;border:none;background:transparent;color:var(--text-sec);font-size:13px;cursor:pointer;border-radius:2px;display:flex;align-items:center;justify-content:center}
+.titlebar-controls button:hover{background:rgba(255,255,255,.1)}
+.titlebar-controls .close:hover{background:var(--accent);color:#fff}
+.id-label{font-size:9px;color:var(--text-dim);background:rgba(255,255,255,.06);padding:1px 4px;border-radius:2px;font-family:'Consolas','Courier New',monospace;letter-spacing:.5px;display:inline-block;vertical-align:middle;line-height:1.4}
+
+/* ===== TOP SECTION (PERSISTENT) ===== */
+.top-section{display:flex;border-bottom:1px solid var(--border);height:280px}
+
+/* Preview Panel */
+.preview-panel{flex:0 0 65%;background:#0a0a1a;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.preview-inner{width:calc(100% - 16px);aspect-ratio:16/9;background:var(--chroma);display:flex;align-items:center;justify-content:center;border-radius:var(--radius);position:relative;max-height:calc(100% - 16px)}
+.preview-inner .preview-text{color:rgba(255,255,255,.25);font-size:20px;font-weight:300;letter-spacing:4px;text-transform:uppercase}
+.preview-inner .preview-id{position:absolute;top:6px;left:8px}
+.preview-inner .fullscreen-btn{position:absolute;bottom:6px;right:8px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);color:var(--text-sec);padding:2px 6px;border-radius:3px;font-size:10px;cursor:pointer}
+.preview-inner .fullscreen-btn:hover{background:rgba(255,255,255,.15)}
+
+/* Control Panel */
+.control-panel{flex:0 0 35%;background:var(--bg-panel);padding:8px 10px;display:flex;flex-direction:column;gap:6px;border-left:1px solid var(--border);overflow-y:auto}
+
+/* Status Row */
+.status-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.indicator{display:flex;align-items:center;gap:3px;background:rgba(0,0,0,.25);padding:3px 8px;border-radius:3px;font-size:10px;font-weight:600}
+.indicator .bar{width:30px;height:6px;border-radius:3px;overflow:hidden;background:rgba(255,255,255,.1)}
+.indicator .bar-fill{height:100%;border-radius:3px;transition:width .3s}
+.indicator .bar-fill.green{background:var(--green);width:35%}
+.indicator .bar-fill.yellow{background:var(--yellow);width:72%}
+.status-icon{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:3px;cursor:pointer;font-size:14px;border:1px solid var(--border)}
+.status-icon:hover{border-color:var(--text-sec)}
+.status-icon.error-icon{position:relative}
+.status-icon.error-icon .badge{position:absolute;top:-3px;right:-3px;background:var(--accent);color:#fff;font-size:7px;width:12px;height:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
+.status-icon.lock-btn{background:rgba(233,69,96,.15);border-color:var(--accent)}
+.status-icon.lock-btn.locked{background:var(--accent);color:#fff}
+
+/* Security Row */
+.security-row{display:flex;align-items:center;gap:10px;padding:2px 0}
+.chk-group{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-sec)}
+.chk-group input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:pointer}
+.chk-group label{cursor:pointer}
+
+/* Delay Progress */
+.delay-bar{background:rgba(0,0,0,.3);border-radius:3px;padding:4px 8px;display:flex;align-items:center;gap:6px;font-size:10px}
+.delay-bar .progress-track{flex:1;height:5px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.delay-bar .progress-fill{height:100%;width:90%;background:linear-gradient(90deg,var(--accent),var(--yellow));border-radius:3px}
+.delay-bar .delay-text{color:var(--yellow);font-weight:600;white-space:nowrap}
+
+/* Info Row */
+.info-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hand-badge{background:rgba(233,69,96,.2);border:1px solid var(--accent);color:var(--accent);padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600}
+.conn-status{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text-sec)}
+.conn-dot{display:inline-flex;align-items:center;gap:2px}
+.conn-dot::before{content:'';width:6px;height:6px;border-radius:50%;display:inline-block}
+.conn-dot.ok::before{background:var(--green)}
+.conn-dot.fail::before{background:var(--red)}
+
+/* Divider */
+.ctrl-divider{height:1px;background:var(--border);margin:2px 0}
+
+/* Quick Actions */
+.quick-actions{display:flex;align-items:center;gap:4px}
+.btn{background:var(--bg-input);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:var(--radius);cursor:pointer;font-size:11px;font-family:inherit;transition:all .15s;white-space:nowrap}
+.btn:hover{background:var(--bg-card);border-color:var(--text-sec)}
+.btn-primary{background:var(--accent);border-color:var(--accent);font-weight:600}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-icon{padding:4px 6px;font-size:13px}
+.btn-full{width:100%}
+.tag-row{display:flex;gap:4px;align-items:center}
+.tag-row select{flex:0 0 120px}
+.tag-row input{flex:1}
+
+/* ===== TAB BAR ===== */
+.tab-bar{display:flex;background:#0d0d1a;border-bottom:2px solid var(--border);padding:0 4px}
+.tab-btn{padding:8px 16px;background:transparent;border:none;color:var(--text-sec);font-size:12px;font-family:inherit;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;letter-spacing:.3px;position:relative}
+.tab-btn:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tab-btn .shortcut{font-size:9px;color:var(--text-dim);margin-left:3px}
+
+/* ===== TAB CONTENT ===== */
+.tab-content{min-height:380px;padding:10px;display:none;overflow-y:auto;max-height:420px}
+.tab-content.active{display:block}
+
+/* ===== GROUP CARD ===== */
+.group{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden}
+.group-header{background:rgba(0,0,0,.2);padding:5px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-sec);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.group-header .count{font-size:9px;font-weight:400;color:var(--text-dim);background:rgba(255,255,255,.06);padding:1px 6px;border-radius:2px}
+.group-body{padding:8px 10px;display:flex;flex-direction:column;gap:5px}
+
+/* ===== FORM ELEMENTS ===== */
+.form-row{display:flex;align-items:center;gap:6px;min-height:24px}
+.form-row .label{flex:0 0 140px;font-size:11px;color:var(--text-sec);display:flex;align-items:center;gap:4px}
+.form-row .label .id-label{margin-right:2px}
+.form-row .control{flex:1;display:flex;align-items:center;gap:4px}
+select,input[type=text],input[type=number],input[type=password]{
+  background:var(--bg-input);border:1px solid var(--border);color:var(--text);padding:3px 6px;border-radius:var(--radius);
+  font-size:11px;font-family:inherit;min-height:24px;width:100%
+}
+select{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23888'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;padding-right:18px}
+select:focus,input:focus{outline:none;border-color:var(--accent)}
+input[type=number]{width:60px}
+input[type=color]{width:32px;height:24px;padding:1px;border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;background:var(--bg-input)}
+
+/* Radio Group */
+.radio-group{display:flex;gap:2px}
+.radio-group label{display:flex;align-items:center;gap:3px;padding:3px 8px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;font-size:11px;color:var(--text-sec);transition:all .15s}
+.radio-group label:hover{border-color:var(--text-sec)}
+.radio-group input[type=radio]{display:none}
+.radio-group input[type=radio]:checked+span{color:var(--accent);font-weight:600}
+.radio-group label:has(input:checked){border-color:var(--accent);background:rgba(233,69,96,.1)}
+
+/* Data Table */
+.data-table{width:100%;border-collapse:collapse;font-size:11px}
+.data-table th{background:rgba(0,0,0,.3);padding:4px 6px;text-align:left;font-weight:600;color:var(--text-sec);border-bottom:1px solid var(--border);font-size:10px;text-transform:uppercase;letter-spacing:.5px}
+.data-table td{padding:4px 6px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text-sec)}
+.data-table tr:hover td{background:rgba(255,255,255,.02)}
+
+/* Columns */
+.cols{display:flex;gap:10px}
+.cols>.col{flex:1;min-width:0}
+.cols-3>.col{flex:1}
+
+/* Sub Tabs */
+.sub-tabs{display:flex;gap:2px;margin-bottom:10px;background:rgba(0,0,0,.2);padding:3px;border-radius:var(--radius)}
+.sub-tab-btn{padding:5px 14px;background:transparent;border:1px solid transparent;color:var(--text-sec);font-size:11px;font-family:inherit;cursor:pointer;border-radius:3px;transition:all .15s;font-weight:500}
+.sub-tab-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.sub-tab-btn.active{background:var(--bg-card);border-color:var(--border);color:var(--accent);font-weight:600}
+.sub-content{display:none}
+.sub-content.active{display:block}
+
+/* Image Slot */
+.img-slot{width:100%;height:60px;background:var(--bg-input);border:1px dashed var(--border);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:10px;cursor:pointer;transition:border-color .15s}
+.img-slot:hover{border-color:var(--accent)}
+
+/* Warning Banner */
+.banner{padding:6px 10px;border-radius:var(--radius);font-size:11px;display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.banner-warn{background:rgba(243,156,18,.1);border:1px solid rgba(243,156,18,.3);color:var(--yellow)}
+.banner-info{background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.2);color:var(--green)}
+
+/* Precision Group */
+.precision-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.precision-cell{background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);padding:4px;text-align:center;font-size:10px}
+.precision-cell .zone-label{color:var(--text-dim);font-size:9px;display:block;margin-bottom:2px}
+.precision-cell select{width:100%;font-size:10px;padding:2px}
+
+/* Settings icon button */
+.settings-icon{width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:3px;cursor:pointer;font-size:11px;color:var(--text-sec);flex-shrink:0}
+.settings-icon:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Hardware Panel */
+.hw-panel{display:grid;grid-template-columns:80px 1fr;gap:2px;font-size:11px}
+.hw-panel .hw-label{color:var(--text-dim);padding:2px 0}
+.hw-panel .hw-value{color:var(--text-sec);padding:2px 0}
+
+/* Watermark */
+.watermark{text-align:center;padding:8px;font-size:10px;color:var(--text-dim);letter-spacing:.5px;border-top:1px solid rgba(255,255,255,.04)}
+
+/* Side-by-side preview boxes */
+.preview-pair{display:flex;gap:6px}
+.preview-box{flex:1;height:50px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-dim)}
+
+/* Slider style */
+input[type=range]{width:100%;accent-color:var(--accent);height:4px;cursor:pointer}
+
+/* Section title inside tab */
+.section-title{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin:8px 0 4px;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.06)}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ===== TITLE BAR ===== -->
+  <div class="titlebar">
+    <div class="titlebar-left">
+      <div class="app-icon">E</div>
+      <div class="titlebar-title"><span>EBS Server</span> v1.0 <span class="id-label">M-01</span></div>
+    </div>
+    <div class="titlebar-controls">
+      <button title="Minimize">&#x2014;</button>
+      <button title="Maximize">&#x25A1;</button>
+      <button class="close" title="Close">&#x2715;</button>
+    </div>
+  </div>
+
+  <!-- ===== TOP SECTION (ALWAYS VISIBLE) ===== -->
+  <div class="top-section">
+    <!-- Preview Panel -->
+    <div class="preview-panel">
+      <div class="preview-inner">
+        <span class="preview-id"><span class="id-label">M-02</span></span>
+        <span class="preview-text">GFX Preview</span>
+        <button class="fullscreen-btn" title="Fullscreen (F11)"><span class="id-label">M-20</span> F11</button>
+      </div>
+    </div>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+      <!-- Status Row -->
+      <div class="status-row">
+        <div class="indicator" title="CPU Usage 35%">
+          <span class="id-label">M-03</span> CPU
+          <div class="bar"><div class="bar-fill green"></div></div>
+        </div>
+        <div class="indicator" title="GPU Usage 72%">
+          <span class="id-label">M-04</span> GPU
+          <div class="bar"><div class="bar-fill yellow"></div></div>
+        </div>
+        <div class="status-icon" title="RFID Status: Connected" style="color:var(--green)">
+          <span class="id-label" style="position:absolute;top:-10px;left:0;font-size:8px">M-05</span>
+          &#x25C9;
+        </div>
+        <div class="status-icon error-icon" title="Errors (2)">
+          <span class="badge">2</span>
+          <span class="id-label" style="position:absolute;top:-10px;left:0;font-size:8px">M-06</span>
+          &#x26A0;
+        </div>
+        <div class="status-icon lock-btn" id="lockToggle" title="Lock Toggle (Ctrl+L)" onclick="toggleLock()">
+          <span class="id-label" style="position:absolute;top:-10px;left:0;font-size:8px">M-07</span>
+          &#x1F512;
+        </div>
+      </div>
+
+      <!-- Security Row -->
+      <div class="security-row">
+        <div class="chk-group">
+          <span class="id-label">M-08</span>
+          <input type="checkbox" id="secureDelay" onchange="toggleDelay()"><label for="secureDelay">Secure Delay</label>
+        </div>
+        <div class="chk-group">
+          <span class="id-label">M-09</span>
+          <input type="checkbox" id="previewToggle" checked><label for="previewToggle">Preview</label>
+        </div>
+      </div>
+
+      <!-- Delay Progress (hidden by default) -->
+      <div class="delay-bar" id="delayBar" style="display:none">
+        <span class="id-label">M-10</span>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+        <span class="delay-text">27:00 / 30:00</span>
+      </div>
+
+      <!-- Info Row -->
+      <div class="info-row">
+        <span class="hand-badge"><span class="id-label">M-17</span> Hand #47</span>
+        <div class="conn-status">
+          <span class="id-label">M-18</span>
+          <span class="conn-dot ok">AT</span>
+          <span class="conn-dot ok">Overlay</span>
+          <span class="conn-dot ok">DB</span>
+        </div>
+      </div>
+
+      <div class="ctrl-divider"></div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <button class="btn btn-primary"><span class="id-label">M-11</span> Reset Hand</button>
+        <button class="btn btn-icon settings-icon" title="Settings"><span class="id-label" style="display:none">M-12</span>&#x2699;</button>
+        <button class="btn btn-icon settings-icon" title="Quick Lock (Ctrl+L)"><span class="id-label" style="display:none">M-19</span>&#x1F512;</button>
+      </div>
+      <button class="btn btn-full"><span class="id-label">M-13</span> Register Deck</button>
+      <button class="btn btn-full"><span class="id-label">M-14</span> Launch ActionTracker</button>
+      <button class="btn btn-full"><span class="id-label">M-15</span> Split Recording</button>
+      <div class="tag-row">
+        <span class="id-label">M-16</span>
+        <select><option>Tag Player</option><option>Seat 1</option><option>Seat 2</option><option>Seat 3</option></select>
+        <input type="text" placeholder="Enter tag...">
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB BAR ===== -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('sources')" data-tab="sources">Sources<span class="shortcut">Ctrl+1</span></button>
+    <button class="tab-btn" onclick="switchTab('outputs')" data-tab="outputs">Outputs<span class="shortcut">Ctrl+2</span></button>
+    <button class="tab-btn" onclick="switchTab('gfx')" data-tab="gfx">GFX<span class="shortcut">Ctrl+3</span></button>
+    <button class="tab-btn" onclick="switchTab('rules')" data-tab="rules">Rules<span class="shortcut">Ctrl+4</span></button>
+    <button class="tab-btn" onclick="switchTab('system')" data-tab="system">System<span class="shortcut">Ctrl+5</span></button>
+  </div>
+
+  <!-- ============================== -->
+  <!-- SOURCES TAB -->
+  <!-- ============================== -->
+  <div class="tab-content active" id="tab-sources">
+    <!-- Output Mode -->
+    <div class="group">
+      <div class="group-header">Output Mode <span class="count">1 element</span></div>
+      <div class="group-body">
+        <div class="form-row">
+          <div class="label"><span class="id-label">S-00</span> Mode</div>
+          <div class="control">
+            <div class="radio-group">
+              <label><input type="radio" name="outputMode" checked><span>Fill &amp; Key</span></label>
+              <label><input type="radio" name="outputMode"><span>Chroma Key</span></label>
+              <label><input type="radio" name="outputMode"><span>Preview-Only</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="col">
+        <!-- Video Sources -->
+        <div class="group">
+          <div class="group-header">Video Sources <span class="count">S-01 to S-04</span></div>
+          <div class="group-body">
+            <table class="data-table">
+              <thead>
+                <tr><th>Device</th><th>Format / URL</th><th>Action</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="id-label">S-01</span> NDI Source 1</td>
+                  <td>1920x1080@60p</td>
+                  <td><span class="id-label">S-03</span> <button class="btn" style="padding:1px 5px;font-size:10px">&#x2699;</button> <span class="id-label">S-04</span> <button class="btn" style="padding:1px 5px;font-size:10px">&#x25B6;</button></td>
+                  <td style="color:var(--green)">ON</td>
+                </tr>
+                <tr>
+                  <td>DeckLink Mini Rec</td>
+                  <td>YUY2 2592x1944@24p</td>
+                  <td><button class="btn" style="padding:1px 5px;font-size:10px">&#x2699;</button> <button class="btn" style="padding:1px 5px;font-size:10px">&#x25B6;</button></td>
+                  <td style="color:var(--text-dim)">OFF</td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn" style="margin-top:4px"><span class="id-label">S-02</span> + Add Source</button>
+          </div>
+        </div>
+
+        <!-- Background -->
+        <div class="group">
+          <div class="group-header">Background <span class="count">S-11, S-12</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-11</span> Enable</div>
+              <div class="control"><input type="checkbox" checked></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-12</span> Colour</div>
+              <div class="control"><input type="color" value="#0000FF"> <span style="color:var(--text-dim);font-size:10px">#0000FF</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audio -->
+        <div class="group">
+          <div class="group-header">Audio <span class="count">S-17, S-18</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-17</span> Input Source</div>
+              <div class="control"><select><option>No Audio Input</option><option>Realtek Audio</option><option>DeckLink Audio</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-18</span> Audio Sync</div>
+              <div class="control"><input type="number" value="0" style="width:70px"> <span style="color:var(--text-dim)">ms</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <!-- Camera -->
+        <div class="group">
+          <div class="group-header">Camera <span class="count">S-05 to S-10</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-05</span> Board Cam Hide GFX</div>
+              <div class="control"><input type="checkbox" checked></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-06</span> Auto Camera Control</div>
+              <div class="control"><input type="checkbox" checked></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-07</span> Mode</div>
+              <div class="control"><select><option>Static</option><option>Dynamic</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-08</span> Heads Up Split</div>
+              <div class="control"><input type="checkbox" checked></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-09</span> Follow Players</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-10</span> Follow Board</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- External -->
+        <div class="group">
+          <div class="group-header">External <span class="count">S-13, S-14</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-13</span> Switcher Source</div>
+              <div class="control"><select><option>-- None --</option><option>ATEM Mini Pro</option><option>ATEM 2 M/E</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-14</span> ATEM Control</div>
+              <div class="control"><input type="checkbox"> <input type="text" placeholder="IP Address" style="width:110px"> <span class="conn-dot fail" style="margin-left:2px"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sync -->
+        <div class="group">
+          <div class="group-header">Sync <span class="count">S-15, S-16</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-15</span> Board Sync</div>
+              <div class="control"><input type="number" value="0" style="width:70px"> <span style="color:var(--text-dim)">ms</span></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">S-16</span> Crossfade</div>
+              <div class="control"><input type="number" value="300" style="width:70px"> <span style="color:var(--text-dim)">ms</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- OUTPUTS TAB -->
+  <!-- ============================== -->
+  <div class="tab-content" id="tab-outputs">
+    <!-- Resolution -->
+    <div class="group">
+      <div class="group-header">Resolution <span class="count">O-01 to O-03</span></div>
+      <div class="group-body" style="flex-direction:row;gap:16px;flex-wrap:wrap">
+        <div class="form-row" style="flex:0 0 auto">
+          <div class="label" style="flex:none"><span class="id-label">O-01</span> Video Size</div>
+          <div class="control"><select style="width:140px"><option>1920 x 1080</option><option>3840 x 2160</option></select></div>
+        </div>
+        <div class="form-row" style="flex:0 0 auto">
+          <div class="label" style="flex:none"><span class="id-label">O-03</span> Frame Rate</div>
+          <div class="control"><input type="number" value="60" style="width:50px"> <span style="color:var(--text-dim)">fps</span></div>
+        </div>
+        <div class="form-row" style="flex:0 0 auto">
+          <div class="label" style="flex:none"><span class="id-label">O-02</span> 9x16 Vertical</div>
+          <div class="control"><input type="checkbox"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <!-- Live -->
+      <div class="col">
+        <div class="group">
+          <div class="group-header">Live Output <span class="count">O-04, O-05</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-04</span> Video Preview</div>
+              <div class="control"><select><option>Disabled</option><option>DeckLink 1</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label">Audio Preview</div>
+              <div class="control"><select><option>No audio preview</option><option>Realtek Audio</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label">Output Device</div>
+              <div class="control"><select><option>Disabled</option><option>DeckLink Duo 2 (1)</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-05</span> Key &amp; Fill</div>
+              <div class="control"><input type="checkbox"> <span style="color:var(--text-dim);font-size:10px">Enable Fill &amp; Key</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delay -->
+      <div class="col">
+        <div class="group">
+          <div class="group-header">Delay Output <span class="count">O-06, O-07</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-06</span> Video Preview</div>
+              <div class="control"><select><option>Disabled</option><option>DeckLink 2</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label">Audio Preview</div>
+              <div class="control"><select><option>No audio preview</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label">Output Device</div>
+              <div class="control"><select><option>Disabled</option><option>DeckLink Duo 2 (2)</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-07</span> Key &amp; Fill</div>
+              <div class="control"><input type="checkbox"> <span style="color:var(--text-dim);font-size:10px">Enable Fill &amp; Key</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <!-- Secure Delay -->
+      <div class="col">
+        <div class="group">
+          <div class="group-header">Secure Delay <span class="count">O-08 to O-13</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-08</span> Delay Time</div>
+              <div class="control" style="flex-direction:column;align-items:stretch;gap:2px">
+                <input type="range" min="1" max="30" value="30">
+                <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-dim)"><span>1 min</span><span style="color:var(--yellow);font-weight:600">30 min</span><span>30 min</span></div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-09</span> Dynamic Delay</div>
+              <div class="control"><input type="checkbox"> <input type="number" value="0" style="width:50px"> <span style="color:var(--text-dim)">min</span></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-10</span> Show Countdown</div>
+              <div class="control"><input type="checkbox" checked></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-13</span> Auto Stream</div>
+              <div class="control"><input type="number" value="0" style="width:50px"> <span style="color:var(--text-dim)">min</span></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-11</span> Countdown Video</div>
+              <div class="control"><select><option>-- No intro --</option><option>Custom Video</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-12</span> Countdown BG</div>
+              <div class="control"><div class="img-slot" style="height:40px">Click to set background</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <!-- Fill & Key -->
+        <div class="group">
+          <div class="group-header">Fill &amp; Key <span class="count">O-18 to O-20</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-18</span> Key Color</div>
+              <div class="control"><input type="color" value="#000000"> <span style="color:var(--text-dim);font-size:10px">#000000</span></div>
+            </div>
+            <div class="form-row" style="align-items:flex-start">
+              <div class="label"><span class="id-label">O-19</span> Preview</div>
+              <div class="control">
+                <div class="preview-pair" style="width:100%">
+                  <div class="preview-box">Fill</div>
+                  <div class="preview-box">Key</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-20</span> DeckLink Map</div>
+              <div class="control"><select style="width:100%"><option>Live Fill:Ch1 / Key:Ch2 / Delay Fill:Ch3 / Key:Ch4</option></select></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recording & Streaming & Virtual -->
+        <div class="group">
+          <div class="group-header">Recording / Streaming <span class="count">O-14 to O-17</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-14</span> Virtual Camera</div>
+              <div class="control"><select><option>Disabled</option><option>OBS Virtual</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-15</span> Recording Mode</div>
+              <div class="control"><select><option>Video with GFX</option><option>Video Only</option><option>GFX Only</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-16</span> Platform</div>
+              <div class="control"><select><option>-- None --</option><option>Twitch</option><option>YouTube</option><option>Custom RTMP</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">O-17</span> Account</div>
+              <div class="control"><button class="btn">Connect Account</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- GFX TAB -->
+  <!-- ============================== -->
+  <div class="tab-content" id="tab-gfx">
+    <div class="sub-tabs">
+      <button class="sub-tab-btn active" onclick="switchSubTab('layout')">Layout <span style="color:var(--text-dim);font-size:9px">(G-01~13)</span></button>
+      <button class="sub-tab-btn" onclick="switchSubTab('visual')">Visual <span style="color:var(--text-dim);font-size:9px">(G-14~25)</span></button>
+      <button class="sub-tab-btn" onclick="switchSubTab('display')">Display <span style="color:var(--text-dim);font-size:9px">(G-26~39)</span></button>
+      <button class="sub-tab-btn" onclick="switchSubTab('numbers')">Numbers <span style="color:var(--text-dim);font-size:9px">(G-40~51)</span></button>
+    </div>
+
+    <!-- GFX > Layout -->
+    <div class="sub-content active" id="sub-layout">
+      <div class="cols">
+        <div class="col">
+          <div class="group">
+            <div class="group-header">Position &amp; Layout <span class="count">G-01 to G-09</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-01</span> Board Position</div>
+                <div class="control"><select><option>Right</option><option>Left</option><option>Centre</option><option>Top</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-02</span> Player Layout</div>
+                <div class="control"><select><option>Vert/Bot/Spill</option><option>Vert</option><option>Bot</option><option>Spill</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-03</span> X Margin</div>
+                <div class="control"><input type="number" value="0.04" step="0.01" style="width:70px"> <span style="color:var(--text-dim)">%</span></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-04</span> Top Margin</div>
+                <div class="control"><input type="number" value="0.05" step="0.01" style="width:70px"> <span style="color:var(--text-dim)">%</span></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-05</span> Bot Margin</div>
+                <div class="control"><input type="number" value="0.04" step="0.01" style="width:70px"> <span style="color:var(--text-dim)">%</span></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-06</span> Leaderboard Pos</div>
+                <div class="control"><select><option>Centre</option><option>Left</option><option>Right</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-07</span> HU Layout L/R</div>
+                <div class="control"><select><option>Only in split screen mode</option><option>Always</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-08</span> HU Camera</div>
+                <div class="control"><select><option>Camera behind dealer</option><option>Camera left</option><option>Camera right</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-09</span> HU Custom Y</div>
+                <div class="control"><input type="checkbox"> <input type="number" value="0.50" step="0.01" style="width:70px"> <span style="color:var(--text-dim)">%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="group">
+            <div class="group-header">Sponsor Logos <span class="count">G-10 to G-12</span></div>
+            <div class="group-body">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="font-size:10px;color:var(--text-dim)"><span class="id-label">G-10</span> Leaderboard Sponsor</div>
+                <div class="img-slot">Click to add logo</div>
+                <div style="font-size:10px;color:var(--text-dim)"><span class="id-label">G-11</span> Board Sponsor</div>
+                <div class="img-slot">Click to add logo</div>
+                <div style="font-size:10px;color:var(--text-dim)"><span class="id-label">G-12</span> Strip Sponsor</div>
+                <div class="img-slot">Click to add logo</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-header">Vanity <span class="count">G-13</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-13</span> Vanity Text</div>
+                <div class="control"><input type="text" value="TABLE 2" style="width:100%"></div>
+              </div>
+              <div class="form-row">
+                <div class="label" style="flex:none">Replace w/ Game Variant</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GFX > Visual -->
+    <div class="sub-content" id="sub-visual">
+      <div class="cols">
+        <div class="col">
+          <div class="group">
+            <div class="group-header">Card Reveal <span class="count">G-14 to G-16</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-14</span> Reveal Players</div>
+                <div class="control"><select><option>Action On</option><option>Always</option><option>Never</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-15</span> How to Show Fold</div>
+                <div class="control"><select style="width:90px"><option>Immediate</option><option>Fade</option></select> <input type="number" value="1.5" step="0.1" style="width:50px"> <span style="color:var(--text-dim)">s</span></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-16</span> Reveal Cards</div>
+                <div class="control"><select><option>Immediate</option><option>Animated</option></select></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-header">Transitions <span class="count">G-17, G-18</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-17</span> Transition In</div>
+                <div class="control"><select style="width:80px"><option>Pop</option><option>Slide</option><option>Fade</option></select> <input type="number" value="0.5" step="0.1" style="width:50px"> <span style="color:var(--text-dim)">s</span></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-18</span> Transition Out</div>
+                <div class="control"><select style="width:80px"><option>Slide</option><option>Pop</option><option>Fade</option></select> <input type="number" value="0.4" step="0.1" style="width:50px"> <span style="color:var(--text-dim)">s</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-header">Action Player <span class="count">G-19 to G-21</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-19</span> Indent Action Player</div>
+                <div class="control"><input type="checkbox" checked></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-20</span> Bounce Action Player</div>
+                <div class="control"><input type="checkbox" checked></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-21</span> Action Clock at</div>
+                <div class="control"><input type="number" value="10" style="width:50px"> <span style="color:var(--text-dim)">s</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="group">
+            <div class="group-header">Post-Hand Display <span class="count">G-22 to G-25</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-22</span> Show Leaderboard</div>
+                <div class="control"><input type="checkbox"> <span class="settings-icon">&#x2699;</span></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-23</span> Show PIP Capture</div>
+                <div class="control"><input type="checkbox"> <span class="settings-icon">&#x2699;</span></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-24</span> Show Player Stats</div>
+                <div class="control"><input type="checkbox"> <span class="settings-icon">&#x2699;</span></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-25</span> Heads Up History</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GFX > Display -->
+    <div class="sub-content" id="sub-display">
+      <div class="cols">
+        <div class="col">
+          <div class="group">
+            <div class="group-header">Leaderboard Options <span class="count">G-26 to G-31</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-26</span> Show Knockout Rank</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-27</span> Show Chipcount %</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-28</span> Show Eliminated</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-29</span> Cumulative Winnings</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-30</span> Hide Leaderboard</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-31</span> Max BB Multiple</div>
+                <div class="control"><input type="number" value="0" style="width:60px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="group">
+            <div class="group-header">Player Display <span class="count">G-32 to G-36</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-32</span> Add Seat #</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-33</span> Show as Eliminated</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-34</span> Unknown Cards Blink</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-35</span> Clear Previous Action</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-36</span> Order Players</div>
+                <div class="control"><select><option>By Position</option><option>By Stack</option><option>By Name</option></select></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-header">Equity &amp; Highlights <span class="count">G-37 to G-39</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-37</span> Show Hand Equities</div>
+                <div class="control"><select><option>All In Only</option><option>Always</option><option>Never</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-38</span> Hilite Winning Hand</div>
+                <div class="control"><select><option>At Showdown</option><option>Always</option><option>Never</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-39</span> Hilite Nit Game</div>
+                <div class="control"><select><option>Never</option><option>1 Street</option><option>2 Streets</option></select></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GFX > Numbers -->
+    <div class="sub-content" id="sub-numbers">
+      <div class="cols">
+        <div class="col">
+          <div class="group">
+            <div class="group-header">Outs <span class="count">G-40 to G-42</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-40</span> Show Outs</div>
+                <div class="control"><select><option>Heads Up</option><option>All In</option><option>Always</option><option>Never</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-41</span> Outs Position</div>
+                <div class="control"><select><option>Below Cards</option><option>Above Cards</option><option>Beside</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-42</span> True Outs</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-header">Score Strip <span class="count">G-43, G-44</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-43</span> Score Strip</div>
+                <div class="control"><select><option>Enabled</option><option>Disabled</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-44</span> Order Strip By</div>
+                <div class="control"><select><option>Position</option><option>Stack Size</option><option>Name</option></select></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-header">Blinds &amp; Hand <span class="count">G-45, G-46</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-45</span> Show Blinds</div>
+                <div class="control"><select><option>Always</option><option>On Change</option><option>Never</option></select></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-46</span> Show Hand #</div>
+                <div class="control"><input type="checkbox" checked></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="group">
+            <div class="group-header">Currency <span class="count">G-47 to G-49</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-47</span> Currency Symbol</div>
+                <div class="control"><input type="text" value="$" style="width:50px"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-48</span> Trailing Currency</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-49</span> Divide by 100</div>
+                <div class="control"><input type="checkbox"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-header">Chipcount Precision <span class="count">G-50</span></div>
+            <div class="group-body">
+              <div class="precision-grid">
+                <div class="precision-cell"><span class="zone-label">Zone 1</span><select><option>0</option><option>1</option><option>2</option></select></div>
+                <div class="precision-cell"><span class="zone-label">Zone 2</span><select><option>0</option><option>1</option><option>2</option></select></div>
+                <div class="precision-cell"><span class="zone-label">Zone 3</span><select><option>0</option><option>1</option><option>2</option></select></div>
+                <div class="precision-cell"><span class="zone-label">Zone 4</span><select><option>0</option><option>1</option><option>2</option></select></div>
+                <div class="precision-cell"><span class="zone-label">Zone 5</span><select><option>0</option><option>1</option><option>2</option></select></div>
+                <div class="precision-cell"><span class="zone-label">Zone 6</span><select><option>0</option><option>1</option><option>2</option></select></div>
+                <div class="precision-cell"><span class="zone-label">Zone 7</span><select><option>0</option><option>1</option><option>2</option></select></div>
+                <div class="precision-cell"><span class="zone-label">Zone 8</span><select><option>0</option><option>1</option><option>2</option></select></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-header">Display Mode <span class="count">G-51</span></div>
+            <div class="group-body">
+              <div class="form-row">
+                <div class="label"><span class="id-label">G-51</span> Mode</div>
+                <div class="control">
+                  <div class="radio-group">
+                    <label><input type="radio" name="displayMode" checked><span>Amount</span></label>
+                    <label><input type="radio" name="displayMode"><span>BB</span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- RULES TAB -->
+  <!-- ============================== -->
+  <div class="tab-content" id="tab-rules">
+    <div class="group">
+      <div class="group-header">Game Rules <span class="count">R-01 to R-06 (6 elements)</span></div>
+      <div class="group-body">
+        <div class="form-row">
+          <div class="label"><span class="id-label">R-01</span> Move Button Bomb Pot</div>
+          <div class="control"><input type="checkbox"></div>
+        </div>
+        <div class="form-row">
+          <div class="label"><span class="id-label">R-02</span> Limit Raises</div>
+          <div class="control"><input type="checkbox"></div>
+        </div>
+        <div class="form-row">
+          <div class="label"><span class="id-label">R-03</span> Allow Rabbit Hunting</div>
+          <div class="control"><input type="checkbox"></div>
+        </div>
+        <div class="form-row">
+          <div class="label"><span class="id-label">R-04</span> Straddle Sleeper</div>
+          <div class="control"><select><option>Disabled</option><option>UTG Only</option><option>Any Position</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="label"><span class="id-label">R-05</span> Sleeper Final Action</div>
+          <div class="control"><select><option>Check</option><option>Raise</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="label"><span class="id-label">R-06</span> Ignore Split Pots</div>
+          <div class="control"><input type="checkbox"></div>
+        </div>
+      </div>
+    </div>
+    <div style="color:var(--text-dim);font-size:10px;padding:8px;text-align:center">Rules are independent and can be configured in any order. Changes take effect on the next hand.</div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- SYSTEM TAB -->
+  <!-- ============================== -->
+  <div class="tab-content" id="tab-system">
+    <div class="cols">
+      <div class="col">
+        <!-- Table -->
+        <div class="group">
+          <div class="group-header">Table <span class="count">Y-01, Y-02</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-01</span> Name</div>
+              <div class="control"><input type="text" value="Table 1"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-02</span> Password</div>
+              <div class="control"><input type="password" placeholder="Table password"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RFID -->
+        <div class="group">
+          <div class="group-header">RFID <span class="count">Y-03 to Y-07</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-03</span> Reset</div>
+              <div class="control"><button class="btn btn-primary">Reset RFID</button></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-04</span> Calibrate</div>
+              <div class="control"><button class="btn">Calibrate Antennas</button></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-05</span> UPCARD Antennas</div>
+              <div class="control"><input type="checkbox" checked></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-06</span> Disable Muck</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-07</span> Disable Community</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AT -->
+        <div class="group">
+          <div class="group-header">ActionTracker <span class="count">Y-13 to Y-15</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-13</span> Allow AT Access</div>
+              <div class="control"><input type="checkbox" checked></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-14</span> Predictive Bet</div>
+              <div class="control"><input type="checkbox" checked></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-15</span> Kiosk Mode</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <!-- Diagnostics -->
+        <div class="group">
+          <div class="group-header">Diagnostics <span class="count">Y-09 to Y-12</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-09</span> Table Diagnostics</div>
+              <div class="control"><button class="btn">Open Diagnostics</button></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-10</span> System Log</div>
+              <div class="control"><button class="btn">View Log</button></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-11</span> Secure Delay Folder</div>
+              <div class="control"><input type="text" value="C:\EBS\delay\" style="width:160px" readonly> <button class="btn" style="padding:3px 6px">...</button></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-12</span> Export Folder</div>
+              <div class="control"><input type="text" value="C:\EBS\export\" style="width:160px" readonly> <button class="btn" style="padding:3px 6px">...</button></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advanced -->
+        <div class="group">
+          <div class="group-header">Advanced <span class="count">Y-16 to Y-23</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-16</span> MultiGFX</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-17</span> Sync Stream</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-18</span> Sync Skin</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-19</span> No Cards</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-20</span> Disable GPU</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-21</span> Ignore Name Tags</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-22</span> Auto Start</div>
+              <div class="control"><input type="checkbox"></div>
+            </div>
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-23</span> Stream Deck</div>
+              <div class="control"><button class="btn">Configure</button></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Info -->
+        <div class="group">
+          <div class="group-header">System Info <span class="count">Y-08</span></div>
+          <div class="group-body">
+            <div class="hw-panel">
+              <span class="hw-label">CPU</span><span class="hw-value">Intel Core i9-13900K</span>
+              <span class="hw-label">GPU</span><span class="hw-value">NVIDIA RTX 4080</span>
+              <span class="hw-label">OS</span><span class="hw-value">Windows 11 Pro 23H2</span>
+              <span class="hw-label">Encoder</span><span class="hw-value">NVENC H.265</span>
+              <span class="hw-label">Memory</span><span class="hw-value">64 GB DDR5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Updates -->
+        <div class="group">
+          <div class="group-header">Updates <span class="count">Y-24</span></div>
+          <div class="group-body">
+            <div class="form-row">
+              <div class="label"><span class="id-label">Y-24</span> Version</div>
+              <div class="control"><span style="color:var(--green);font-weight:600">v1.0.0</span> <button class="btn" style="margin-left:8px">Check for Updates</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== WATERMARK ===== -->
+  <div class="watermark">EBS Server v1.0 -- UI Wireframe | PRD-0004 | 2026-02-16 | Total: 117 UI Elements (M:20 S:19 O:20 G:51 R:6 C:7 Y:24)</div>
+</div>
+
+<script>
+// Tab switching
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
+}
+
+// GFX sub-tab switching
+function switchSubTab(subId) {
+  document.querySelectorAll('.sub-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.sub-tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('sub-' + subId).classList.add('active');
+  event.target.closest('.sub-tab-btn').classList.add('active');
+}
+
+// Lock toggle
+function toggleLock() {
+  const btn = document.getElementById('lockToggle');
+  btn.classList.toggle('locked');
+  btn.innerHTML = btn.classList.contains('locked')
+    ? '<span class="id-label" style="position:absolute;top:-10px;left:0;font-size:8px">M-07</span>&#x1F513;'
+    : '<span class="id-label" style="position:absolute;top:-10px;left:0;font-size:8px">M-07</span>&#x1F512;';
+}
+
+// Secure Delay toggle
+function toggleDelay() {
+  const bar = document.getElementById('delayBar');
+  const chk = document.getElementById('secureDelay');
+  bar.style.display = chk.checked ? 'flex' : 'none';
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey) {
+    const tabs = ['sources','outputs','gfx','rules','system'];
+    const num = parseInt(e.key);
+    if (num >= 1 && num <= 6) {
+      e.preventDefault();
+      switchTab(tabs[num - 1]);
+    }
+    if (e.key === 'l' || e.key === 'L') {
+      e.preventDefault();
+      toggleLock();
+    }
+  }
+});
+</script>
+
+</body>
+</html>

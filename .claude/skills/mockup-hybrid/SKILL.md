@@ -44,20 +44,40 @@ auto_trigger: true
 
 3-Tier 자동 선택 목업 생성 시스템. `--mockup`만으로 최적의 시각화 방식을 자동 결정합니다.
 
-## 3-Tier 아키텍처
+## 동작 모드
 
+### Mode 1: 문서 기반 (Document-Driven)
 ```
-/auto --mockup "요청"
+/auto --mockup docs/02-design/feature.md
       │
       ▼
-┌─────────────────────────────────────┐
-│      Design Context Analyzer        │
-│  프롬프트 키워드 + 컨텍스트 분석    │
-└─────────────────────────────────────┘
+┌─────────────────────────────────┐
+│      Document Scanner           │
+│  ## 헤딩 기준 섹션 분리 + 분류  │
+│  NEED / SKIP / EXIST 판단      │
+└─────────────────────────────────┘
       │
-      ├─ 다이어그램 키워드 ──▶ Tier 1: Mermaid (~2초, Git diff 가능)
-      ├─ UI/화면 키워드    ──▶ Tier 2: HTML Wireframe (~5초, PNG 캡처)
-      └─ 고품질/발표 키워드 ─▶ Tier 3: Stitch AI (~15초, HiFi 목업)
+      ├─ NEED 섹션들 ──▶ 3-Tier Router ──▶ 일괄 생성
+      ├─ EXIST 섹션   ──▶ 스킵 (--force 시 재생성)
+      └─ SKIP 섹션    ──▶ 스킵 (서술형)
+      │
+      ▼
+┌─────────────────────────────────┐
+│      Document Embedder          │
+│  Mermaid → 인라인 코드 블록    │
+│  HTML    → ![](이미지 참조)    │
+└─────────────────────────────────┘
+```
+
+### Mode 2: 단건 (Prompt-Driven)
+```
+/auto "요청" --mockup
+      │
+      ▼
+  3-Tier Router
+      ├─ 다이어그램 키워드 ──▶ Mermaid (~2초)
+      ├─ UI/화면 키워드    ──▶ HTML Wireframe (~5초)
+      └─ 고품질/발표 키워드 ─▶ Stitch AI (~15초)
 ```
 
 ## 자동 라우팅 규칙
@@ -95,14 +115,19 @@ auto_trigger: true
 ## 사용 예시
 
 ```bash
-# 자동 선택 → Mermaid (다이어그램 키워드 감지)
+# 문서 기반 자동 목업 (핵심 기능)
+/auto --mockup docs/02-design/auth.design.md
+# → 문서 스캔 → 시각화 필요 섹션 자동 발견 → 일괄 생성 + 삽입
+
+# 미리보기 (실제 수정 없이 어떤 목업이 생성될지 확인)
+/auto --mockup docs/02-design/auth.design.md --dry-run
+
+# 기존 목업도 재생성
+/auto --mockup docs/02-design/auth.design.md --force
+
+# 단건 자동 선택 (프롬프트 기반)
 /auto "API 인증 흐름 설계" --mockup
-
-# 자동 선택 → HTML (UI 키워드 감지)
 /auto "대시보드 화면 설계" --mockup
-
-# 자동 선택 → Stitch (고품질 키워드 감지)
-/auto "프레젠테이션용 랜딩 페이지" --mockup
 
 # 강제 지정
 /auto "시스템 구조" --mockup mermaid

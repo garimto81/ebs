@@ -2516,6 +2516,8 @@
       "name": "Commentary Mode",
       "category": "Server 관리",
       "priority": "P1",
+      "status": "excluded",
+      "exclusion_reason": "프로덕션 미사용 기능, EBS에서 배제",
       "description": "해설자 원격 접속 (비밀번호 인증, 통계 전용 모드)",
       "sources": {
         "screenshot": null,
@@ -2534,6 +2536,8 @@
       "name": "Picture In Picture",
       "category": "Server 관리",
       "priority": "P1",
+      "status": "excluded",
+      "exclusion_reason": "프로덕션 미사용 기능, EBS에서 배제",
       "description": "해설자 카메라 PIP 오버레이 설정",
       "sources": {
         "screenshot": null,
