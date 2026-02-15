@@ -16,7 +16,7 @@ omc_delegate: oh-my-claudecode:ultrawork
 omc_agents:
   - executor
   - executor-high
-  - architect
+  - oh-my-claudecode:architect
   - planner
 ---
 

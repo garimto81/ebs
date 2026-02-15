@@ -44,7 +44,7 @@ Task(subagent_type="oh-my-claudecode:tdd-guide", model="sonnet",
 /auto Tier 5 AUTONOMOUS
     └── /tdd <feature> (테스트 없는 코드 감지 시)
 
-/work --loop Tier 3
+/auto Tier 3
     └── /tdd <feature> (새 기능 구현 요청 시)
 ```
 

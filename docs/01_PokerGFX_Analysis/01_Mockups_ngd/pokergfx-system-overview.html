@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PokerGFX 시스템 전체 구조</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0a0e1a; color: #e0e0e0; min-height: 100vh; padding: 40px; }
+
+  .header { text-align: center; margin-bottom: 50px; }
+  .header h1 { font-size: 32px; color: #fff; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .header .subtitle { font-size: 16px; color: #8b95a5; }
+  .header .badge { display: inline-block; background: #1a3a5c; color: #5ba3e6; padding: 4px 14px; border-radius: 20px; font-size: 13px; margin-top: 12px; }
+
+  .flow-container { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: nowrap; margin: 0 auto; max-width: 1200px; }
+
+  .step-box { background: linear-gradient(135deg, #141a2e 0%, #1a2240 100%); border: 1px solid #2a3555; border-radius: 16px; padding: 28px 24px; width: 200px; min-height: 240px; text-align: center; position: relative; transition: all 0.3s; }
+  .step-box:hover { border-color: #4a7bd4; transform: translateY(-4px); box-shadow: 0 8px 30px rgba(74,123,212,0.15); }
+
+  .step-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+  .step-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .step-desc { font-size: 13px; color: #8b95a5; line-height: 1.6; }
+  .step-tech { margin-top: 12px; padding-top: 12px; border-top: 1px solid #2a3555; }
+  .step-tech span { display: inline-block; background: #1a2a4a; color: #5ba3e6; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin: 2px; }
+
+  .arrow { font-size: 28px; color: #4a7bd4; min-width: 50px; text-align: center; flex-shrink: 0; }
+  .arrow-label { font-size: 11px; color: #5ba3e6; display: block; margin-top: 4px; }
+
+  .section-title { text-align: center; font-size: 14px; color: #5ba3e6; text-transform: uppercase; letter-spacing: 2px; margin: 60px 0 30px; }
+
+  .programs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
+  .program-card { background: linear-gradient(135deg, #141a2e 0%, #1a2240 100%); border: 1px solid #2a3555; border-radius: 12px; padding: 20px; text-align: center; }
+  .program-card .name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .program-card .size { font-size: 12px; color: #f0a040; margin-bottom: 8px; }
+  .program-card .role { font-size: 12px; color: #8b95a5; line-height: 1.5; }
+  .program-card.main { border-color: #f0a040; background: linear-gradient(135deg, #1a1820 0%, #2a2040 100%); }
+
+  .stats-bar { display: flex; justify-content: center; gap: 40px; margin: 50px auto; padding: 24px; background: linear-gradient(135deg, #141a2e 0%, #1a2240 100%); border: 1px solid #2a3555; border-radius: 12px; max-width: 800px; }
+  .stat { text-align: center; }
+  .stat .num { font-size: 28px; font-weight: 700; color: #5ba3e6; }
+  .stat .label { font-size: 12px; color: #8b95a5; margin-top: 4px; }
+
+  .note { text-align: center; margin-top: 40px; padding: 16px; background: rgba(240,160,64,0.08); border: 1px solid rgba(240,160,64,0.2); border-radius: 8px; max-width: 700px; margin-left: auto; margin-right: auto; }
+  .note p { font-size: 13px; color: #f0a040; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>PokerGFX 시스템 전체 구조</h1>
+  <p class="subtitle">포커 방송에 카드가 표시되기까지의 과정</p>
+  <span class="badge">Server v3.71.0 | 내부 프로젝트명: VPT</span>
+</div>
+
+<!-- Main Flow -->
+<div class="flow-container">
+  <div class="step-box">
+    <span class="step-icon">🃏</span>
+    <div class="step-title">RFID 카드</div>
+    <div class="step-desc">각 카드에 초소형 칩이 내장되어 있어 고유 번호로 식별 가능</div>
+    <div class="step-tech">
+      <span>RFID 태그</span>
+      <span>고유 UID</span>
+    </div>
+  </div>
+
+  <div class="arrow">
+    ➜
+    <span class="arrow-label">무선 감지</span>
+  </div>
+
+  <div class="step-box">
+    <span class="step-icon">📡</span>
+    <div class="step-title">RFID 리더</div>
+    <div class="step-desc">테이블에 숨겨진 26개 안테나가 카드를 자동으로 인식</div>
+    <div class="step-tech">
+      <span>26개 안테나</span>
+      <span>USB/WiFi</span>
+    </div>
+  </div>
+
+  <div class="arrow">
+    ➜
+    <span class="arrow-label">USB 전송</span>
+  </div>
+
+  <div class="step-box" style="border-color: #f0a040;">
+    <span class="step-icon">🖥️</span>
+    <div class="step-title">PokerGFX 서버</div>
+    <div class="step-desc">카드 정보를 받아 그래픽을 생성하고 방송 장비에 전달</div>
+    <div class="step-tech">
+      <span>355MB</span>
+      <span>.NET</span>
+      <span>SQL Server</span>
+    </div>
+  </div>
+
+  <div class="arrow">
+    ➜
+    <span class="arrow-label">영상 출력</span>
+  </div>
+
+  <div class="step-box">
+    <span class="step-icon">🎬</span>
+    <div class="step-title">ATEM 스위처</div>
+    <div class="step-desc">Blackmagic 장비로 카메라 영상과 그래픽을 합성</div>
+    <div class="step-tech">
+      <span>Blackmagic</span>
+      <span>Port 9910</span>
+    </div>
+  </div>
+
+  <div class="arrow">
+    ➜
+    <span class="arrow-label">방송 송출</span>
+  </div>
+
+  <div class="step-box">
+    <span class="step-icon">📺</span>
+    <div class="step-title">TV 시청자</div>
+    <div class="step-desc">시청자가 각 플레이어의 카드, 이름, 칩 수를 실시간으로 확인</div>
+    <div class="step-tech">
+      <span>실시간</span>
+      <span>오버레이</span>
+    </div>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="num">2,877</div>
+    <div class="label">디컴파일된 소스 파일</div>
+  </div>
+  <div class="stat">
+    <div class="num">4개</div>
+    <div class="label">프로그램 구성</div>
+  </div>
+  <div class="stat">
+    <div class="num">50+</div>
+    <div class="label">통신 메시지 종류</div>
+  </div>
+  <div class="stat">
+    <div class="num">17종</div>
+    <div class="label">화면 표시 요소</div>
+  </div>
+</div>
+
+<!-- Programs -->
+<div class="section-title">4개 프로그램 구성</div>
+<div class="programs-grid">
+  <div class="program-card main">
+    <div class="name">PokerGFX Server</div>
+    <div class="size">355MB / 2,242 파일</div>
+    <div class="role">핵심 두뇌<br>RFID 읽기, 그래픽 생성, 네트워크 관리 모두 담당</div>
+  </div>
+  <div class="program-card">
+    <div class="name">ActionTracker</div>
+    <div class="size">8.8MB / 576 파일</div>
+    <div class="role">방송 조종석<br>디렉터가 카메라와 오버레이를 실시간 제어</div>
+  </div>
+  <div class="program-card">
+    <div class="name">Common.dll</div>
+    <div class="size">553KB / 48 파일</div>
+    <div class="role">공유 부품<br>라이선스 확인, 암호화 등 공통 기능</div>
+  </div>
+  <div class="program-card">
+    <div class="name">GFXUpdater</div>
+    <div class="size">56KB / 11 파일</div>
+    <div class="role">자동 업데이트<br>인터넷에서 새 버전을 받아 자동 설치</div>
+  </div>
+</div>
+
+<div class="note">
+  <p>PokerGFX는 구매 대상이 아니라 <strong>분석 및 벤치마크 대상</strong>입니다.<br>이 구조를 참고하여 EBS 자체 시스템을 설계합니다.</p>
+</div>
+
+</body>
+</html>

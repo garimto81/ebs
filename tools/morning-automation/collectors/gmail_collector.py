@@ -214,6 +214,7 @@ class GmailCollector:
         delivery_failures = []  # Track delivery failures
         vendor_emails = {vendor: [] for vendor in VENDOR_KEYWORDS.keys()}
         vendor_sent = {}  # Track sent emails by vendor/recipient
+        unclassified_emails = []  # Emails from unknown senders (AI review needed)
 
         now = datetime.now(timezone.utc)
         followup_threshold = timedelta(hours=FOLLOWUP_THRESHOLD_HOURS)
@@ -267,6 +268,10 @@ class GmailCollector:
             if "SENT" not in email.labels and detected_vendor:
                 awaiting_reply.append(email_info)
 
+            # Track unclassified emails (unknown sender, not in vendor list)
+            if "SENT" not in email.labels and not detected_vendor:
+                unclassified_emails.append(email_info)
+
             # Track sent emails
             if "SENT" in email.labels:
                 sent_emails.append(email_info)
@@ -303,13 +308,37 @@ class GmailCollector:
         vendor_emails = {k: v for k, v in vendor_emails.items() if v}
         vendor_sent = {k: v for k, v in vendor_sent.items() if v}
 
+        # Filter awaiting_reply: exclude emails the user already replied to
+        sent_by_thread = {}
+        for ei in email_data:
+            if ei.get("is_sent") and ei.get("thread_id"):
+                tid = ei["thread_id"]
+                if tid not in sent_by_thread:
+                    sent_by_thread[tid] = []
+                sent_by_thread[tid].append(ei.get("date"))
+
+        filtered_awaiting = []
+        for item in awaiting_reply:
+            tid = item.get("thread_id")
+            item_date = item.get("date")
+            if tid and tid in sent_by_thread:
+                user_replied = any(
+                    sd and item_date and sd > item_date
+                    for sd in sent_by_thread[tid]
+                )
+                if not user_replied:
+                    filtered_awaiting.append(item)
+            else:
+                filtered_awaiting.append(item)
+
         return {
             "total_emails": len(emails),
             "emails": email_data,
-            "awaiting_reply": awaiting_reply,
+            "awaiting_reply": filtered_awaiting,
             "needs_followup": needs_followup,
             "sent_emails": sent_emails,
             "delivery_failures": delivery_failures,
+            "unclassified_emails": unclassified_emails,
             "vendor_emails": vendor_emails,  # Received emails by vendor
             "vendor_sent": vendor_sent,  # Sent emails by vendor
             "collected_at": datetime.now().isoformat(),
@@ -350,12 +379,21 @@ class GmailCollector:
         return None
 
     def _detect_vendor(self, email) -> Optional[str]:
-        """Detect vendor from email sender or subject."""
+        """Detect vendor from email sender, subject, or sender domain."""
         text_to_search = f"{email.sender} {email.subject}".lower()
 
         for vendor, keywords in VENDOR_KEYWORDS.items():
             for keyword in keywords:
                 if keyword in text_to_search:
+                    return vendor
+
+        # Fallback: check sender domain against VENDOR_EMAIL_DOMAINS
+        sender = email.sender.lower()
+        email_match = re.search(r'[\w\.-]+@([\w\.-]+)', sender)
+        if email_match:
+            domain = email_match.group(1)
+            for vendor, domains in VENDOR_EMAIL_DOMAINS.items():
+                if domain in domains:
                     return vendor
 
         return None
@@ -449,6 +487,9 @@ class GmailCollector:
             for email in emails:
                 if email["id"] not in existing_sent_ids:
                     existing["vendor_sent"][vendor].append(email)
+
+        # Replace unclassified_emails with fresh data
+        existing["unclassified_emails"] = new_data.get("unclassified_emails", [])
 
         existing["last_updated"] = datetime.now().isoformat()
 

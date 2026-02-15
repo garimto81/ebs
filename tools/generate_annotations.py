@@ -1,0 +1,945 @@
+#!/usr/bin/env python3
+"""Generate annotated overlay images for PokerGFX UI Analysis.
+
+Usage:
+  python generate_annotations.py                          # Normal (auto-snap + empty check)
+  python generate_annotations.py --no-snap                # Normal without edge snapping
+  python generate_annotations.py --calibrate              # Calibrate + save JSON sidecar
+  python generate_annotations.py --calibrate --target 02  # Calibrate single image
+  python generate_annotations.py --debug                  # Debug overlay with grid
+  python generate_annotations.py --debug --target 02      # Debug single image
+
+Strategy: Contrast Edge Detection + Auto-Calibration
+- Normal mode: auto-snaps box edges to nearest contrast boundaries (±2px)
+- Empty box detection: warns when a box covers uniform-color space
+- Calibrate mode: saves calibrated coordinates to JSON sidecar file
+- Debug mode: shows detected edges and coordinate labels
+"""
+import argparse
+import json
+import os
+import sys
+from PIL import Image, ImageDraw, ImageFont
+
+INPUT_DIR = "C:/claude/ebs/images/pokerGFX"
+OUTPUT_DIR = "C:/claude/ebs/docs/01_PokerGFX_Analysis/02_Annotated_ngd"
+
+# Font setup
+try:
+    font = ImageFont.truetype("C:/Windows/Fonts/arialbd.ttf", 13)
+except Exception:
+    font = ImageFont.load_default()
+
+try:
+    font_small = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 10)
+except Exception:
+    font_small = ImageFont.load_default()
+
+RED = (220, 30, 30)
+GREEN = (30, 160, 30)
+BLUE = (30, 100, 220)
+
+
+# ============================================================
+# EDGE DETECTION & AUTO-CALIBRATION
+# ============================================================
+
+def find_h_edge(pixels, img_w, img_h, y_est, x_start, x_end, search_range=20):
+    """Find nearest horizontal contrast edge near y_est.
+
+    Scans rows within ±search_range of y_est, comparing each row's pixels
+    with the row above. Returns the row with highest average contrast.
+    Contrast = sum(|R1-R2| + |G1-G2| + |B1-B2|) per pixel pair.
+    """
+    x_end = min(x_end, img_w)
+    best_y = y_est
+    best_score = 0.0
+
+    for y in range(max(1, y_est - search_range),
+                   min(img_h - 1, y_est + search_range + 1)):
+        score = 0.0
+        n = 0
+        for x in range(max(0, x_start), x_end, 3):
+            r1, g1, b1 = pixels[x, y - 1][:3]
+            r2, g2, b2 = pixels[x, y][:3]
+            score += abs(r1 - r2) + abs(g1 - g2) + abs(b1 - b2)
+            n += 1
+        if n > 0:
+            avg = score / n
+            if avg > best_score:
+                best_score = avg
+                best_y = y
+
+    # Only snap if contrast is significant (threshold=25)
+    return best_y if best_score > 25 else y_est
+
+
+def find_v_edge(pixels, img_w, img_h, x_est, y_start, y_end, search_range=20):
+    """Find nearest vertical contrast edge near x_est.
+
+    Same logic as find_h_edge but for vertical edges (column-to-column).
+    """
+    y_end = min(y_end, img_h)
+    best_x = x_est
+    best_score = 0.0
+
+    for x in range(max(1, x_est - search_range),
+                   min(img_w - 1, x_est + search_range + 1)):
+        score = 0.0
+        n = 0
+        for y in range(max(0, y_start), y_end, 3):
+            r1, g1, b1 = pixels[x - 1, y][:3]
+            r2, g2, b2 = pixels[x, y][:3]
+            score += abs(r1 - r2) + abs(g1 - g2) + abs(b1 - b2)
+            n += 1
+        if n > 0:
+            avg = score / n
+            if avg > best_score:
+                best_score = avg
+                best_x = x
+
+    return best_x if best_score > 25 else x_est
+
+
+def auto_calibrate(img, boxes):
+    """Auto-calibrate box positions using contrast edge detection.
+
+    For each box, snaps all 4 edges to the nearest high-contrast boundary
+    within a search range. Returns calibrated boxes with delta info.
+    """
+    pixels = img.load()
+    w, h = img.size
+    calibrated = []
+
+    for box in boxes:
+        x, y, bw, bh = box['rect']
+
+        # Snap top edge: scan horizontal contrast in the box's X range
+        new_y = find_h_edge(pixels, w, h, y, x, x + bw)
+        # Snap bottom edge
+        new_y2 = find_h_edge(pixels, w, h, y + bh, x, x + bw)
+        # Snap left edge: scan vertical contrast in the box's Y range
+        new_x = find_v_edge(pixels, w, h, x, y, y + bh)
+        # Snap right edge
+        new_x2 = find_v_edge(pixels, w, h, x + bw, y, y + bh)
+
+        new_bw = new_x2 - new_x
+        new_bh = new_y2 - new_y
+
+        # Guard: keep original if result is unreasonable
+        if new_bw < 10:
+            new_bw = bw
+            new_x = x
+        if new_bh < 8:
+            new_bh = bh
+            new_y = y
+
+        new_box = dict(box)
+        new_box['rect'] = (new_x, new_y, new_bw, new_bh)
+        new_box['_original'] = (x, y, bw, bh)
+        dx, dy, dw, dh = new_x - x, new_y - y, new_bw - bw, new_bh - bh
+        new_box['_delta'] = (dx, dy, dw, dh)
+        calibrated.append(new_box)
+
+    return calibrated
+
+
+def check_empty_boxes(img, boxes, variance_threshold=15):
+    """Check if any box covers mostly uniform/empty space.
+
+    Samples pixels inside each box and calculates average color deviation.
+    Low deviation = likely empty space, separator, or uniform background.
+    Returns list of warning dicts: {'label', 'rect', 'variance', 'avg_color'}.
+    """
+    pixels = img.load()
+    w_img, h_img = img.size
+    warnings = []
+
+    for box in boxes:
+        x, y, bw, bh = box['rect']
+        label = box['label']
+
+        # Skip very small boxes (checkboxes, dismiss buttons)
+        if bw < 20 or bh < 10:
+            continue
+
+        # Sample pixels in a grid inside the box (avoid border pixels)
+        samples = []
+        step_x = max(1, bw // 8)
+        step_y = max(1, bh // 6)
+        for sy in range(y + 3, min(y + bh - 3, h_img), step_y):
+            for sx in range(x + 3, min(x + bw - 3, w_img), step_x):
+                r, g, b = pixels[sx, sy][:3]
+                samples.append((r, g, b))
+
+        if len(samples) < 4:
+            continue
+
+        # Calculate average color deviation
+        avg_r = sum(s[0] for s in samples) / len(samples)
+        avg_g = sum(s[1] for s in samples) / len(samples)
+        avg_b = sum(s[2] for s in samples) / len(samples)
+
+        variance = sum(
+            abs(s[0] - avg_r) + abs(s[1] - avg_g) + abs(s[2] - avg_b)
+            for s in samples
+        ) / len(samples)
+
+        if variance < variance_threshold:
+            avg_color = f"rgb({int(avg_r)},{int(avg_g)},{int(avg_b)})"
+            warnings.append({
+                'label': label,
+                'rect': (x, y, bw, bh),
+                'variance': round(variance, 1),
+                'avg_color': avg_color,
+            })
+
+    return warnings
+
+
+def detect_all_h_separators(img, y_start=0, y_end=None, min_ratio=0.5):
+    """Detect all horizontal dark lines (separators) in image."""
+    if y_end is None:
+        y_end = img.height
+    pixels = img.load()
+    w = img.width
+    separators = []
+
+    for y in range(y_start, min(y_end, img.height)):
+        dark = 0
+        total = 0
+        for x in range(5, w - 5, 2):
+            r, g, b = pixels[x, y][:3]
+            if r < 80 and g < 80 and b < 80:
+                dark += 1
+            total += 1
+        if total > 0 and dark / total >= min_ratio:
+            separators.append(y)
+
+    # Merge adjacent (within 2px)
+    merged = []
+    for y in separators:
+        if merged and y - merged[-1] <= 2:
+            pass  # skip adjacent
+        else:
+            merged.append(y)
+    return merged
+
+
+# ============================================================
+# DRAWING FUNCTIONS
+# ============================================================
+
+def draw_boxes(img, boxes, default_color=RED):
+    """Draw annotation boxes with external labels on image."""
+    overlay = Image.new('RGBA', img.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+
+    for box in boxes:
+        x, y, w, h = box['rect']
+        label = str(box['label'])
+        c = box.get('color', default_color)
+
+        # Semi-transparent fill
+        draw.rectangle([x + 2, y + 2, x + w - 2, y + h - 2], fill=(*c, 22))
+        # Border
+        draw.rectangle([x, y, x + w, y + h], outline=c, width=2)
+
+        # Label badge - positioned above the box
+        bbox = draw.textbbox((0, 0), label, font=font)
+        tw = bbox[2] - bbox[0]
+        th = bbox[3] - bbox[1]
+        pad_x, pad_y = 5, 2
+        badge_w = tw + pad_x * 2
+        badge_h = th + pad_y * 2 + 2
+
+        # Default: above top-left corner
+        lx = x - 1
+        ly = y - badge_h - 1
+
+        # If would go above image, place inside top-left
+        if ly < 0:
+            ly = y + 2
+            lx = x + 2
+
+        # If would go left of image
+        if lx < 0:
+            lx = 0
+
+        draw.rectangle([lx, ly, lx + badge_w, ly + badge_h], fill=c)
+        draw.text((lx + pad_x, ly + pad_y), label, fill='white', font=font)
+
+    # Composite overlay onto original
+    if img.mode != 'RGBA':
+        img = img.convert('RGBA')
+    result = Image.alpha_composite(img, overlay)
+    return result.convert('RGB')
+
+
+def draw_debug_overlay(img, boxes, h_separators=None):
+    """Draw debug information: coordinate labels, detected separators."""
+    overlay = Image.new('RGBA', img.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+
+    # Draw detected horizontal separators as thin blue lines
+    if h_separators:
+        for y in h_separators:
+            draw.line([(0, y), (img.width, y)], fill=(0, 120, 255, 80), width=1)
+            draw.text((img.width - 40, y - 10), f"y={y}",
+                       fill=(0, 120, 255, 160), font=font_small)
+
+    # Draw coordinate labels for each box
+    for box in boxes:
+        x, y, w, h = box['rect']
+        label = str(box['label'])
+
+        # Coordinate text below the box
+        coord = f"[{label}] ({x},{y},{w},{h})"
+        text_y = y + h + 3
+        if text_y + 12 > img.height:
+            text_y = y + 2  # inside if no room below
+        draw.text((x + 2, text_y), coord,
+                   fill=(255, 255, 0, 220), font=font_small)
+
+        # Show delta if available
+        delta = box.get('_delta')
+        if delta and any(d != 0 for d in delta):
+            dx, dy, dw, dh = delta
+            delta_text = f"d({dx:+d},{dy:+d},{dw:+d},{dh:+d})"
+            draw.text((x + 2, text_y + 12), delta_text,
+                       fill=(0, 255, 100, 200), font=font_small)
+
+    if img.mode != 'RGBA':
+        img = img.convert('RGBA')
+    return Image.alpha_composite(img, overlay).convert('RGB')
+
+
+# ============================================================
+# IMAGE DEFINITIONS
+# Each box: {'rect': (x, y, width, height), 'label': str}
+# Coordinates measured from pixel analysis of original screenshots
+# ============================================================
+
+IMAGES = {
+    # --------------------------------------------------------
+    # 1. Main Window (765x365) - redesigned 2026-02-11
+    # --------------------------------------------------------
+    '01-main-window': {
+        'src': '스크린샷 2026-02-05 180630.png',
+        'boxes': [
+            {'rect': (0,   0,   765, 32),  'label': '1'},   # Title Bar
+            {'rect': (10,  38,  572, 316), 'label': '2'},   # Preview
+            {'rect': (594, 38,  158, 40),  'label': '3'},   # CPU/GPU/Error/Lock
+            {'rect': (594, 82,  154, 50),  'label': '4'},   # Secure Delay + Preview
+            # (y=136-152 is empty separator space - no box)
+            {'rect': (594, 156, 154, 30),  'label': '5'},   # Reset Hand
+            {'rect': (594, 190, 154, 28),  'label': '6'},   # Register Deck
+            {'rect': (594, 222, 154, 28),  'label': '7'},   # Action Tracker
+            {'rect': (594, 254, 154, 28),  'label': '8'},   # Studio
+            {'rect': (594, 286, 154, 28),  'label': '9'},   # Split Recording
+            {'rect': (594, 318, 154, 34),  'label': '10'},  # Tag Player
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 2. Sources Tab (765x730) - calibrated 2026-02-10
+    # --------------------------------------------------------
+    '02-sources-tab': {
+        'src': '스크린샷 2026-02-05 180637.png',
+        'boxes': [
+            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar
+            {'rect': (9,   379, 556, 86),  'label': '2'},   # Device Table
+            {'rect': (565, 385, 187, 53),  'label': '3'},   # Board Cam / Auto Camera
+            {'rect': (565, 438, 187, 20),  'label': '4'},   # Camera Mode
+            {'rect': (565, 458, 187, 63),  'label': '5'},   # Heads Up / Follow
+            {'rect': (565, 521, 187, 63),  'label': '6'},   # Linger / Post
+            {'rect': (9,   584, 285, 44),  'label': '7'},   # Chroma Key
+            {'rect': (431, 592, 129, 21),  'label': '8'},   # Add Network Camera
+            {'rect': (16,  619, 212, 90),  'label': '9'},   # Audio / Sync
+            {'rect': (235, 619, 235, 90),  'label': '10'},  # External Switcher / ATEM
+            {'rect': (477, 619, 88,  90),  'label': '11'},  # Board Sync / Crossfade
+            {'rect': (572, 619, 172, 90),  'label': '12'},  # Player View
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 3. Outputs Tab (765x730) - calibrated 2026-02-10
+    # --------------------------------------------------------
+    '03-outputs-tab': {
+        'src': '스크린샷 2026-02-05 180645.png',
+        'boxes': [
+            {'rect': (30,  397, 235, 20),  'label': '1'},   # Video Size
+            {'rect': (272, 397, 146, 20),  'label': '2'},   # 9x16 Vertical
+            {'rect': (30,  423, 210, 21),  'label': '3'},   # Frame Rate
+            {'rect': (56,  465, 209, 110), 'label': '4'},   # Live column
+            {'rect': (271, 465, 142, 110), 'label': '5'},   # Delay column
+            {'rect': (33,  601, 232, 20),  'label': '6'},   # Virtual Camera
+            {'rect': (17,  677, 460, 32),  'label': '7'},   # Recording Mode
+            {'rect': (540, 397, 200, 20),  'label': '8'},   # Secure Delay
+            {'rect': (488, 423, 222, 21),  'label': '9'},   # Dynamic Delay
+            {'rect': (540, 449, 200, 21),  'label': '10'},  # Auto Stream
+            {'rect': (540, 476, 200, 15),  'label': '11'},  # Show Countdown
+            {'rect': (488, 500, 252, 131), 'label': '12'},  # Countdown Video + BG
+            {'rect': (488, 635, 252, 74),  'label': '13'},  # Twitch / ChatBot
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 4. GFX 1 Tab (765x730) - Detailed control-level scan 2026-02-12
+    # GroupBox borders (100,100,100): y=385,419,481,488,507,527,709 / x=16,376,383,744
+    # Left panel dropdowns (210,210,210 top): y=392,419,445,473,499,525,551,578,604
+    # Spinners (171,173,179): x=463 y=536-555/562-581/588-607, x=659 y=681-700
+    # Checkboxes: unchecked y=547-559, blue(0,95,184) y=569-581/591-603
+    # Gear buttons (208,208,208): x=716-733 y=613-630/635-652/657-674
+    # Skin buttons: x=545-626 / x=634-733, face at y=392-413
+    # --------------------------------------------------------
+    '04-gfx1-tab': {
+        'src': '스크린샷 2026-02-05 180649.png',
+        'boxes': [
+            # Tab Bar
+            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar (Sources|Outputs|GFX1|...)
+
+            # Left Panel - 11 individual control rows (x=16-376)
+            {'rect': (16,  385, 360, 31),  'label': '2'},   # Board Position [Right]
+            {'rect': (16,  416, 360, 27),  'label': '3'},   # Player Layout [Vert/Bot/Spill]
+            {'rect': (16,  443, 360, 28),  'label': '4'},   # Reveal Players [Action On]
+            {'rect': (16,  471, 360, 27),  'label': '5'},   # How to show a Fold [Immediate|1.5|S]
+            {'rect': (16,  498, 360, 26),  'label': '6'},   # Reveal Cards [Immediate]
+            {'rect': (16,  524, 360, 26),  'label': '7'},   # Leaderboard Position [Centre]
+            {'rect': (16,  550, 360, 26),  'label': '8'},   # Transition In Animation [Pop|0.5|S]
+            {'rect': (16,  576, 360, 26),  'label': '9'},   # Transition Out Animation [Slide|0.4|S]
+            {'rect': (16,  602, 360, 26),  'label': '10'},  # Heads Up Layout L/R [Only in split...]
+            {'rect': (16,  628, 360, 26),  'label': '11'},  # Heads Up Camera [Camera behind dealer]
+            {'rect': (16,  654, 360, 26),  'label': '12'},  # Heads Up Custom Y pos [☐|0.50|%]
+
+            # Skin Area - 3 individual elements (y=385-419)
+            {'rect': (383, 385, 161, 34),  'label': '13'},  # Skin Info Label ("Titanium, 1.41 GB")
+            {'rect': (545, 385, 82,  34),  'label': '14'},  # [Skin Editor] button
+            {'rect': (634, 385, 100, 34),  'label': '15'},  # [Media Folder] button
+
+            # Sponsor Logo Columns (y=419-481, 3 columns)
+            {'rect': (393, 419, 93,  62),  'label': '16'},  # Sponsor Logo Col 1
+            {'rect': (493, 419, 93,  62),  'label': '17'},  # Sponsor Logo Col 2
+            {'rect': (593, 419, 93,  62),  'label': '18'},  # Sponsor Logo Col 3
+
+            # Vanity (y=488-507)
+            {'rect': (393, 488, 351, 19),  'label': '19'},  # Vanity [TABLE 2] + Replace checkbox
+
+            # Bottom Section - Margin spinners (left, x=383-533)
+            {'rect': (383, 534, 150, 24),  'label': '20'},  # X Margin [0.04] %
+            {'rect': (383, 560, 150, 24),  'label': '21'},  # Top Margin [0.05] %
+            {'rect': (383, 586, 150, 24),  'label': '22'},  # Bot Margin [0.04] %
+
+            # Bottom Section - Checkbox settings (right, x=535-744)
+            {'rect': (535, 534, 209, 24),  'label': '23'},  # Show Heads Up History ☐
+            {'rect': (535, 560, 209, 24),  'label': '24'},  # Indent Action Player ☑
+            {'rect': (535, 586, 209, 24),  'label': '25'},  # Bounce Action Player ☑
+
+            # Bottom Section - Gear settings (full width, each with ☐ + ⚙)
+            {'rect': (383, 611, 361, 22),  'label': '26'},  # Show leaderboard after each hand
+            {'rect': (383, 633, 361, 22),  'label': '27'},  # Show PIP Capture after each hand
+            {'rect': (383, 655, 361, 22),  'label': '28'},  # Show player stats in ticker
+
+            # Action Clock (bottom)
+            {'rect': (383, 678, 361, 24),  'label': '29'},  # Show Action Clock at [10] S
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 5. GFX 2 Tab (765x730) - pixel-scanned 2026-02-12
+    # GroupBox borders: H y=385,709  V x=16,330,337,732
+    # Left panel: x=16-330, Right panel: x=337-732
+    # --------------------------------------------------------
+    '05-gfx2-tab': {
+        'src': '스크린샷 2026-02-05 180652.png',
+        'boxes': [
+            # Tab Bar
+            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar (Sources|Outputs|GFX1|GFX2|...)
+            # Left Panel - Leaderboard Options (6 rows, x=16-330)
+            {'rect': (16,  393, 314, 22),  'label': '2'},   # Show knockout rank in Leaderboard ☐
+            {'rect': (16,  415, 314, 22),  'label': '3'},   # Show Chipcount % in Leaderboard ☑
+            {'rect': (16,  437, 314, 22),  'label': '4'},   # Show eliminated players in Leaderboard stats ☑
+            {'rect': (16,  459, 314, 22),  'label': '5'},   # Show Chipcount with Cumulative Winnings ☐
+            {'rect': (16,  481, 314, 22),  'label': '6'},   # Hide leaderboard when hand starts ☑
+            {'rect': (16,  503, 314, 28),  'label': '7'},   # Max BB multiple to show in Leaderboard [200]
+            # Left Panel - Game Rules (4 rows)
+            {'rect': (16,  554, 314, 22),  'label': '8'},   # Move button after Bomb Pot ☐
+            {'rect': (16,  576, 314, 22),  'label': '9'},   # Limit Raises to Effective Stack size ☐
+            {'rect': (16,  598, 314, 22),  'label': '10'},  # Straddle not on the button or UTG is sleeper ☐
+            {'rect': (16,  620, 314, 22),  'label': '11'},  # Sleeper straddle gets final action ☐
+            # Right Panel (10 rows, x=337-732)
+            {'rect': (337, 393, 395, 22),  'label': '12'},  # Add seat # to player name ☐
+            {'rect': (337, 415, 395, 22),  'label': '13'},  # Show as eliminated when player loses stack ☑
+            {'rect': (337, 437, 395, 22),  'label': '14'},  # Allow Rabbit Hunting ☐
+            {'rect': (337, 459, 395, 24),  'label': '15'},  # Unknown cards blink in Secure Mode ☑
+            {'rect': (337, 483, 395, 25),  'label': '16'},  # Hilite Nit game players when [At Risk] ▼
+            {'rect': (337, 508, 395, 24),  'label': '17'},  # Clear previous action & show 'x to call' ☑
+            {'rect': (337, 532, 395, 24),  'label': '18'},  # Order players from the first [To the left] ▼
+            {'rect': (337, 556, 395, 26),  'label': '19'},  # Show hand equities [After 1st betting round] ▼
+            {'rect': (337, 582, 395, 26),  'label': '20'},  # Hilite winning hand [Immediately] ▼
+            {'rect': (337, 608, 395, 22),  'label': '21'},  # When showing equity+outs, ignore split pots ☐
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 6. GFX3 Tab (765x730) - pixel-scanned 2026-02-12
+    # GroupBox borders: H y=385,709  V x=16,281,288,677
+    # Left panel: x=16-281, Right panel: x=288-677
+    # --------------------------------------------------------
+    '06-gfx3-tab': {
+        'src': '스크린샷 2026-02-05 180655.png',
+        'boxes': [
+            # Tab Bar
+            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar (Sources|...|GFX3|...)
+            # Left Panel - Outs section (x=16-281)
+            {'rect': (16,  392, 265, 26),  'label': '2'},   # Show Outs [Heads Up or All In Showdown] ▼
+            {'rect': (16,  418, 265, 26),  'label': '3'},   # Outs Position [Left] ▼
+            {'rect': (16,  444, 265, 22),  'label': '4'},   # True Outs ☑
+            # Left Panel - Score Strip section
+            {'rect': (16,  473, 265, 26),  'label': '5'},   # Score Strip [Off] ▼
+            {'rect': (16,  499, 265, 26),  'label': '6'},   # Order Strip by [Chip Count] ▼
+            {'rect': (16,  525, 265, 20),  'label': '7'},   # Show eliminated players in Strip ☐
+            # Left Panel - Blinds section
+            {'rect': (16,  556, 265, 26),  'label': '8'},   # Show Blinds [Never] ▼
+            {'rect': (16,  582, 265, 20),  'label': '9'},   # Show hand # with blinds ☑
+            # Left Panel - Currency section
+            {'rect': (16,  636, 265, 24),  'label': '10'},  # Currency Symbol [W] ☐
+            {'rect': (16,  660, 265, 22),  'label': '11'},  # Trailing Currency Symbol ☐
+            {'rect': (16,  682, 265, 20),  'label': '12'},  # Divide all amounts by 100 ☐
+            # Right Panel - Chipcount Precision (x=288-677, 8 dropdown rows)
+            {'rect': (288, 392, 389, 26),  'label': '13'},  # Leaderboard [Exact Amount] ▼
+            {'rect': (288, 418, 389, 26),  'label': '14'},  # Player Stack [Smart Amount ('k' & 'M')] ▼
+            {'rect': (288, 444, 389, 26),  'label': '15'},  # Player Action [Smart Amount ('k' & 'M')] ▼
+            {'rect': (288, 470, 389, 26),  'label': '16'},  # Blinds [Smart Amount ('k' & 'M')] ▼
+            {'rect': (288, 496, 389, 26),  'label': '17'},  # Pot [Smart Amount ('k' & 'M')] ▼
+            {'rect': (288, 522, 389, 26),  'label': '18'},  # Twitch Bot [Exact Amount] ▼
+            {'rect': (288, 548, 389, 26),  'label': '19'},  # Ticker [Exact Amount] ▼
+            {'rect': (288, 574, 389, 26),  'label': '20'},  # Strip [Exact Amount] ▼
+            # Right Panel - How to display amounts (3 dropdown rows)
+            {'rect': (288, 622, 389, 26),  'label': '21'},  # Chipcounts [Amount] ▼
+            {'rect': (288, 648, 389, 26),  'label': '22'},  # Pot [Amount] ▼
+            {'rect': (288, 674, 389, 26),  'label': '23'},  # Bets [Amount] ▼
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 7. Commentary Tab (765x730) - calibrated 2026-02-10
+    # --------------------------------------------------------
+    '07-commentary-tab': {
+        'src': '스크린샷 2026-02-05 180659.png',
+        'boxes': [
+            # Tab Bar
+            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar (Sources|...|Commentary|System)
+            # Commentary Panel (x=16-533, y=385-572)
+            {'rect': (16,  394, 517, 26),  'label': '2'},   # Commentary Mode [Disabled] ▼
+            {'rect': (16,  422, 517, 24),  'label': '3'},   # Password field (masked)
+            {'rect': (16,  472, 517, 22),  'label': '4'},   # Statistics only ☐
+            {'rect': (16,  494, 517, 22),  'label': '5'},   # Allow commentator to control leaderboard ☑
+            {'rect': (16,  516, 326, 22),  'label': '6'},   # Commentator camera as well as audio ☑
+            {'rect': (345, 516, 168, 22),  'label': '7'},   # [Configure Picture In Picture] button
+            {'rect': (16,  540, 517, 22),  'label': '8'},   # Allow commentator camera to go full screen ☑
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 8. System Tab (765x730) - recalibrated 2026-02-12 (28 individual controls)
+    # --------------------------------------------------------
+    '08-system-tab': {
+        'src': '스크린샷 2026-02-05 180624.png',
+        'boxes': [
+            # Tab Bar
+            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar (Sources|...|Commentary|System)
+            # --- Table GroupBox (x=16-237, y=385-534) ---
+            {'rect': (27,  421, 199, 20),  'label': '2'},   # Name [GGP] + [Update]
+            {'rect': (27,  448, 199, 20),  'label': '3'},   # Pwd [CCC] + [Update]
+            {'rect': (27,  499, 41,  20),  'label': '4'},   # [Reset] button
+            {'rect': (80,  499, 63,  20),  'label': '5'},   # [Calibrate] button
+            # --- License GroupBox (x=244-505, y=385-534) ---
+            {'rect': (335, 393, 150, 20),  'label': '6'},   # Serial # 674
+            {'rect': (290, 418, 180, 24),  'label': '7'},   # [Check for Updates]
+            {'rect': (255, 450, 135, 42),  'label': '8'},   # Updates & support + [Evaluation mode]
+            {'rect': (395, 450, 100, 42),  'label': '9'},   # PRO license + [Evaluation mode]
+            # --- Right Panel (x=512-751, y=385-717) ---
+            {'rect': (555, 395, 190, 20),  'label': '10'},  # [Open Table Diagnostics]
+            {'rect': (555, 420, 190, 140), 'label': '11'},  # System info (CPU/GPU/OS/Encoder)
+            {'rect': (555, 563, 190, 19),  'label': '12'},  # [View System Log]
+            {'rect': (612, 607, 124, 19),  'label': '13'},  # [Secure Delay Folder]
+            {'rect': (612, 637, 124, 19),  'label': '14'},  # [Export Folder]
+            {'rect': (555, 678, 190, 17),  'label': '15'},  # Stream Deck [Disabled] ▼
+            # --- Checkboxes Left Column ---
+            {'rect': (16,  543, 98,  20),  'label': '16'},  # MultiGFX ☐
+            {'rect': (16,  565, 100, 20),  'label': '17'},  # Sync Stream ☐
+            {'rect': (16,  587, 100, 20),  'label': '18'},  # Sync Skin ☐
+            {'rect': (16,  609, 100, 20),  'label': '19'},  # No Cards ☐
+            {'rect': (16,  653, 148, 20),  'label': '20'},  # Disable GPU Encode ☐
+            {'rect': (16,  675, 148, 20),  'label': '21'},  # Ignore Name Tags ☑
+            # --- Checkboxes Right Column ---
+            {'rect': (118, 543, 387, 20),  'label': '22'},  # UPCARD antennas read hole cards... ☐
+            {'rect': (160, 565, 345, 20),  'label': '23'},  # Disable muck antenna when in... ☐
+            {'rect': (160, 587, 345, 20),  'label': '24'},  # Disable Community Card antenna... ☐
+            {'rect': (160, 609, 345, 20),  'label': '25'},  # Auto Start PokerGFX Server... ☐
+            {'rect': (285, 631, 220, 20),  'label': '26'},  # Allow Action Tracker access ☑
+            {'rect': (210, 653, 295, 20),  'label': '27'},  # Action Tracker Predictive Bet Input ☐
+            {'rect': (300, 675, 205, 20),  'label': '28'},  # Action Tracker Kiosk ☐
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 9. Skin Editor (883x461) - recalibrated 2026-02-12 (37 individual controls)
+    # --------------------------------------------------------
+    '09-skin-editor': {
+        'src': '스크린샷 2026-02-05 180715.png',
+        'boxes': [
+            # --- Header ---
+            {'rect': (5,   39,  462, 20),  'label': '1'},   # Name [Titanium]
+            {'rect': (5,   62,  462, 17),  'label': '2'},   # Details [Modern, layered skin...]
+            {'rect': (480, 39,  385, 18),  'label': '3'},   # Remove Partial Transparency... ☐
+            {'rect': (620, 62,  248, 17),  'label': '4'},   # Designed for 4K (3840 x 2160) ☐
+            # --- Adjustments GroupBox (y=86-164) ---
+            {'rect': (20,  106, 140, 38),  'label': '5'},   # Adjust Size slider
+            # --- Elements GroupBox (y=164-298) ---
+            {'rect': (300, 180, 130, 21),  'label': '6'},   # [Strip]
+            {'rect': (27,  208, 126, 21),  'label': '7'},   # [Board]
+            {'rect': (164, 208, 126, 21),  'label': '8'},   # [Blinds]
+            {'rect': (301, 208, 126, 21),  'label': '9'},   # [Outs]
+            {'rect': (27,  236, 126, 21),  'label': '10'},  # [Hand History]
+            {'rect': (164, 236, 126, 21),  'label': '11'},  # [Action Clock]
+            {'rect': (301, 236, 126, 21),  'label': '12'},  # [Leaderboard]
+            {'rect': (27,  264, 126, 21),  'label': '13'},  # [Split Screen Divider]
+            {'rect': (164, 264, 126, 21),  'label': '14'},  # [Ticker]
+            {'rect': (301, 264, 126, 21),  'label': '15'},  # [Field]
+            # --- Text GroupBox (y=298-390) ---
+            {'rect': (136, 311, 128, 18),  'label': '16'},  # Text All Caps ☑
+            {'rect': (278, 311, 150, 18),  'label': '17'},  # Text Reveal Speed slider
+            {'rect': (13,  340, 285, 22),  'label': '18'},  # Font 1 [Gotham] [...]
+            {'rect': (13,  366, 285, 22),  'label': '19'},  # Font 2 [Gotham] [...]
+            {'rect': (310, 366, 120, 22),  'label': '20'},  # [Language]
+            # --- Cards GroupBox (x=443-866, y=99-164) ---
+            {'rect': (456, 100, 225, 26),  'label': '21'},  # Card display (card images)
+            {'rect': (685, 127, 173, 21),  'label': '22'},  # [Add] [Replace] [Delete]
+            {'rect': (685, 155, 173, 21),  'label': '23'},  # [Import Card Back]
+            # --- Flags GroupBox (x=443-866, y=186-252) ---
+            {'rect': (545, 197, 300, 18),  'label': '24'},  # Country flag does not force... ☑
+            {'rect': (449, 219, 67,  21),  'label': '25'},  # [Edit Flags]
+            {'rect': (545, 219, 316, 22),  'label': '26'},  # Hide flag after [0.0] S (0=Do not hide)
+            # --- Player GroupBox (x=443-866, y=259-390) ---
+            {'rect': (449, 303, 172, 22),  'label': '27'},  # Variant [HOLDEM (2 Cards)] ▼
+            {'rect': (683, 303, 173, 22),  'label': '28'},  # Player Set [2 Card Games] ▼
+            {'rect': (490, 330, 140, 20),  'label': '29'},  # Override Card Set ☐
+            {'rect': (683, 328, 173, 21),  'label': '30'},  # [Edit] [New] [Delete]
+            {'rect': (650, 358, 210, 18),  'label': '31'},  # Crop player photo to circle ☐
+            # --- Bottom Buttons (y=400-449) ---
+            {'rect': (12,  400, 131, 49),  'label': '32'},  # [IMPORT]
+            {'rect': (149, 400, 131, 49),  'label': '33'},  # [EXPORT]
+            {'rect': (286, 400, 131, 49),  'label': '34'},  # [SKIN DOWNLOAD CENTRE]
+            {'rect': (423, 400, 131, 49),  'label': '35'},  # [RESET TO DEFAULT]
+            {'rect': (560, 400, 131, 49),  'label': '36'},  # [DISCARD]
+            {'rect': (697, 400, 131, 49),  'label': '37'},  # [USE]
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 10. Graphic Editor - Board (644x582) - calibrated 2026-02-10
+    # --------------------------------------------------------
+    '10-graphic-editor-board': {
+        'src': '스크린샷 2026-02-05 180720.png',
+        'boxes': [
+            # --- Top Bar ---
+            {'rect': (290, 30,  125, 18),  'label': '1'},   # Layout Size [296 X 197]
+            # --- Import / Mode Row (y=68-102) ---
+            {'rect': (30,  76,  88,  22),  'label': '2'},   # [Import Image] button
+            {'rect': (125, 76,  158, 22),  'label': '3'},   # AT Mode (Flop Game) ▼
+            # --- Right Panel: Element ---
+            {'rect': (497, 48,  115, 22),  'label': '4'},   # Element [Card 1 ▼]
+            # --- Right Panel: Position/Anchor ---
+            {'rect': (468, 86,  65,  20),  'label': '5'},   # Left [288 ⬆⬇]
+            {'rect': (540, 86,  72,  20),  'label': '6'},   # Anchor [Right ▼]
+            {'rect': (468, 110, 65,  20),  'label': '7'},   # Top [0 ⬆⬇]
+            {'rect': (540, 110, 72,  20),  'label': '8'},   # Anchor [Top ▼]
+            {'rect': (468, 134, 65,  20),  'label': '9'},   # Width [56 ⬆⬇]
+            {'rect': (560, 134, 52,  20),  'label': '10'},  # Z [1 ⬆⬇]
+            {'rect': (468, 158, 65,  20),  'label': '11'},  # Height [80 ⬆⬇]
+            {'rect': (560, 158, 52,  20),  'label': '12'},  # < [0 ⬆⬇]
+            # --- Animation (y=102-198) ---
+            {'rect': (36,  138, 72,  22),  'label': '13'},  # [AnimIn] button
+            {'rect': (116, 138, 22,  22),  'label': '14'},  # [X] dismiss AnimIn
+            {'rect': (146, 141, 75,  16),  'label': '15'},  # AnimIn slider (blue)
+            {'rect': (36,  166, 72,  22),  'label': '16'},  # [AnimOut] button
+            {'rect': (116, 166, 22,  22),  'label': '17'},  # [X] dismiss AnimOut
+            {'rect': (146, 169, 75,  16),  'label': '18'},  # AnimOut slider (blue)
+            {'rect': (270, 138, 125, 22),  'label': '19'},  # Transition In [-- Default -- ▼]
+            {'rect': (270, 166, 125, 22),  'label': '20'},  # Transition Out [-- Default -- ▼]
+            # --- Text Visible (y=198-353) ---
+            {'rect': (20,  207, 120, 16),  'label': '21'},  # ☐ Text Visible
+            {'rect': (141, 237, 152, 22),  'label': '22'},  # Font [Font 1 - Gotham ▼]
+            {'rect': (300, 232, 36,  22),  'label': '23'},  # Colour swatch
+            {'rect': (370, 232, 36,  22),  'label': '24'},  # Hilite Col swatch
+            {'rect': (141, 261, 152, 22),  'label': '25'},  # Alignment [Left ▼]
+            {'rect': (300, 264, 36,  22),  'label': '26'},  # Colour swatch (Alignment)
+            {'rect': (80,  295, 55,  16),  'label': '27'},  # ☐ Drop Shadow
+            {'rect': (141, 291, 152, 22),  'label': '28'},  # [North ▼] dropdown
+            {'rect': (318, 294, 36,  22),  'label': '29'},  # Colour swatch (Shadow)
+            {'rect': (100, 321, 90,  20),  'label': '30'},  # Rounded Corners [0 ⬆⬇]
+            {'rect': (262, 321, 70,  20),  'label': '31'},  # Margins X [0 ⬆⬇]
+            {'rect': (350, 321, 55,  20),  'label': '32'},  # Y [0 ⬆⬇]
+            # --- Right Side Controls ---
+            {'rect': (566, 208, 64,  30),  'label': '33'},  # [Adjust Colours] button
+            {'rect': (445, 242, 112, 58),  'label': '34'},  # Background Image area
+            {'rect': (527, 310, 20,  18),  'label': '35'},  # [X] dismiss background
+            {'rect': (440, 328, 120, 16),  'label': '36'},  # ☐ Triggered by Language text
+            {'rect': (566, 296, 64,  24),  'label': '37'},  # [OK] button
+            {'rect': (566, 330, 64,  24),  'label': '38'},  # [Cancel] button
+            # --- Preview ---
+            {'rect': (16,  365, 340, 200), 'label': '39'},  # Live Preview
+        ],
+    },
+
+    # --------------------------------------------------------
+    # 11. Graphic Editor - Player (644x505) - calibrated 2026-02-12
+    # Red boxes for editor controls, Green boxes for preview overlay elements
+    # Editor controls share identical GroupBox positions with Image 10
+    # --------------------------------------------------------
+    '11-graphic-editor-player': {
+        'src': '스크린샷 2026-02-05 180728.png',
+        'boxes': [
+            # --- Top Bar (Player Set row, y=39-68) ---
+            {'rect': (91,  42,  198, 18),  'label': '1'},   # Player Set [2 Card Games ▼]
+            {'rect': (310, 42,  80,  18),  'label': '2'},   # Layout Size [465 X 120]
+            # --- Import / Mode Row (y=68-102) ---
+            {'rect': (30,  76,  88,  22),  'label': '3'},   # [Import Image] button
+            {'rect': (125, 76,  158, 22),  'label': '4'},   # AT Mode with photo ▼
+            # --- Right Panel: Element ---
+            {'rect': (497, 48,  115, 22),  'label': '5'},   # Element [Card 1 ▼]
+            # --- Right Panel: Position/Anchor ---
+            {'rect': (468, 86,  65,  20),  'label': '6'},   # Left [372 ⬆⬇]
+            {'rect': (540, 86,  72,  20),  'label': '7'},   # Anchor [Right ▼]
+            {'rect': (468, 110, 65,  20),  'label': '8'},   # Top [5 ⬆⬇]
+            {'rect': (540, 110, 72,  20),  'label': '9'},   # Anchor [Top ▼]
+            {'rect': (468, 134, 65,  20),  'label': '10'},  # Width [44 ⬆⬇]
+            {'rect': (560, 134, 52,  20),  'label': '11'},  # Z [1 ⬆⬇]
+            {'rect': (468, 158, 65,  20),  'label': '12'},  # Height [64 ⬆⬇]
+            {'rect': (560, 158, 52,  20),  'label': '13'},  # < [0 ⬆⬇]
+            # --- Animation (y=102-198) ---
+            {'rect': (36,  138, 72,  22),  'label': '14'},  # [AnimIn] button
+            {'rect': (116, 138, 22,  22),  'label': '15'},  # [X] dismiss AnimIn
+            {'rect': (146, 141, 75,  16),  'label': '16'},  # AnimIn slider (blue)
+            {'rect': (36,  166, 72,  22),  'label': '17'},  # [AnimOut] button
+            {'rect': (116, 166, 22,  22),  'label': '18'},  # [X] dismiss AnimOut
+            {'rect': (146, 169, 75,  16),  'label': '19'},  # AnimOut slider (blue)
+            {'rect': (270, 138, 125, 22),  'label': '20'},  # Transition In [-- Default -- ▼]
+            {'rect': (270, 166, 125, 22),  'label': '21'},  # Transition Out [-- Default -- ▼]
+            # --- Text Visible (y=198-353) ---
+            {'rect': (20,  207, 120, 16),  'label': '22'},  # ☐ Text Visible
+            {'rect': (141, 237, 152, 22),  'label': '23'},  # Font [Font 1 - Gotham ▼]
+            {'rect': (300, 232, 36,  22),  'label': '24'},  # Colour swatch
+            {'rect': (370, 232, 36,  22),  'label': '25'},  # Hilite Col swatch
+            {'rect': (141, 261, 152, 22),  'label': '26'},  # Alignment [Left ▼]
+            {'rect': (300, 264, 36,  22),  'label': '27'},  # Colour swatch (Alignment)
+            {'rect': (80,  295, 55,  16),  'label': '28'},  # ☐ Drop Shadow
+            {'rect': (141, 291, 152, 22),  'label': '29'},  # [North ▼] dropdown
+            {'rect': (318, 294, 36,  22),  'label': '30'},  # Colour swatch (Shadow)
+            {'rect': (100, 321, 90,  20),  'label': '31'},  # Rounded Corners [0 ⬆⬇]
+            {'rect': (262, 321, 70,  20),  'label': '32'},  # Margins X [0 ⬆⬇]
+            {'rect': (350, 321, 55,  20),  'label': '33'},  # Y [0 ⬆⬇]
+            # --- Right Side Controls ---
+            {'rect': (566, 208, 64,  30),  'label': '34'},  # [Adjust Colours] button
+            {'rect': (445, 242, 112, 58),  'label': '35'},  # Background Image area
+            {'rect': (527, 310, 20,  18),  'label': '36'},  # [X] dismiss background
+            {'rect': (440, 328, 120, 16),  'label': '37'},  # ☐ Triggered by Language text
+            {'rect': (566, 296, 64,  24),  'label': '38'},  # [OK] button
+            {'rect': (566, 330, 64,  24),  'label': '39'},  # [Cancel] button
+            # --- Preview Area ---
+            {'rect': (16,  355, 465, 130), 'label': '40'},  # Live Preview
+            # --- Green: Overlay elements in preview ---
+            {'rect': (19,  370, 88,  115), 'label': 'A',  'color': GREEN},  # Player Photo
+            {'rect': (108, 371, 48,  68),  'label': 'B',  'color': GREEN},  # Hole Cards
+            {'rect': (168, 383, 182, 28),  'label': 'C',  'color': GREEN},  # NAME
+            {'rect': (385, 399, 36,  14),  'label': 'D',  'color': GREEN},  # Country Flag
+            {'rect': (425, 383, 47,  30),  'label': 'E',  'color': GREEN},  # Equity %
+            {'rect': (108, 440, 170, 30),  'label': 'F',  'color': GREEN},  # ACTION
+            {'rect': (280, 433, 145, 48),  'label': 'G',  'color': GREEN},  # STACK
+            {'rect': (428, 435, 52,  45),  'label': 'H',  'color': GREEN},  # POS
+        ],
+    },
+}
+
+
+# ============================================================
+# MAIN
+# ============================================================
+
+def process_image(name, data, mode='normal', snap=True):
+    """Process a single image. mode: 'normal', 'calibrate', 'debug'.
+    snap: if True, auto-calibrate box positions in normal mode.
+    """
+    src_path = os.path.join(INPUT_DIR, data['src'])
+    if not os.path.exists(src_path):
+        print(f"SKIP (not found): {src_path}")
+        return None
+
+    img = Image.open(src_path).copy()
+    boxes = data['boxes']
+
+    if mode == 'calibrate':
+        calibrated = auto_calibrate(img, boxes)
+        # Print calibration report
+        print(f"\n{'='*60}")
+        print(f"  {name}  ({img.size[0]}x{img.size[1]})")
+        print(f"{'='*60}")
+        changed = 0
+        for cb in calibrated:
+            lbl = cb['label']
+            orig = cb.get('_original', cb['rect'])
+            curr = cb['rect']
+            delta = cb.get('_delta', (0, 0, 0, 0))
+            moved = any(d != 0 for d in delta)
+            marker = " << MOVED" if moved else ""
+            if moved:
+                changed += 1
+            print(f"  [{lbl:>2}] {str(orig):>22} -> {str(curr):<22}{marker}")
+            if moved:
+                dx, dy, dw, dh = delta
+                print(f"        delta: x{dx:+d} y{dy:+d} w{dw:+d} h{dh:+d}")
+        print(f"\n  {changed}/{len(calibrated)} boxes adjusted")
+
+        # Check for empty boxes
+        empty_warnings = check_empty_boxes(img, calibrated)
+        for w in empty_warnings:
+            print(f"  WARN: Box [{w['label']}] ({w['rect']}) "
+                  f"variance={w['variance']} avg={w['avg_color']} - may be empty")
+
+        # Generate calibrated overlay
+        dst_path = os.path.join(OUTPUT_DIR, f"{name}.png")
+        result = draw_boxes(img, calibrated)
+        result.save(dst_path, quality=95)
+        print(f"  -> {dst_path}")
+
+        # Save calibrated coordinates to JSON sidecar (Fix #3)
+        json_path = os.path.join(OUTPUT_DIR, f"{name}-calibrated.json")
+        json_data = {
+            'name': name,
+            'src': data['src'],
+            'size': list(img.size),
+            'boxes': [],
+        }
+        for cb in calibrated:
+            entry = {
+                'rect': list(cb['rect']),
+                'label': cb['label'],
+            }
+            if cb.get('color') and cb['color'] != RED:
+                entry['color'] = 'GREEN' if cb['color'] == GREEN else 'BLUE'
+            if cb.get('_delta') and any(d != 0 for d in cb['_delta']):
+                entry['delta'] = list(cb['_delta'])
+            entry['original'] = list(cb.get('_original', cb['rect']))
+            json_data['boxes'].append(entry)
+        json_data['empty_warnings'] = empty_warnings
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(json_data, f, indent=2, ensure_ascii=False)
+        print(f"  -> {json_path}")
+
+        # Print Python dict for copy-paste
+        print(f"\n  # Copy-paste replacement:")
+        print(f"  'boxes': [")
+        for cb in calibrated:
+            x, y, w, h = cb['rect']
+            lbl = cb['label']
+            color = cb.get('color')
+            if color and color != RED:
+                color_name = 'GREEN' if color == GREEN else 'BLUE'
+                print(f"      {{'rect': ({x:<4d} {y:<4d} {w:<4d} {h:<3d}),"
+                      f" 'label': '{lbl}', 'color': {color_name}}},")
+            else:
+                print(f"      {{'rect': ({x:<4d} {y:<4d} {w:<4d} {h:<3d}),"
+                      f" 'label': '{lbl}'}},")
+        print(f"  ],")
+
+        return calibrated
+
+    elif mode == 'debug':
+        # Detect separators for debug overlay
+        content_y = 350 if img.height > 400 else 0
+        h_seps = detect_all_h_separators(img, y_start=content_y)
+
+        # Calibrate first to get delta info
+        calibrated = auto_calibrate(img, boxes)
+
+        # Draw normal boxes + debug overlay
+        result = draw_boxes(img, calibrated)
+        result = draw_debug_overlay(result, calibrated, h_seps)
+
+        dst_path = os.path.join(OUTPUT_DIR, f"{name}-debug.png")
+        result.save(dst_path, quality=95)
+        print(f"DEBUG: {dst_path} ({img.size[0]}x{img.size[1]}, "
+              f"{len(boxes)} boxes, {len(h_seps)} separators)")
+        return calibrated
+
+    else:  # normal
+        dst_path = os.path.join(OUTPUT_DIR, f"{name}.png")
+
+        # Fix #1: Auto-snap to edges in normal mode (disable with --no-snap)
+        if snap:
+            draw_target = auto_calibrate(img, boxes)
+            snapped = sum(1 for b in draw_target
+                          if b.get('_delta') and any(d != 0 for d in b['_delta']))
+        else:
+            draw_target = boxes
+            snapped = 0
+
+        # Fix #2: Check for empty/uniform boxes
+        empty_warnings = check_empty_boxes(img, draw_target)
+        for w in empty_warnings:
+            print(f"  WARN: [{name}] Box [{w['label']}] ({w['rect']}) "
+                  f"variance={w['variance']} avg={w['avg_color']} - may be empty")
+
+        result = draw_boxes(img, draw_target)
+        result.save(dst_path, quality=95)
+
+        snap_info = f", {snapped} snapped" if snap and snapped > 0 else ""
+        warn_info = f", {len(empty_warnings)} warnings" if empty_warnings else ""
+        print(f"OK: {dst_path} ({img.size[0]}x{img.size[1]}, "
+              f"{len(boxes)} boxes{snap_info}{warn_info})")
+        return empty_warnings if empty_warnings else None
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Generate annotated overlay images for PokerGFX UI Analysis')
+    parser.add_argument('--calibrate', action='store_true',
+                        help='Auto-calibrate box positions using edge detection')
+    parser.add_argument('--debug', action='store_true',
+                        help='Generate debug overlays with coordinates and grid')
+    parser.add_argument('--no-snap', action='store_true',
+                        help='Disable auto edge-snapping in normal mode')
+    parser.add_argument('--target', type=str, default=None,
+                        help='Process only images matching this prefix (e.g. "02")')
+    args = parser.parse_args()
+
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    mode = 'calibrate' if args.calibrate else ('debug' if args.debug else 'normal')
+    snap = not args.no_snap
+
+    count = 0
+    total_warnings = 0
+    for name, data in IMAGES.items():
+        if args.target and not name.startswith(args.target):
+            continue
+        result = process_image(name, data, mode=mode, snap=snap)
+        if isinstance(result, list):
+            total_warnings += len(result)
+        count += 1
+
+    if mode == 'calibrate':
+        print(f"\nCalibration complete: {count} images analyzed.")
+        print("JSON sidecar files saved to output directory.")
+    elif mode == 'debug':
+        print(f"\nDebug overlays: {count} images generated (*-debug.png).")
+    else:
+        warn_msg = f" ({total_warnings} empty-box warnings)" if total_warnings else ""
+        snap_msg = " (edge-snap ON)" if snap else " (edge-snap OFF)"
+        print(f"\nDone: {count} images generated{snap_msg}{warn_msg}.")
+
+
+if __name__ == '__main__':
+    main()

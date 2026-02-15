@@ -119,7 +119,7 @@ class MarkdownReporter:
         # Follow-up needed
         needs_followup = gmail_data.get("needs_followup", [])
         for item in needs_followup[:3]:  # Top 3
-            vendor = item.get("vendor", "Unknown")
+            vendor = item.get("recipient_vendor") or item.get("vendor") or "Unknown"
             days = item.get("days_elapsed", 0)
             alerts.append(f"- 🔴 Follow-up 필요: {vendor} ({days}일 무응답)")
 
@@ -239,6 +239,29 @@ class MarkdownReporter:
                 lines.append(f"| {vendor} | {subject} | {date} | {days}일 |")
             lines.append("")
 
+        # Unclassified emails (AI review needed)
+        unclassified = gmail_data.get("unclassified_emails", [])
+        if unclassified:
+            lines.extend([
+                "### 🔍 미분류 메일 (AI 검토 필요)",
+                "",
+                "등록된 업체 외 발신자. 프로젝트 관련성 확인 필요.",
+                "",
+                "| 발신자 | 제목 | 수신일 | 미리보기 |",
+                "|--------|------|--------|----------|",
+            ])
+            for email in unclassified[:10]:
+                import re
+                sender = email.get("sender", "-")
+                name_match = re.match(r'^([^<]+)<', sender)
+                sender_display = name_match.group(1).strip().strip('"') if name_match else sender[:30]
+                sender_display = sender_display.replace("|", "\\|")
+                subject = email.get("subject", "").replace("|", "\\|")[:40]
+                date = email.get("date", "")[:10] if email.get("date") else "-"
+                snippet = email.get("snippet", "").replace("|", "\\|")[:60]
+                lines.append(f"| {sender_display} | {subject} | {date} | {snippet} |")
+            lines.append("")
+
         # Statistics
         total = gmail_data.get("total_emails", 0)
         lines.extend([
@@ -249,6 +272,7 @@ class MarkdownReporter:
             f"- 전송 실패: {len(failures)}건",
             f"- 응답 대기: {len(awaiting)}건",
             f"- Follow-up 필요: {len(followup)}건",
+            f"- 미분류: {len(unclassified)}건",
             "",
             "---",
             "",
@@ -405,20 +429,13 @@ class MarkdownReporter:
 
         return text.strip()
 
-    # All vendors that should receive RFI (same as slack_poster.py)
+    # All vendors that should receive RFI (synced with VENDOR-MANAGEMENT.md + slack_poster.py)
     ALL_RFI_VENDORS = {
         # Category A (통합 파트너 후보)
         "sunfly": {"name": "Sun-Fly", "email": "susie.su@sun-fly.com", "cat": "A"},
         "angel": {"name": "Angel Playing Cards", "email": "overseas@angel-group.co.jp", "cat": "A"},
-        "emfoplus": {"name": "엠포플러스", "email": "biz@emfoplus.co.kr", "cat": "A"},
         # Category B (부품 공급)
-        "feig": {"name": "FEIG", "email": "info@feig.de", "cat": "B"},
         "gao": {"name": "GAO RFID", "email": "sales@gaorfid.com", "cat": "B"},
-        "identiv": {"name": "Identiv", "email": "sales@identiv.com", "cat": "B"},
-        "pongee": {"name": "PONGEE", "email": "pongee@pongee.com.tw", "cat": "B"},
-        "waveshare": {"name": "Waveshare", "email": "service@waveshare.com", "cat": "B"},
-        "sparkfun": {"name": "SparkFun", "email": "sales@sparkfun.com", "cat": "B"},
-        "adafruit": {"name": "Adafruit", "email": "support@adafruit.com", "cat": "B"},
         "fadedspade": {"name": "Faded Spade", "email": "sales@fadedspade.com", "cat": "B"},
     }
 
@@ -454,7 +471,7 @@ class MarkdownReporter:
 
         # Priority 3: Follow-up emails
         for email in gmail_data.get("needs_followup", [])[:3]:
-            vendor = email.get("vendor", "Unknown")
+            vendor = email.get("recipient_vendor") or email.get("vendor") or "Unknown"
             lines.append(f"{task_num}. [ ] {vendor} Follow-up 메일 발송")
             task_num += 1
 

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EBS Action Tracker - BnW Wireframe</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #1a1a1a; color: #e0e0e0; width: 1280px; height: 800px; overflow: hidden; }
+
+  /* Status Bar */
+  .status-bar { display: flex; gap: 16px; padding: 8px 16px; background: #222; border-bottom: 1px solid #444; font-size: 11px; }
+  .status-item { display: flex; align-items: center; gap: 4px; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #888; }
+  .status-dot.on { background: #aaa; }
+
+  /* Game Info Bar */
+  .game-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; background: #252525; border-bottom: 1px solid #444; }
+  .game-type { font-weight: 700; font-size: 14px; }
+  .blinds { font-size: 13px; color: #aaa; }
+  .hand-num { font-size: 12px; color: #888; }
+
+  /* Main Layout */
+  .main { display: grid; grid-template-columns: 1fr 280px; height: calc(100% - 74px); }
+
+  /* Table Area */
+  .table-area { position: relative; padding: 20px; }
+  .poker-table { position: relative; width: 100%; height: 100%; }
+
+  /* Seats */
+  .seat { position: absolute; width: 140px; text-align: center; }
+  .seat-box { border: 2px solid #555; border-radius: 8px; padding: 8px; background: #2a2a2a; }
+  .seat-box.active { border-color: #ccc; background: #333; }
+  .seat-box.folded { opacity: 0.4; }
+  .seat-name { font-weight: 700; font-size: 12px; }
+  .seat-stack { font-size: 11px; color: #aaa; margin-top: 2px; }
+  .seat-cards { display: flex; gap: 4px; justify-content: center; margin-top: 4px; }
+  .mini-card { width: 24px; height: 34px; border: 1.5px solid #888; border-radius: 3px; background: #444; font-size: 9px; display: flex; align-items: center; justify-content: center; }
+  .seat-action { font-size: 10px; color: #999; margin-top: 3px; }
+  .position-tag { font-size: 9px; font-weight: 700; color: #aaa; background: #383838; border-radius: 3px; padding: 1px 5px; display: inline-block; margin-top: 2px; }
+  .action-on { position: absolute; top: -6px; right: -6px; width: 12px; height: 12px; border-radius: 50%; background: #bbb; border: 1px solid #888; }
+
+  /* Seat positions (10 seats around oval) */
+  .seat-1 { top: 55%; left: 0; }
+  .seat-2 { top: 15%; left: 2%; }
+  .seat-3 { top: 0; left: 18%; }
+  .seat-4 { top: 0; left: 38%; }
+  .seat-5 { top: 0; left: 58%; }
+  .seat-6 { top: 0; right: 18%; }
+  .seat-7 { top: 15%; right: 2%; }
+  .seat-8 { top: 55%; right: 0; }
+  .seat-9 { bottom: 5%; right: 25%; }
+  .seat-10 { bottom: 5%; left: 25%; }
+
+  /* Board */
+  .board { position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+  .board-cards { display: flex; gap: 6px; }
+  .board-card { width: 44px; height: 62px; border: 2px solid #777; border-radius: 5px; background: #333; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+  .board-card.empty { border-style: dashed; border-color: #555; }
+  .pot-display { margin-top: 8px; font-size: 14px; font-weight: 700; color: #ccc; }
+  .street-label { font-size: 11px; color: #888; margin-top: 4px; }
+
+  /* Right Panel */
+  .right-panel { border-left: 1px solid #444; display: flex; flex-direction: column; }
+
+  /* Action Buttons */
+  .action-section { padding: 12px; border-bottom: 1px solid #444; }
+  .section-title { font-size: 11px; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .action-btn { padding: 10px; border: 2px solid #666; border-radius: 6px; background: #2a2a2a; color: #ddd; font-weight: 700; font-size: 12px; text-align: center; cursor: pointer; }
+  .action-btn.fold { border-color: #888; }
+  .action-btn.check { border-color: #888; }
+  .action-btn.call { border-color: #999; }
+  .action-btn.bet { border-color: #aaa; }
+  .action-btn.allin { border-color: #bbb; grid-column: span 2; }
+
+  /* Betting Input */
+  .bet-section { padding: 12px; border-bottom: 1px solid #444; }
+  .bet-input-row { display: flex; gap: 6px; align-items: center; }
+  .bet-input { flex: 1; padding: 8px; border: 2px solid #555; border-radius: 4px; background: #222; color: #ddd; font-size: 14px; text-align: center; }
+  .bet-adj { width: 32px; height: 32px; border: 1.5px solid #666; border-radius: 4px; background: #2a2a2a; color: #ccc; font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .quick-bets { display: flex; gap: 6px; margin-top: 8px; }
+  .quick-btn { flex: 1; padding: 6px; border: 1.5px solid #555; border-radius: 4px; background: #252525; color: #aaa; font-size: 10px; text-align: center; cursor: pointer; }
+
+  /* Undo */
+  .undo-section { padding: 12px; border-bottom: 1px solid #444; }
+  .undo-btn { width: 100%; padding: 8px; border: 2px dashed #666; border-radius: 6px; background: transparent; color: #999; font-size: 12px; text-align: center; cursor: pointer; }
+
+  /* Bottom Controls */
+  .bottom-controls { padding: 12px; margin-top: auto; }
+  .control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .control-btn { padding: 6px; border: 1px solid #555; border-radius: 4px; background: #222; color: #888; font-size: 9px; text-align: center; cursor: pointer; text-transform: uppercase; }
+
+  /* Keyboard hint */
+  .kbd { font-size: 9px; color: #666; font-style: italic; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<!-- Status Bar -->
+<div class="status-bar">
+  <div class="status-item"><div class="status-dot on"></div> Network</div>
+  <div class="status-item"><div class="status-dot on"></div> Table</div>
+  <div class="status-item"><div class="status-dot"></div> Stream</div>
+  <div class="status-item"><div class="status-dot"></div> Record</div>
+</div>
+
+<!-- Game Info -->
+<div class="game-bar">
+  <div class="game-type">NO LIMIT HOLDEM</div>
+  <div class="blinds">Blinds: 100 / 200 (Ante 25)</div>
+  <div class="hand-num">Hand #47</div>
+</div>
+
+<div class="main">
+  <!-- Table Area -->
+  <div class="table-area">
+    <div class="poker-table">
+      <!-- 10 Seats -->
+      <div class="seat seat-1">
+        <div class="seat-box active"><div class="action-on"></div>
+          <div class="seat-name">Player 1</div>
+          <div class="seat-stack">45,200</div>
+          <div class="seat-cards"><div class="mini-card">A&#9824;</div><div class="mini-card">K&#9829;</div></div>
+          <div class="position-tag">BB</div>
+        </div>
+      </div>
+      <div class="seat seat-2">
+        <div class="seat-box">
+          <div class="seat-name">Player 2</div>
+          <div class="seat-stack">62,800</div>
+          <div class="seat-cards"><div class="mini-card"></div><div class="mini-card"></div></div>
+          <div class="seat-action">CALL 200</div>
+        </div>
+      </div>
+      <div class="seat seat-3">
+        <div class="seat-box folded">
+          <div class="seat-name">Player 3</div>
+          <div class="seat-stack">31,000</div>
+          <div class="seat-action">FOLD</div>
+        </div>
+      </div>
+      <div class="seat seat-4">
+        <div class="seat-box">
+          <div class="seat-name">Player 4</div>
+          <div class="seat-stack">55,400</div>
+          <div class="seat-cards"><div class="mini-card"></div><div class="mini-card"></div></div>
+          <div class="seat-action">RAISE 600</div>
+        </div>
+      </div>
+      <div class="seat seat-5">
+        <div class="seat-box folded">
+          <div class="seat-name">Player 5</div>
+          <div class="seat-stack">28,100</div>
+          <div class="seat-action">FOLD</div>
+        </div>
+      </div>
+      <div class="seat seat-6">
+        <div class="seat-box">
+          <div class="seat-name">Player 6</div>
+          <div class="seat-stack">71,300</div>
+          <div class="seat-cards"><div class="mini-card"></div><div class="mini-card"></div></div>
+          <div class="position-tag">DLR</div>
+        </div>
+      </div>
+      <div class="seat seat-7">
+        <div class="seat-box folded">
+          <div class="seat-name">Player 7</div>
+          <div class="seat-stack">19,600</div>
+          <div class="seat-action">FOLD</div>
+        </div>
+      </div>
+      <div class="seat seat-8">
+        <div class="seat-box">
+          <div class="seat-name">Player 8</div>
+          <div class="seat-stack">42,000</div>
+          <div class="seat-cards"><div class="mini-card"></div><div class="mini-card"></div></div>
+          <div class="position-tag">SB</div>
+        </div>
+      </div>
+      <div class="seat seat-9">
+        <div class="seat-box folded">
+          <div class="seat-name">Player 9</div>
+          <div class="seat-stack">35,500</div>
+          <div class="seat-action">FOLD</div>
+        </div>
+      </div>
+      <div class="seat seat-10">
+        <div class="seat-box folded">
+          <div class="seat-name">Player 10</div>
+          <div class="seat-stack">22,100</div>
+          <div class="seat-action">FOLD</div>
+        </div>
+      </div>
+
+      <!-- Board -->
+      <div class="board">
+        <div class="board-cards">
+          <div class="board-card">Q&#9830;</div>
+          <div class="board-card">7&#9827;</div>
+          <div class="board-card">2&#9824;</div>
+          <div class="board-card empty"></div>
+          <div class="board-card empty"></div>
+        </div>
+        <div class="pot-display">POT: 2,450</div>
+        <div class="street-label">FLOP</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="right-panel">
+    <div class="action-section">
+      <div class="section-title">Actions</div>
+      <div class="action-buttons">
+        <div class="action-btn fold">FOLD<div class="kbd">[F]</div></div>
+        <div class="action-btn check">CHECK<div class="kbd">[C]</div></div>
+        <div class="action-btn call">CALL 600<div class="kbd">[L]</div></div>
+        <div class="action-btn bet">BET<div class="kbd">[B]</div></div>
+        <div class="action-btn allin">ALL-IN 45,200<div class="kbd">[A]</div></div>
+      </div>
+    </div>
+
+    <div class="bet-section">
+      <div class="section-title">Bet Amount</div>
+      <div class="bet-input-row">
+        <div class="bet-adj">-</div>
+        <div class="bet-input">1,200</div>
+        <div class="bet-adj">+</div>
+      </div>
+      <div class="quick-bets">
+        <div class="quick-btn">MIN</div>
+        <div class="quick-btn">1/2 POT</div>
+        <div class="quick-btn">POT</div>
+        <div class="quick-btn">ALL-IN</div>
+      </div>
+    </div>
+
+    <div class="undo-section">
+      <div class="undo-btn">&#8630; UNDO LAST ACTION</div>
+    </div>
+
+    <div class="bottom-controls">
+      <div class="section-title">Controls</div>
+      <div class="control-grid">
+        <div class="control-btn">Hide GFX</div>
+        <div class="control-btn">Tag Hand</div>
+        <div class="control-btn">Adjust Stack</div>
+        <div class="control-btn">Chop</div>
+        <div class="control-btn">Run It 2x</div>
+        <div class="control-btn">Miss Deal</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

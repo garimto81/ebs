@@ -44,7 +44,7 @@ Task(subagent_type="oh-my-claudecode:researcher", model="sonnet",
 ## 인과관계 (CRITICAL - 절대 보존)
 
 ```
-/work --loop Tier 3
+/auto Tier 3
     └── /research code (코드 분석 필요 시)
     └── /research web (오픈소스 탐색 필요 시)
 

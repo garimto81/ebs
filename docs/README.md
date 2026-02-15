@@ -22,32 +22,43 @@ docs/
 ├── README.md                           ← 현재 문서
 ├── PRD-0003-EBS-RFID-System.md        # Master PRD (비전/전략)
 │
-├── 1-phase-0/                          # Phase 0: 업체 선정
-│   ├── VENDOR-SELECTION-CHECKLIST.md  # 업체 선정 체크리스트
-│   └── PRD-0004-Vendor-Contact-Automation.md  # 업체 컨택 자동화
-│
-├── 2-phase-1/                          # Phase 1: PokerGFX 복제
+├── 01_PokerGFX_Analysis/              # PokerGFX 분석 (Phase 0 기획)
 │   ├── PRD-0003-Phase1-PokerGFX-Clone.md
 │   ├── PokerGFX-Feature-Checklist.md  # 149개 기능 체크리스트
-│   ├── PokerGFX-UI-Analysis.md       # PokerGFX UI 스크린샷 분석
-│   └── reference/                      # PokerGFX 참조 자료
-│       ├── PokerGFX_Security.pdf
-│       ├── user-manual_split/         # 매뉴얼 PDF (6개 파일)
-│       └── user-manual_images/        # 매뉴얼 이미지
+│   ├── PokerGFX-UI-Analysis.md        # PokerGFX UI 스크린샷 분석
+│   ├── PokerGFX-Server-Binary-Analysis.md  # 바이너리 분석
+│   ├── 01_Mockups_ngd/                # HTML 목업 + PNG
+│   ├── 02_Annotated_ngd/              # 주석 이미지
+│   ├── 03_Reference_ngd/              # PokerGFX 참조 자료
+│   │   ├── PokerGFX_Security.pdf
+│   │   ├── user-manual_split/         # 매뉴얼 PDF (6개 파일)
+│   │   └── user-manual_images/        # 매뉴얼 이미지
+│   ├── 04_Protocol_Spec/             # 프로토콜 스펙
+│   ├── 05_Behavioral_Spec/           # 상태 머신
+│   ├── 06_Cross_Reference/           # 레지스트리 + 감사
+│   ├── 07_Decompiled_Archive/        # 디컴파일 (gitignored)
+│   └── 08_PDCA_Archive/              # PDCA plan/design/report
 │
-├── 3-phase-2/                          # Phase 2: WSOPLIVE DB 연동
+├── 03_Phase02_ngd/                     # Phase 2: WSOPLIVE DB 연동
 │   └── PRD-0003-Phase2-WSOP-Integration.md
 │
-├── 4-phase-3/                          # Phase 3: 자동화
+├── 04_Phase03_ngd/                     # Phase 3: 자동화
 │   └── PRD-0003-Phase3-EBS-Automation.md
 │
-└── 5-operations/                       # 운영 문서
-    ├── EBS-WORK-DASHBOARD.md          # 업무 현황
-    ├── VENDOR-MANAGEMENT.md           # 업체 관리
-    ├── PHASE-PROGRESSION.md           # Phase 진행 가이드
-    ├── COMMUNICATION-RULES.md         # 외부 커뮤니케이션 규칙
-    ├── daily-briefings/               # 일일 브리핑 보고서
-    └── email-drafts/                  # 업체 이메일 드래프트
+├── 05_Operations_ngd/                  # 운영 문서
+│   ├── VENDOR-MANAGEMENT.md           # 업체 관리 (Source of Truth)
+│   ├── PHASE-PROGRESSION.md           # Phase 진행 가이드
+│   ├── COMMUNICATION-RULES_ngd.md     # 외부 커뮤니케이션 규칙
+│   ├── VENDOR-SELECTION-CHECKLIST.md  # 업체 선정 체크리스트
+│   ├── PRD-0004-Vendor-Contact-Automation.md  # 업체 컨택 자동화
+│   ├── VIMEO-OTT-PRICING-SUMMARY_ngd.md  # OTT 견적
+│   ├── 01_DailyBriefings_ngd/         # 일일 브리핑 보고서
+│   └── 02_EmailDrafts_ngd/            # 업체 이메일 드래프트
+│
+├── 90_Images_ngd/                      # 이미지 자료
+├── 91_Mockups_ngd/                     # 목업
+├── GOOGLE-DRIVE-STRUCTURE_ngd.md      # Google Drive 폴더 구조
+└── MAPPING_ngd.json                    # 매핑 정보
 ```
 
 ---
@@ -60,40 +71,34 @@ docs/
 |------|------|
 | [PRD-0003-EBS-RFID-System.md](PRD-0003-EBS-RFID-System.md) | Master PRD (비전/전략/로드맵) |
 
-### Phase 0: 업체 선정
+### PokerGFX 분석
 
 | 문서 | 설명 |
 |------|------|
-| [VENDOR-SELECTION-CHECKLIST.md](1-phase-0/VENDOR-SELECTION-CHECKLIST.md) | 업체 선정 기준, 후보, 체크리스트 |
-| [PRD-0004-Vendor-Contact-Automation.md](1-phase-0/PRD-0004-Vendor-Contact-Automation.md) | 업체 컨택 자동화 시스템 |
-
-### Phase 1: PokerGFX 복제
-
-| 문서 | 설명 |
-|------|------|
-| [PRD-0003-Phase1-PokerGFX-Clone.md](2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md) | Phase 1 상세 계획 |
-| [PokerGFX-Feature-Checklist.md](2-phase-1/PokerGFX-Feature-Checklist.md) | 149개 기능 체크리스트 |
-| [PokerGFX-UI-Analysis.md](2-phase-1/PokerGFX-UI-Analysis.md) | PokerGFX UI 스크린샷 분석 (v3.0.0) |
-| [reference/](2-phase-1/reference/) | PokerGFX 매뉴얼, 보안 문서 |
+| [PRD-0003-Phase1-PokerGFX-Clone.md](01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md) | PokerGFX 복제 계획 |
+| [PokerGFX-Feature-Checklist.md](01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md) | 149개 기능 체크리스트 |
+| [PokerGFX-UI-Analysis.md](01_PokerGFX_Analysis/PokerGFX-UI-Analysis.md) | PokerGFX UI 스크린샷 분석 (v3.0.0) |
+| [PokerGFX-Server-Binary-Analysis.md](01_PokerGFX_Analysis/PokerGFX-Server-Binary-Analysis.md) | 서버 바이너리 분석 |
+| [03_Reference_ngd/](01_PokerGFX_Analysis/03_Reference_ngd/) | PokerGFX 매뉴얼, 보안 문서 |
 
 ### 운영
 
 | 문서 | 설명 |
 |------|------|
-| [EBS-WORK-DASHBOARD.md](5-operations/EBS-WORK-DASHBOARD.md) | 업무 현황 대시보드 |
-| [VENDOR-MANAGEMENT.md](5-operations/VENDOR-MANAGEMENT.md) | 업체 관리 |
-| [PHASE-PROGRESSION.md](5-operations/PHASE-PROGRESSION.md) | Phase 진행 조건/가이드 |
-| [COMMUNICATION-RULES.md](5-operations/COMMUNICATION-RULES.md) | 외부 커뮤니케이션 규칙 |
-| [daily-briefings/](5-operations/daily-briefings/) | 일일 브리핑 보고서 |
-| [email-drafts/](5-operations/email-drafts/) | 업체 이메일 드래프트 |
-| [GOOGLE-DRIVE-STRUCTURE.md](GOOGLE-DRIVE-STRUCTURE.md) | Google Drive 폴더 구조 |
+| [VENDOR-MANAGEMENT.md](05_Operations_ngd/VENDOR-MANAGEMENT.md) | 업체 관리 (Source of Truth) |
+| [PHASE-PROGRESSION.md](05_Operations_ngd/PHASE-PROGRESSION.md) | Phase 진행 조건/가이드 |
+| [COMMUNICATION-RULES_ngd.md](05_Operations_ngd/COMMUNICATION-RULES_ngd.md) | 외부 커뮤니케이션 규칙 |
+| [VENDOR-SELECTION-CHECKLIST.md](05_Operations_ngd/VENDOR-SELECTION-CHECKLIST.md) | 업체 선정 체크리스트 |
+| [01_DailyBriefings_ngd/](05_Operations_ngd/01_DailyBriefings_ngd/) | 일일 브리핑 보고서 |
+| [02_EmailDrafts_ngd/](05_Operations_ngd/02_EmailDrafts_ngd/) | 업체 이메일 드래프트 |
+| [GOOGLE-DRIVE-STRUCTURE_ngd.md](GOOGLE-DRIVE-STRUCTURE_ngd.md) | Google Drive 폴더 구조 |
 
 ### 미래 단계 (Phase 1 완료 후)
 
 | 문서 | 설명 |
 |------|------|
-| [PRD-0003-Phase2-WSOP-Integration.md](3-phase-2/PRD-0003-Phase2-WSOP-Integration.md) | DB 연동 계획 |
-| [PRD-0003-Phase3-EBS-Automation.md](4-phase-3/PRD-0003-Phase3-EBS-Automation.md) | 자동화 계획 |
+| [PRD-0003-Phase2-WSOP-Integration.md](03_Phase02_ngd/PRD-0003-Phase2-WSOP-Integration.md) | DB 연동 계획 |
+| [PRD-0003-Phase3-EBS-Automation.md](04_Phase03_ngd/PRD-0003-Phase3-EBS-Automation.md) | 자동화 계획 |
 
 ---
 
@@ -102,9 +107,9 @@ docs/
 | 역할 | 시작 문서 | 목적 |
 |------|----------|------|
 | **경영/PM** | [PRD-0003-EBS-RFID-System.md](PRD-0003-EBS-RFID-System.md) | 프로젝트 비전/전략 |
-| **구매** | [VENDOR-SELECTION-CHECKLIST.md](1-phase-0/VENDOR-SELECTION-CHECKLIST.md) | 업체 선정 기준 |
-| **개발** | [PokerGFX-Feature-Checklist.md](2-phase-1/PokerGFX-Feature-Checklist.md) | 복제 대상 기능 |
-| **운영** | [EBS-WORK-DASHBOARD.md](5-operations/EBS-WORK-DASHBOARD.md) | 현재 업무 현황 |
+| **구매** | [VENDOR-MANAGEMENT.md](05_Operations_ngd/VENDOR-MANAGEMENT.md) | 업체 관리 |
+| **개발** | [PokerGFX-Feature-Checklist.md](01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md) | 복제 대상 기능 |
+| **운영** | [PHASE-PROGRESSION.md](05_Operations_ngd/PHASE-PROGRESSION.md) | Phase 진행 현황 |
 
 ---
 
@@ -125,9 +130,9 @@ Phase 1의 목표는 **PokerGFX의 모든 기능을 100% 복제**하는 것입�
 
 | 자료 | 위치 | 용도 |
 |------|------|------|
-| 사용자 매뉴얼 | `2-phase-1/reference/user-manual_split/` | 기능/UI 분석 |
-| 매뉴얼 이미지 | `2-phase-1/reference/user-manual_images/` | UI 참조 |
-| 보안 문서 | `2-phase-1/reference/PokerGFX_Security.pdf` | 보안 구조 참조 |
+| 사용자 매뉴얼 | `01_PokerGFX_Analysis/03_Reference_ngd/user-manual_split/` | 기능/UI 분석 |
+| 매뉴얼 이미지 | `01_PokerGFX_Analysis/03_Reference_ngd/user-manual_images/` | UI 참조 |
+| 보안 문서 | `01_PokerGFX_Analysis/03_Reference_ngd/PokerGFX_Security.pdf` | 보안 구조 참조 |
 
 ---
 
@@ -152,4 +157,4 @@ Phase 1의 목표는 **PokerGFX의 모든 기능을 100% 복제**하는 것입�
 
 ---
 
-**Version**: 8.0.0 | **Updated**: 2026-02-09 | **BRACELET STUDIO**
+**Version**: 10.0.0 | **Updated**: 2026-02-15 | **BRACELET STUDIO**

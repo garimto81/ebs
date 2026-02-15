@@ -12,14 +12,14 @@ priority: "critical"
 depends_on: []
 
 related_docs:
-  - "docs/1-phase-0/VENDOR-SELECTION-CHECKLIST.md"
-  - "docs/2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md"
-  - "docs/2-phase-1/PokerGFX-Feature-Checklist.md"
-  - "docs/2-phase-1/reference/"
-  - "docs/3-phase-2/PRD-0003-Phase2-WSOP-Integration.md"
-  - "docs/4-phase-3/PRD-0003-Phase3-EBS-Automation.md"
-  - "docs/5-operations/PHASE-PROGRESSION.md"
-  - "docs/5-operations/VENDOR-MANAGEMENT.md"
+  - "docs/05_Operations_ngd/VENDOR-SELECTION-CHECKLIST.md"
+  - "docs/01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md"
+  - "docs/01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md"
+  - "docs/01_PokerGFX_Analysis/03_Reference_ngd/"
+  - "docs/03_Phase02_ngd/PRD-0003-Phase2-WSOP-Integration.md"
+  - "docs/04_Phase03_ngd/PRD-0003-Phase3-EBS-Automation.md"
+  - "docs/05_Operations_ngd/PHASE-PROGRESSION.md"
+  - "docs/05_Operations_ngd/VENDOR-MANAGEMENT.md"
 
 stakeholders:
   - "방송팀"
@@ -51,7 +51,7 @@ EBS는 RFID 기반 포커 카드 인식 시스템을 통해 다음 세 가지를
 
 핸드 히스토리와 플레이어 통계는 방송 품질과 사업 확장의 핵심 자산입니다. 현재 이 데이터를 외부 시스템에 의존하고 있어 활용에 제약이 있습니다. EBS를 통해 데이터를 자체 소유하고, 커스텀 분석과 콘텐츠 생산을 자유롭게 수행합니다.
 
-> 경쟁사 분석은 [Phase 1 PRD](2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md)를 참조하세요.
+> 경쟁사 분석은 [Phase 1 PRD](01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md)를 참조하세요.
 
 ## 1.3 핵심 가치 제안
 
@@ -112,7 +112,7 @@ EBS는 **DB 자산을 활용**하는 네 가지 핵심 역할을 위해 설계�
 
 ## 3.1 Phase 1 기능 (확정)
 
-Phase 1은 **PokerGFX 100% 복제**가 목표입니다. 복제 대상 기능 전체 목록은 [PokerGFX Feature Checklist (149개)](2-phase-1/PokerGFX-Feature-Checklist.md)를 참조하세요.
+Phase 1은 **PokerGFX 100% 복제**가 목표입니다. 복제 대상 기능 전체 목록은 [PokerGFX Feature Checklist (149개)](01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md)를 참조하세요.
 
 **카테고리별 요약:**
 
@@ -124,7 +124,7 @@ Phase 1은 **PokerGFX 100% 복제**가 목표입니다. 복제 대상 기능 전
 | **보안** | Realtime Mode + Trustless Mode (PokerGFX 동일) |
 | **커스터마이징** | TBD |
 
-> 상세 기능 명세는 [Phase 1 PRD](2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md)를 참조하세요.
+> 상세 기능 명세는 [Phase 1 PRD](01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md)를 참조하세요.
 
 ## 3.2 Phase 2/3 기능 (TBD)
 
@@ -188,10 +188,10 @@ Phase 1 완료 후 실제 운영 경험을 바탕으로 재설계합니다.
 
 | Phase | 문서 | 주요 내용 |
 |-------|------|----------|
-| 0 | [VENDOR-SELECTION-CHECKLIST.md](1-phase-0/VENDOR-SELECTION-CHECKLIST.md) | 업체 선정 기준, 체크리스트 |
-| 1 | [PRD-0003-Phase1-PokerGFX-Clone.md](2-phase-1/PRD-0003-Phase1-PokerGFX-Clone.md) | 기능 매핑, 주차별 계획, Gate 조건 |
-| 2 | [PRD-0003-Phase2-WSOP-Integration.md](3-phase-2/PRD-0003-Phase2-WSOP-Integration.md) | API 명세, 동기화 로직, 에러 핸들링 |
-| 3 | [PRD-0003-Phase3-EBS-Automation.md](4-phase-3/PRD-0003-Phase3-EBS-Automation.md) | 자동화 알고리즘, 성능 요구사항 |
+| 0 | [VENDOR-SELECTION-CHECKLIST.md](01_PokerGFX_Analysis/VENDOR-SELECTION-CHECKLIST.md) | 업체 선정 기준, 체크리스트 |
+| 1 | [PRD-0003-Phase1-PokerGFX-Clone.md](01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md) | 기능 매핑, 주차별 계획, Gate 조건 |
+| 2 | [PRD-0003-Phase2-WSOP-Integration.md](03_Phase02_ngd/PRD-0003-Phase2-WSOP-Integration.md) | API 명세, 동기화 로직, 에러 핸들링 |
+| 3 | [PRD-0003-Phase3-EBS-Automation.md](04_Phase03_ngd/PRD-0003-Phase3-EBS-Automation.md) | 자동화 알고리즘, 성능 요구사항 |
 
 ---
 

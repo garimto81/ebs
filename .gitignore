@@ -2,6 +2,9 @@
 .omc/
 nul
 
+# Node
+node_modules/
+
 # Python
 __pycache__/
 *.pyc
@@ -13,3 +16,24 @@ __pycache__/
 
 # 임시 파일
 *.backup
+
+# 디버그/중간 산출물
+tools/debug_output/
+docs/01_PokerGFX_Analysis/02_Annotated_ngd/*-debug.png
+docs/01_PokerGFX_Analysis/02_Annotated_ngd/*-detected.json
+docs/01_PokerGFX_Analysis/02_Annotated_ngd/*-calibrated.json
+docs/01_PokerGFX_Analysis/02_Annotated_ngd/*-boundaries.json
+
+# PDCA 스냅샷 (자동 생성)
+docs/.pdca-snapshots/
+
+# Morning Automation 런타임 데이터
+tools/morning-automation/data/*.json
+tools/morning-automation/data/*.txt
+!tools/morning-automation/data/.gitkeep
+
+# PokerGFX 디컴파일 아카이브 (저작권 보호)
+docs/01_PokerGFX_Analysis/07_Decompiled_Archive/Server/
+docs/01_PokerGFX_Analysis/07_Decompiled_Archive/Common/
+docs/01_PokerGFX_Analysis/07_Decompiled_Archive/ActionTracker/
+docs/01_PokerGFX_Analysis/07_Decompiled_Archive/GFXUpdater/

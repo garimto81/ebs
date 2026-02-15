@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스포츠 vs 포커 방송 비교 - PokerGFX Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0e1a;
+            color: #e0e0e0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .column {
+            background: #151a2d;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .column-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid;
+        }
+
+        .sports .column-header {
+            border-bottom-color: #4ecdc4;
+        }
+
+        .poker .column-header {
+            border-bottom-color: #ff6b6b;
+        }
+
+        .column-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .sports .column-title {
+            color: #4ecdc4;
+        }
+
+        .poker .column-title {
+            color: #ff6b6b;
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .sports .icon {
+            background: rgba(78, 205, 196, 0.2);
+        }
+
+        .poker .icon {
+            background: rgba(255, 107, 107, 0.2);
+        }
+
+        .flow-step {
+            margin-bottom: 20px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid;
+        }
+
+        .sports .flow-step {
+            border-left-color: #4ecdc4;
+        }
+
+        .poker .flow-step {
+            border-left-color: #ff6b6b;
+        }
+
+        .flow-step-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .flow-step-desc {
+            font-size: 14px;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        .arrow {
+            text-align: center;
+            font-size: 24px;
+            color: #666;
+            margin: 12px 0;
+        }
+
+        .key-point {
+            margin-top: 24px;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .sports .key-point {
+            background: rgba(78, 205, 196, 0.15);
+            border: 2px solid #4ecdc4;
+            color: #4ecdc4;
+        }
+
+        .poker .key-point {
+            background: rgba(255, 107, 107, 0.15);
+            border: 2px solid #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .conclusion {
+            background: #151a2d;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .conclusion-header {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-align: center;
+            color: #ffd700;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .reason {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .reason-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: #ffd700;
+            color: #0a0e1a;
+            border-radius: 50%;
+            font-weight: 700;
+            line-height: 32px;
+            margin-bottom: 12px;
+        }
+
+        .reason-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .reason-subtitle {
+            font-size: 13px;
+            color: #b0b0b0;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reasons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>스포츠 vs 포커 방송 비교</h1>
+
+        <div class="comparison-grid">
+            <!-- Sports Broadcasting Column -->
+            <div class="column sports">
+                <div class="column-header">
+                    <div class="icon">🏀</div>
+                    <div class="column-title">스포츠 방송</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-step-title">📹 카메라 촬영</div>
+                    <div class="flow-step-desc">경기장의 모든 상황이 눈에 보임</div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-step-title">👁️ 모든 정보가 가시적</div>
+                    <div class="flow-step-desc">
+                        • 스코어: 전광판에 표시됨<br>
+                        • 선수 번호: 유니폼에 표시됨<br>
+                        • 타임: 경기 시계로 확인 가능<br>
+                        • 상황: 카메라로 모두 포착
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-step-title">🎨 단순 오버레이</div>
+                    <div class="flow-step-desc">
+                        운영자가 수동으로 데이터 입력<br>
+                        스코어보드, 타이머, 선수 통계 표시
+                    </div>
+                </div>
+
+                <div class="key-point">
+                    카메라 = 충분
+                </div>
+            </div>
+
+            <!-- Poker Broadcasting Column -->
+            <div class="column poker">
+                <div class="column-header">
+                    <div class="icon">🃏</div>
+                    <div class="column-title">포커 방송</div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-step-title">📹 카메라 촬영</div>
+                    <div class="flow-step-desc">테이블과 플레이어만 보임</div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-step-title">❌ 핵심 정보가 숨겨짐</div>
+                    <div class="flow-step-desc">
+                        • <span class="highlight">홀카드: 뒤집어진 채로 존재</span><br>
+                        • 승률: 계산 불가능<br>
+                        • 히든 정보: 게임의 핵심<br>
+                        • 시청자는 아무것도 모름
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="flow-step">
+                    <div class="flow-step-title">📡 RFID 시스템 필수</div>
+                    <div class="flow-step-desc">
+                        카드 인식 → 서버 분석 → 승률 계산<br>
+                        → 실시간 통계 → 그래픽 생성<br>
+                        <span class="highlight">복잡한 데이터 파이프라인 구축</span>
+                    </div>
+                </div>
+
+                <div class="key-point">
+                    카메라만으로는 불가능
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion">
+            <div class="conclusion-header">왜 전용 시스템이 필요한가</div>
+            <div class="reasons-grid">
+                <div class="reason">
+                    <div class="reason-number">1</div>
+                    <div class="reason-title">대량 카드 인식</div>
+                    <div class="reason-subtitle">매 핸드 최대 20장 카드 실시간 추적</div>
+                </div>
+
+                <div class="reason">
+                    <div class="reason-number">2</div>
+                    <div class="reason-title">액션 추적</div>
+                    <div class="reason-subtitle">폴드/콜/레이즈/베팅 자동 감지</div>
+                </div>
+
+                <div class="reason">
+                    <div class="reason-number">3</div>
+                    <div class="reason-title">승률 재계산</div>
+                    <div class="reason-subtitle">매 카드마다 equity 동적 갱신</div>
+                </div>
+
+                <div class="reason">
+                    <div class="reason-number">4</div>
+                    <div class="reason-title">보안 딜레이</div>
+                    <div class="reason-subtitle">정보 노출 타이밍 정밀 제어</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

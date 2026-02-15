@@ -125,7 +125,7 @@ class SlackPoster:
     CATEGORY_A_KEYS = {"sunfly", "angel"}
 
     # Category C vendors (benchmarks/references, no email needed)
-    CATEGORY_C_KEYS = {"pokergfx", "abbiati", "sit_korea"}
+    CATEGORY_C_KEYS = {"abbiati", "sit_korea"}
 
     def _classify_vendor(self, vendor_key: str) -> str:
         """Classify vendor into A/B/C category."""

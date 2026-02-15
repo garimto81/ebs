@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>데이터 흐름도 - 카드에서 화면까지</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0a0e1a; color: #e0e0e0; min-height: 100vh; padding: 40px; }
+
+  .header { text-align: center; margin-bottom: 40px; }
+  .header h1 { font-size: 28px; color: #fff; margin-bottom: 8px; }
+  .header .subtitle { font-size: 15px; color: #8b95a5; }
+
+  .timeline { max-width: 800px; margin: 0 auto; position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 50px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, #5ba3e6, #f0a040, #50e080, #e05050, #a070e0, #5ba3e6); border-radius: 2px; }
+
+  .step { display: flex; align-items: flex-start; margin-bottom: 0; position: relative; }
+  .step-num { width: 100px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .step-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; z-index: 2; position: relative; }
+
+  .step-content { flex: 1; margin-left: 20px; padding: 20px 24px; background: linear-gradient(135deg, #141a2e 0%, #1a2240 100%); border: 1px solid #2a3555; border-radius: 12px; margin-bottom: 16px; }
+  .step-content h3 { font-size: 16px; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .step-content .time { font-size: 12px; color: #f0a040; background: rgba(240,160,64,0.1); padding: 2px 8px; border-radius: 4px; }
+  .step-content p { font-size: 13px; color: #8b95a5; line-height: 1.7; margin-bottom: 10px; }
+  .step-content .analogy { font-size: 13px; color: #50e080; font-style: italic; padding: 8px 12px; background: rgba(80,224,128,0.06); border-left: 2px solid rgba(80,224,128,0.3); border-radius: 0 6px 6px 0; }
+
+  .detail-box { margin-top: 10px; padding: 10px 14px; background: rgba(0,0,0,0.2); border-radius: 8px; font-size: 12px; }
+  .detail-box .label { color: #5ba3e6; font-weight: 600; margin-bottom: 4px; }
+  .detail-box code { background: rgba(91,163,230,0.1); color: #8ab4e8; padding: 1px 6px; border-radius: 3px; font-size: 11px; }
+
+  .color-blue .step-dot { background: #1a3a5c; border: 2px solid #5ba3e6; }
+  .color-orange .step-dot { background: #3a2a1a; border: 2px solid #f0a040; }
+  .color-green .step-dot { background: #1a3a2a; border: 2px solid #50e080; }
+  .color-red .step-dot { background: #3a1a1a; border: 2px solid #e05050; }
+  .color-purple .step-dot { background: #2a1a3a; border: 2px solid #a070e0; }
+
+  .summary { max-width: 800px; margin: 40px auto 0; background: linear-gradient(135deg, #141a2e 0%, #1a2240 100%); border: 1px solid #2a3555; border-radius: 12px; padding: 24px; }
+  .summary h2 { font-size: 18px; color: #fff; margin-bottom: 16px; text-align: center; }
+  .summary-flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
+  .summary-item { text-align: center; padding: 10px 14px; }
+  .summary-item .icon { font-size: 28px; }
+  .summary-item .label { font-size: 11px; color: #8b95a5; margin-top: 4px; }
+  .summary-arrow { font-size: 20px; color: #4a7bd4; }
+
+  .modes-section { max-width: 800px; margin: 30px auto 0; }
+  .modes-section h2 { font-size: 18px; color: #fff; margin-bottom: 16px; text-align: center; }
+  .modes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .mode-card { background: linear-gradient(135deg, #141a2e 0%, #1a2240 100%); border: 1px solid #2a3555; border-radius: 10px; padding: 16px; text-align: center; }
+  .mode-card .name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .mode-card .desc { font-size: 12px; color: #8b95a5; line-height: 1.5; }
+  .mode-card.active { border-color: #50e080; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>카드에서 화면까지의 여정</h1>
+  <p class="subtitle">RFID 카드 한 장이 TV 화면에 나타나기까지 6단계</p>
+</div>
+
+<div class="timeline">
+
+  <!-- Step 1 -->
+  <div class="step color-blue">
+    <div class="step-num"><div class="step-dot">🃏</div></div>
+    <div class="step-content">
+      <h3>1단계: 카드 내려놓기 <span class="time">0ms</span></h3>
+      <p>딜러가 카드를 플레이어 앞에 놓거나 보드에 깝니다.<br>카드 안에는 눈에 보이지 않는 초소형 RFID 칩이 들어있습니다.</p>
+      <div class="analogy">비유: 교통카드를 단말기에 대는 것과 같은 원리입니다. 카드마다 고유 번호가 있어요.</div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step color-orange">
+    <div class="step-num"><div class="step-dot">📡</div></div>
+    <div class="step-content">
+      <h3>2단계: 안테나 감지 <span class="time">~50ms</span></h3>
+      <p>테이블 표면 아래 숨겨진 안테나가 카드의 RFID 칩을 감지합니다.<br>어떤 좌석에 어떤 카드가 놓였는지 자동으로 파악합니다.</p>
+      <div class="detail-box">
+        <div class="label">PokerGFX 방식</div>
+        26개 안테나가 <code>529ms</code> 간격으로 카드를 스캔<br>
+        카드 고유 번호(UID) 예: <code>E0040150A1B2C3D4</code>
+      </div>
+      <div class="analogy">비유: 도서관 출입구 센서처럼, 안테나 위에 카드가 있으면 자동으로 인식됩니다.</div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step color-green">
+    <div class="step-num"><div class="step-dot">🔍</div></div>
+    <div class="step-content">
+      <h3>3단계: 카드 식별 <span class="time">~100ms</span></h3>
+      <p>서버가 RFID 고유 번호를 데이터베이스에서 찾아서 실제 카드를 확인합니다.<br>예: 번호 <code>E004...</code> = 스페이드 에이스</p>
+      <div class="detail-box">
+        <div class="label">데이터베이스 조회</div>
+        UID <code>E0040150A1B2C3D4</code> → <code>As</code> (스페이드 에이스)<br>
+        54장 카드 전체가 사전 등록되어 있음
+      </div>
+      <div class="analogy">비유: 학생증 바코드를 찍으면 이름이 나오는 것처럼, 카드 번호로 카드 종류를 찾습니다.</div>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step color-red">
+    <div class="step-num"><div class="step-dot">🎨</div></div>
+    <div class="step-content">
+      <h3>4단계: 그래픽 생성 <span class="time">~150ms</span></h3>
+      <p>서버의 그래픽 엔진이 카드 이미지를 만들고 플립 애니메이션을 준비합니다.<br>17종의 화면 요소(플레이어 바, 카드, 팟 등)를 조합합니다.</p>
+      <div class="detail-box">
+        <div class="label">애니메이션</div>
+        카드가 뒤집히면서 나타나는 효과: 크기 1→0→1 + 반짝임(Glint)<br>
+        16단계 애니메이션 상태로 부드럽게 전환
+      </div>
+      <div class="analogy">비유: PowerPoint 슬라이드에 애니메이션을 거는 것과 비슷하지만, 초당 30~60번 실시간으로 그립니다.</div>
+    </div>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="step color-purple">
+    <div class="step-num"><div class="step-dot">🎬</div></div>
+    <div class="step-content">
+      <h3>5단계: 영상 합성 <span class="time">~200ms</span></h3>
+      <p>생성된 그래픽이 카메라 영상 위에 겹쳐집니다 (오버레이).<br>ATEM 스위처가 카메라 영상과 그래픽을 실시간으로 합성합니다.</p>
+      <div class="detail-box">
+        <div class="label">Blackmagic ATEM</div>
+        카메라 영상(배경) + PokerGFX 그래픽(전경) = 최종 방송 화면<br>
+        디렉터가 ActionTracker로 카메라 전환 제어
+      </div>
+      <div class="analogy">비유: 일기예보에서 기상캐스터 뒤에 지도가 합성되는 것과 같은 원리입니다.</div>
+    </div>
+  </div>
+
+  <!-- Step 6 -->
+  <div class="step color-blue">
+    <div class="step-num"><div class="step-dot">📺</div></div>
+    <div class="step-content">
+      <h3>6단계: 시청자 화면 <span class="time">~300ms</span></h3>
+      <p>시청자가 TV에서 플레이어의 카드, 이름, 칩 수를 확인합니다.<br>카드를 내려놓은 순간부터 약 0.3초 만에 화면에 표시됩니다.</p>
+      <div class="analogy">비유: 카드가 테이블에 닿는 순간, 눈 깜짝할 사이에 전 세계 시청자에게 보여집니다.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Summary Flow -->
+<div class="summary">
+  <h2>전체 흐름 한눈에 보기</h2>
+  <div class="summary-flow">
+    <div class="summary-item"><div class="icon">🃏</div><div class="label">RFID 카드</div></div>
+    <div class="summary-arrow">→</div>
+    <div class="summary-item"><div class="icon">📡</div><div class="label">안테나 감지</div></div>
+    <div class="summary-arrow">→</div>
+    <div class="summary-item"><div class="icon">🔍</div><div class="label">DB 조회</div></div>
+    <div class="summary-arrow">→</div>
+    <div class="summary-item"><div class="icon">🎨</div><div class="label">그래픽 생성</div></div>
+    <div class="summary-arrow">→</div>
+    <div class="summary-item"><div class="icon">🎬</div><div class="label">영상 합성</div></div>
+    <div class="summary-arrow">→</div>
+    <div class="summary-item"><div class="icon">📺</div><div class="label">TV 화면</div></div>
+  </div>
+</div>
+
+<!-- Modes -->
+<div class="modes-section">
+  <h2>3가지 방송 모드</h2>
+  <div class="modes-grid">
+    <div class="mode-card active">
+      <div class="name">Live 모드</div>
+      <div class="desc">실시간으로 카드 공개<br>시청자가 바로 확인 가능<br>(인터넷 방송용)</div>
+    </div>
+    <div class="mode-card">
+      <div class="name">Delay 모드</div>
+      <div class="desc">일정 시간 후 카드 공개<br>플레이어 보호 목적<br>(TV 방송용)</div>
+    </div>
+    <div class="mode-card">
+      <div class="name">Commentary 모드</div>
+      <div class="desc">해설자만 모든 카드 확인<br>시청자에겐 선택적 공개<br>(해설 부스용)</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

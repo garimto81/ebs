@@ -30,6 +30,7 @@ from .analyzer import DesignContextAnalyzer, AnalysisResult
 from .fallback_handler import FallbackHandler
 from ..adapters.html_adapter import HTMLAdapter
 from ..adapters.stitch_adapter import StitchAdapter
+from ..adapters.mermaid_adapter import MermaidAdapter
 
 
 class MockupRouter:
@@ -39,6 +40,7 @@ class MockupRouter:
         self,
         html_adapter: Optional[HTMLAdapter] = None,
         stitch_adapter: Optional[StitchAdapter] = None,
+        mermaid_adapter: Optional[MermaidAdapter] = None,
         analyzer: Optional[DesignContextAnalyzer] = None,
         fallback_handler: Optional[FallbackHandler] = None,
     ):
@@ -48,11 +50,13 @@ class MockupRouter:
         Args:
             html_adapter: HTML 어댑터
             stitch_adapter: Stitch 어댑터
+            mermaid_adapter: Mermaid 어댑터
             analyzer: 프롬프트 분석기
             fallback_handler: 폴백 핸들러
         """
         self.html_adapter = html_adapter or HTMLAdapter()
         self.stitch_adapter = stitch_adapter or StitchAdapter()
+        self.mermaid_adapter = mermaid_adapter or MermaidAdapter()
         self.analyzer = analyzer or DesignContextAnalyzer()
         self.fallback_handler = fallback_handler or FallbackHandler()
 
@@ -118,6 +122,48 @@ class MockupRouter:
         fallback_used = False
         final_backend = backend
         final_reason = analysis.reason
+
+        if backend == MockupBackend.MERMAID:
+            # Mermaid 코드 생성 (HTML/스크린샷 불필요)
+            mermaid_result = self.mermaid_adapter.generate_from_prompt(prompt)
+
+            if mermaid_result.success:
+                # Mermaid는 .md 파일로 저장
+                output_dir = html_path.parent if html_path else DEFAULT_MOCKUP_DIR
+                md_path = output_dir / f"{self._extract_name(prompt)}.mermaid.md"
+                md_path.parent.mkdir(parents=True, exist_ok=True)
+                md_content = f"# {self._extract_name(prompt)}\n\n```mermaid\n{mermaid_result.mermaid_code}\n```\n"
+                md_path.write_text(md_content, encoding="utf-8")
+
+                return MockupResult(
+                    backend=MockupBackend.MERMAID,
+                    reason=analysis.reason,
+                    html_path=md_path,
+                    image_path=None,
+                    success=True,
+                    message=self._create_mermaid_message(
+                        mermaid_result.mermaid_code,
+                        mermaid_result.diagram_type,
+                        md_path,
+                    ),
+                    fallback_used=False,
+                    mermaid_code=mermaid_result.mermaid_code,
+                )
+            else:
+                # Mermaid 실패 시 HTML로 폴백
+                return self._execute_backend(
+                    backend=MockupBackend.HTML,
+                    prompt=prompt,
+                    options=options,
+                    html_path=html_path,
+                    image_path=image_path,
+                    analysis=AnalysisResult(
+                        backend=MockupBackend.HTML,
+                        reason=SelectionReason.FALLBACK,
+                        confidence=0.7,
+                        details=f"Mermaid 실패 -> HTML 폴백: {mermaid_result.error_message}",
+                    ),
+                )
 
         if backend == MockupBackend.STITCH:
             # Stitch 시도
@@ -228,6 +274,23 @@ class MockupRouter:
             message=f"❌ 오류: {error_message}",
             fallback_used=False,
         )
+
+    def _create_mermaid_message(
+        self,
+        mermaid_code: str,
+        diagram_type: str,
+        md_path: Path,
+    ) -> str:
+        """Mermaid 결과 메시지 생성"""
+        lines = [
+            f"📊 선택: Mermaid {diagram_type} (이유: 다이어그램 키워드 감지)",
+            f"✅ 생성: {md_path}",
+            "",
+            "```mermaid",
+            mermaid_code,
+            "```",
+        ]
+        return "\n".join(lines)
 
     def _create_message(
         self,

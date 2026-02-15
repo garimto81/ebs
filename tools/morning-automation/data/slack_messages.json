@@ -1,7 +1,15 @@
 {
-  "total_messages": 46,
+  "total_messages": 51,
   "action_items": [],
   "mentions_to_me": [
+    {
+      "ts": "1770629062.541139",
+      "text": "<https://drive.google.com/drive/folders/1GlDqSgEDs9z8j5VY6iX3QndTLb6_8-PF?usp=sharing|[ EBS Google Drive ]>\n<@U0ADLE24351> <@U05U07C2EAV> <@U07A1938DLL> <@U091S4JTTB2> <@U045S8F5ZM3>",
+      "user": "U040EUZ6JRY",
+      "timestamp": "2026-02-09T18:24:22.541139",
+      "completed": true,
+      "link": "slack://channel?team=T05SZ8VE39U&id=C09N8J3UJN9&message=1770629062.541139"
+    },
     {
       "ts": "1769670604.466319",
       "text": "<https://docs.google.com/document/d/1ATByivr9XH7JiwuVYl1Dq2x9cYoK-4JhsUw5vByGpBk/edit?usp=sharing|[ pokerGFX json 원본 데이터 및 구조 분석 문서 ]>\n<@U05U07C2EAV>",
@@ -36,104 +44,40 @@
     }
   ],
   "vendor_mentions": {
-    "feig": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "gao": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "pongee": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "identiv": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
     "sunfly": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "waveshare": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "adafruit": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "sparkfun": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
-        "timestamp": "2026-02-02T14:54:38.051859"
-      }
-    ],
-    "pokergfx": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (6개 업체)\n\n*RFI 현황:*\n• 발송 완료: 1개 업체\n• 전송 실패: 0개 업체\n• 미발송: 3개 업체\n\n*:warning: 미발송 업체:*\n• Angel Playing Card",
         "timestamp": "2026-02-02T14:54:38.051859"
       },
       {
-        "ts": "1769670604.466319",
-        "context": "<https://docs.google.com/document/d/1ATByivr9XH7JiwuVYl1Dq2x9cYoK-4JhsUw5vByGpBk/edit?usp=sharing|[ pokerGFX json 원본 데이터 및 구조 분석 문서 ]>\n<@U05U07C2EAV>",
-        "timestamp": "2026-01-29T16:10:04.466319"
-      },
-      {
-        "ts": "1769381179.538629",
-        "context": "1. RFID 수급및 필요한 드라이버 암호화 방법론 준비\n2. 기존 PokerGFX 기능 분석 및 필요한 기술 확보",
-        "timestamp": "2026-01-26T07:46:19.538629"
-      },
-      {
-        "ts": "1768292109.730309",
-        "context": "PokerGFX RFID 리더기는\n• GFX 서버가 연결되어 있어야 동작\n• 리더 모듈이 자체적으로 GFX 안테나에서 읽어오 카드 정보를 암호화\n현재 저희가 가지고 있는 PokerGFX 모듈과 서버는 벤치마킹정도로 쓸 수 있을 것 같고 따로 RFID 리더기를 만들고 EBS에 데이터를 받게해야 하지 않을까 합니다.\n지금 당장은 개발을 위해서는 범용 RFID ",
-        "timestamp": "2026-01-13T17:15:09.730309"
-      },
-      {
-        "ts": "1768291724.840839",
-        "context": "PokerGFX 매뉴얼 NotebookLM 입니다.\n<https://notebooklm.google.com/notebook/a9b25c2f-c96b-437b-a648-b95b7059f628>",
-        "timestamp": "2026-01-13T17:08:44.840839"
-      }
-    ],
-    "fadedspade": [
-      {
-        "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
-        "timestamp": "2026-02-02T14:54:38.051859"
+        "ts": "1770709501.996099",
+        "context": "[ Sun-Fly 시연 제품 인보이스 요청 ]",
+        "timestamp": "2026-02-10T16:45:01.996099"
       }
     ],
     "angel": [
       {
         "ts": "1770011678.051859",
-        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (17개 업체)\n\n*RFI 현황:*\n• 발송 완료: 2개 업체\n• 전송 실패: 1개 업체\n• 미발송: 9개 업체\n\n*:warning: 미발송 업체:*\n• Sun-Fly :star: (<",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (6개 업체)\n\n*RFI 현황:*\n• 발송 완료: 1개 업체\n• 전송 실패: 0개 업체\n• 미발송: 3개 업체\n\n*:warning: 미발송 업체:*\n• Angel Playing Card",
         "timestamp": "2026-02-02T14:54:38.051859"
+      }
+    ],
+    "fadedspade": [
+      {
+        "ts": "1770011678.051859",
+        "context": "*EBS 업체 관리 - 통합 파트너 선정*\n\n:clipboard: <https://slack.com/lists/T03QGJ73GBB/F0ADFE95U00|업체 리스트 보기> (6개 업체)\n\n*RFI 현황:*\n• 발송 완료: 1개 업체\n• 전송 실패: 0개 업체\n• 미발송: 3개 업체\n\n*:warning: 미발송 업체:*\n• Angel Playing Card",
+        "timestamp": "2026-02-02T14:54:38.051859"
+      }
+    ],
+    "gao": [
+      {
+        "ts": "1770798032.530209",
+        "context": "<https://thegaogroup.com/|[ RFID 전문 업체 GAOGROUP ]>",
+        "timestamp": "2026-02-11T17:20:32.530209"
       }
     ]
   },
-  "collected_at": "2026-02-06T11:54:14.309837",
-  "last_updated": "2026-02-09T16:23:52.790249"
+  "collected_at": "2026-02-10T11:54:26.341782",
+  "last_updated": "2026-02-11T17:44:44.988525"
 }
