@@ -1,10 +1,10 @@
 ---
 doc_type: "prd"
 doc_id: "PRD-0004-EBS-ServerUI"
-version: "17.0.0"
+version: "18.0.0"
 status: "draft"
 owner: "BRACELET STUDIO"
-last_updated: "2026-02-19"
+last_updated: "2026-02-20"
 phase: "phase-1"
 priority: "critical"
 
@@ -226,42 +226,42 @@ PRD-0004는 단순한 화면 스펙이 아니라 **운영자의 사고 모델**�
 
 ---
 
-## 2장: Main Window
+## Step 1: Main Window (중앙 통제실)
 
-### 2.1 PokerGFX 원본
+> 모든 것은 **Main Window**에서 시작한다. 운영자가 시스템 전체를 한눈에 모니터링하고, 5개 설정 영역으로 분기하는 허브다. 본방송 중에는 여기서 긴급 조작을 수행하고, 준비 단계에서는 여기서 각 탭으로 이동한다.
 
-![Main Window - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180630.png)
+### PokerGFX 원본
+
+![Main Window - PokerGFX 원본](02_Annotated_ngd/01-main-window.png)
 
 PokerGFX의 기본 화면. 좌측에 방송 Preview, 우측에 상태 표시와 액션 버튼이 배치된 2-column 레이아웃이다. 10개 UI 요소로 구성.
-
-### 2.2 분석
-
-![Main Window - 오버레이 분석](02_Annotated_ngd/01-main-window.png)
 
 | # | 기능명 | 설명 | EBS 복제 |
 |:-:|--------|------|:--------:|
 | 1 | Title Bar | `PokerGFX Server 3.111 (c) 2011-24` 타이틀 + 최소/최대/닫기 버튼 | P2 |
 | 2 | Preview | Chroma Key Blue 배경의 방송 미리보기 화면. GFX 오버레이가 실시간 렌더링됨 | P0 |
 | 3 | CPU / GPU / Error / Lock | CPU, GPU 사용률 인디케이터 + Error 아이콘 + Lock 아이콘. 시스템 부하와 상태 실시간 모니터링 | P1 |
-| 4 | Recording / Secure Delay / Preview | 3개 체크박스 행. Recording(녹화 토글), Secure Delay(방송 보안 딜레이 토글), Preview(미리보기 토글). Recording·Secure Delay는 EBS 미구현. Preview는 상시 활성화 고정(토글 제거). | ❌ / 상시 활성화 |
+| 4 | Recording / Secure Delay / Preview | 3개 체크박스 행. Recording(녹화 토글), Secure Delay(방송 보안 딜레이 토글), Preview(미리보기 토글). | EBS MVP 범위 외 (추후 개발 예정) |
 | 5 | Reset Hand | Reset Hand 버튼. 현재 핸드 데이터 초기화 + Settings 톱니바퀴 + Lock 자물쇠 | P0 |
 | 6 | Register Deck | RFID 카드 덱 일괄 등록 버튼. 새 덱 투입 시 52장 순차 스캔 | P0 |
 | 7 | Action Tracker | Action Tracker 실행 버튼. 운영자용 실시간 게임 추적 인터페이스 | P0 |
-| 8 | Studio | Studio 모드 진입 버튼. 방송 스튜디오 환경 전환 | ❌ |
-| 9 | Split Recording | 핸드별 분할 녹화 버튼. 각 핸드를 개별 파일로 자동 저장 | ❌ |
-| 10 | Tag Player | 플레이어 태그 + 드롭다운. 특정 플레이어에 마커를 부여하여 추적 | ❌ |
+| 8 | Studio | Studio 모드 진입 버튼. 방송 스튜디오 환경 전환 | EBS MVP 범위 외 (추후 개발 예정) |
+| 9 | Split Recording | 핸드별 분할 녹화 버튼. 각 핸드를 개별 파일로 자동 저장 | EBS MVP 범위 외 (추후 개발 예정) |
+| 10 | Tag Player | 플레이어 태그 + 드롭다운. 특정 플레이어에 마커를 부여하여 추적 | EBS MVP 범위 외 (추후 개발 예정) |
 
 > **설계 시사점**
 > - Preview + 우측 컨트롤 패널 2-column 레이아웃은 운영 효율이 검증된 구조 → EBS 계승
 > - RFID 상태(3번)가 CPU/GPU와 같은 행에 묻혀 존재감 약함 → EBS에서 독립 분리 (M-05)
 > - 버튼 7개가 우선순위 구분 없이 균등 노출 → EBS에서 Quick Actions 그룹으로 재편
-> - **미구현 5종 (EBS 범위 외)**: Recording, Secure Delay(4번), Studio(8번), Split Recording(9번), Tag Player(10번) — Preview는 미리보기 항상 활성화 고정(토글 UI 제거)
+> - **EBS MVP 범위 외 (추후 개발 예정)**: Recording, Secure Delay(4번), Studio(8번), Split Recording(9번), Tag Player(10번) — Preview는 미리보기 항상 활성화 고정(토글 UI 제거)
 
-### 2.3 EBS 설계
+### EBS 설계본
 
-![Main Window](images/mockups/ebs-main.png)
+![Main Window - EBS 설계본](images/mockups/ebs-main.png)
 
-**변환 요약**: PokerGFX 10개 → EBS 15개. RFID Status 독립 분리, Hand Counter(M-17), Connection Status(M-18) 신규 추가. Recording·Secure Delay·Studio·Split Recording·Tag Player 미구현. Preview 상시 활성화 고정(M-09 토글 제거). 2-column 레이아웃 계승.
+### 설계 스펙
+
+**변환 요약**: PokerGFX 10개 → EBS 15개. RFID Status 독립 분리, Hand Counter(M-17), Connection Status(M-18) 신규 추가. Recording·Secure Delay·Studio·Split Recording·Tag Player EBS MVP 범위 외 (추후 개발 예정). Preview 상시 활성화 고정(M-09 토글 제거). 2-column 레이아웃 계승.
 
 시스템 모니터링과 긴급 조작을 담당하는 기본 화면. 본방송 중 운영자 주의력의 15%만 할당된다.
 
@@ -273,28 +273,45 @@ PokerGFX의 기본 화면. 좌측에 방송 Preview, 우측에 상태 표시와 
 - **Status Bar**: 하단 1행. RFID 연결 상태, 현재 핸드 번호, AT/Overlay/DB 연결 상태를 점 인디케이터로 표시.
 - **탭 없음**: Main Window는 독립 모니터링 화면. 각 설정 탭(Sources, Outputs, GFX, Rules, System)은 키보드 단축키(Ctrl+1~5)로 별도 창 접근.
 
-### 2.4 레이아웃
+#### 레이아웃
 
 Preview Panel(M-02, 좌) + Status Panel(M-03~M-05, M-18, 우상) + Quick Actions(M-11~M-14, 우하).
 
-### 2.5 Design Decisions
+#### Design Decisions
 
 1. **Dual Canvas 모니터링이 Preview Panel(M-02)에 집중되는 이유**: 운영자가 방송 중 80% 이상 바라보는 화면이다. Venue/Broadcast Canvas의 상태 차이를 한 곳에서 확인하여 Hidden Information Problem이 정상 작동하는지 즉시 판단 가능하다.
 
-2. **Quick Actions(M-11~M-14)가 메인에 노출되는 이유**: Reset Hand, Register Deck, Launch AT는 초 단위 반응이 필요하므로 탭 전환 없이 메인 화면에 상주한다.
+2. **Quick Actions(M-11~M-14)가 메인에 노출되는 이유**: Reset Hand, Register Deck, Launch AT는 즉각적 반응이 필요하므로 메인 화면에 상주한다.
 
-### 2.6 Workflow
+#### Workflow
 
-앱 실행 시 기본 화면. Preview로 출력 상태 모니터링 -> 상태 표시로 시스템 건강 확인 -> 긴급 시 Quick Actions 사용 -> 탭 전환으로 상세 설정 접근.
+**시나리오 A: 방송 전 준비**
+1. 앱 실행 → Preview 상태 확인 (M-02)
+2. RFID Status (M-05) 확인 → Green이면 다음 단계
+3. Ctrl+5 → System 탭: RFID 캘리브레이션
+4. Ctrl+1~4 → 각 탭 설정 완료
+5. M-13 Register Deck → 새 덱 등록
+6. F8 / M-14 → Action Tracker 실행
 
-### 2.7 Element Catalog
+**시나리오 B: 긴급 복구 (본방송 중)**
+1. RFID 빨간색 → M-05 상태 상세 확인
+2. M-11 Reset Hand → 현재 핸드 초기화 (확인 다이얼로그)
+3. 문제 지속 시 → Ctrl+5 → Y-03 Reset → 캘리브레이션 재실행
+
+**시나리오 C: 덱 교체**
+1. 핸드 종료 확인 (Action Tracker)
+2. M-13 Register Deck 클릭
+3. 52장 순차 스캔 완료 (1/52 ~ 52/52)
+4. Preview에서 새 덱 인식 확인
+
+#### Element Catalog
 
 #### 상태 표시 그룹
 
 | # | 요소 | 타입 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
 | M-01 | Title Bar | AppBar | 앱 이름 + 버전 + 윈도우 컨트롤 | #1 | P2 |
-| M-02 | Preview Panel | Canvas | 출력 해상도(O-01)와 동일한 종횡비 유지, Chroma Key Blue, GFX 오버레이 실시간 렌더링 | #2 | P0 |
+| M-02 | Preview Panel | Canvas | 출력 해상도(O-01)와 동일한 종횡비 유지, Chroma Key Blue, GFX 오버레이 실시간 렌더링. **해상도 정책**: 실제 출력은 Full HD(1920×1080) 기준 리사이징. 문서 표기(480×270)는 UI 공간 내 표시 크기로 가독성용 축약 표기. | #2 | P0 |
 | M-03 | CPU Indicator | ProgressBar | CPU 사용률 + 색상 코딩 (Green<60%, Yellow<85%, Red>=85%) | #3 | P1 |
 | M-04 | GPU Indicator | ProgressBar | GPU 사용률 + 색상 코딩 | #3 | P1 |
 | M-05 | RFID Status | Icon+Badge | Green=Connected, Red=Disconnected, Yellow=Calibrating | #3 | P0 |
@@ -318,6 +335,7 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 
 | # | 요소 | 타입 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
+| M-07 | Lock Toggle | IconButton | 설정 잠금/해제. 잠금 시 Quick Actions 외 모든 탭 설정 변경 불가 (본방송 중 실수 방지) | #3 | P1 |
 | M-09 | Preview Toggle | Checkbox | Preview 렌더링 On/Off (CPU 절약) | #4 | P0 |
 
 #### Quick Actions 그룹
@@ -330,14 +348,27 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 | M-14 | Launch AT | ElevatedButton | Action Tracker 실행/포커스 전환 | #7 | P0 |
 | M-20 | Fullscreen Preview | IconButton | Preview 전체 화면 (F11) | 신규 | P2 |
 
-### 2.8 Interaction Patterns
+#### Interaction Patterns
 
 | 조작 | 시스템 반응 | 피드백 |
 |------|-----------|--------|
-| M-11 Reset Hand | 확인 다이얼로그 -> 핸드 초기화 | Preview 초기화, Hand# 리셋 |
+| M-07 Lock Toggle | 잠금 시: 탭 비활성, Lock 아이콘 빨간색 | 설정 변경 시도 → "잠금 해제 후 가능" 툴팁 |
+| M-11 Reset Hand | 확인 다이얼로그 → 핸드 초기화 | Preview 초기화, Hand# 리셋 |
+| M-12 Settings | 전역 설정 다이얼로그 열림 | 테마/언어/단축키 변경 가능 |
 | M-13 Register Deck | 52장 순차 스캔 다이얼로그 | 1/52~52/52 진행 표시 |
+| M-14 Launch AT | AT 프로세스 실행 + 포커스 전환 | M-18 AT 표시등 Green으로 변경 |
+| M-20 Fullscreen Preview | Preview 전체 화면 전환 | ESC로 복귀 |
 
-### 2.9 Navigation
+#### 에러 상태 (Main Window 특화)
+
+| 에러 유형 | 표시 위치 | 시각 피드백 | 복구 액션 |
+|----------|----------|-----------|---------|
+| RFID 미연결 | M-05 | Red 아이콘 + 경고음 | Ctrl+5 → Y-03 Reset |
+| AT 연결 끊김 | M-18 | AT 표시등 Red | M-14 재실행 |
+| Preview 멈춤 | M-02 | 마지막 프레임 고정 + 테두리 빨간색 | M-09 Preview 토글 재시작 |
+| Hand Counter 불일치 | M-17 | 숫자 빨간색 표시 | M-11 Reset Hand |
+
+#### Navigation
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
@@ -348,17 +379,15 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 
 ---
 
-## 3장: Sources 탭
+## Step 2: Sources (카메라 + 스위처)
 
-### 3.1 PokerGFX 원본
+> 그래픽만으로는 방송이 완성되지 않는다. 카메라 영상과 합성되어야 한다. 어떤 카메라가 연결되어 있는지, ATEM 스위처의 IP는 무엇인지, 보드 카메라 싱크는 몇 밀리초인지를 설정해야 그래픽 오버레이가 정확한 타이밍에 올라간다. **Sources**(Ctrl+1)는 이 물리적 연결을 담당한다.
 
-![Sources 탭 - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180637.png)
+### PokerGFX 원본
+
+![Sources 탭 - PokerGFX 원본](02_Annotated_ngd/02-sources-tab.png)
 
 비디오 입력 장치, 카메라 제어, 크로마키, 외부 스위처 연동을 관리하는 탭. 12개 UI 요소로 구성.
-
-### 3.2 분석
-
-![Sources 탭 - 오버레이 분석](02_Annotated_ngd/02-sources-tab.png)
 
 | # | 기능명 | 설명 | EBS 복제 |
 |:-:|--------|------|:--------:|
@@ -380,19 +409,21 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 > - Chroma Key(7번)가 목록 중간에 배치 → EBS에서 Output Mode Selector(S-00)로 상단 분리
 > - Auto Camera Control: 게임 상태 기반 자동 카메라 전환이 핵심 → EBS 계승
 
-### 3.3 EBS 설계
+### EBS 설계본
 
-![Sources Tab](images/mockups/ebs-sources.png)
+![Sources Tab - EBS 설계본](images/mockups/ebs-sources.png)
+
+### 설계 스펙
 
 **변환 요약**: PokerGFX 12개 → EBS 19개. Output Mode Selector(S-00) 신규 추가로 Fill & Key/Chroma Key/Internal 모드에 따른 조건부 표시. ATEM 설정은 Fill & Key 모드에서만 노출하여 인지 부하 감소.
 
 비디오/오디오 입력 소스를 등록하고 속성을 조절한다. 자동 카메라 제어 설정도 이 화면에서 한다.
 
-### 3.4 레이아웃
+#### 레이아웃
 
 3구역: Video Sources Table(S-01, 상단) > Camera Control(S-05~S-10, 중단) > Background/Audio/External/Sync(S-11~S-18, 하단).
 
-### 3.5 Design Decisions
+#### Design Decisions
 
 1. **Output Mode Selector(S-00)가 첫 번째인 이유**: Fill & Key / Chroma Key / Internal 모드 선택이 나머지 요소의 가시성과 필수 여부를 결정한다. 모드를 먼저 결정해야 불필요한 설정 노출을 방지할 수 있다.
 
@@ -400,7 +431,7 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 
 3. **Audio(S-17, S-18)가 모든 모드에서 공통인 이유**: 오디오 소스와 싱크 보정은 출력 모드와 무관하게 항상 필요하다.
 
-### 3.6 Workflow
+#### Workflow
 
 ```mermaid
 flowchart LR
@@ -411,7 +442,7 @@ flowchart LR
     S1 & S3 & S4 --> S5["오디오+싱크<br/>S-15~S-18"]
 ```
 
-### 3.7 Element Catalog
+#### Element Catalog
 
 | # | 그룹 | 요소 | 타입 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|------|:---:|:--------:|
@@ -435,7 +466,7 @@ flowchart LR
 | S-17 | Audio | Input Source | Dropdown | 오디오 소스 선택 | #9 | P1 |
 | S-18 | Audio | Audio Sync | NumberInput | 오디오 싱크 보정 (ms) | #9 | P1 |
 
-### 3.8 Interaction Patterns
+#### Interaction Patterns
 
 | 조작 | 시스템 반응 | 피드백 |
 |------|-----------|--------|
@@ -443,7 +474,7 @@ flowchart LR
 | S-11 Chroma Key 토글 | Preview에 크로마키 즉시 반영 | 배경색 변화 |
 | S-14 ATEM IP 입력 | 연결 시도 + 상태 표시 | Green/Red 아이콘 |
 
-### 3.9 Navigation
+#### Navigation
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
@@ -452,17 +483,15 @@ flowchart LR
 
 ---
 
-## 4장: Outputs 탭
+## Step 3: Outputs (출력 파이프라인)
 
-### 4.1 PokerGFX 원본
+> 생성된 그래픽을 내보내야 한다. 그래픽이 어떤 장치로, 어떤 해상도와 프레임레이트로 나가는지를 설정해야 한다. Fill & Key 채널 매핑, 녹화, 스트리밍 설정도 이 탭에서 관리한다. **Outputs**(Ctrl+2)에서 출력 파이프라인을 구성한다.
 
-![Outputs 탭 - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180645.png)
+### PokerGFX 원본
+
+![Outputs 탭 - PokerGFX 원본](02_Annotated_ngd/03-outputs-tab.png)
 
 비디오 출력 해상도, Live/Delay 이중 파이프라인, 스트리밍을 관리하는 탭. 13개 UI 요소로 구성.
-
-### 4.2 분석
-
-![Outputs 탭 - 오버레이 분석](02_Annotated_ngd/03-outputs-tab.png)
 
 | # | 기능명 | 설명 | EBS 복제 |
 |:-:|--------|------|:--------:|
@@ -483,32 +512,34 @@ flowchart LR
 > - Live/Delay 2열 구조는 직관적이며 EBS 계승 가치 있음
 > - Key & Fill(4~5번)의 DeckLink 포트 할당이 불명확 → EBS에서 O-18~O-20 Fill & Key 전용 섹션 신규
 
-### 4.3 EBS 설계
+### EBS 설계본
 
-![Outputs Tab](images/mockups/ebs-outputs.png)
+![Outputs Tab - EBS 설계본](images/mockups/ebs-outputs.png)
+
+### 설계 스펙
 
 **변환 요약**: PokerGFX 13개 → EBS 20개. Fill & Key Channel Map(O-20), Key Color(O-18), Fill/Key Preview(O-19) 신규 추가. Live 단일 출력 구조. Delay 파이프라인은 추후 개발.
 
 출력 파이프라인을 설정한다. Delay 이중 출력은 추후 개발 범위이며, 현재는 Live 단일 출력 구조로 설계한다.
 
-### 4.4 레이아웃
+#### 레이아웃
 
 3구역: Resolution(O-01~O-03, 상단) > Live 출력(O-04~O-05) > Recording/Streaming/Fill&Key(O-14~O-20). Delay 파이프라인(O-06~O-07)은 추후 개발.
 
-### 4.5 Design Decisions
+#### Design Decisions
 
 1. **Venue/Broadcast가 독립 파이프라인인 이유**: Dual Canvas Architecture의 핵심. 두 파이프라인의 장치, 해상도, 프레임레이트가 독립적이어야 Hidden Information Problem을 하드웨어 수준에서 해결할 수 있다. (추후 개발: Delay 파이프라인 추가 시 적용)
 
 2. **Fill & Key 채널 매핑(O-05, O-07, O-20)이 P0인 이유**: Fill(RGB)과 Key(Alpha)는 DeckLink 카드의 물리적 SDI/HDMI 포트에 매핑된다. 포트 할당 오류는 방송 화면 깨짐으로 직결된다.
 
-### 4.6 Workflow
+#### Workflow
 
 ```mermaid
 flowchart LR
     O1["해상도<br/>O-01,O-03"] --> O2["Live<br/>O-04,O-05"] --> O5["녹화/스트리밍<br/>O-15~O-17"]
 ```
 
-### 4.7 Element Catalog
+#### Element Catalog
 
 | # | 그룹 | 요소 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
@@ -527,7 +558,7 @@ flowchart LR
 | O-19 | Fill & Key | Fill/Key Preview | Fill 신호와 Key 신호 나란히 미리보기 | 신규 | P1 |
 | O-20 | Fill & Key | DeckLink Channel Map | Live Fill/Key → DeckLink 포트 매핑 (Delay 추가 시 확장) | 신규 | P0 |
 
-### 4.8 Interaction Patterns
+#### Interaction Patterns
 
 | 조작 | 시스템 반응 | 피드백 |
 |------|-----------|--------|
@@ -558,7 +589,7 @@ flowchart LR
 - 완료: Preview 즉시 복구, O-01에 새 해상도 표시
 - 스킨 비호환 감지 시: 경고 토스트 "현재 스킨이 4K 최적화되지 않았습니다. SK-04를 확인하세요."
 
-### 4.9 Navigation
+#### Navigation
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
@@ -567,31 +598,39 @@ flowchart LR
 
 ---
 
-## 5장: GFX 탭 (4개 서브탭)
+## Step 4: GFX (4개 서브탭)
 
-### 5.1 PokerGFX 원본: GFX 1/2/3
+> 규칙이 정의되고 데이터가 입력되면, 이를 시각적으로 표현해야 한다. **GFX**(Ctrl+3)는 가장 복잡한 영역이라 하나의 화면으로는 부족하다. "어디에 배치할지"(Layout), "어떤 연출로"(Visual), "무엇을 표시할지"(Display), "숫자를 어떤 형식으로"(Numbers) — 이 네 가지는 서로 다른 작업이므로 4개 서브탭으로 분리된다.
+
+### PokerGFX 원본: GFX 1/2/3
 
 PokerGFX는 GFX 설정을 3개 탭에 걸쳐 73개 요소로 분산했다. 기능이 추가되면서 자연 발생한 구조이며, 논리적 분류 기준이 일관되지 않는다.
 
 **GFX 1** (29개 요소) — 레이아웃, 연출, 스킨, 스폰서, 마진이 혼재
 
-![GFX 1 - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180649.png)
-
-![GFX 1 - 오버레이 분석](02_Annotated_ngd/04-gfx1-tab.png)
+![GFX 1 - PokerGFX 원본](02_Annotated_ngd/04-gfx1-tab.png)
 
 **GFX 2** (21개 요소) — 리더보드, 게임 규칙, 표시 설정이 혼재
 
-![GFX 2 - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180652.png)
-
-![GFX 2 - 오버레이 분석](02_Annotated_ngd/05-gfx2-tab.png)
+![GFX 2 - PokerGFX 원본](02_Annotated_ngd/05-gfx2-tab.png)
 
 **GFX 3** (23개 요소) — 수치 형식 위주, 가장 응집도 높음
 
-![GFX 3 - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180655.png)
+![GFX 3 - PokerGFX 원본](02_Annotated_ngd/06-gfx3-tab.png)
 
-![GFX 3 - 오버레이 분석](02_Annotated_ngd/06-gfx3-tab.png)
+### EBS 설계본
 
-### 5.2 분석: 재편이 필요한 이유
+![GFX Layout](images/mockups/ebs-gfx-layout.png)
+
+![GFX Visual](images/mockups/ebs-gfx-visual.png)
+
+![GFX Display](images/mockups/ebs-gfx-display.png)
+
+![GFX Numbers](images/mockups/ebs-gfx-numbers.png)
+
+### 설계 스펙
+
+#### 분석: 재편이 필요한 이유
 
 GFX 1에 Board Position(배치)과 Reveal Cards(연출)이 같은 탭에 있다. GFX 2에 Show Chipcount %(표시 설정)와 Move Button Bomb Pot(게임 규칙)이 같은 탭에 있다. 변경 빈도와 영향 범위가 다른 설정이 섞여 있으면 라이브 중 오조작 위험이 높아진다.
 
@@ -605,11 +644,11 @@ GFX 1에 Board Position(배치)과 Reveal Cards(연출)이 같은 탭에 있다.
 
 **변환 결과**: 73개 → 51개(GFX) + 6개(Rules). 중복 제거와 배제로 -16개.
 
-### 5.3 EBS GFX 탭 구조 개요
+#### EBS GFX 탭 구조 개요
 
 GFX 탭은 PokerGFX 원본의 GFX1/2/3을 **Layout/Visual/Display/Numbers** 4개 서브탭으로 재편한 것이다.
 
-### 5.4 GFX 서브탭 매핑
+#### GFX 서브탭 매핑
 
 | 서브탭 | 원본 대응 | 주요 기능 |
 |--------|----------|----------|
@@ -618,7 +657,7 @@ GFX 탭은 PokerGFX 원본의 GFX1/2/3을 **Layout/Visual/Display/Numbers** 4개
 | **Display** | GFX2 + GFX3 일부 | 통계 표시, 방송 오버레이 |
 | **Numbers** | GFX3 일부 | 승률, Outs, 위닝 핸드 |
 
-### 5.5 Design Decisions
+#### Design Decisions
 
 1. **GFX 1/2/3을 단일 탭(4개 서브 섹션)으로 통합한 이유**: PokerGFX의 GFX 1/2/3은 기능 추가 과정의 산물이었다. EBS에서는 기능적 분류(Layout/Visual/Display/Numbers)로 재편하여 "어디에, 어떤 연출로, 무엇을, 어떤 형식으로"라는 자연스러운 작업 순서를 따른다.
 
@@ -626,7 +665,7 @@ GFX 탭은 PokerGFX 원본의 GFX1/2/3을 **Layout/Visual/Display/Numbers** 4개
 
 3. **Skin Editor/Graphic Editor가 별도 창인 이유**: GFX 탭은 "런타임 설정", Skin/Graphic Editor는 "디자인 편집"이다. 편집 작업은 시간이 걸리고 실시간 프리뷰가 필요하므로 별도 창에서 작업한다.
 
-### 5.6 Workflow
+#### Workflow
 
 ```mermaid
 flowchart LR
@@ -636,7 +675,7 @@ flowchart LR
     L -->|"Skin"| SKE["Skin Editor"] -->|"요소"| GRE["Graphic Editor"]
 ```
 
-### 5.7 Layout 서브탭
+#### Layout 서브탭
 
 ![GFX Layout](images/mockups/ebs-gfx-layout.png)
 
@@ -669,7 +708,7 @@ Margin(G-03~G-05)은 이미 정규화 좌표(올바른 설계)이므로 변경�
 | G-12 | Sponsor Logo 3 | ImageSlot | Strip 스폰서 | GFX1 #18 | P2 |
 | G-13 | Vanity Text | TextField+Checkbox | 테이블 텍스트 + Game Variant 대체 | GFX1 #19 | P2 |
 
-### 5.8 Visual 서브탭
+#### Visual 서브탭
 
 ![GFX Visual](images/mockups/ebs-gfx-visual.png)
 
@@ -690,7 +729,7 @@ Margin(G-03~G-05)은 이미 정규화 좌표(올바른 설계)이므로 변경�
 | G-24 | Show Player Stats | Checkbox+Settings | 핸드 후 티커 통계 | GFX1 #28 | P1 |
 | G-25 | Heads Up History | Checkbox | 헤즈업 히스토리 | GFX1 #23 | P1 |
 
-### 5.9 Display 서브탭
+#### Display 서브탭
 
 ![GFX Display](images/mockups/ebs-gfx-display.png)
 
@@ -713,7 +752,7 @@ Margin(G-03~G-05)은 이미 정규화 좌표(올바른 설계)이므로 변경�
 | G-38 | Hilite Winning Hand | Dropdown | 위닝 핸드 강조 시점 | GFX2 #20 | P0 |
 | G-39 | Hilite Nit Game | Dropdown | 닛 게임 강조 조건 | GFX2 #16 | P1 |
 
-### 5.10 Numbers 서브탭
+#### Numbers 서브탭
 
 ![GFX Numbers](images/mockups/ebs-gfx-numbers.png)
 
@@ -734,7 +773,7 @@ Margin(G-03~G-05)은 이미 정규화 좌표(올바른 설계)이므로 변경�
 | G-50 | Chipcount Precision | PrecisionGroup | 8개 영역별 수치 형식 | GFX3 #14-20 | P1 |
 | G-51 | Display Mode | ModeGroup | Amount vs BB 전환 | GFX3 #22-23 | P1 |
 
-### 5.11 Interaction Patterns
+#### Interaction Patterns
 
 | 조작 | 시스템 반응 | 영향 범위 |
 |------|-----------|-----------|
@@ -752,7 +791,7 @@ Margin(G-03~G-05)은 이미 정규화 좌표(올바른 설계)이므로 변경�
 | Channel (특정 출력) | Live 설정 | 안전 |
 | Local (단일 요소) | Sponsor Logo, Vanity Text | 안전 |
 
-### 5.12 Navigation
+#### Navigation
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
@@ -762,15 +801,23 @@ Margin(G-03~G-05)은 이미 정규화 좌표(올바른 설계)이므로 변경�
 
 ---
 
-## 6장: Rules 탭
+## Step 5: Rules (게임 규칙)
 
-### 6.1 PokerGFX 원본: GFX 2에서 분리
+> 같은 포커라도 게임마다 규칙이 다르다. Bomb Pot이 있는 게임에서는 프리플롭 베팅이 없고, Straddle이 허용되면 블라인드 구조가 달라진다. 규칙이 달라지면 그래픽도 달라지므로, 운영자는 **Rules**(Ctrl+4)에서 게임 규칙을 먼저 정의해야 한다.
+
+### PokerGFX 원본
 
 PokerGFX에는 독립 Rules 탭이 없다. 게임 규칙(Bomb Pot, Straddle 등)은 GFX 2 탭의 #8~#11, #14, #21에 표시 설정과 섞여 있었다.
 
-![GFX 2 - 오버레이 (규칙 요소 #8~#11, #14, #21)](02_Annotated_ngd/05-gfx2-tab.png)
+![GFX 2 - 규칙 요소 (#8~#11, #14, #21)](02_Annotated_ngd/05-gfx2-tab.png)
 
-### 6.2 분석: 분리 근거
+### EBS 설계본
+
+![Rules Tab - EBS 설계본](images/mockups/ebs-rules.png)
+
+### 설계 스펙
+
+#### 분리 근거
 
 | GFX 2 # | 기능명 | 성격 | EBS 배치 |
 |:--------:|--------|------|----------|
@@ -786,25 +833,21 @@ PokerGFX에는 독립 Rules 탭이 없다. 게임 규칙(Bomb Pot, Straddle 등)
 > - 변경 빈도와 영향 범위가 다르므로 독립 탭으로 분리
 > - 대부분 기본값으로 운영되며 특수 게임 형식에서만 변경
 
-### 6.3 EBS 설계
-
-![Rules Tab](images/mockups/ebs-rules.png)
-
 **변환 요약**: GFX 2에서 게임 규칙 6개를 추출하여 독립 탭으로 구성. 모든 요소 P1 (기본값 운영).
 
 게임 규칙(Bomb Pot, Straddle 등)과 특수 상황 설정.
 
-### 6.4 Design Decisions
+#### Design Decisions
 
 1. **GFX 2에서 분리한 이유**: 규칙은 Game Engine의 행동을 결정하고, GFX Display는 시각적 출력을 결정한다. 변경 빈도와 영향 범위가 다르므로 독립 탭으로 분리했다.
 
 2. **모든 요소가 P1인 이유**: 대부분의 방송에서 기본값으로 운영된다. 특수 규칙은 특정 게임 형식에서만 활성화되므로 P0이 아닌 P1로 분류했다.
 
-### 6.5 Workflow
+#### Workflow
 
 게임 규칙 설정은 독립적이며 순서가 없다. 필요한 규칙만 확인/변경한다.
 
-### 6.6 Element Catalog
+#### Element Catalog
 
 | # | 요소 | 설명 | PGX | 우선순위 |
 |:-:|------|------|:---:|:--------:|
@@ -815,7 +858,7 @@ PokerGFX에는 독립 Rules 탭이 없다. 게임 규칙(Bomb Pot, Straddle 등)
 | R-05 | Sleeper Final Action | 슬리퍼 최종 액션 | GFX2 #11 | P1 |
 | R-06 | Ignore Split Pots | Equity/Outs에서 Split pot 무시 | GFX2 #21 | P1 |
 
-### 6.7 Navigation
+#### Navigation
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
@@ -824,36 +867,36 @@ PokerGFX에는 독립 Rules 탭이 없다. 게임 규칙(Bomb Pot, Straddle 등)
 
 ---
 
-## 7장: System 탭
+## Step 6: System (RFID + 연결 점검)
 
-### 7.1 PokerGFX 원본
+> RFID가 카드를 읽으려면 리더가 연결되고 캘리브레이션이 완료되어야 한다. 하드웨어 점검 없이 본방송을 시작하면 중간에 카드 인식이 안 되는 사고가 발생한다. **System**(Ctrl+5)에서 RFID 리더 상태, 네트워크 연결, 테이블 디바이스를 점검한다.
 
-![System 탭 - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180624.png)
+### PokerGFX 원본
+
+![System 탭 - PokerGFX 원본](02_Annotated_ngd/08-system-tab.png)
 
 RFID 리더, 안테나, 라이선스, 시스템 진단, 고급 설정을 관리하는 탭. 28개 UI 요소로 구성.
-
-### 7.2 분석
-
-![System 탭 - 오버레이 분석](02_Annotated_ngd/08-system-tab.png)
 
 > **설계 시사점**
 > - RFID 안테나(22~24번)가 하단에 배치되어 있으나, 실제로는 방송 준비의 첫 번째 설정임 → EBS에서 상단 이동 (Y-03~Y-07)
 > - 라이선스 관련 4개(6~9번)는 EBS 자체 시스템에서 불필요 → 제거
 > - AT 접근 정책이 다른 설정과 혼재 → EBS에서 독립 그룹 (Y-13~Y-15)
 
-### 7.3 EBS 설계
+### EBS 설계본
 
-![System Tab](images/mockups/ebs-system.png)
+![System Tab - EBS 설계본](images/mockups/ebs-system.png)
+
+### 설계 스펙
 
 **변환 요약**: PokerGFX 28개 → EBS 24개. RFID를 상단으로 이동 (준비 첫 단계), 라이선스 4개 제거, AT 접근 정책 독립 그룹화.
 
 RFID, Action Tracker 연결, 시스템 진단.
 
-### 7.4 레이아웃
+#### 레이아웃
 
 4구역: RFID(Y-03~Y-07, 상단) > AT(Y-13~Y-15) > Diagnostics(Y-08~Y-12) > Advanced(Y-16~Y-24).
 
-### 7.5 Design Decisions
+#### Design Decisions
 
 1. **RFID 캘리브레이션이 방송 준비 첫 단계인 이유**: 캘리브레이션 없이 다른 설정을 진행하면 테스트 핸드에서 카드 오인식이 발생한다. 따라서 하드웨어 점검 -> RFID 캘리브레이션을 최우선으로 배치했다.
 
@@ -861,11 +904,11 @@ RFID, Action Tracker 연결, 시스템 진단.
 
 3. **Advanced 그룹(Y-16~Y-23)이 별도 섹션인 이유**: MultiGFX, Stream Deck 매핑 등은 대부분 변경하지 않는다. 자주 사용하는 RFID/Diagnostics 설정과 시각적으로 분리하여 실수를 방지한다.
 
-### 7.6 Workflow
+#### Workflow
 
 RFID 리셋/캘리브레이션 -> 안테나 설정 -> AT 접근 정책 -> 진단 확인 -> 고급 설정.
 
-### 7.7 Element Catalog
+#### Element Catalog
 
 | # | 그룹 | 요소 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
@@ -893,7 +936,7 @@ RFID 리셋/캘리브레이션 -> 안테나 설정 -> AT 접근 정책 -> 진단
 | Y-23 | Advanced | Stream Deck | Elgato Stream Deck 매핑 | #15 | P2 |
 | Y-24 | Updates | Version + Check | 버전 표시 + 업데이트 | #7,#8 | P2 |
 
-### 7.8 Interaction Patterns
+#### Interaction Patterns
 
 | 조작 | 시스템 반응 | 피드백 |
 |------|-----------|--------|
@@ -901,7 +944,7 @@ RFID 리셋/캘리브레이션 -> 안테나 설정 -> AT 접근 정책 -> 진단
 | Y-04 Calibrate 클릭 | 안테나별 캘리브레이션 시작 | 진행률 + 안테나별 결과 |
 | Y-09 Table Diagnostics | 별도 창 열림 | 안테나 신호 강도 실시간 표시 |
 
-### 7.9 Navigation
+#### Navigation
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
@@ -911,36 +954,36 @@ RFID 리셋/캘리브레이션 -> 안테나 설정 -> AT 접근 정책 -> 진단
 
 ---
 
-## 8장: Skin Editor (별도 창)
+## Step 7: Skin Editor (별도 창)
 
-### 8.1 PokerGFX 원본
+> 지금까지의 모든 그래픽에는 "외관"이 있다 — 색상, 폰트, 카드 이미지, 애니메이션. 이것을 스킨이라고 부르며, 방송 전날 또는 며칠 전에 미리 만들어둔다. 본방송 중에는 건드리지 않는 사전 작업이므로 탭이 아니라 **Skin Editor**(별도 창)로 분리된다.
 
-![Skin Editor - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180715.png)
+### PokerGFX 원본
+
+![Skin Editor - PokerGFX 원본](02_Annotated_ngd/09-skin-editor.png)
 
 별도 창으로 열리는 스킨 편집기. 37개 UI 요소로 구성. 스킨 정보, 요소 버튼, 텍스트/카드/플레이어/국기 설정, Import/Export 기능.
-
-### 8.2 분석
-
-![Skin Editor - 오버레이 분석](02_Annotated_ngd/09-skin-editor.png)
 
 > **설계 시사점**
 > - 국기 관련 3개(24~26번)가 카드/플레이어 설정 사이에 끼어 흐름이 단절됨 → EBS에서 P2로 통합
 > - 에디터 계층(GFX → Skin → Graphic)이 자연스러운 깊이 구조를 형성 → EBS 계승
 > - Import/Export/Download(32~34번)는 팀 간 공유 자산 관리에 필수 → EBS 유지
 
-### 8.3 EBS 설계
+### EBS 설계본
 
-![Skin Editor](images/mockups/ebs-skin-editor.png)
+![Skin Editor - EBS 설계본](images/mockups/ebs-skin-editor.png)
+
+### 설계 스펙
 
 **변환 요약**: PokerGFX 37개 → EBS 26개. 국기 관련 P2 통합, 에디터 계층(GFX → Skin → Graphic) 명시, 핵심 기능 유지.
 
 Skin(방송 그래픽 테마) 편집. 색상, 폰트, 레이아웃을 변경하고 테마를 저장/불러오기.
 
-### 8.4 레이아웃
+#### 레이아웃
 
 4구역: Skin Preview(상단) > Element Buttons(SK-06, 중상) > Settings(SK-01~SK-20) > Actions(SK-21~SK-26, 하단).
 
-### 8.5 Design Decisions
+#### Design Decisions
 
 1. **에디터 계층 구조 (GFX -> Skin -> Graphic)**: GFX 탭은 "무엇을 어디에 표시할지" 런타임 설정. Skin Editor는 "어떤 시각적 테마로" 표현할지 정의. Graphic Editor는 "개별 요소를 픽셀 단위로" 편집. 변경 빈도에 따라 분리: GFX는 방송마다, Skin은 시즌마다, Graphic은 디자인 변경 시에만.
 
@@ -950,7 +993,7 @@ Skin(방송 그래픽 테마) 편집. 색상, 폰트, 레이아웃을 변경하�
 
 4. **SK-04 4K Design이 체크박스인 이유**: 스킨은 특정 해상도를 기준으로 제작된다. 이 플래그는 "이 스킨의 원본 좌표계가 무엇인지"를 선언한다. 런타임에 출력 해상도(O-01)와 스킨 기준 해상도(SK-04)가 다르면 스케일 변환이 자동 적용된다. 단, 업스케일(1080p 스킨 → 4K 출력)은 품질 저하 가능성이 있으므로 경고를 표시한다.
 
-### 8.6 Workflow
+#### Workflow
 
 ```mermaid
 flowchart LR
@@ -958,7 +1001,7 @@ flowchart LR
     S3 --> S4["플레이어<br/>SK-14~20"] --> S5["저장/적용<br/>SK-21~26"]
 ```
 
-### 8.7 Element Catalog
+#### Element Catalog
 
 | # | 그룹 | 요소 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
@@ -989,7 +1032,7 @@ flowchart LR
 | SK-25 | Actions | Discard | 변경 취소 | #36 | P1 |
 | SK-26 | Actions | Use | 현재 적용 | #37 | P1 |
 
-### 8.8 Navigation
+#### Navigation
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
@@ -998,50 +1041,50 @@ flowchart LR
 
 ---
 
-## 9장: Graphic Editor (별도 창)
+## Step 8: Graphic Editor (별도 창)
 
-### 9.1 PokerGFX 원본
+> **Graphic Editor**는 Skin Editor에서 개별 요소를 클릭하면 열리는 하위 작업 창이다. 변경 빈도가 낮을수록 접근이 깊은 설계 철학에 따라, 픽셀 단위 편집은 가장 깊은 계층(GFX → Skin Editor → Graphic Editor)에 배치된다.
+
+### PokerGFX 원본
 
 PokerGFX의 Graphic Editor는 Board 모드(39개)와 Player 모드(48개)로 분리되어 있었다. 공통 기능(Position, Animation, Text, Background)이 60% 이상 중복.
 
 **Board 모드** (39개 요소)
 
-![Graphic Editor Board - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180720.png)
-
-![Graphic Editor Board - 오버레이 분석](02_Annotated_ngd/10-graphic-editor-board.png)
+![Graphic Editor Board - PokerGFX 원본](02_Annotated_ngd/10-graphic-editor-board.png)
 
 **Player 모드** (48개 요소)
 
-![Graphic Editor Player - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180728.png)
+![Graphic Editor Player - PokerGFX 원본](02_Annotated_ngd/11-graphic-editor-player.png)
 
-![Graphic Editor Player - 오버레이 분석](02_Annotated_ngd/11-graphic-editor-player.png)
+### EBS 설계본
 
-### 9.2 분석
+![Graphic Editor - EBS 설계본](images/mockups/ebs-graphic-editor.png)
+
+### 설계 스펙
+
+#### 분석
 
 > **설계 시사점**
 > - Board(39개) + Player(48개) = 87개 요소 중 공통 기능이 60% 이상 중복됨
 > - Position(LTWH), Animation In/Out, Text, Background는 동일한 조작 패턴
 > - 두 에디터를 분리할 이유가 기능적으로 없음 → 단일 에디터 + 모드 전환으로 통합
 
-### 9.3 EBS 설계
-
-![Graphic Editor](images/mockups/ebs-graphic-editor.png)
-
 **변환 요약**: PokerGFX 87개(Board 39 + Player 48) → EBS 18개(공통 10 + Player 전용 8). Board/Player 단일 에디터로 통합, 동일한 조작 패턴 유지하면서 대상만 전환.
 
 Skin Editor에서 선택한 특정 요소(Board, Player, Card 등)의 위치, 크기, 색상, 효과를 픽셀 단위로 편집.
 
-### 9.4 Design Decisions
+#### Design Decisions
 
 1. **Board/Player 듀얼 모드인 이유**: 보드 영역과 플레이어 영역은 레이아웃 요소가 완전히 다르다. 모드 전환으로 동일한 조작 패턴(Position, Animation, Text)을 유지하면서 대상만 바꾼다.
 
 2. **Skin Editor에서만 접근 가능한 이유**: GFX -> Skin Editor -> Graphic Editor 순서로 진입 깊이가 깊어지면서 실수로 픽셀 수준 편집에 접근하는 것을 방지한다. "변경 빈도가 낮을수록 접근이 깊다."
 
-### 9.5 Workflow
+#### Workflow
 
 편집 대상 선택 -> 위치/크기 조정 -> 애니메이션 설정 -> 텍스트 스타일 -> 실시간 프리뷰 확인.
 
-### 9.6 Element Catalog
+#### Element Catalog
 
 #### Board/공통 편집 기능 (10개)
 
@@ -1072,7 +1115,7 @@ Skin Editor에서 선택한 특정 요소(Board, Player, Card 등)의 위치, �
 | G | Stack | 칩 스택 | P0 |
 | H | Position | 포지션 (D/SB/BB) | P0 |
 
-### 9.7 Navigation
+#### Navigation
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
@@ -1084,13 +1127,9 @@ Skin Editor에서 선택한 특정 요소(Board, Player, Card 등)의 위치, �
 
 ### PokerGFX 원본
 
-![Commentary Tab - PokerGFX 원본](../../images/pokerGFX/스크린샷%202026-02-05%20180659.png)
+![Commentary Tab](02_Annotated_ngd/07-commentary-tab.png)
 
 PokerGFX에서 Commentary 탭은 해설자 전용 정보 표시 영역을 제어한다. 8개 요소(SV-021 Commentary ON/OFF, SV-022 Commentator Name 등)로 구성되며, 방송 화면에 해설자 이름과 관련 정보를 오버레이한다.
-
-### 분석
-
-![Commentary Overlay](02_Annotated_ngd/07-commentary-tab.png)
 
 > **배제 판단 근거**
 > - 기존 프로덕션에서 Commentary 기능을 사용한 적이 없음 — 해설자 정보는 별도 그래픽 소스로 처리
@@ -1223,7 +1262,6 @@ graph TD
 | `F7` | Register Deck | 메인 |
 | `F8` | Launch AT | 메인 |
 | `F11` | Preview 전체 화면 | 메인 |
-| `Ctrl+L` | Lock 토글 | 전역 |
 | `Ctrl+1` | Sources 탭 | 전역 |
 | `Ctrl+2` | Outputs 탭 | 전역 |
 | `Ctrl+3` | GFX 탭 | 전역 |
@@ -1385,7 +1423,8 @@ AT는 별도 앱. GfxServer 상호작용 지점만 매핑한다.
 | **v15.0.0** | **2026-02-18** | **해상도 적응형 레이아웃 재설계**: 1.5절 해상도 적응 원칙 추가(Design/Output/Preview 개념 정의, 앱 윈도우 크기 정책, 좌표 시스템 원칙). M-02 Preview Panel 해상도 스케일링 스펙 추가. O-01 해상도 변경 7단계 처리 체인 정의. 5.7절 GFX 좌표계 원칙 블록 추가(정규화 좌표 vs 기준 픽셀 단위 체계 명시). SK-04 4K Design 동작 정의(기준 좌표계 전환, 경고 조건) + 8.5 Design Decisions 항목 4 추가. 9.6절 Position(LTWH)/Anchor/Coordinate Display 해상도 독립적 좌표 시스템 재정의. |
 | **v16.0.0** | **2026-02-19** | **Delay 이중 출력 추후 개발 처리**: 1.3 "PokerGFX → EBS 구조 변환" 섹션 제거 (1.4~1.6 → 1.3~1.5로 번호 재조정). Step 6 설명에서 Delay 제거 → Live 단일 출력 구조로 재기술. M-08/M-10 우선순위 P0 → Future. O-06~O-13 우선순위 → Future. 4.3~4.9 Outputs 탭 EBS 설계 전반에 "Delay는 추후 개발" 표기. SEC-001~005, SEC-010~011 매핑에 추후 개발 주석. Y-11 Secure Delay Folder Future 처리. Ctrl+D 단축키 추후 개발 표기. Viewer Overlay Dual Canvas 설명 재기술. |
 | **v17.0.0** | **2026-02-19** | Secure Delay, Split Recording, Tag Player 제거. 2.3 EBS 설계 UI 설명 강화. |
+| **v18.0.0** | **2026-02-20** | **1장+2~9장 완전 통합 구조 재편**: 2~9장을 Step 1~8 형식으로 1장에 흡수. 각 Step에 PokerGFX 원본(02_Annotated_ngd/) + EBS 설계본(images/mockups/) 이미지 이중 삽입. Step 1 Main Window 보완: M-07 Lock Toggle Element 추가, Workflow 시나리오 A/B/C 3개 추가, Interaction Patterns 6개로 확장(M-07/M-12/M-14/M-20 포함), 에러 상태 섹션 신규 추가, M-02 Full HD 주석 추가. 제외 기능 표현 "EBS MVP 범위 외 (추후 개발 예정)"으로 통일. Commentary 섹션 이미지 경로 정리(구형 스크린샷 제거). |
 
 ---
 
-**Version**: 17.0.0 | **Updated**: 2026-02-19
+**Version**: 18.0.0 | **Updated**: 2026-02-20
