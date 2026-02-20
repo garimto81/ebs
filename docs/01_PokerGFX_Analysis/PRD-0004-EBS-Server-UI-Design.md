@@ -165,7 +165,7 @@ flowchart LR
 
 | 원칙 | UI 반영 |
 |------|---------|
-| 운영자 중심 설계 (라이브 중 인지 부하 최소화) | Quick Actions, Lock Toggle, 단축키 |
+| 운영자 중심 설계 (라이브 중 인지 부하 최소화) | Quick Actions, 단축키 |
 | 검증된 레이아웃 계승 (PokerGFX 2-column 유지) | Preview(좌) + Control(우) |
 | 논리적 기능 통합 (GFX 1/2/3 재편) | Layout/Visual/Display/Numbers 4개 서브탭 |
 
@@ -243,48 +243,33 @@ PokerGFX의 기본 화면. 좌측에 방송 Preview, 우측에 상태 표시와 
 | 1 | Title Bar | `PokerGFX Server 3.111 (c) 2011-24` 타이틀 + 최소/최대/닫기 버튼 | P2 |
 | 2 | Preview | Chroma Key Blue 배경의 방송 미리보기 화면. GFX 오버레이가 실시간 렌더링됨 | P0 |
 | 3 | CPU / GPU / Error / Lock | CPU, GPU 사용률 인디케이터 + Error 아이콘 + Lock 아이콘. 시스템 부하와 상태 실시간 모니터링 | P1 |
-| 4 | Preview | Preview 체크박스. 미리보기 활성화 토글 | P0 |
+| 4 | Recording / Secure Delay / Preview | 3개 체크박스 행. Recording(녹화 토글), Secure Delay(방송 보안 딜레이 토글), Preview(미리보기 토글). Recording·Secure Delay는 EBS 미구현. Preview는 상시 활성화 고정(토글 제거). | ❌ / 상시 활성화 |
 | 5 | Reset Hand | Reset Hand 버튼. 현재 핸드 데이터 초기화 + Settings 톱니바퀴 + Lock 자물쇠 | P0 |
 | 6 | Register Deck | RFID 카드 덱 일괄 등록 버튼. 새 덱 투입 시 52장 순차 스캔 | P0 |
 | 7 | Action Tracker | Action Tracker 실행 버튼. 운영자용 실시간 게임 추적 인터페이스 | P0 |
-| 8 | Studio | Studio 모드 진입 버튼. 방송 스튜디오 환경 전환 | P2 |
+| 8 | Studio | Studio 모드 진입 버튼. 방송 스튜디오 환경 전환 | ❌ |
+| 9 | Split Recording | 핸드별 분할 녹화 버튼. 각 핸드를 개별 파일로 자동 저장 | ❌ |
+| 10 | Tag Player | 플레이어 태그 + 드롭다운. 특정 플레이어에 마커를 부여하여 추적 | ❌ |
 
 > **설계 시사점**
 > - Preview + 우측 컨트롤 패널 2-column 레이아웃은 운영 효율이 검증된 구조 → EBS 계승
 > - RFID 상태(3번)가 CPU/GPU와 같은 행에 묻혀 존재감 약함 → EBS에서 독립 분리 (M-05)
 > - 버튼 7개가 우선순위 구분 없이 균등 노출 → EBS에서 Quick Actions 그룹으로 재편
+> - **미구현 5종 (EBS 범위 외)**: Recording, Secure Delay(4번), Studio(8번), Split Recording(9번), Tag Player(10번) — Preview는 미리보기 항상 활성화 고정(토글 UI 제거)
 
 ### 2.3 EBS 설계
 
 ![Main Window](images/mockups/ebs-main.png)
 
-**변환 요약**: PokerGFX 10개 → EBS 16개. RFID Status 독립 분리, Hand Counter(M-17), Connection Status(M-18) 신규 추가. 2-column 레이아웃 계승.
+**변환 요약**: PokerGFX 10개 → EBS 15개. RFID Status 독립 분리, Hand Counter(M-17), Connection Status(M-18) 신규 추가. Recording·Secure Delay·Studio·Split Recording·Tag Player 미구현. Preview 상시 활성화 고정(M-09 토글 제거). 2-column 레이아웃 계승.
 
 시스템 모니터링과 긴급 조작을 담당하는 기본 화면. 본방송 중 운영자 주의력의 15%만 할당된다.
 
-#### 레이아웃 구조
-
-```
-+------------------------------------------+
-| Title Bar                     [_][□][×] |
-+---------------------------+--------------+
-|                           | CPU  GPU  ⚠  |
-|   Preview Panel (16:9)    | 🔒 Lock       |
-|   Chroma Key Blue         | [✓] Preview  |
-|   GFX 오버레이 렌더링      |              |
-|                           | [Reset Hand] |
-|   1920 x 1080 | LIVE      | [⚙] [🔒]   |
-|                           | [Reg. Deck]  |
-|                           | [Launch AT]  |
-+---------------------------+--------------+
-| ● RFID  Hand #47  AT● Overlay● DB●      |
-+------------------------------------------+
-```
-
 #### UI 설계 원칙
 
-- **Preview Panel**: 전체 너비의 70%, 16:9 비율 고정. Chroma Key Blue(#0000FF) 배경에 GFX 오버레이 실시간 렌더링.
-- **Control Panel**: 나머지 30% 공간. 필수 상태 인디케이터(CPU/GPU/RFID)와 Quick Actions 버튼만 배치. 수직 스크롤 없이 모든 요소가 보여야 한다.
+- **Preview Panel**: 480px 고정폭, 16:9 비율 자동 높이 (480×270). Chroma Key Blue(#0000FF) 배경에 GFX 오버레이 실시간 렌더링. CSS `aspect-ratio:16/9` 적용.
+- **Control Panel**: 나머지 320px. 상단: 필수 상태 인디케이터(CPU/GPU/RFID). 중단: 자동 spacer(flex:1, ~60px). 하단: Quick Actions 버튼 3개. 수직 스크롤 없이 모든 요소가 보여야 한다.
+- **앱 윈도우**: 800×365px 기준 (Title Bar 28px + Preview 270px + Status Bar 22px + Shortcut Bar 24px + Watermark 22px).
 - **Status Bar**: 하단 1행. RFID 연결 상태, 현재 핸드 번호, AT/Overlay/DB 연결 상태를 점 인디케이터로 표시.
 - **탭 없음**: Main Window는 독립 모니터링 화면. 각 설정 탭(Sources, Outputs, GFX, Rules, System)은 키보드 단축키(Ctrl+1~5)로 별도 창 접근.
 
@@ -297,8 +282,6 @@ Preview Panel(M-02, 좌) + Status Panel(M-03~M-05, M-18, 우상) + Quick Actions
 1. **Dual Canvas 모니터링이 Preview Panel(M-02)에 집중되는 이유**: 운영자가 방송 중 80% 이상 바라보는 화면이다. Venue/Broadcast Canvas의 상태 차이를 한 곳에서 확인하여 Hidden Information Problem이 정상 작동하는지 즉시 판단 가능하다.
 
 2. **Quick Actions(M-11~M-14)가 메인에 노출되는 이유**: Reset Hand, Register Deck, Launch AT는 초 단위 반응이 필요하므로 탭 전환 없이 메인 화면에 상주한다.
-
-3. **Lock Toggle(M-07)이 전역 동작인 이유**: 라이브 중 실수로 설정 변경하면 방송 사고. Lock은 모든 탭의 설정 변경을 일괄 비활성화하며 Ctrl+L로 토글 가능하다.
 
 ### 2.6 Workflow
 
@@ -315,7 +298,7 @@ Preview Panel(M-02, 좌) + Status Panel(M-03~M-05, M-18, 우상) + Quick Actions
 | M-03 | CPU Indicator | ProgressBar | CPU 사용률 + 색상 코딩 (Green<60%, Yellow<85%, Red>=85%) | #3 | P1 |
 | M-04 | GPU Indicator | ProgressBar | GPU 사용률 + 색상 코딩 | #3 | P1 |
 | M-05 | RFID Status | Icon+Badge | Green=Connected, Red=Disconnected, Yellow=Calibrating | #3 | P0 |
-| M-06 | Error Icon | IconButton | 에러 카운트 뱃지, 클릭 시 로그 팝업 | #3 | P1 |
+| M-06 | RFID Connection Icon | Icon | RFID 연결 상태 표시 (연결 시 녹색 USB/WiFi 아이콘으로 변경, 미연결 시 경고 아이콘) | #3 | P1 |
 | M-17 | Hand Counter | Badge | 현재 세션 핸드 번호 (Hand #47) | 신규 | P0 |
 | M-18 | Connection Status | Row | AT/Overlay/DB 각각 Green/Red 표시 | 신규 | P0 |
 
@@ -335,7 +318,6 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 
 | # | 요소 | 타입 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
-| M-07 | Lock Toggle | IconButton | Lock 활성 시 설정 변경 불가, 오조작 방지 | #3 | P0 |
 | M-09 | Preview Toggle | Checkbox | Preview 렌더링 On/Off (CPU 절약) | #4 | P0 |
 
 #### Quick Actions 그룹
@@ -346,14 +328,12 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 | M-12 | Settings | IconButton | 전역 설정 다이얼로그 (테마, 언어, 단축키) | #5 | P1 |
 | M-13 | Register Deck | ElevatedButton | 52장 RFID 일괄 등록, 진행 다이얼로그 | #6 | P0 |
 | M-14 | Launch AT | ElevatedButton | Action Tracker 실행/포커스 전환 | #7 | P0 |
-| M-19 | Quick Lock | Keyboard Shortcut | Ctrl+L 즉시 Lock 토글 | 신규 | P1 |
 | M-20 | Fullscreen Preview | IconButton | Preview 전체 화면 (F11) | 신규 | P2 |
 
 ### 2.8 Interaction Patterns
 
 | 조작 | 시스템 반응 | 피드백 |
 |------|-----------|--------|
-| M-07 Lock 클릭 | 모든 설정 변경 비활성화 | 자물쇠 아이콘 변화 + 탭 그레이아웃 |
 | M-11 Reset Hand | 확인 다이얼로그 -> 핸드 초기화 | Preview 초기화, Hand# 리셋 |
 | M-13 Register Deck | 52장 순차 스캔 다이얼로그 | 1/52~52/52 진행 표시 |
 
@@ -361,7 +341,7 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
-| Sources~System 탭 | Ctrl+1~5 또는 탭 클릭 | M-07 Lock 해제 시 |
+| Sources~System 탭 | Ctrl+1~5 또는 탭 클릭 | 항상 |
 | Skin Editor | GFX 탭 > 스킨 선택 영역 | 별도 창 |
 | ActionTracker | F8 또는 M-14 | 별도 앱 실행 |
 | Preview 전체 화면 | F11 또는 M-20 | ESC로 복귀 |
