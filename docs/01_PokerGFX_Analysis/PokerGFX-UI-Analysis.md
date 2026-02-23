@@ -66,6 +66,33 @@ Preview 하단에 7개 탭이 배치되어 있습니다.
 | Commentary | 6 | [7장](#7-commentary-탭) |
 | System | 20+ | [8장](#8-system-탭) |
 
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/01-main-window-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 1 | #1 |
+| MEDIUM | max_delta ≤ 8px | 6 | #2, #4, #5, #6, #8, #9 |
+| LOW | max_delta ≤ 15px | 2 | #7, #10 |
+| CRITICAL | max_delta > 15px | 1 | #3 |
+| N/A (delta 없음) | - | 0 | — |
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #4 | `acura \| Dl \| Pravie` | Secure Delay / Preview 체크박스 레이블 | MEDIUM |
+
+#### Empty Warning 처리
+
+| 박스 # | 분산값 | 평균 색상 | 처리 방침 |
+|:------:|:------:|:--------:|----------|
+| #1 | 10.4 | rgb(241,241,241) | Title Bar 균일 배경 — OCR 기대 불가, 박스 경계로만 판단 |
+
+
 > **EBS 설계 시사점**
 > - Preview + 우측 컨트롤 패널 2-column 레이아웃은 운영 효율이 검증된 구조
 > - Register Deck, Launch Action Tracker, Reset Hand는 P0 필수 기능
@@ -99,6 +126,36 @@ Preview 하단에 7개 탭이 배치되어 있습니다.
 | 10 | External Switcher / ATEM | External Switcher Source 드롭다운 + ATEM Control 체크박스 + IP 입력란. Blackmagic ATEM 스위처 직접 통신 | P1 |
 | 11 | Board Sync / Crossfade | Board Sync (보드 카드 싱크 보정, mS) + Crossfade (전환 크로스페이드 시간, mS). 기본값 각각 0mS / 300mS | P1 |
 | 12 | Player View | 우측 하단 Player / View 버튼. 플레이어별 카메라 뷰 전환 | P1 |
+
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/02-sources-tab-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 2 | #2, #8 |
+| MEDIUM | max_delta ≤ 8px | 0 | — |
+| LOW | max_delta ≤ 15px | 3 | #9, #11, #12 |
+| CRITICAL | max_delta > 15px | 0 | — |
+| N/A (delta 없음) | - | 7 | #1, #3, #4, #5, #6, #7, #10 |
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #1 | `ur \| X1 \| = \| = \| menta` | Tab Bar 레이블 (partial) | N/A |
+| #2 | `Davica \| URL \| L \| R \| cycle` | Device Table — URL, L/R, Cycle 컬럼 포함 | HIGH |
+| #7 | `ackground \| ur \| ¥ \| Chroma` | Chroma Key Background URL 입력란 | N/A |
+| #8 | `dd \| rk \| Cam` | Add Network Camera / Dark Cam 버튼 영역 | HIGH |
+| #9 | `Lovel \| —` | Level (Audio 입력 레벨 표시) | LOW |
+| #10 | `External \| Switcher` | External Switcher Source 드롭다운 | N/A |
+| #11 | `Board \| Sync: \| s00` | Board Sync 보정값 입력 | LOW |
+| #12 | `Player \| View \| I` | Player/View 버튼 영역 ⚠ Guard 위반 | LOW |
+
+> ⚠ **Guard 위반**: #12 dy=-15 (dy_max=12 초과) — Player View 박스 하단 경계 행 겹침 주의
+
 
 > **EBS 설계 시사점**
 > - ATEM 연동: Blackmagic ATEM 스위처 IP 기반 직접 통신 지원 필요
@@ -134,6 +191,40 @@ Preview 하단에 7개 탭이 배치되어 있습니다.
 | 11 | Show Countdown | 카운트다운 표시 체크박스. Delay 출력에 남은 시간 표시 | P1 |
 | 12 | Countdown Video | Countdown Lead-Out Video 드롭다운. 카운트다운 종료 시 재생할 영상 선택 + Countdown Background 버튼 | P2 |
 | 13 | Twitch / ChatBot | Twitch Account 연결 버튼 + ChatBot 체크박스 + Channel Title 체크박스. Twitch 직접 연동 | P2 |
+
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/03-outputs-tab-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 0 | — |
+| MEDIUM | max_delta ≤ 8px | 1 | #7 |
+| LOW | max_delta ≤ 15px | 2 | #10, #13 |
+| CRITICAL | max_delta > 15px | 8 | #1, #2, #3, #4, #5, #6, #8, #12 |
+| N/A (delta 없음) | - | 2 | #9, #11 |
+
+> ⚠ **주의**: CRITICAL 8개 (61%) — 이 화면의 오버레이 정확도가 낮음. 요소 경계 재검토 권장.
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #1 | `Video \| Siza` | Video Size 출력 해상도 드롭다운 | CRITICAL |
+| #2 | `B \| 9x16 \| Vertical` | 9x16 Vertical 체크박스 | CRITICAL |
+| #4 | `Live \| Praview \| Praview \| w \| No` | Live / Preview column 헤더 | CRITICAL |
+| #5 | `Dalay` | Delay column (Secure Delay 파이프라인) | CRITICAL |
+| #6 | `Virtual \| Camera` | Virtual Camera 드롭다운 | CRITICAL |
+| #7 | `Rocording \| Mode.` | Recording Mode 드롭다운 | MEDIUM |
+| #8 | `Secura \| Delay \| [30 \| Min` | Secure Delay 30분 설정 ⚠ Guard 위반 | CRITICAL |
+| #10 | `Autostream \| [0 \| Min` | Auto Stream 딜레이 설정 | LOW |
+| #12 | `Countdown \| Lead-Out \| Video \| ...` | Countdown Video 드롭다운 ⚠ Guard 위반 | CRITICAL |
+| #13 | `ite \| unt \| L]` | Twitch/ChatBot 영역 (partial) | LOW |
+
+> ⚠ **Guard 위반**: #1 dy=-18, #2 dy=-18, #4 dy=16, #5 dy=16, #12 dy=19 (모두 dy_max=12 초과)
+
 
 > **EBS 설계 시사점**
 > - Secure Delay 30분: 체크리스트에서 10~120초로 기술했으나, 실제 앱은 **분 단위** (최대 30분)
@@ -186,6 +277,42 @@ Preview 하단에 7개 탭이 배치되어 있습니다.
 | 28 | Show player stats | Show player stats in the ticker after each hand 체크박스 + ⚙ 설정 | P1 |
 | 29 | Action Clock | Show Action Clock at `[10] S`. 지정 시간부터 원형 타이머 표시 | P0 |
 
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/04-gfx1-tab-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 1 | #1 |
+| MEDIUM | max_delta ≤ 8px | 5 | #3, #4, #7, #8, #11 |
+| LOW | max_delta ≤ 15px | 6 | #2, #9, #13, #14, #21, #26 |
+| CRITICAL | max_delta > 15px | 2 | #10, #15 |
+| N/A (delta 없음) | - | 15 | #5, #6, #12, #16–#20, #22–#25, #27–#29 |
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #1 | `ur \| X1 \| = \| = \| menta` | Tab Bar (partial) | HIGH |
+| #2 | `Board \| Position` | Board Position 드롭다운 | LOW |
+| #3 | `il \| Player \| Layout` | Player Layout 드롭다운 | MEDIUM |
+| #4 | `Revaal \| Playars.` | Reveal Players 드롭다운 | MEDIUM |
+| #5 | `How \| to \| show \| a \| Fold` | Fold 표시 방식 | N/A |
+| #6 | `Revaal \| Cards \| diats` | Reveal Cards 드롭다운 | N/A |
+| #7 | `Leaderboard \| Position \| ntre` | Leaderboard Position | MEDIUM |
+| #8 | `Transition \| In \| Animation \| B` | Transition In 설정 | MEDIUM |
+| #9 | `Transition \| Out \| Animation \| B` | Transition Out 설정 | LOW |
+| #10 | `Heads \| Up \| Layout \| Left/ \| Right` | Heads Up Layout L/R ⚠ Guard 위반 | CRITICAL |
+| #11 | `Heads \| Up` | Heads Up Camera 설정 | MEDIUM |
+| #13 | `Titanium, \| 1.41 \| GB` | Skin Info 레이블 (스킨명+용량) | LOW |
+| #21 | `Top \| Margin \| [0.05` | Top Margin 스피너 | LOW |
+| #26 | `Show \| leaderboard \| after \| each \| hand` | Show leaderboard 체크박스 | LOW |
+
+> ⚠ **Guard 위반**: #10 dy=20 (dy_max=12 초과) — Heads Up Layout 박스 행 겹침
+
+
 > **EBS 설계 시사점**
 > - 스킨 시스템: 1.41GB "Titanium" 스킨 - 모든 그래픽 에셋이 단일 스킨으로 패키징
 > - 3개 스폰서 슬롯: Leaderboard / Board / Strip 위치별 로고 배치
@@ -229,6 +356,36 @@ Preview 하단에 7개 탭이 배치되어 있습니다.
 | 19 | Show hand equities | Show hand equities `[After 1st betting round]` 드롭다운. Equity 표시 시점 | P0 |
 | 20 | Hilite winning hand | Hilite winning hand `[Immediately]` 드롭다운. 위닝 핸드 강조 시점 | P0 |
 | 21 | Ignore split pots | When showing equity and outs, ignore split pots 체크박스 ☐. Split pot Equity 계산 규칙 | P1 |
+
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/05-gfx2-tab-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 1 | #1 |
+| MEDIUM | max_delta ≤ 8px | 1 | #7 |
+| LOW | max_delta ≤ 15px | 0 | — |
+| CRITICAL | max_delta > 15px | 2 | #13, #15 |
+| N/A (delta 없음) | - | 17 | #2–#6, #8–#12, #14, #16–#21 |
+
+> ⚠ **주의**: delta 미적용 박스 17개 (81%) — 대다수 박스가 원본 좌표 사용.
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #1 | `Output \| X1 \| FX \| FX \| menta` | Tab Bar (partial) | HIGH |
+| #4 | `Show \| eliminated \| players \| in \| Leaderboard` | Show eliminated Leaderboard 체크박스 | N/A |
+| #7 | `Max \| BB \| multipl \| to \| show` | Max BB multiple 드롭다운 | MEDIUM |
+| #13 | `Show \| as \| eliminated \| when \| player` | Show as eliminated 체크박스 ⚠ Guard 위반 | CRITICAL |
+| #15 | `Unknown \| cards \| blink \| in \| Secura` | Unknown cards blink 체크박스 ⚠ Guard 위반 | CRITICAL |
+| #18 | `Ordar \| layors \| fromthe \| irst` | Order players from first 드롭다운 | N/A |
+
+> ⚠ **Guard 위반**: #13 dw=26, #15 dw=26 (dw_max=25 초과) — 너비 오버 확장
+
 
 > **EBS 설계 시사점**
 > - Bomb Pot / Rabbit Hunting / Sleeper Straddle: 방송에서 사용되는 다양한 특수 규칙 지원 필요
@@ -275,6 +432,37 @@ Outs 표시, Score Strip, Blinds, 통화 기호, Chipcount 정밀도, 금액 표
 | 22 | Pot mode | Pot `[Amount]` 드롭다운. Amount 또는 BB 표시 모드 | P1 |
 | 23 | Bets mode | Bets `[Amount]` 드롭다운. Amount 또는 BB 표시 모드 | P1 |
 
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/06-gfx3-tab-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 1 | #1 |
+| MEDIUM | max_delta ≤ 8px | 7 | #2, #3, #5, #7, #11, #15, #20 |
+| LOW | max_delta ≤ 15px | 0 | — |
+| CRITICAL | max_delta > 15px | 3 | #13, #14, #21 |
+| N/A (delta 없음) | - | 12 | #4, #6, #8–#10, #12, #16–#19, #22, #23 |
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #1 | `ur \| X1 \| = \| FX \| menta` | Tab Bar (partial) | HIGH |
+| #2 | `show \| Outs \| w` | Show Outs 드롭다운 | MEDIUM |
+| #6 | `Ordar \| Strip \| by \| Count` | Order Strip by Count 드롭다운 | N/A |
+| #7 | `Show \| eliminated \| players \| in \| Strip` | Strip 탈락 선수 표시 체크박스 | MEDIUM |
+| #13 | `Leaderboard \| Pracision \| Chipcount` | Leaderboard Precision 드롭다운 ⚠ Guard 위반 | CRITICAL |
+| #14 | `Playor \| Stack` | Player Stack precision 드롭다운 | CRITICAL |
+| #15 | `Player \| Action` | Player Action precision 드롭다운 | MEDIUM |
+| #20 | `strip` | Strip precision 드롭다운 | MEDIUM |
+| #21 | `How \| to \| Chipcounts \| display` | Chipcounts 표시 모드 ⚠ Guard 위반 | CRITICAL |
+
+> ⚠ **Guard 위반**: #13 dy=-13, #21 dy=-20 (dy_max=12 초과)
+
+
 > **EBS 설계 시사점**
 > - 영역별 독립 수치 형식: 리더보드 = 정확 금액, 방송 화면 = k/M 축약
 > - 통화 기호 ₩: 한국 방송 지원 확인
@@ -305,6 +493,31 @@ Outs 표시, Score Strip, Blinds, 통화 기호, Chipcount 정밀도, 금액 표
 | 6 | Commentator camera | Commentator camera as well as audio 체크박스 ☑. 해설자 카메라 활성화 | P1 |
 | 7 | Configure PIP | `[Configure Picture In Picture]` 버튼. PIP 설정 창 열기 | P1 |
 | 8 | Full screen | Allow commentator camera to go full screen 체크박스 ☑. 해설자 카메라 전체화면 | P2 |
+
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/07-commentary-tab-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 2 | #1, #7 |
+| MEDIUM | max_delta ≤ 8px | 0 | — |
+| LOW | max_delta ≤ 15px | 5 | #2, #3, #4, #5, #8 |
+| CRITICAL | max_delta > 15px | 0 | — |
+| N/A (delta 없음) | - | 1 | #6 |
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #1 | `ur \| X1 \| = \| = \| menta` | Tab Bar (partial) | HIGH |
+| #3 | `Password \| (Min. \| 10 \| characters \| to` | Password 입력란 (최소 10자 조건 확인) | LOW |
+| #7 | `ura \| Pi \| ura \| In \| Pi` | Configure PIP 버튼 (In/Out 설정) | HIGH |
+
+> ⚠ **Guard 위반**: #2 dy=-15 (dy_max=12 초과) — Commentary Mode 드롭다운 행 겹침
+
 
 > **EBS 설계 시사점**
 > - 해설자 원격 접속: 비밀번호 인증으로 외부 해설자가 통계 열람
@@ -355,6 +568,41 @@ Outs 표시, Score Strip, Blinds, 통화 기호, Chipcount 정밀도, 금액 표
 | 26 | Allow AT access | Allow Action Tracker access 체크박스 ☑. Action Tracker 접근 허용 | P0 |
 | 27 | AT Predictive Bet | Action Tracker Predictive Bet Input 체크박스 ☐. 베팅 금액 예측 입력 | P0 |
 | 28 | AT Kiosk | Action Tracker Kiosk 체크박스 ☐. AT 전용 키오스크 모드 | P0 |
+
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/08-system-tab-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 5 | #1, #5, #7, #13, #14 |
+| MEDIUM | max_delta ≤ 8px | 4 | #12, #19, #20, #22 |
+| LOW | max_delta ≤ 15px | 3 | #9, #17, #27 |
+| CRITICAL | max_delta > 15px | 9 | #3, #4, #6, #8, #10, #11, #15, #16, #28 |
+| N/A (delta 없음) | - | 7 | #2, #18, #21, #23–#26 |
+
+> ⚠ **주의**: CRITICAL 9개 (32%) — 시스템 탭 오버레이 복잡도 높음.
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #2 | `Name \| GGP` | Table Name 입력란 | N/A |
+| #3 | `Pwd \| (cCC` | Table Password 입력란 | CRITICAL |
+| #6 | `Serial` | Serial # 라이선스 번호 | CRITICAL |
+| #8 | `Updatas \| & \| support \| Evaluation \| moda` | Updates & support 라이선스 상태 ⚠ Guard 위반 | CRITICAL |
+| #9 | `Evaluation \| moda` | PRO license 상태 표시 | LOW |
+| #11 | `Intel(R) \| Cora(TM) \| i9-14900HX \| GaForce \| RTX` | System Info (CPU/GPU) | CRITICAL |
+| #12 | `Log` | View System Log 버튼 | MEDIUM |
+| #19 | `NoCards \| @` | No Cards 체크박스 | MEDIUM |
+| #20 | `Disable \| GPU \| Encode \| B` | Disable GPU Encode 체크박스 | MEDIUM |
+| #22 | `UPCARD \| antannas \| raad \| hole \| cards` | UPCARD antennas 체크박스 | MEDIUM |
+| #27 | `Action \| Tracker \| Pradictiva \| Bat \| Input` | AT Predictive Bet Input 체크박스 | LOW |
+
+> ⚠ **Guard 위반**: #4 dw=28, #8 dw=31 (dw_max=25 초과), #6 dy=-14, #16 dy=-17 (dy_max=12 초과), #28 dh=22 (dh_max=20 초과)
+
 
 > **EBS 설계 시사점**
 > - RFID 안테나 3종 독립 제어: UPCARD / Muck / Community Card 안테나 각각 On/Off
@@ -417,6 +665,39 @@ Outs 표시, Score Strip, Blinds, 통화 기호, Chipcount 정밀도, 금액 표
 | 36 | DISCARD | `[DISCARD]` 버튼. 변경사항 취소 | P1 |
 | 37 | USE | `[USE]` 버튼. 현재 스킨 적용 | P1 |
 
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/09-skin-editor-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 8 | #6, #7, #10, #13, #25, #27, #30, #32 |
+| MEDIUM | max_delta ≤ 8px | 7 | #2, #22, #33, #34, #35, #36, #37 |
+| LOW | max_delta ≤ 15px | 6 | #8, #11, #12, #14, #15, #21 |
+| CRITICAL | max_delta > 15px | 7 | #5, #17, #18, #19, #20, #24, #31 |
+| N/A (delta 없음) | - | 9 | #1, #3, #4, #9, #16, #23, #26, #28, #29 |
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #1 | `Name \| Titanium` | 스킨 이름 입력란 | N/A |
+| #2 | `layered \| skin \| with \| neutral \| colours.` | 스킨 설명 텍스트 | MEDIUM |
+| #4 | `Designed \| for \| 4K \| (3840 \| x` | 4K 전용 스킨 체크박스 레이블 | N/A |
+| #5 | `Adjustments \| Adjust \| Sizo` | Adjust Size 슬라이더 영역 ⚠ Guard 위반 | CRITICAL |
+| #17 | `Text \| Ravaal \| Spaad` | Text Reveal Speed 슬라이더 레이블 | CRITICAL |
+| #18 | `Font \| 1 \| Gotham \| =` | Font 1 선택 (Gotham) | CRITICAL |
+| #19 | `Font2 \| Gotham \| -` | Font 2 선택 (Gotham) | CRITICAL |
+| #24 | `'Country \| flag \| does \| not \| force` | Country flag 옵션 체크박스 ⚠ Guard 위반 | CRITICAL |
+| #31 | `Crop \| player \| photo \| to \| circle` | Crop to circle 체크박스 ⚠ Guard 위반 | CRITICAL |
+| #34 | `SKIN \| DOWNLOAD.` | SKIN DOWNLOAD CENTRE 버튼 | MEDIUM |
+| #35 | `RESET \| TO \| DEFAULT` | RESET TO DEFAULT 버튼 | MEDIUM |
+
+> ⚠ **Guard 위반**: #5 dy=-19 (dy_max=12 초과), #31 dh=24 (dh_max=20 초과)
+
+
 > **EBS 설계 시사점**
 > - 스킨 패키징: 모든 그래픽 에셋을 하나의 스킨으로 관리 (Import/Export 가능)
 > - 4K 지원 체크박스: 3840x2160 전용 스킨
@@ -478,6 +759,33 @@ Outs 표시, Score Strip, Blinds, 통화 기호, Chipcount 정밀도, 금액 표
 | 37 | OK | `[OK]` 버튼. 변경사항 저장 | P1 |
 | 38 | Cancel | `[Cancel]` 버튼. 변경사항 취소 | P1 |
 | 39 | Live Preview | 하단 실시간 프리뷰. 보드 카드 + POT + 블라인드 + Vanity 렌더링 | P0 |
+
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/10-graphic-editor-board-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 7 | #3, #13, #17, #22, #28, #33, #38 |
+| MEDIUM | max_delta ≤ 8px | 6 | #2, #16, #19, #27, #32, #37 |
+| LOW | max_delta ≤ 15px | 7 | #14, #15, #20, #30, #34, #35, #39 |
+| CRITICAL | max_delta > 15px | 3 | #1, #6, #31 |
+| N/A (delta 없음) | - | 16 | #4, #5, #7–#12, #18, #21, #23–#26, #29, #36 |
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #1 | `206X` | Layout Size 배율 표시 (296X 오인식) | CRITICAL |
+| #3 | `AT \| ne)` | AT Mode 드롭다운 (Flop Game 등) | HIGH |
+| #6 | `Anchor` | Anchor (H) 수평 기준점 드롭다운 | CRITICAL |
+| #34 | `Click \| to \| add \| Background \| image` | Import Image 플레이스홀더 ⚠ Guard 위반 | LOW |
+| #39 | `POT \| 100,000 \| 50,000 \| / \| 100,0!` | 프리뷰 패널 POT/블라인드 표시 | LOW |
+
+> ⚠ **Guard 위반**: #31 dw=-40 (dw_max=25 초과) — Margins X 박스 너비 과다 축소, #34 dy=14 (dy_max=12 초과)
+
 
 > **EBS 설계 시사점**
 > - 픽셀 단위 정밀 배치: 모든 요소가 Left/Top/Width/Height로 정확한 위치 지정
@@ -544,6 +852,35 @@ Outs 표시, Score Strip, Blinds, 통화 기호, Chipcount 정밀도, 금액 표
 | 38 | OK | `[OK]` 버튼. 변경사항 저장 | P1 |
 | 39 | Cancel | `[Cancel]` 버튼. 변경사항 취소 | P1 |
 | 40 | Live Preview | 하단 실시간 프리뷰. 플레이어 오버레이 전체 구성 렌더링 | P0 |
+
+### 요소 분석
+
+> OCR JSON 기반 자동 분석 (source: `02_Annotated_ngd/11-graphic-editor-player-ocr.json`)
+
+#### 신뢰도 분포
+
+| 신뢰도 | 기준 | 박스 수 | 해당 박스 |
+|:------:|------|:-------:|----------|
+| HIGH | max_delta ≤ 3px | 8 | #7, #14, #18, #23, #29, #34, #39, #A |
+| MEDIUM | max_delta ≤ 8px | 6 | #1, #17, #20, #28, #33, #38 |
+| LOW | max_delta ≤ 15px | 5 | #15, #16, #31, #35, #36 |
+| CRITICAL | max_delta > 15px | 3 | #2, #21, #32 |
+| N/A (delta 없음) | - | 26 | #3–#6, #8–#13, #19, #22, #24–#27, #30, #37, #40, #B–#H |
+
+> ⚠ **주의**: N/A 박스 26개 (54%) — 다수 요소가 원본 좌표 그대로 사용.
+
+#### OCR 텍스트 → 요소 용도 추론
+
+| 박스 # | OCR 추출 텍스트 | 추론 용도 | 신뢰도 |
+|:------:|----------------|----------|:------:|
+| #4 | `with \| photo` | 플레이어 사진 표시 모드 레이블 | N/A |
+| #7 | `Anchor \| ht` | Anchor (V) 수직 기준점 (Height 기준) | HIGH |
+| #21 | `out \| Default` | Transition Out Default 설정 | CRITICAL |
+| #35 | `Click \| to \| add \| Background \| image` | Import Image 플레이스홀더 ⚠ Guard 위반 | LOW |
+| #40 | `ACTION` | 프리뷰 패널 ACTION 표시 텍스트 | N/A |
+
+> ⚠ **Guard 위반**: #32 dw=-40 (dw_max=25 초과), #35 dy=14 (dy_max=12 초과)
+
 
 ### 오버레이 요소 (녹색 박스 A-H)
 
@@ -680,7 +1017,8 @@ Outs 표시, Score Strip, Blinds, 통화 기호, Chipcount 정밀도, 금액 표
 | v2.0.0 | 2026-02-06 | 전체 구조 재편. 10개 섹션 + 갭 분석 30개 항목 추가 |
 | v3.0.0 | 2026-02-06 | 매뉴얼 형식 재작성. annotated 이미지 11장 삽입, 번호별 기능 테이블 + EBS 복제 우선순위 |
 | v4.0.0 | 2026-02-10 | PIL 기반 annotated 이미지 전면 재생성 (정확한 좌표). 원본→오버레이→설명 3단계 구조 |
+| v5.0.0 | 2026-02-23 | **요소 분석 섹션 추가**: 11개 화면 섹션 각각에 OCR JSON 기반 신뢰도 분포 + OCR 텍스트 추론 + Empty Warning 처리 테이블 삽입 (analyze_overlay_errors.py 기반) |
 
 ---
 
-**Version**: 4.0.0 | **Updated**: 2026-02-10
+**Version**: 5.0.0 | **Updated**: 2026-02-23

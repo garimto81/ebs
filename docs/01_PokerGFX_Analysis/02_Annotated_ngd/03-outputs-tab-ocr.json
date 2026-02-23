@@ -1,0 +1,298 @@
+{
+  "name": "03-outputs-tab",
+  "src": "스크린샷 2026-02-05 180645.png",
+  "size": [
+    765,
+    730
+  ],
+  "mode": "ocr",
+  "boxes": [
+    {
+      "rect": [
+        10,
+        379,
+        255,
+        18
+      ],
+      "label": "1",
+      "original": [
+        30,
+        397,
+        235,
+        20
+      ],
+      "delta": [
+        -20,
+        -18,
+        20,
+        -2
+      ],
+      "ocr_text": "Video | Siza",
+      "ocr_word_count": 2
+    },
+    {
+      "rect": [
+        265,
+        379,
+        153,
+        25
+      ],
+      "label": "2",
+      "original": [
+        270,
+        397,
+        148,
+        20
+      ],
+      "delta": [
+        -5,
+        -18,
+        5,
+        5
+      ],
+      "ocr_text": "B | 9x16 | Vertical",
+      "ocr_word_count": 3
+    },
+    {
+      "rect": [
+        10,
+        417,
+        230,
+        18
+      ],
+      "label": "3",
+      "original": [
+        30,
+        423,
+        210,
+        21
+      ],
+      "delta": [
+        -20,
+        -6,
+        20,
+        -3
+      ],
+      "ocr_text": "Frame | Rate | g | =",
+      "ocr_word_count": 4,
+      "auto_protected": true
+    },
+    {
+      "rect": [
+        56,
+        481,
+        215,
+        94
+      ],
+      "label": "4",
+      "original": [
+        56,
+        465,
+        209,
+        110
+      ],
+      "delta": [
+        0,
+        16,
+        6,
+        -16
+      ],
+      "ocr_text": "Live | Praview | Praview | w | No",
+      "ocr_word_count": 8
+    },
+    {
+      "rect": [
+        271,
+        481,
+        142,
+        94
+      ],
+      "label": "5",
+      "original": [
+        270,
+        465,
+        143,
+        110
+      ],
+      "delta": [
+        1,
+        16,
+        -1,
+        -16
+      ],
+      "ocr_text": "Dalay",
+      "ocr_word_count": 1
+    },
+    {
+      "rect": [
+        9,
+        601,
+        256,
+        20
+      ],
+      "label": "6",
+      "original": [
+        28,
+        601,
+        237,
+        20
+      ],
+      "delta": [
+        -19,
+        0,
+        19,
+        0
+      ],
+      "ocr_text": "Virtual | Camera",
+      "ocr_word_count": 2
+    },
+    {
+      "rect": [
+        9,
+        683,
+        468,
+        35
+      ],
+      "label": "7",
+      "original": [
+        17,
+        677,
+        460,
+        32
+      ],
+      "delta": [
+        -8,
+        6,
+        8,
+        3
+      ],
+      "ocr_text": "Rocording | Mode.",
+      "ocr_word_count": 2
+    },
+    {
+      "rect": [
+        554,
+        385,
+        198,
+        24
+      ],
+      "label": "8",
+      "original": [
+        537,
+        397,
+        203,
+        20
+      ],
+      "delta": [
+        17,
+        -12,
+        -5,
+        4
+      ],
+      "ocr_text": "Secura | Delay | [30 | Min",
+      "ocr_word_count": 4
+    },
+    {
+      "rect": [
+        488,
+        423,
+        222,
+        21
+      ],
+      "label": "9",
+      "original": [
+        488,
+        423,
+        222,
+        21
+      ]
+    },
+    {
+      "rect": [
+        552,
+        443,
+        200,
+        32
+      ],
+      "label": "10",
+      "original": [
+        540,
+        443,
+        200,
+        32
+      ],
+      "delta": [
+        12,
+        0,
+        0,
+        0
+      ],
+      "ocr_text": "Autostream | [0 | Min",
+      "ocr_word_count": 3
+    },
+    {
+      "rect": [
+        540,
+        476,
+        200,
+        15
+      ],
+      "label": "11",
+      "original": [
+        540,
+        476,
+        200,
+        15
+      ],
+      "ocr_text": "Show | Countdown",
+      "ocr_word_count": 2
+    },
+    {
+      "rect": [
+        481,
+        519,
+        271,
+        127
+      ],
+      "label": "12",
+      "original": [
+        488,
+        500,
+        252,
+        131
+      ],
+      "delta": [
+        -7,
+        19,
+        19,
+        -4
+      ],
+      "ocr_text": "Countdown | Lead-Out | Video | Countdown | Background",
+      "ocr_word_count": 5
+    },
+    {
+      "rect": [
+        487,
+        646,
+        265,
+        72
+      ],
+      "label": "13",
+      "original": [
+        488,
+        635,
+        252,
+        74
+      ],
+      "delta": [
+        -1,
+        11,
+        13,
+        -2
+      ],
+      "ocr_text": "ite | unt | L]",
+      "ocr_word_count": 3
+    }
+  ],
+  "empty_warnings": []
+}

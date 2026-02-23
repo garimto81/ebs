@@ -1,0 +1,463 @@
+{
+  "name": "06-gfx3-tab",
+  "src": "스크린샷 2026-02-05 180655.png",
+  "size": [
+    765,
+    730
+  ],
+  "mode": "ocr",
+  "boxes": [
+    {
+      "rect": [
+        11,
+        363,
+        379,
+        16
+      ],
+      "label": "1",
+      "original": [
+        9,
+        363,
+        381,
+        16
+      ],
+      "delta": [
+        2,
+        0,
+        -2,
+        0
+      ],
+      "ocr_text": "ur | X1 | = | FX | menta",
+      "ocr_word_count": 5
+    },
+    {
+      "rect": [
+        9,
+        379,
+        262,
+        35
+      ],
+      "label": "2",
+      "original": [
+        16,
+        387,
+        265,
+        32
+      ],
+      "delta": [
+        -7,
+        -8,
+        -3,
+        3
+      ],
+      "ocr_text": "show | Outs | w",
+      "ocr_word_count": 3
+    },
+    {
+      "rect": [
+        9,
+        414,
+        262,
+        26
+      ],
+      "label": "3",
+      "original": [
+        16,
+        418,
+        265,
+        26
+      ],
+      "delta": [
+        -7,
+        -4,
+        -3,
+        0
+      ],
+      "ocr_text": "ous",
+      "ocr_word_count": 1
+    },
+    {
+      "rect": [
+        16,
+        444,
+        265,
+        22
+      ],
+      "label": "4",
+      "original": [
+        16,
+        444,
+        265,
+        22
+      ]
+    },
+    {
+      "rect": [
+        9,
+        475,
+        262,
+        26
+      ],
+      "label": "5",
+      "original": [
+        16,
+        473,
+        265,
+        26
+      ],
+      "delta": [
+        -7,
+        2,
+        -3,
+        0
+      ]
+    },
+    {
+      "rect": [
+        16,
+        499,
+        265,
+        26
+      ],
+      "label": "6",
+      "original": [
+        16,
+        499,
+        265,
+        26
+      ],
+      "ocr_text": "Ordar | Strip | by | Count",
+      "ocr_word_count": 4
+    },
+    {
+      "rect": [
+        9,
+        525,
+        260,
+        20
+      ],
+      "label": "7",
+      "original": [
+        16,
+        525,
+        265,
+        20
+      ],
+      "delta": [
+        -7,
+        0,
+        -5,
+        0
+      ],
+      "ocr_text": "Show | eliminated | players | in | Strip",
+      "ocr_word_count": 5
+    },
+    {
+      "rect": [
+        16,
+        556,
+        265,
+        26
+      ],
+      "label": "8",
+      "original": [
+        16,
+        556,
+        265,
+        26
+      ]
+    },
+    {
+      "rect": [
+        16,
+        574,
+        265,
+        32
+      ],
+      "label": "9",
+      "original": [
+        16,
+        574,
+        265,
+        32
+      ],
+      "ocr_text": "Show | hand | # | with",
+      "ocr_word_count": 4
+    },
+    {
+      "rect": [
+        16,
+        632,
+        265,
+        32
+      ],
+      "label": "10",
+      "original": [
+        16,
+        632,
+        265,
+        32
+      ],
+      "ocr_text": "Currency | Symbol | | | @",
+      "ocr_word_count": 4
+    },
+    {
+      "rect": [
+        9,
+        660,
+        273,
+        22
+      ],
+      "label": "11",
+      "original": [
+        16,
+        660,
+        265,
+        22
+      ],
+      "delta": [
+        -7,
+        0,
+        8,
+        0
+      ],
+      "ocr_text": "Trailing | Currancy | Symbol | B",
+      "ocr_word_count": 4
+    },
+    {
+      "rect": [
+        16,
+        682,
+        265,
+        20
+      ],
+      "label": "12",
+      "original": [
+        16,
+        682,
+        265,
+        20
+      ],
+      "ocr_text": "Divida | all | amounts | by | 100",
+      "ocr_word_count": 5
+    },
+    {
+      "rect": [
+        271,
+        379,
+        398,
+        41
+      ],
+      "label": "13",
+      "original": [
+        288,
+        392,
+        389,
+        29
+      ],
+      "delta": [
+        -17,
+        -13,
+        9,
+        12
+      ],
+      "ocr_text": "Leaderboard | Pracision | Chipcount",
+      "ocr_word_count": 3
+    },
+    {
+      "rect": [
+        271,
+        420,
+        398,
+        26
+      ],
+      "label": "14",
+      "original": [
+        288,
+        418,
+        389,
+        26
+      ],
+      "delta": [
+        -17,
+        2,
+        9,
+        0
+      ],
+      "ocr_text": "Playor | Stack",
+      "ocr_word_count": 2
+    },
+    {
+      "rect": [
+        282,
+        446,
+        387,
+        26
+      ],
+      "label": "15",
+      "original": [
+        288,
+        444,
+        389,
+        26
+      ],
+      "delta": [
+        -6,
+        2,
+        -2,
+        0
+      ],
+      "ocr_text": "Player | Action",
+      "ocr_word_count": 2
+    },
+    {
+      "rect": [
+        288,
+        470,
+        389,
+        26
+      ],
+      "label": "16",
+      "original": [
+        288,
+        470,
+        389,
+        26
+      ],
+      "ocr_text": "Blinds",
+      "ocr_word_count": 1
+    },
+    {
+      "rect": [
+        288,
+        496,
+        389,
+        26
+      ],
+      "label": "17",
+      "original": [
+        288,
+        496,
+        389,
+        26
+      ],
+      "ocr_text": "Pot",
+      "ocr_word_count": 1
+    },
+    {
+      "rect": [
+        288,
+        522,
+        389,
+        26
+      ],
+      "label": "18",
+      "original": [
+        288,
+        522,
+        389,
+        26
+      ],
+      "ocr_text": "Twitch | Bot",
+      "ocr_word_count": 2
+    },
+    {
+      "rect": [
+        288,
+        548,
+        389,
+        26
+      ],
+      "label": "19",
+      "original": [
+        288,
+        548,
+        389,
+        26
+      ],
+      "ocr_text": "Ticker",
+      "ocr_word_count": 1
+    },
+    {
+      "rect": [
+        282,
+        576,
+        387,
+        20
+      ],
+      "label": "20",
+      "original": [
+        288,
+        574,
+        389,
+        26
+      ],
+      "delta": [
+        -6,
+        2,
+        -2,
+        -6
+      ],
+      "ocr_text": "strip",
+      "ocr_word_count": 1
+    },
+    {
+      "rect": [
+        282,
+        596,
+        396,
+        41
+      ],
+      "label": "21",
+      "original": [
+        288,
+        616,
+        389,
+        37
+      ],
+      "delta": [
+        -6,
+        -20,
+        7,
+        4
+      ],
+      "ocr_text": "How | to | Chipcounts | display",
+      "ocr_word_count": 4
+    },
+    {
+      "rect": [
+        288,
+        648,
+        389,
+        26
+      ],
+      "label": "22",
+      "original": [
+        288,
+        648,
+        389,
+        26
+      ],
+      "ocr_text": "Pot",
+      "ocr_word_count": 1
+    },
+    {
+      "rect": [
+        288,
+        674,
+        389,
+        26
+      ],
+      "label": "23",
+      "original": [
+        288,
+        674,
+        389,
+        26
+      ],
+      "ocr_text": "Bats",
+      "ocr_word_count": 1
+    }
+  ],
+  "empty_warnings": []
+}

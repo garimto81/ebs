@@ -1,0 +1,238 @@
+{
+  "name": "02-sources-tab",
+  "src": "스크린샷 2026-02-05 180637.png",
+  "size": [
+    765,
+    730
+  ],
+  "mode": "ocr",
+  "boxes": [
+    {
+      "rect": [
+        9,
+        363,
+        381,
+        16
+      ],
+      "label": "1",
+      "original": [
+        9,
+        363,
+        381,
+        16
+      ],
+      "ocr_text": "ur | X1 | = | = | menta",
+      "ocr_word_count": 5
+    },
+    {
+      "rect": [
+        9,
+        379,
+        556,
+        86
+      ],
+      "label": "2",
+      "original": [
+        9,
+        379,
+        558,
+        86
+      ],
+      "delta": [
+        0,
+        0,
+        -2,
+        0
+      ],
+      "ocr_text": "Davica | URL | L | R | cycle",
+      "ocr_word_count": 20
+    },
+    {
+      "rect": [
+        565,
+        385,
+        187,
+        53
+      ],
+      "label": "3",
+      "original": [
+        565,
+        385,
+        187,
+        53
+      ]
+    },
+    {
+      "rect": [
+        565,
+        438,
+        187,
+        20
+      ],
+      "label": "4",
+      "original": [
+        565,
+        438,
+        187,
+        20
+      ]
+    },
+    {
+      "rect": [
+        565,
+        458,
+        187,
+        63
+      ],
+      "label": "5",
+      "original": [
+        565,
+        458,
+        187,
+        63
+      ]
+    },
+    {
+      "rect": [
+        565,
+        521,
+        187,
+        63
+      ],
+      "label": "6",
+      "original": [
+        565,
+        521,
+        187,
+        63
+      ]
+    },
+    {
+      "rect": [
+        9,
+        584,
+        285,
+        44
+      ],
+      "label": "7",
+      "original": [
+        9,
+        584,
+        285,
+        44
+      ],
+      "ocr_text": "ackground | ur | ¥ | Chroma",
+      "ocr_word_count": 4
+    },
+    {
+      "rect": [
+        430,
+        592,
+        131,
+        21
+      ],
+      "label": "8",
+      "original": [
+        431,
+        592,
+        129,
+        21
+      ],
+      "delta": [
+        -1,
+        0,
+        2,
+        0
+      ],
+      "ocr_text": "dd | rk | Cam",
+      "ocr_word_count": 3
+    },
+    {
+      "rect": [
+        9,
+        628,
+        220,
+        90
+      ],
+      "label": "9",
+      "original": [
+        9,
+        619,
+        220,
+        100
+      ],
+      "delta": [
+        0,
+        9,
+        0,
+        -10
+      ],
+      "ocr_text": "Lovel | —",
+      "ocr_word_count": 2
+    },
+    {
+      "rect": [
+        235,
+        619,
+        235,
+        90
+      ],
+      "label": "10",
+      "original": [
+        235,
+        619,
+        235,
+        90
+      ],
+      "ocr_text": "External | Switcher",
+      "ocr_word_count": 2
+    },
+    {
+      "rect": [
+        483,
+        613,
+        96,
+        105
+      ],
+      "label": "11",
+      "original": [
+        477,
+        619,
+        88,
+        90
+      ],
+      "delta": [
+        6,
+        -6,
+        8,
+        15
+      ],
+      "ocr_text": "Board | Sync: | s00",
+      "ocr_word_count": 3
+    },
+    {
+      "rect": [
+        579,
+        604,
+        173,
+        97
+      ],
+      "label": "12",
+      "original": [
+        572,
+        619,
+        172,
+        90
+      ],
+      "delta": [
+        7,
+        -15,
+        1,
+        7
+      ],
+      "ocr_text": "Player | View | I",
+      "ocr_word_count": 3
+    }
+  ],
+  "empty_warnings": []
+}
