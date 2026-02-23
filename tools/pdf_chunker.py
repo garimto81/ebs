@@ -341,8 +341,38 @@ Examples:
                         help="처음 N개 청크 미리보기 (텍스트 일부 표시)")
     parser.add_argument("--quiet", action="store_true",
                         help="진행 메시지 숨기기")
+    parser.add_argument('--prd', action='store_true', help='PRD 전용 계층형 청킹 활성화')
+    parser.add_argument('--strategy', choices=['auto', 'fixed', 'hierarchical', 'semantic'], default='auto', help='청킹 전략 (--prd 활성화 시)')
+    parser.add_argument('--threshold', type=int, default=60000, help='청킹 임계 토큰 수 (기본: 60000)')
 
     args = parser.parse_args()
+
+    # MD 파일 처리 분기 (기존 PDF 경로 앞에 삽입)
+    if Path(args.input).suffix.lower() in ('.md', '.markdown'):
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'lib' / '..'))
+        from lib.pdf_utils.md_chunker import MDChunker
+        max_tok = 8000 if args.prd else args.tokens
+        overlap = 400 if args.prd else args.overlap
+        chunker_md = MDChunker(
+            strategy=args.strategy if args.prd else 'fixed',
+            max_tokens=max_tok,
+            overlap=overlap,
+            threshold=args.threshold,
+        )
+        result_md = chunker_md.process(args.input)
+        import json as _json
+        out = result_md.to_dict()
+        if args.output:
+            Path(args.output).write_text(_json.dumps(out, ensure_ascii=False, indent=2), encoding='utf-8')
+            print(f"청킹 완료: {args.input}")
+            print(f"- 청크 수: {result_md.chunk_count}개")
+            print(f"- 총 토큰: {result_md.total_tokens:,}")
+            print(f"- 전략: {result_md.strategy}")
+            print(f"- 출력 파일: {args.output}")
+        else:
+            print(_json.dumps(out, ensure_ascii=False, indent=2))
+        return  # PDF 처리 경로로 가지 않도록 조기 반환
 
     try:
         chunker = PDFChunker(

@@ -285,7 +285,7 @@ D4 도달 → 수정 진행
 
 ## 상태 관리 스크립트
 
-`D:\AI\claude01\.claude\skills\debugging-workflow\scripts\debug_state.py`
+`debug_state.py` (인라인 구현)
 
 ```python
 from debug_state import DebugState
@@ -319,4 +319,4 @@ state.abort()
 
 - `/issue failed` - 3회 가설 기각 시 에스컬레이션
 - `/auto` - E2E 실패 시 자동 트리거
-- `debugging-workflow` 스킬 - Phase D0-D4 상세
+- `/debug` 커맨드 - Phase D0-D4 상세

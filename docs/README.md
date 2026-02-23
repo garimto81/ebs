@@ -27,9 +27,8 @@ docs/
 │   ├── PokerGFX-Feature-Checklist.md  # 149개 기능 체크리스트
 │   ├── PokerGFX-UI-Analysis.md        # PokerGFX UI 스크린샷 분석
 │   ├── PokerGFX-Server-Binary-Analysis.md  # 바이너리 분석
-│   ├── PRD-0004-EBS-Server-UI-Design.md  # EBS Server UI 설계 (허브)
-│   ├── PRD-0004-screens/                 # 9개 화면별 Screen Spec
-│   ├── PRD-0004-feature-mapping.md       # 149개 기능 매핑
+│   ├── PRD-0004-EBS-Server-UI-Design.md  # EBS Server UI 통합 설계서 (v13.0)
+│   ├── PRD-0004-technical-specs.md       # 기술 명세서
 │   ├── 01_Mockups_ngd/                # HTML 목업 + PNG
 │   ├── 02_Annotated_ngd/              # 주석 이미지
 │   ├── 03_Reference_ngd/              # PokerGFX 참조 자료
@@ -81,9 +80,8 @@ docs/
 | [PRD-0003-Phase1-PokerGFX-Clone.md](01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md) | PokerGFX 복제 계획 |
 | [PokerGFX-Feature-Checklist.md](01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md) | 149개 기능 체크리스트 |
 | [PokerGFX-UI-Analysis.md](01_PokerGFX_Analysis/PokerGFX-UI-Analysis.md) | PokerGFX UI 스크린샷 분석 (v3.0.0) |
-| [PRD-0004-EBS-Server-UI-Design.md](01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md) | EBS Server UI 설계 (허브) |
-| [PRD-0004-screens/](01_PokerGFX_Analysis/PRD-0004-screens/) | 9개 화면별 Screen Spec |
-| [PRD-0004-feature-mapping.md](01_PokerGFX_Analysis/PRD-0004-feature-mapping.md) | 149개 기능 매핑 |
+| [PRD-0004-EBS-Server-UI-Design.md](01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md) | EBS Server UI 통합 설계서 (184개 요소, 149개 기능 매핑 포함) |
+| [PRD-0004-technical-specs.md](01_PokerGFX_Analysis/PRD-0004-technical-specs.md) | 기술 명세서 (카드, 게임 엔진, GPU) |
 | [PokerGFX-Server-Binary-Analysis.md](01_PokerGFX_Analysis/PokerGFX-Server-Binary-Analysis.md) | 서버 바이너리 분석 |
 | [03_Reference_ngd/](01_PokerGFX_Analysis/03_Reference_ngd/) | PokerGFX 매뉴얼, 보안 문서 |
 

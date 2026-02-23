@@ -112,19 +112,20 @@ EBS는 **DB 자산을 활용**하는 네 가지 핵심 역할을 위해 설계�
 
 ## 3.1 Phase 1 기능 (확정)
 
-Phase 1은 **PokerGFX 100% 복제**가 목표입니다. 복제 대상 기능 전체 목록은 [PokerGFX Feature Checklist (149개)](01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md)를 참조하세요.
+Phase 1은 **EBS console v1.0 (Broadcast Ready)** 개발이 목표입니다. "PokerGFX 100% 복제"가 아닌 **라이브 방송 가능**을 달성 기준으로 삼습니다. 기능 범위와 버전 로드맵은 [EBS console 기획서](00-prd/ebs-console.prd.md)를 참조하세요.
 
-**카테고리별 요약:**
+**v1.0 핵심 범위 (Broadcast Ready):**
 
 | 카테고리 | 기능 |
 |----------|------|
-| **카드 표시** | 실시간 홀카드 표시, 승률/아웃츠 자동 계산, 팟 사이즈, 플레이어 통계 (VPIP, PFR), 핸드 히스토리 |
-| **운영자 입력** | 원클릭 액션 입력, 스마트 베팅 예측, 드래그 앤 드롭 플레이어 관리, Stream Deck |
-| **프로덕션 통합** | OBS Browser Source, NDI 출력, Chroma Key, 다중 테이블 |
-| **보안** | Realtime Mode + Trustless Mode (PokerGFX 동일) |
-| **커스터마이징** | TBD |
+| **Action Tracker** | 실시간 게임 진행 추적, 액션 입력, 베팅 계산, 보드 카드 관리 |
+| **Pre-Start Setup** | 이벤트 설정, 플레이어/스택 입력, RFID 연결 (수동 폴백 포함) |
+| **Viewer Overlay** | 홀카드, 칩카운트, 팟, 액션 표시 — OBS Browser Source 출력 |
+| **Security 기본** | Realtime Mode + Trustless Mode 토글, WebSocket TLS |
+| **Server 관리 핵심** | Chroma Key, Live/Delay 출력, 해상도, RFID 덱 등록 |
 
-> 상세 기능 명세는 [Phase 1 PRD](01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md)를 참조하세요.
+> 기능 트리아지 (149개 → Keep/Drop/Defer): [ebs-console-feature-triage.md](01_PokerGFX_Analysis/ebs-console-feature-triage.md)
+> 상세 버전 로드맵: [EBS console 기획서](00-prd/ebs-console.prd.md)
 
 ## 3.2 Phase 2/3 기능 (TBD)
 
@@ -148,7 +149,7 @@ PokerGFX도 **Realtime Mode**로 운영합니다. 카드 스캔 즉시 시스템
 | 모드 | 설명 | 운영 방식 |
 |------|------|----------|
 | **Realtime Mode** | 카드 스캔 즉시 시스템에 반영 | **실제 운영에 사용**. 방송 딜레이는 OBS/하드웨어에서 처리 |
-| **Trustless Mode** | 딜레이 후 카드 공개 | PokerGFX에 기능으로 존재하므로 **복제 대상**. 실제 운영은 Realtime Mode |
+| **Trustless Mode** | 딜레이 후 카드 공개 *(추후 개발)* | PokerGFX에 기능으로 존재하므로 복제 대상. 실제 운영은 Realtime Mode. EBS 내부 Delay 출력 기능은 추후 개발 |
 
 **모드 전환:** 운영자 설정에서 토글 가능
 
@@ -167,7 +168,7 @@ Phase 1 완료 후 실제 운영 경험을 바탕으로 재설계합니다.
 | Phase | 완료 | 핵심 목표 | 성공 지표 | 슬로건 |
 |-------|:----:|----------|----------|--------|
 | **0** | Q2 2026 | RFID 업체 선정 + POC + PokerGFX 기능 분석/기획 | 계약 + POC 통과 + 기능 체크리스트 확정 | "준비 완료" |
-| **1** | Q4 2026 | PokerGFX 100% 복제 (순수 개발) | 운영자 2명+ "동일" 승인 | "동일하게" |
+| **1** | Q4 2026 | EBS console v1.0 개발 (Broadcast Ready) | v1.0 기능으로 라이브 방송 성공 | "방송 가능" |
 | **2** | Q4 2027 | WSOPLIVE DB 수작업을 자동화 처리 | TBD | "자동화한다" |
 | **3** | Q4 2028 | 자동화 프로토콜 | TBD | "프로덕션 최적화" |
 

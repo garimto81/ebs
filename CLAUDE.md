@@ -92,10 +92,7 @@ python C:\claude\ebs\tools\morning-automation\main.py
 # 전체 수집 (초기 실행 또는 전체 재수집)
 python C:\claude\ebs\tools\morning-automation\main.py --full
 
-# Slack 채널에 업체 현황 갱신
-python C:\claude\ebs\tools\morning-automation\main.py --post
-
-# 표준 워크플로우 (수집 + 채널 갱신)
+# 표준 워크플로우 (수집 + Slack 채널 메시지 갱신)
 python C:\claude\ebs\tools\morning-automation\main.py --post
 
 # 전체 재수집 + 채널 갱신 (스키마 변경 시)
@@ -109,21 +106,28 @@ python C:\claude\ebs\tools\morning-automation\main.py --no-report
 ```
 
 **Slack API 제약**:
-- `--notify` 사용 금지 (`chat:write:bot` scope 없음)
+- `--notify` 사용 금지 (`chat:write:bot` scope 없음, DM 발송 불가)
 - `--post`만 사용 가능 (기존 채널 메시지 `chat.update`로 갱신)
-- DM 발송 불가
+
+**자동 실행 (Windows Task Scheduler)**:
+```powershell
+# 매일 아침 자동 실행 스케줄러 등록
+powershell -File C:\claude\ebs\tools\morning-automation\setup_scheduler.ps1
+```
 
 ### PDF 도구
 
 ```powershell
 pip install -r C:\claude\ebs\tools\requirements.txt
 
-python C:\claude\ebs\tools\split_pdf.py <input.pdf> 20              # 페이지 분할
+python C:\claude\ebs\tools\split_pdf.py <input.pdf> 20              # 페이지 분할 (N페이지씩)
+python C:\claude\ebs\tools\pdf_splitter.py <input.pdf>              # 페이지 단위 개별 분할
 python C:\claude\ebs\tools\extract_images.py <input.pdf> --output-dir <output/>  # 이미지 추출
 python C:\claude\ebs\tools\pdf_chunker.py <input.pdf>               # 토큰 기반 청킹
+python C:\claude\ebs\tools\pdf_page_chunker.py <input.pdf>          # 페이지 레이아웃 보존 청킹
 ```
 
-### PokerGFX UI 분석 도구
+### PokerGFX 분석 도구
 
 ```powershell
 pip install Pillow
@@ -132,6 +136,12 @@ pip install Pillow
 python C:\claude\ebs\tools\generate_annotations.py
 python C:\claude\ebs\tools\generate_annotations.py --calibrate       # 자동 캘리브레이션
 python C:\claude\ebs\tools\generate_annotations.py --debug --target 02  # 디버그 모드 (단일 이미지)
+
+# UI 요소 자동 감지
+python C:\claude\ebs\tools\detect_ui_elements.py <image_path>
+
+# 기능 레지스트리 생성 (기능 체크리스트 → JSON 레지스트리)
+python C:\claude\ebs\tools\generate_feature_registry.py
 ```
 
 ### Google Drive 정리
@@ -156,7 +166,7 @@ sqlite3 C:\claude\ebs\server\db\cards.db < C:\claude\ebs\server\db\init.sql
 유일한 실행 가능 코드베이스 (~2,400 LOC, Python).
 
 ```
-main.py                 # CLI 진입점 (argparse: --full, --post, --notify, --date, --no-report)
+main.py                 # CLI 진입점 (argparse: --full, --post, --date, --no-report, --notify[비활성])
 config/settings.py      # Slack channel/list ID, Gmail label ID, 업체 키워드, 이메일 도메인 매핑
 collectors/
   slack_collector.py    # #ggpnotice 채널 메시지 수집, 업체 언급 감지
@@ -166,7 +176,8 @@ reporters/
   markdown_reporter.py  # docs/05_Operations_ngd/01_DailyBriefings_ngd/ 에 Markdown 생성
   slack_poster.py       # Slack 채널 메시지 갱신 (chat.update, RFI 현황/회신 포함)
   slack_notifier.py     # DM 알림 (현재 scope 부족으로 비활성)
-data/                   # JSON 중간 파일 (slack_messages.json, gmail_emails.json, slack_lists.json)
+templates/              # Markdown 리포트 템플릿
+data/                   # JSON 중간 파일 + timestamp 추적 파일
 ```
 
 **데이터 파이프라인**:
@@ -204,6 +215,25 @@ Morning Automation은 EBS 외부의 공유 라이브러리에 의존한다:
 - `VENDOR_EMAIL_DOMAINS`: 수신자 도메인으로 발송 업체 감지 (예: `"sunfly": ["sun-fly.com"]`)
 
 새 업체 추가 시 두 매핑 모두 업데이트 필요.
+
+### PokerGFX Analysis 디렉토리 구조 (`docs/01_PokerGFX_Analysis/`)
+
+역설계 결과물이 단계별로 축적된 구조:
+
+```
+01_Mockups_ngd/     # 화면 목업 HTML (ebs 레포에서는 참조만)
+02_Annotated_ngd/   # 주석 오버레이 이미지 + OCR JSON
+03_Cropped_ngd/     # 화면별 크롭 이미지 (11개 화면)
+03_Reference_ngd/   # 매뉴얼 PDF, 웹 스크린샷
+04_Protocol_Spec/   # ActionTracker WebSocket 메시지 명세
+05_Behavioral_Spec/ # 게임 상태 머신 (22개 게임 규칙)
+06_Cross_Reference/ # 신뢰도 감사, 기능-화면 매핑
+07_Decompiled_Archive/  # 역컴파일 C# 소스 (ActionTracker, Server, Common, GFXUpdater)
+08_PDCA_Archive/    # 분석 작업 아카이브
+mockups/            # HTML 와이어프레임 (sources, outputs, gfx, rules, main-window)
+```
+
+`07_Decompiled_Archive/`는 PokerGFX 바이너리에서 추출한 C# 소스로, 프로토콜 스펙 작성 시 1차 소스다. Server (`vpt_server.*`) 와 ActionTracker (`vpt_remote.*`) 네임스페이스가 핵심.
 
 ### Database Schema (`server/db/init.sql`)
 
@@ -264,16 +294,34 @@ Morning Automation은 EBS 외부의 공유 라이브러리에 의존한다:
 
 > Drive 폴더명과 로컬 폴더명이 다를 수 있음: `01_PokerGFX_Analysis` (로컬) = `01_Phase00` (Drive)
 
+### PDCA 문서 네이밍 컨벤션 (docs/ 서브폴더)
+
+작업 결과물 문서는 아래 4-tier 폴더 구조를 따른다:
+
+| 폴더 | 확장자 | 용도 |
+|------|--------|------|
+| `docs/00-prd/` | `*.prd.md` | Product Requirements Document |
+| `docs/01-plan/` | `*.plan.md` | 작업 계획서 (구현 전략) |
+| `docs/02-design/` | `*.design.md` | 설계 문서 (UI/아키텍처) |
+| `docs/04-report/` | `*.report.md` | 완료 보고서 |
+
+예: `action-tracker.prd.md` → `action-tracker-redesign.plan.md` → `action-tracker-ui.design.md` → `action-tracker.report.md`
+
 ## Key Documents
 
 | 문서 | 경로 | 용도 |
 |------|------|------|
 | Master PRD | `docs/PRD-0003-EBS-RFID-System.md` | 비전/전략/로드맵 |
+| Phase 1 복제 PRD | `docs/01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md` | PokerGFX 동일 복제 설계서 (v9.1.0) |
+| Server UI 설계 | `docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md` | EBS Server UI 통합 설계서 (184개 요소) |
+| 기능 상호작용 | `docs/01_PokerGFX_Analysis/PRD-0004-feature-interactions.md` | 탭/기능 간 상호작용 명세 |
+| 기술 스펙 | `docs/01_PokerGFX_Analysis/PRD-0004-technical-specs.md` | 성능/프로토콜 기술 스펙 |
+| 기능 체크리스트 | `docs/01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md` | 149개 복제 대상 |
+| PokerGFX UI 분석 | `docs/01_PokerGFX_Analysis/PokerGFX-UI-Analysis.md` | UI 화면 분석 |
+| 바이너리 분석 | `docs/01_PokerGFX_Analysis/PokerGFX-Server-Binary-Analysis.md` | Server 바이너리 역분석 결과 |
 | 업체 관리 | `docs/05_Operations_ngd/VENDOR-MANAGEMENT.md` | 업체 정보 1차 소스 |
 | 커뮤니케이션 규칙 | `docs/05_Operations_ngd/COMMUNICATION-RULES_ngd.md` | 외부 이메일 규칙 |
 | 업체 선정 체크리스트 | `docs/05_Operations_ngd/VENDOR-SELECTION-CHECKLIST.md` | Phase 0 선정 기준 |
-| 기능 체크리스트 | `docs/01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md` | 149개 복제 대상 |
-| PokerGFX 분석 | `docs/01_PokerGFX_Analysis/PokerGFX-UI-Analysis.md` | UI 분석 |
 | PokerGFX 참조 자료 | `docs/01_PokerGFX_Analysis/03_Reference_ngd/` | 매뉴얼/보안 PDF |
 | 이메일 드래프트 | `docs/05_Operations_ngd/02_EmailDrafts_ngd/` | 업체 컨택 이메일 |
 | 데일리 브리핑 | `docs/05_Operations_ngd/01_DailyBriefings_ngd/` | 일일 현황 보고 |
@@ -284,6 +332,7 @@ Morning Automation은 EBS 외부의 공유 라이브러리에 의존한다:
 | 레포 | 로컬 파일 | Google Docs ID | URL |
 |------|-----------|---------------|-----|
 | **ebs_reverse** | `C:/claude/ebs_reverse/docs/01-plan/pokergfx-development-prd.md` | `1xz3T1tp0jGxp6Dmwicvqf1DD01SW6RYmmGrNzUZ92Y4` | [PRD: PokerGFX Clone](https://docs.google.com/document/d/1xz3T1tp0jGxp6Dmwicvqf1DD01SW6RYmmGrNzUZ92Y4/edit) |
+| **ebs** | `docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md` | `1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk` | [PRD-0004: EBS Server UI Design](https://docs.google.com/document/d/1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk/edit) |
 
 > **주의**: 위 Google Docs는 `ebs_reverse` 레포의 파일과 동기화된다. `ebs` 레포의 문서가 아님.
 
@@ -293,4 +342,4 @@ Morning Automation은 EBS 외부의 공유 라이브러리에 의존한다:
 |------|------|
 | `.omc/bkit/` | bkit PDCA 상태, 스냅샷 (삭제 금지) |
 | `.omc/plans/` | 작업 계획 문서 |
-| `.claude/` | Claude 커맨드, 스킬, 에이전트 설정 |
+| `.claude/` | 글로벌 `C:\claude\.claude\`로의 symlink (커맨드, 스킬, 에이전트) |

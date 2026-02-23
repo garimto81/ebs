@@ -8,12 +8,15 @@ Usage:
   python generate_annotations.py --calibrate --target 02  # Calibrate single image
   python generate_annotations.py --debug                  # Debug overlay with grid
   python generate_annotations.py --debug --target 02      # Debug single image
+  python generate_annotations.py --ocr                    # OCR-based precision calibration
+  python generate_annotations.py --ocr --target 04        # OCR calibration for single image
 
 Strategy: Contrast Edge Detection + Auto-Calibration
 - Normal mode: auto-snaps box edges to nearest contrast boundaries (±2px)
 - Empty box detection: warns when a box covers uniform-color space
 - Calibrate mode: saves calibrated coordinates to JSON sidecar file
 - Debug mode: shows detected edges and coordinate labels
+- OCR mode: Tesseract OCR detects text regions, refines box coords, then applies edge-snap
 """
 import argparse
 import json
@@ -21,8 +24,28 @@ import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
 
+try:
+    import pytesseract
+    pytesseract.pytesseract.tesseract_cmd = r'C:/Users/AidenKim/scoop/shims/tesseract.exe'
+    # Set TESSDATA_PREFIX so Tesseract can find language files installed via scoop
+    os.environ.setdefault(
+        'TESSDATA_PREFIX',
+        r'C:\Users\AidenKim\scoop\persist\tesseract\tessdata'
+    )
+    TESSERACT_AVAILABLE = True
+except ImportError:
+    TESSERACT_AVAILABLE = False
+
 INPUT_DIR = "C:/claude/ebs/images/pokerGFX"
 OUTPUT_DIR = "C:/claude/ebs/docs/01_PokerGFX_Analysis/02_Annotated_ngd"
+CROP_DIR = "C:/claude/ebs/docs/01_PokerGFX_Analysis/03_Cropped_ngd"
+
+DELTA_GUARD = {
+    'dy_max': 12,   # y 이동 최대 (행 겹침 방지)
+    'dh_max': 20,   # 높이 변화 최대 (오버 확장 방지)
+    'dx_max': 20,   # x 이동 최대
+    'dw_max': 25,   # 너비 변화 최대
+}
 
 # Font setup
 try:
@@ -114,6 +137,15 @@ def auto_calibrate(img, boxes):
     for box in boxes:
         x, y, bw, bh = box['rect']
 
+        # Skip edge snapping for boxes with no_snap flag
+        if box.get('no_snap'):
+            new_box = dict(box)
+            new_box['rect'] = (x, y, bw, bh)
+            new_box['_original'] = (x, y, bw, bh)
+            new_box['_delta'] = (0, 0, 0, 0)
+            calibrated.append(new_box)
+            continue
+
         # Snap top edge: scan horizontal contrast in the box's X range
         new_y = find_h_edge(pixels, w, h, y, x, x + bw)
         # Snap bottom edge
@@ -141,6 +173,176 @@ def auto_calibrate(img, boxes):
         new_box['_delta'] = (dx, dy, dw, dh)
         calibrated.append(new_box)
 
+    # Prevent calibrated boxes from overlapping each other
+    for i in range(len(calibrated)):
+        for j in range(i + 1, len(calibrated)):
+            ri = calibrated[i]['rect']
+            rj = calibrated[j]['rect']
+            # AABB overlap test
+            if (ri[0] < rj[0] + rj[2] and ri[0] + ri[2] > rj[0] and
+                    ri[1] < rj[1] + rj[3] and ri[1] + ri[3] > rj[1]):
+                di = calibrated[i].get('_delta', (0, 0, 0, 0))
+                dj = calibrated[j].get('_delta', (0, 0, 0, 0))
+                # Revert the box that moved more
+                if sum(abs(d) for d in di) >= sum(abs(d) for d in dj):
+                    orig = calibrated[i]['_original']
+                    calibrated[i]['rect'] = orig
+                    calibrated[i]['_delta'] = (0, 0, 0, 0)
+                else:
+                    orig = calibrated[j]['_original']
+                    calibrated[j]['rect'] = orig
+                    calibrated[j]['_delta'] = (0, 0, 0, 0)
+
+    return calibrated
+
+
+def ocr_calibrate(img, boxes):
+    """Refine box positions using Tesseract OCR text detection.
+
+    For each annotation box:
+    1. Run pytesseract.image_to_data() on the full image with confidence > 30 filter.
+    2. Find all OCR word bounding boxes that overlap or are contained within the annotation box.
+    3. If matching OCR text found, expand/adjust the annotation box to tightly fit
+       the union bounding box of all matching OCR text regions.
+    4. Fall back to original box if no OCR text found in region.
+
+    Returns calibrated boxes with '_ocr_text', '_ocr_count', '_delta' metadata.
+    Requires TESSERACT_AVAILABLE = True (pytesseract installed + tesseract binary).
+    """
+    if not TESSERACT_AVAILABLE:
+        print("  [OCR] pytesseract not available, skipping OCR calibration")
+        return [dict(b) for b in boxes]
+
+    img_w, img_h = img.size
+
+    # Run OCR once on the full image
+    ocr_data = pytesseract.image_to_data(
+        img,
+        output_type=pytesseract.Output.DICT,
+        lang='eng',
+        config='--psm 11'  # sparse text: find as many text regions as possible
+    )
+
+    # Build list of high-confidence word bounding boxes
+    word_boxes = []
+    n_words = len(ocr_data['text'])
+    for i in range(n_words):
+        conf = int(ocr_data['conf'][i])
+        text = ocr_data['text'][i].strip()
+        if conf < 30 or not text:
+            continue
+        wx = ocr_data['left'][i]
+        wy = ocr_data['top'][i]
+        ww = ocr_data['width'][i]
+        wh = ocr_data['height'][i]
+        word_boxes.append({
+            'text': text,
+            'conf': conf,
+            'x': wx, 'y': wy, 'w': ww, 'h': wh,
+        })
+
+    print(f"  [OCR] Detected {len(word_boxes)} high-confidence words (conf>30)")
+
+    calibrated = []
+    adjusted_count = 0
+
+    for box in boxes:
+        if box.get('no_snap'):
+            calibrated.append(dict(box, _delta=(0, 0, 0, 0), _ocr_text='', _ocr_count=0))
+            continue
+        x, y, bw, bh = box['rect']
+        box_x2 = x + bw
+        box_y2 = y + bh
+
+        # Find OCR words that overlap with this annotation box
+        # Overlap: word center must be inside the box (more robust than full containment)
+        matched = []
+        for wb in word_boxes:
+            wx, wy, ww, wh = wb['x'], wb['y'], wb['w'], wb['h']
+            # Word center
+            cx = wx + ww // 2
+            cy = wy + wh // 2
+            if x <= cx <= box_x2 and y <= cy <= box_y2:
+                matched.append(wb)
+
+        new_box = dict(box)
+        new_box['_original'] = (x, y, bw, bh)
+
+        if matched:
+            # Compute union bounding box of all matched OCR word regions
+            min_x = min(wb['x'] for wb in matched)
+            min_y = min(wb['y'] for wb in matched)
+            max_x = max(wb['x'] + wb['w'] for wb in matched)
+            max_y = max(wb['y'] + wb['h'] for wb in matched)
+
+            # Add small padding (2px) around OCR bounding box
+            pad = 2
+            min_x = max(0, min_x - pad)
+            min_y = max(0, min_y - pad)
+            max_x = min(img_w, max_x + pad)
+            max_y = min(img_h, max_y + pad)
+
+            # Only adjust if the OCR region fits within a reasonable expansion
+            # (guard against OCR picking up text outside the actual UI element)
+            # Allow expansion of up to 30px in any direction
+            max_expand = 30
+            new_x = max(x - max_expand, min(x, min_x))
+            new_y = max(y - max_expand, min(y, min_y))
+            new_x2 = min(box_x2 + max_expand, max(box_x2, max_x))
+            new_y2 = min(box_y2 + max_expand, max(box_y2, max_y))
+
+            new_bw = new_x2 - new_x
+            new_bh = new_y2 - new_y
+
+            # Guard: reject if result is too small or too large
+            if new_bw >= 8 and new_bh >= 6:
+                dx = new_x - x
+                dy = new_y - y
+                dw = new_bw - bw
+                dh = new_bh - bh
+
+                # ── Adaptive Delta Guard ───────────────────────────────────
+                guard_violated = (
+                    abs(dy) > DELTA_GUARD['dy_max'] or
+                    abs(dh) > DELTA_GUARD['dh_max'] or
+                    abs(dx) > DELTA_GUARD['dx_max'] or
+                    abs(dw) > DELTA_GUARD['dw_max']
+                )
+                if guard_violated:
+                    new_box['rect'] = (x, y, bw, bh)
+                    new_box['_delta'] = (0, 0, 0, 0)
+                    new_box['_ocr_text'] = ' | '.join(wb['text'] for wb in matched[:5])
+                    new_box['_ocr_count'] = len(matched)
+                    new_box['_auto_protected'] = True
+                    print(f"  [OCR] [{box['label']:>3}] PROTECTED d({dx:+d},{dy:+d},{dw:+d},{dh:+d})")
+                    calibrated.append(new_box)
+                    continue
+                # ── Guard 통과 시 기존 적용 ────────────────────────────────
+
+                new_box['rect'] = (new_x, new_y, new_bw, new_bh)
+                new_box['_delta'] = (dx, dy, dw, dh)
+                new_box['_ocr_text'] = ' | '.join(wb['text'] for wb in matched[:5])
+                new_box['_ocr_count'] = len(matched)
+
+                if any(d != 0 for d in (dx, dy, dw, dh)):
+                    adjusted_count += 1
+                    ocr_texts = ' '.join(wb['text'] for wb in matched[:3])
+                    # Encode safely for terminals with limited charset (e.g. cp949)
+                    safe_text = ocr_texts.encode('ascii', errors='replace').decode('ascii')
+                    print(f"  [OCR] [{box['label']:>3}] d({dx:+d},{dy:+d},{dw:+d},{dh:+d})"
+                          f"  text: \"{safe_text}\"")
+            else:
+                new_box['_delta'] = (0, 0, 0, 0)
+                new_box['_ocr_text'] = ''
+                new_box['_ocr_count'] = 0
+        else:
+            new_box['_delta'] = (0, 0, 0, 0)
+            new_box['_ocr_text'] = ''
+            new_box['_ocr_count'] = 0
+
+        calibrated.append(new_box)
+
+    print(f"  [OCR] {adjusted_count}/{len(boxes)} boxes adjusted by OCR")
     return calibrated
 
 
@@ -158,6 +360,10 @@ def check_empty_boxes(img, boxes, variance_threshold=15):
     for box in boxes:
         x, y, bw, bh = box['rect']
         label = box['label']
+
+        # Skip boxes marked no_snap (solid-colour swatches, dark checkboxes)
+        if box.get('no_snap'):
+            continue
 
         # Skip very small boxes (checkboxes, dismiss buttons)
         if bw < 20 or bh < 10:
@@ -224,6 +430,55 @@ def detect_all_h_separators(img, y_start=0, y_end=None, min_ratio=0.5):
         else:
             merged.append(y)
     return merged
+
+
+# ============================================================
+# CROP FUNCTION
+# ============================================================
+
+def crop_boxes(img, boxes, output_dir, name, padding=8):
+    """Crop each annotated box region from original image with padding.
+
+    Uses calibrated coordinates. Clamps to image boundaries.
+    Adds a label watermark (red background, white text) at top-left.
+    Returns count of crops generated.
+    """
+    os.makedirs(output_dir, exist_ok=True)
+    w, h = img.size
+    count = 0
+
+    for box in boxes:
+        x, y, bw, bh = box['rect']
+        label = str(box['label'])
+
+        # Apply padding + clamp to image bounds
+        pad = padding
+        x1 = max(0, x - pad)
+        y1 = max(0, y - pad)
+        x2 = min(w, x + bw + pad)
+        y2 = min(h, y + bh + pad)
+
+        # Minimum size guard: expand padding if crop is too small
+        if (x2 - x1) < 20 or (y2 - y1) < 15:
+            pad = 16
+            x1 = max(0, x - pad)
+            y1 = max(0, y - pad)
+            x2 = min(w, x + bw + pad)
+            y2 = min(h, y + bh + pad)
+
+        cropped = img.crop((x1, y1, x2, y2))
+
+        # Label watermark at top-left corner
+        draw = ImageDraw.Draw(cropped)
+        badge_w = max(22, len(label) * 7 + 8)
+        draw.rectangle([0, 0, badge_w, 16], fill=RED)
+        draw.text((4, 1), label, fill='white', font=font_small)
+
+        fname = f"{name}-crop-{label}.png"
+        cropped.save(os.path.join(output_dir, fname), quality=95)
+        count += 1
+
+    return count
 
 
 # ============================================================
@@ -323,9 +578,11 @@ def draw_debug_overlay(img, boxes, h_separators=None):
 IMAGES = {
     # --------------------------------------------------------
     # 1. Main Window (765x365) - redesigned 2026-02-11
+    # window_rect: 메인 윈도우만 정확히 크롭 (노드 크기에 딱맞게)
     # --------------------------------------------------------
     '01-main-window': {
         'src': '스크린샷 2026-02-05 180630.png',
+        'window_rect': (0, 0, 765, 365),
         'boxes': [
             {'rect': (0,   0,   765, 32),  'label': '1'},   # Title Bar
             {'rect': (10,  38,  572, 316), 'label': '2'},   # Preview
@@ -349,13 +606,13 @@ IMAGES = {
         'boxes': [
             {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar
             {'rect': (9,   379, 556, 86),  'label': '2'},   # Device Table
-            {'rect': (565, 385, 187, 53),  'label': '3'},   # Board Cam / Auto Camera
-            {'rect': (565, 438, 187, 20),  'label': '4'},   # Camera Mode
-            {'rect': (565, 458, 187, 63),  'label': '5'},   # Heads Up / Follow
-            {'rect': (565, 521, 187, 63),  'label': '6'},   # Linger / Post
+            {'rect': (565, 385, 187, 53),  'label': '3', 'no_snap': True},  # Board Cam / Auto Camera
+            {'rect': (565, 438, 187, 20),  'label': '4', 'no_snap': True},  # Camera Mode
+            {'rect': (565, 458, 187, 63),  'label': '5', 'no_snap': True},  # Heads Up / Follow
+            {'rect': (565, 521, 187, 63),  'label': '6', 'no_snap': True},  # Linger / Post
             {'rect': (9,   584, 285, 44),  'label': '7'},   # Chroma Key
             {'rect': (431, 592, 129, 21),  'label': '8'},   # Add Network Camera
-            {'rect': (16,  619, 212, 90),  'label': '9'},   # Audio / Sync
+            {'rect': (9,   619, 220, 100), 'label': '9'},   # Audio / Sync / Level
             {'rect': (235, 619, 235, 90),  'label': '10'},  # External Switcher / ATEM
             {'rect': (477, 619, 88,  90),  'label': '11'},  # Board Sync / Crossfade
             {'rect': (572, 619, 172, 90),  'label': '12'},  # Player View
@@ -446,38 +703,41 @@ IMAGES = {
     },
 
     # --------------------------------------------------------
-    # 5. GFX 2 Tab (765x730) - pixel-scanned 2026-02-12
+    # 5. GFX 2 Tab (765x730) - redesigned 2026-02-23
     # GroupBox borders: H y=385,709  V x=16,330,337,732
     # Left panel: x=16-330, Right panel: x=337-732
+    # OCR row anchors (detect_ui_elements --target 05):
+    #   L-row text y: 401,423,445,467,489,512 / 562,584,606,628
+    #   R-row text y: 401,423,445,467,482~491,515~517,540,565,581~593,615
     # --------------------------------------------------------
     '05-gfx2-tab': {
         'src': '스크린샷 2026-02-05 180652.png',
         'boxes': [
             # Tab Bar
-            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar (Sources|Outputs|GFX1|GFX2|...)
+            {'rect': (9,   363, 381, 17),  'label': '1'},   # Tab Bar (Sources|Outputs|GFX1|GFX2|...)
             # Left Panel - Leaderboard Options (6 rows, x=16-330)
-            {'rect': (16,  393, 314, 22),  'label': '2'},   # Show knockout rank in Leaderboard ☐
-            {'rect': (16,  415, 314, 22),  'label': '3'},   # Show Chipcount % in Leaderboard ☑
-            {'rect': (16,  437, 314, 22),  'label': '4'},   # Show eliminated players in Leaderboard stats ☑
-            {'rect': (16,  459, 314, 22),  'label': '5'},   # Show Chipcount with Cumulative Winnings ☐
-            {'rect': (16,  481, 314, 22),  'label': '6'},   # Hide leaderboard when hand starts ☑
-            {'rect': (16,  503, 314, 28),  'label': '7'},   # Max BB multiple to show in Leaderboard [200]
-            # Left Panel - Game Rules (4 rows)
-            {'rect': (16,  554, 314, 22),  'label': '8'},   # Move button after Bomb Pot ☐
-            {'rect': (16,  576, 314, 22),  'label': '9'},   # Limit Raises to Effective Stack size ☐
-            {'rect': (16,  598, 314, 22),  'label': '10'},  # Straddle not on the button or UTG is sleeper ☐
-            {'rect': (16,  620, 314, 22),  'label': '11'},  # Sleeper straddle gets final action ☐
+            {'rect': (16,  393, 314, 22),  'label': '2',  'no_snap': True},  # Show knockout rank in Leaderboard ☐
+            {'rect': (16,  415, 314, 22),  'label': '3',  'no_snap': True},  # Show Chipcount % in Leaderboard ☑
+            {'rect': (16,  437, 314, 22),  'label': '4'},                    # Show eliminated players in Leaderboard stats ☑
+            {'rect': (16,  459, 314, 22),  'label': '5',  'no_snap': True},  # Show Chipcount with Cumulative Winnings ☐
+            {'rect': (16,  481, 314, 22),  'label': '6',  'no_snap': True},  # Hide leaderboard when hand starts ☑
+            {'rect': (16,  503, 314, 28),  'label': '7'},                    # Max BB multiple to show in Leaderboard [200]
+            # Left Panel - Game Rules (4 rows) — all no_snap
+            {'rect': (16,  554, 314, 22),  'label': '8',  'no_snap': True},  # Move button after Bomb Pot ☐
+            {'rect': (16,  576, 314, 22),  'label': '9',  'no_snap': True},  # Limit Raises to Effective Stack size ☐
+            {'rect': (16,  598, 314, 22),  'label': '10', 'no_snap': True},  # Straddle not on the button or UTG is sleeper ☐
+            {'rect': (16,  620, 314, 22),  'label': '11', 'no_snap': True},  # Sleeper straddle gets final action ☐
             # Right Panel (10 rows, x=337-732)
-            {'rect': (337, 393, 395, 22),  'label': '12'},  # Add seat # to player name ☐
-            {'rect': (337, 415, 395, 22),  'label': '13'},  # Show as eliminated when player loses stack ☑
-            {'rect': (337, 437, 395, 22),  'label': '14'},  # Allow Rabbit Hunting ☐
-            {'rect': (337, 459, 395, 24),  'label': '15'},  # Unknown cards blink in Secure Mode ☑
-            {'rect': (337, 483, 395, 25),  'label': '16'},  # Hilite Nit game players when [At Risk] ▼
-            {'rect': (337, 508, 395, 24),  'label': '17'},  # Clear previous action & show 'x to call' ☑
-            {'rect': (337, 532, 395, 24),  'label': '18'},  # Order players from the first [To the left] ▼
-            {'rect': (337, 556, 395, 26),  'label': '19'},  # Show hand equities [After 1st betting round] ▼
-            {'rect': (337, 582, 395, 26),  'label': '20'},  # Hilite winning hand [Immediately] ▼
-            {'rect': (337, 608, 395, 22),  'label': '21'},  # When showing equity+outs, ignore split pots ☐
+            {'rect': (337, 393, 395, 22),  'label': '12', 'no_snap': True},  # Add seat # to player name ☐
+            {'rect': (337, 415, 395, 22),  'label': '13'},                   # Show as eliminated when player loses stack ☑
+            {'rect': (337, 437, 395, 22),  'label': '14', 'no_snap': True},  # Allow Rabbit Hunting ☐
+            {'rect': (337, 459, 395, 24),  'label': '15'},                   # Unknown cards blink in Secure Mode ☑
+            {'rect': (337, 483, 395, 25),  'label': '16', 'no_snap': True},  # Hilite Nit game players when [At Risk] ▼
+            {'rect': (337, 508, 395, 24),  'label': '17', 'no_snap': True},  # Clear previous action & show 'x to call' ☑
+            {'rect': (337, 532, 395, 24),  'label': '18'},                   # Order players from the first [To the left] ▼
+            {'rect': (337, 556, 395, 26),  'label': '19'},                   # Show hand equities [After 1st betting round] ▼
+            {'rect': (337, 582, 395, 26),  'label': '20', 'no_snap': True},  # Hilite winning hand [Immediately] ▼
+            {'rect': (337, 608, 395, 22),  'label': '21', 'no_snap': True},  # When showing equity+outs, ignore split pots ☐
         ],
     },
 
@@ -585,7 +845,7 @@ IMAGES = {
     },
 
     # --------------------------------------------------------
-    # 9. Skin Editor (883x461) - recalibrated 2026-02-12 (37 individual controls)
+    # 9. Skin Editor (883x461) - no_snap fixes 2026-02-23 (37 individual controls)
     # --------------------------------------------------------
     '09-skin-editor': {
         'src': '스크린샷 2026-02-05 180715.png',
@@ -593,7 +853,7 @@ IMAGES = {
             # --- Header ---
             {'rect': (5,   39,  462, 20),  'label': '1'},   # Name [Titanium]
             {'rect': (5,   62,  462, 17),  'label': '2'},   # Details [Modern, layered skin...]
-            {'rect': (480, 39,  385, 18),  'label': '3'},   # Remove Partial Transparency... ☐
+            {'rect': (480, 39,  385, 18),  'label': '3',  'no_snap': True},   # Remove Partial Transparency... ☐
             {'rect': (620, 62,  248, 17),  'label': '4'},   # Designed for 4K (3840 x 2160) ☐
             # --- Adjustments GroupBox (y=86-164) ---
             {'rect': (20,  106, 140, 38),  'label': '5'},   # Adjust Size slider
@@ -639,7 +899,7 @@ IMAGES = {
     },
 
     # --------------------------------------------------------
-    # 10. Graphic Editor - Board (644x582) - calibrated 2026-02-10
+    # 10. Graphic Editor - Board (644x582) - no_snap fixes 2026-02-23
     # --------------------------------------------------------
     '10-graphic-editor-board': {
         'src': '스크린샷 2026-02-05 180720.png',
@@ -650,9 +910,9 @@ IMAGES = {
             {'rect': (30,  76,  88,  22),  'label': '2'},   # [Import Image] button
             {'rect': (125, 76,  158, 22),  'label': '3'},   # AT Mode (Flop Game) ▼
             # --- Right Panel: Element ---
-            {'rect': (497, 48,  115, 22),  'label': '4'},   # Element [Card 1 ▼]
+            {'rect': (497, 48,  115, 22),  'label': '4',  'no_snap': True},   # Element [Card 1 ▼]
             # --- Right Panel: Position/Anchor ---
-            {'rect': (468, 86,  65,  20),  'label': '5'},   # Left [288 ⬆⬇]
+            {'rect': (468, 86,  65,  20),  'label': '5',  'no_snap': True},   # Left [288 ⬆⬇]
             {'rect': (540, 86,  72,  20),  'label': '6'},   # Anchor [Right ▼]
             {'rect': (468, 110, 65,  20),  'label': '7'},   # Top [0 ⬆⬇]
             {'rect': (540, 110, 72,  20),  'label': '8'},   # Anchor [Top ▼]
@@ -670,15 +930,15 @@ IMAGES = {
             {'rect': (270, 138, 125, 22),  'label': '19'},  # Transition In [-- Default -- ▼]
             {'rect': (270, 166, 125, 22),  'label': '20'},  # Transition Out [-- Default -- ▼]
             # --- Text Visible (y=198-353) ---
-            {'rect': (20,  207, 120, 16),  'label': '21'},  # ☐ Text Visible
+            {'rect': (20,  207, 120, 16),  'label': '21',  'no_snap': True},  # ☐ Text Visible
             {'rect': (141, 237, 152, 22),  'label': '22'},  # Font [Font 1 - Gotham ▼]
-            {'rect': (300, 232, 36,  22),  'label': '23'},  # Colour swatch
-            {'rect': (370, 232, 36,  22),  'label': '24'},  # Hilite Col swatch
+            {'rect': (300, 232, 36,  22),  'label': '23',  'no_snap': True},  # Colour swatch
+            {'rect': (370, 232, 36,  22),  'label': '24',  'no_snap': True},  # Hilite Col swatch
             {'rect': (141, 261, 152, 22),  'label': '25'},  # Alignment [Left ▼]
             {'rect': (300, 264, 36,  22),  'label': '26'},  # Colour swatch (Alignment)
             {'rect': (80,  295, 55,  16),  'label': '27'},  # ☐ Drop Shadow
             {'rect': (141, 291, 152, 22),  'label': '28'},  # [North ▼] dropdown
-            {'rect': (318, 294, 36,  22),  'label': '29'},  # Colour swatch (Shadow)
+            {'rect': (318, 294, 36,  22),  'label': '29',  'no_snap': True},  # Colour swatch (Shadow)
             {'rect': (100, 321, 90,  20),  'label': '30'},  # Rounded Corners [0 ⬆⬇]
             {'rect': (262, 321, 70,  20),  'label': '31'},  # Margins X [0 ⬆⬇]
             {'rect': (350, 321, 55,  20),  'label': '32'},  # Y [0 ⬆⬇]
@@ -686,7 +946,7 @@ IMAGES = {
             {'rect': (566, 208, 64,  30),  'label': '33'},  # [Adjust Colours] button
             {'rect': (445, 242, 112, 58),  'label': '34'},  # Background Image area
             {'rect': (527, 310, 20,  18),  'label': '35'},  # [X] dismiss background
-            {'rect': (440, 328, 120, 16),  'label': '36'},  # ☐ Triggered by Language text
+            {'rect': (440, 328, 120, 16),  'label': '36',  'no_snap': True},  # ☐ Triggered by Language text
             {'rect': (566, 296, 64,  24),  'label': '37'},  # [OK] button
             {'rect': (566, 330, 64,  24),  'label': '38'},  # [Cancel] button
             # --- Preview ---
@@ -695,7 +955,7 @@ IMAGES = {
     },
 
     # --------------------------------------------------------
-    # 11. Graphic Editor - Player (644x505) - calibrated 2026-02-12
+    # 11. Graphic Editor - Player (644x505) - no_snap fixes 2026-02-23
     # Red boxes for editor controls, Green boxes for preview overlay elements
     # Editor controls share identical GroupBox positions with Image 10
     # --------------------------------------------------------
@@ -709,9 +969,9 @@ IMAGES = {
             {'rect': (30,  76,  88,  22),  'label': '3'},   # [Import Image] button
             {'rect': (125, 76,  158, 22),  'label': '4'},   # AT Mode with photo ▼
             # --- Right Panel: Element ---
-            {'rect': (497, 48,  115, 22),  'label': '5'},   # Element [Card 1 ▼]
+            {'rect': (497, 48,  115, 22),  'label': '5',  'no_snap': True},   # Element [Card 1 ▼]
             # --- Right Panel: Position/Anchor ---
-            {'rect': (468, 86,  65,  20),  'label': '6'},   # Left [372 ⬆⬇]
+            {'rect': (468, 86,  65,  20),  'label': '6',  'no_snap': True},   # Left [372 ⬆⬇]
             {'rect': (540, 86,  72,  20),  'label': '7'},   # Anchor [Right ▼]
             {'rect': (468, 110, 65,  20),  'label': '8'},   # Top [5 ⬆⬇]
             {'rect': (540, 110, 72,  20),  'label': '9'},   # Anchor [Top ▼]
@@ -729,15 +989,15 @@ IMAGES = {
             {'rect': (270, 138, 125, 22),  'label': '20'},  # Transition In [-- Default -- ▼]
             {'rect': (270, 166, 125, 22),  'label': '21'},  # Transition Out [-- Default -- ▼]
             # --- Text Visible (y=198-353) ---
-            {'rect': (20,  207, 120, 16),  'label': '22'},  # ☐ Text Visible
+            {'rect': (20,  207, 120, 16),  'label': '22',  'no_snap': True},  # ☐ Text Visible
             {'rect': (141, 237, 152, 22),  'label': '23'},  # Font [Font 1 - Gotham ▼]
-            {'rect': (300, 232, 36,  22),  'label': '24'},  # Colour swatch
-            {'rect': (370, 232, 36,  22),  'label': '25'},  # Hilite Col swatch
+            {'rect': (300, 232, 36,  22),  'label': '24',  'no_snap': True},  # Colour swatch
+            {'rect': (370, 232, 36,  22),  'label': '25',  'no_snap': True},  # Hilite Col swatch
             {'rect': (141, 261, 152, 22),  'label': '26'},  # Alignment [Left ▼]
             {'rect': (300, 264, 36,  22),  'label': '27'},  # Colour swatch (Alignment)
             {'rect': (80,  295, 55,  16),  'label': '28'},  # ☐ Drop Shadow
             {'rect': (141, 291, 152, 22),  'label': '29'},  # [North ▼] dropdown
-            {'rect': (318, 294, 36,  22),  'label': '30'},  # Colour swatch (Shadow)
+            {'rect': (318, 294, 36,  22),  'label': '30',  'no_snap': True},  # Colour swatch (Shadow)
             {'rect': (100, 321, 90,  20),  'label': '31'},  # Rounded Corners [0 ⬆⬇]
             {'rect': (262, 321, 70,  20),  'label': '32'},  # Margins X [0 ⬆⬇]
             {'rect': (350, 321, 55,  20),  'label': '33'},  # Y [0 ⬆⬇]
@@ -745,7 +1005,7 @@ IMAGES = {
             {'rect': (566, 208, 64,  30),  'label': '34'},  # [Adjust Colours] button
             {'rect': (445, 242, 112, 58),  'label': '35'},  # Background Image area
             {'rect': (527, 310, 20,  18),  'label': '36'},  # [X] dismiss background
-            {'rect': (440, 328, 120, 16),  'label': '37'},  # ☐ Triggered by Language text
+            {'rect': (440, 328, 120, 16),  'label': '37',  'no_snap': True},  # ☐ Triggered by Language text
             {'rect': (566, 296, 64,  24),  'label': '38'},  # [OK] button
             {'rect': (566, 330, 64,  24),  'label': '39'},  # [Cancel] button
             # --- Preview Area ---
@@ -769,7 +1029,7 @@ IMAGES = {
 # ============================================================
 
 def process_image(name, data, mode='normal', snap=True):
-    """Process a single image. mode: 'normal', 'calibrate', 'debug'.
+    """Process a single image. mode: 'normal', 'calibrate', 'debug', 'ocr', 'crop'.
     snap: if True, auto-calibrate box positions in normal mode.
     """
     src_path = os.path.join(INPUT_DIR, data['src'])
@@ -780,7 +1040,24 @@ def process_image(name, data, mode='normal', snap=True):
     img = Image.open(src_path).copy()
     boxes = data['boxes']
 
-    if mode == 'calibrate':
+    # window_rect: 메인 윈도우만 정확 크롭 (딱맞게, 패딩 없음)
+    window_rect = data.get('window_rect')
+    if window_rect:
+        wx, wy, ww, wh = window_rect
+        img = img.crop((wx, wy, wx + ww, wy + wh))
+        if wx != 0 or wy != 0:
+            boxes = [dict(b, rect=(b['rect'][0] - wx, b['rect'][1] - wy,
+                                   b['rect'][2], b['rect'][3])) for b in boxes]
+
+    if mode == 'crop':
+        # Use edge-snap calibrated coordinates for accurate cropping
+        calibrated = auto_calibrate(img, boxes)
+        dst_dir = os.path.join(CROP_DIR, name)
+        crop_count = crop_boxes(img, calibrated, dst_dir, name)
+        print(f"CROP: {dst_dir} ({crop_count} crops generated)")
+        return crop_count
+
+    elif mode == 'calibrate':
         calibrated = auto_calibrate(img, boxes)
         # Print calibration report
         print(f"\n{'='*60}")
@@ -856,6 +1133,84 @@ def process_image(name, data, mode='normal', snap=True):
 
         return calibrated
 
+    elif mode == 'ocr':
+        print(f"\n{'='*60}")
+        print(f"  {name}  ({img.size[0]}x{img.size[1]})  [OCR mode]")
+        print(f"{'='*60}")
+
+        if not TESSERACT_AVAILABLE:
+            print("  [OCR] Tesseract/pytesseract not available.")
+            print("  [OCR] Falling back to edge-detection only.")
+            calibrated = auto_calibrate(img, boxes)
+        else:
+            # Step 1: OCR-based coordinate refinement
+            ocr_boxes = ocr_calibrate(img, boxes)
+
+            # Step 2: Apply additional edge-detection snap on top of OCR results
+            print(f"  [OCR] Applying edge-detection snap on OCR-refined boxes...")
+            calibrated_raw = auto_calibrate(img, ocr_boxes)
+
+            # Merge metadata: preserve OCR text/count from ocr_boxes into final result
+            calibrated = []
+            for i, cb in enumerate(calibrated_raw):
+                ocr_meta = ocr_boxes[i]
+                cb['_ocr_text'] = ocr_meta.get('_ocr_text', '')
+                cb['_ocr_count'] = ocr_meta.get('_ocr_count', 0)
+                calibrated.append(cb)
+
+        # Print calibration summary
+        changed = sum(1 for b in calibrated
+                      if b.get('_delta') and any(d != 0 for d in b['_delta']))
+        ocr_adjusted = sum(1 for b in calibrated if b.get('_ocr_count', 0) > 0)
+        protected = sum(1 for b in calibrated if b.get('_auto_protected'))
+        print(f"\n  Summary: {changed}/{len(calibrated)} boxes moved after OCR+edge-snap")
+        print(f"  OCR text found in: {ocr_adjusted}/{len(calibrated)} boxes")
+        print(f"  Auto-protected (delta guard): {protected}/{len(calibrated)} boxes")
+
+        # Check empty boxes
+        empty_warnings = check_empty_boxes(img, calibrated)
+        for w in empty_warnings:
+            print(f"  WARN: Box [{w['label']}] variance={w['variance']} avg={w['avg_color']}"
+                  f" - may be empty")
+
+        # Save output image
+        dst_path = os.path.join(OUTPUT_DIR, f"{name}.png")
+        result = draw_boxes(img, calibrated)
+        result.save(dst_path, quality=95)
+        print(f"  -> {dst_path}")
+
+        # Save JSON sidecar with OCR metadata
+        json_path = os.path.join(OUTPUT_DIR, f"{name}-ocr.json")
+        json_data = {
+            'name': name,
+            'src': data['src'],
+            'size': list(img.size),
+            'mode': 'ocr',
+            'boxes': [],
+        }
+        for cb in calibrated:
+            entry = {
+                'rect': list(cb['rect']),
+                'label': cb['label'],
+                'original': list(cb.get('_original', cb['rect'])),
+            }
+            if cb.get('color') and cb['color'] != RED:
+                entry['color'] = 'GREEN' if cb['color'] == GREEN else 'BLUE'
+            if cb.get('_delta') and any(d != 0 for d in cb['_delta']):
+                entry['delta'] = list(cb['_delta'])
+            if cb.get('_ocr_text'):
+                entry['ocr_text'] = cb['_ocr_text']
+                entry['ocr_word_count'] = cb['_ocr_count']
+            if cb.get('_auto_protected'):
+                entry['auto_protected'] = True
+            json_data['boxes'].append(entry)
+        json_data['empty_warnings'] = empty_warnings
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(json_data, f, indent=2, ensure_ascii=False)
+        print(f"  -> {json_path}")
+
+        return calibrated
+
     elif mode == 'debug':
         # Detect separators for debug overlay
         content_y = 350 if img.height > 400 else 0
@@ -911,26 +1266,55 @@ def main():
                         help='Generate debug overlays with coordinates and grid')
     parser.add_argument('--no-snap', action='store_true',
                         help='Disable auto edge-snapping in normal mode')
+    parser.add_argument('--ocr', action='store_true',
+                        help='OCR-based precision calibration using Tesseract '
+                             '(OCR text region detection + edge-snap)')
+    parser.add_argument('--crop', action='store_true',
+                        help='Crop each annotated box from original image')
     parser.add_argument('--target', type=str, default=None,
                         help='Process only images matching this prefix (e.g. "02")')
     args = parser.parse_args()
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    mode = 'calibrate' if args.calibrate else ('debug' if args.debug else 'normal')
+    if args.crop:
+        mode = 'crop'
+    elif args.ocr:
+        mode = 'ocr'
+    elif args.calibrate:
+        mode = 'calibrate'
+    elif args.debug:
+        mode = 'debug'
+    else:
+        mode = 'normal'
     snap = not args.no_snap
+
+    if mode == 'ocr' and not TESSERACT_AVAILABLE:
+        print("ERROR: pytesseract is not installed.")
+        print("  Install with: pip install pytesseract")
+        print("  Tesseract binary must be at: C:/Users/AidenKim/scoop/shims/tesseract.exe")
+        sys.exit(1)
 
     count = 0
     total_warnings = 0
+    total_crops = 0
     for name, data in IMAGES.items():
         if args.target and not name.startswith(args.target):
             continue
         result = process_image(name, data, mode=mode, snap=snap)
-        if isinstance(result, list):
+        if mode == 'crop' and isinstance(result, int):
+            total_crops += result
+        elif isinstance(result, list):
             total_warnings += len(result)
         count += 1
 
-    if mode == 'calibrate':
+    if mode == 'crop':
+        print(f"\nCrop complete: {count} images processed, {total_crops} crops generated.")
+        print(f"Output directory: {CROP_DIR}")
+    elif mode == 'ocr':
+        print(f"\nOCR calibration complete: {count} images processed.")
+        print("OCR JSON sidecar files saved to output directory (*-ocr.json).")
+    elif mode == 'calibrate':
         print(f"\nCalibration complete: {count} images analyzed.")
         print("JSON sidecar files saved to output directory.")
     elif mode == 'debug':
