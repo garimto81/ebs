@@ -1,7 +1,7 @@
 ---
 doc_type: "prd"
 doc_id: "EBS-CONSOLE-PRD"
-version: "1.0.0"
+version: "1.1.0"
 status: "draft"
 owner: "BRACELET STUDIO"
 created: "2026-02-23"
@@ -137,27 +137,30 @@ Phase 0에서 수행한 PokerGFX 역설계 결과물. 이 분석이 EBS console 
 |----------|:----:|:----:|:----:|:----:|:----:|
 | Action Tracker | 26 | 22 | 4 | 0 | 0 |
 | Pre-Start Setup | 13 | 10 | 0 | 3 | 0 |
-| Viewer Overlay | 14 | 12 | 2 | 0 | 0 |
-| GFX Console | 25 | 3 | 20 | 0 | 2 |
+| Viewer Overlay | 14 | 10 | 4 | 0 | 0 |
+| GFX Console | 25 | 3 | 18 | 2 | 2 |
 | Security | 11 | 7 | 3 | 1 | 0 |
-| Equity & Stats | 19 | 1 | 16 | 0 | 2 |
-| Hand History | 11 | 1 | 9 | 0 | 1 |
-| Server 관리 | 30 | 9 | 14 | 3 | 4 |
-| **합계** | **149** | **65** | **68** | **7** | **9** |
+| Equity & Stats | 19 | 1 | 15 | 0 | 3 |
+| Hand History | 11 | 1 | 8 | 0 | 2 |
+| Server 관리 | 30 | 12 | 10 | 3 | 5 |
+| **합계** | **149** | **66** | **62** | **9** | **12** |
 
-### 3.3 Drop 목록 (9개 배제 확정)
+### 3.3 Drop 목록 (12개 배제 확정)
 
 | ID | 기능 | 배제 사유 |
 |----|------|---------|
-| GC-019 | Print Report | 방송 중 인쇄 시나리오 없음 |
-| GC-024 | 다크/라이트 테마 | 기능 관련성 없는 선호도 옵션 |
-| ST-005 | 누적 3Bet% | 충분한 핸드 DB 없이 의미 없는 수치 |
-| ST-006 | 누적 CBet% | ST-005와 동일 사유 |
-| HH-011 | 핸드 공유 | 외부 서비스 연동 필요, EBS 범위 외 |
+| SV-021 | Commentary Mode | 기존 운영팀 미사용 확정. 운영 방식과 불일치 |
+| SV-022 | PIP (Commentary) | SV-021 배제에 따른 연동 기능 자동 배제 |
+| SV-010 | 9x16 Vertical | 쇼츠/모바일 출력. EBS 방송(가로 16:9)과 무관 |
 | SV-011 | Twitch 연동 | OBS에서 처리, EBS 범위 외 |
-| SV-021 | Commentary Mode | 기존 운영팀 미사용 확정 |
-| SV-022 | PIP (Commentary) | SV-021 전제, 기존 배제 확정 |
 | SV-030 | Split Recording | 편집 워크플로우, 방송 운영 범위 외 |
+| GC-022 | 시스템 상태 | CPU/메모리 모니터링. OS 내장 도구로 대체 가능 |
+| GC-024 | 다크/라이트 테마 | UI 편의 기능. 단일 테마(다크)로 고정 |
+| EQ-009 | 핸드 레인지 인식 | AI/ML 분석 전제. EBS 범위 외 |
+| EQ-011 | Short Deck Equity | 특수 게임타입 전용, 개발 ROI 불충분 |
+| ST-005 | 누적 3Bet% | 고급 통계 누적 집계. v2.0 통계 완성 시 재검토 |
+| HH-004 | 팟 사이즈 필터 | 분석용 고급 필터. 플레이어/태그 필터로 충분 |
+| HH-011 | 핸드 공유 | 외부 서비스 연동 필요. EBS 단독 실행 범위 외 |
 
 ---
 
@@ -173,17 +176,17 @@ Phase 0에서 수행한 PokerGFX 역설계 결과물. 이 분석이 EBS console 
 
 ### 4.2 버전별 범위
 
-#### v1.0 Broadcast Ready (65개 기능)
+#### v1.0 Broadcast Ready (66개 기능)
 
 > **목표**: EBS console 단독으로 라이브 포커 방송 운영 가능
 
 **핵심 범위:**
 - Action Tracker 22개 — 실시간 게임 진행 추적, 액션/베팅 입력
 - Pre-Start Setup 10개 — 이벤트 설정, 플레이어/스택 입력
-- Viewer Overlay 12개 — 홀카드, 칩카운트, 팟, 액션 OBS 오버레이
+- Viewer Overlay 10개 — 홀카드, 칩카운트, 팟, 액션 OBS 오버레이
 - Security 7개 — Realtime/Trustless Mode 토글, WebSocket TLS
 - GFX Console 3개 — 플레이어 수, 남은 수, 평균 스택 기본 현황
-- Server 관리 9개 — 해상도, 크로마키, 딜레이 출력, 레이아웃 기본
+- Server 관리 12개 — 해상도, 크로마키, 딜레이 출력, 레이아웃 기본
 - Equity & Stats 1개 — 핸드 수 카운터
 - Hand History 1개 — 현재 세션 핸드 상세 뷰
 
@@ -233,7 +236,7 @@ Phase 0에서 수행한 PokerGFX 역설계 결과물. 이 분석이 EBS console 
 
 ### 5.1 의존성 기반 개발 순서
 
-v1.0 65개 기능을 의존성 순서로 6개 레이어로 분류한다.
+v1.0 66개 기능을 의존성 순서로 6개 레이어로 분류한다.
 
 ```
   Layer 1: 인프라 (방송 시작 전 필수)
@@ -324,7 +327,7 @@ PokerGFX에 없는 EBS 고유 기능. v3.0에서 구현하거나, 필요 시 별
   PokerGFX            PokerGFX            EBS 고유
   기능 핵심           기능 완성           기능 추가
 
-  65개 기능           68개 기능           7개+신규
+  66개 기능           62개 기능           9개+신규
 
   방송 가능           방송 고품질         자동화 완성
 ```
@@ -333,11 +336,91 @@ EBS 고유 기능은 v3.0에서 집중 구현한다. v1.0/v2.0은 PokerGFX 벤�
 
 ---
 
+## Appendix A: v1.0 스코프 최종 확정 (2026-02-23)
+
+> 2026-02-23 트리아지 v1.1.0 기준 확정. 상세: `ebs-console-feature-triage.md`
+
+### A.1 v1.0 개발 대상 (66개)
+
+| 카테고리 | v1.0 개수 |
+|----------|:---------:|
+| Action Tracker | 22 |
+| Pre-Start Setup | 10 |
+| Viewer Overlay | 10 |
+| GFX Console | 3 |
+| Security | 7 |
+| Equity & Stats | 1 |
+| Hand History | 1 |
+| Server 관리 | 12 |
+| **합계** | **66** |
+
+### A.2 Drop 확정 (12개)
+
+완전 배제 확정. 재검토 없이 EBS console 범위 외로 처리.
+
+| ID | 기능 | 카테고리 | 배제 사유 |
+|----|------|---------|---------|
+| SV-021 | Commentary Mode | Server 관리 | 기존 운영팀 미사용 확정 |
+| SV-022 | PIP (Commentary) | Server 관리 | SV-021 전제, 자동 배제 |
+| SV-010 | 9x16 Vertical | Server 관리 | 쇼츠/모바일 출력, 방송 범위 외 |
+| SV-011 | Twitch 연동 | Server 관리 | OBS 처리, EBS 범위 외 |
+| SV-030 | Split Recording | Server 관리 | 편집 워크플로우, 방송 운영 범위 외 |
+| GC-022 | 시스템 상태 | GFX Console | OS 내장 도구로 대체 가능 |
+| GC-024 | 다크/라이트 테마 | GFX Console | 단일 테마(다크) 고정 |
+| EQ-009 | 핸드 레인지 인식 | Equity & Stats | AI/ML 분석 전제, EBS 범위 외 |
+| EQ-011 | Short Deck Equity | Equity & Stats | 특수 타입, 개발 ROI 불충분 |
+| ST-005 | 누적 3Bet% | Equity & Stats | 고급 통계, v2.0 재검토 |
+| HH-004 | 팟 사이즈 필터 | Hand History | 분석용, 기본 필터로 충분 |
+| HH-011 | 핸드 공유 | Hand History | 외부 서비스 연동 필요 |
+
+---
+
+## Appendix A: v1.0 스코프 최종 확정 (2026-02-23)
+
+> 2026-02-23 트리아지 v1.1.0 기준 확정. 상세: `ebs-console-feature-triage.md`
+
+### A.1 v1.0 개발 대상 (66개)
+
+| 카테고리 | v1.0 개수 |
+|----------|:---------:|
+| Action Tracker | 22 |
+| Pre-Start Setup | 10 |
+| Viewer Overlay | 10 |
+| GFX Console | 3 |
+| Security | 7 |
+| Equity & Stats | 1 |
+| Hand History | 1 |
+| Server 관리 | 12 |
+| **합계** | **66** |
+
+### A.2 Drop 확정 (12개)
+
+완전 배제 확정. 재검토 없이 EBS console 범위 외로 처리.
+
+| ID | 기능 | 카테고리 | 배제 사유 |
+|----|------|---------|---------|
+| SV-021 | Commentary Mode | Server 관리 | 기존 운영팀 미사용 확정 |
+| SV-022 | PIP (Commentary) | Server 관리 | SV-021 전제, 자동 배제 |
+| SV-010 | 9x16 Vertical | Server 관리 | 쇼츠/모바일 출력, 방송 범위 외 |
+| SV-011 | Twitch 연동 | Server 관리 | OBS 처리, EBS 범위 외 |
+| SV-030 | Split Recording | Server 관리 | 편집 워크플로우, 방송 운영 범위 외 |
+| GC-022 | 시스템 상태 | GFX Console | OS 내장 도구로 대체 가능 |
+| GC-024 | 다크/라이트 테마 | GFX Console | 단일 테마(다크) 고정 |
+| EQ-009 | 핸드 레인지 인식 | Equity & Stats | AI/ML 분석 전제, EBS 범위 외 |
+| EQ-011 | Short Deck Equity | Equity & Stats | 특수 타입, 개발 ROI 불충분 |
+| ST-005 | 누적 3Bet% | Equity & Stats | 고급 통계, v2.0 재검토 |
+| HH-004 | 팟 사이즈 필터 | Hand History | 분석용, 기본 필터로 충분 |
+| HH-011 | 핸드 공유 | Hand History | 외부 서비스 연동 필요 |
+
+---
+
 ## 변경 이력
 
 | 버전 | 날짜 | 변경 내용 |
 |------|------|----------|
 | 1.0.0 | 2026-02-23 | 최초 작성 |
+| 1.1.0 | 2026-02-23 | 트리아지 v1.1.0 동기화: v1.0=66개, Drop=12개, Appendix A(스코프 요약) 추가 |
+| 1.1.0 | 2026-02-23 | 트리아지 v1.1.0 동기화: v1.0=66개, Drop=12개, Appendix A(스코프 요약) 추가 |
 
 ---
-**Version**: 1.0.0 | **Updated**: 2026-02-23
+**Version**: 1.1.0 | **Updated**: 2026-02-23
