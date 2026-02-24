@@ -1,7 +1,7 @@
 ---
 doc_type: "prd"
 doc_id: "PRD-0004-EBS-ServerUI"
-version: "19.3.0"
+version: "19.4.0"
 status: "draft"
 owner: "BRACELET STUDIO"
 last_updated: "2026-02-23"
@@ -41,43 +41,31 @@ stakeholders:
 
 ---
 
-## v1.0 스코프 요약 (2026-02-23 확정)
-
-> **기준 문서**: [ebs-console.prd.md](../00-prd/ebs-console.prd.md) | [ebs-console-feature-triage.md](ebs-console-feature-triage.md)
-
-| 버전 | 목표 | 기능 수 |
-|------|------|:------:|
-| **v1.0 Broadcast Ready** | EBS console 단독 라이브 방송 1회 성공 | 66개 |
-| v2.0 Operational Excellence | 통계·분석·방송 품질 고도화 | 62개 |
-| v3.0 EBS Native | RFID 자동 인식 + WSOP LIVE DB 연동 | 9개 |
-
-### Drop 확정 (12개)
-
-| ID | 기능 | 배제 사유 |
-|----|------|----------|
-| GC-019 | Print Report | 방송 운영과 무관한 오프라인 기능 |
-| GC-022 | 시스템 상태 | CPU/메모리 모니터링 — 방송과 무관 |
-| GC-024 | 다크/라이트 테마 | 단일 다크 테마 고정 |
-| EQ-009 | 핸드 레인지 인식 | 고급 AI 분석 — EBS 범위 외 |
-| EQ-011 | Short Deck Equity | 특수 게임타입 — 개발 ROI 불충분 |
-| ST-005 | 누적 3Bet% | 고급 통계 누적 집계 — 우선순위 최하위 |
-| HH-004 | 팟 사이즈 필터 | 분석용 고급 필터 — v1.0 범위 외 |
-| HH-011 | 핸드 공유 | 외부 서비스 연동 필요, EBS 범위 외 |
-| SV-010 | 9x16 Vertical | 쇼츠/모바일용 — EBS 방송 범위 외 |
-| SV-011 | Twitch 연동 | OBS에서 처리, EBS 범위 외 |
-| SV-021 | Commentary Mode | 기존 배제 확정 (운영팀 미사용) |
-| SV-022 | PIP (Commentary) | SV-021 전제 — 기존 배제 |
-| SV-030 | Split Recording | 편집 워크플로우 — 기존 배제 |
-
-> **본 문서의 UI 설계는 v1.0 Keep 66개 기능을 우선 기술한다.** Drop 기능은 해당 섹션에 `[DROP]`으로 표기.
-
----
-
 ## 1장: 전체 화면 구조
 
 ### 1.1 네비게이션 맵
 
 포커 방송 한 프레임이 만들어지는 데이터 파이프라인을 따라가면, EBS의 모든 화면이 왜 존재하는지 드러난다. 빈 캔버스에서 시작하여 8단계를 거치면 완성된 네비게이션 맵에 도달한다.
+
+#### Step 0: 전체 네비게이션 맵 (최종 확정)
+
+8단계를 거쳐 완성된 최종 다이어그램이 EBS의 전체 네비게이션 맵이다. 운영자의 하루는 이 맵의 바깥(Skin Editor)에서 시작하여, 안쪽(6개 탭 설정)을 거쳐, Action Tracker에서 끝난다.
+
+```mermaid
+flowchart LR
+    MW["Main Window"] -->|"Ctrl+1"| SRC["Sources"]
+    MW -->|"Ctrl+2"| OUT["Outputs"]
+    MW -->|"Ctrl+3"| GFX1["GFX 1"]
+    MW -->|"Ctrl+4"| GFX2["GFX 2"]
+    MW -->|"Ctrl+5"| GFX3["GFX 3"]
+    MW -->|"Ctrl+6"| SYS["System"]
+    SYS -->|"Y-09"| TDG["Table Diagnostics"]
+    MW -->|"Skin"| SKE["Skin Editor<br/>(별도 창)"]
+    SKE -->|"요소 클릭"| GRE["Graphic Editor<br/>(별도 창)"]
+    MW -->|"F8"| AT["Action Tracker<br/>(별도 앱)"]
+```
+
+---
 
 #### Step 1: Main Window — 중앙 통제실
 
@@ -120,13 +108,25 @@ PokerGFX의 기본 화면. 좌측에 방송 Preview, 우측에 상태 표시와 
 > - 버튼 7개가 우선순위 구분 없이 균등 노출 → EBS에서 Quick Actions 그룹으로 재편
 > - **EBS MVP 범위 외 (추후 개발 예정)**: Recording, Secure Delay(4번), Studio(8번), Split Recording(9번), Tag Player(10번) — Preview는 미리보기 항상 활성화 고정(토글 UI 제거)
 
-##### EBS 설계본
+##### EBS 설계본 — 해상도 변형 비교
+
+**A. 자동 16:9 (기본)** — `aspect-ratio:16/9` · `flex:1 1 auto` · 1920×1080 기준
 
 ![Main Window - EBS 설계본](images/mockups/ebs-main.png)
 
+**B. 고정 720×480 (SD 변형)** — `flex:0 0 720px` · SD 480p 출력 환경 전용
+
+![Main Window - EBS 설계본 (720×480 SD 변형)](mockups/ebs-main-window-720x480-capture.png)
+
+> **두 이미지를 함께 배치한 이유**: Preview Panel은 출력 해상도에 따라 플렉서블하게 동작하도록 설계되었다.
+> 기본(A)은 `aspect-ratio:16/9`로 1920×1080 환경에서 컨테이너에 비례하여 자동 조정되고,
+> SD 변형(B)은 Preview를 `720×480` 고정 픽셀로 렌더링하여 SD 480p 방송 장비 호환성을 확보한다.
+> 두 모드는 CSS 변수 1개(`--preview-fixed-size`) 전환으로 런타임 스위칭이 가능한 단일 구현체이며,
+> 기본값은 자동 16:9 모드다.
+
 ##### 설계 스펙
 
-**변환 요약**: PokerGFX 10개 → EBS 15개. RFID Status 독립 분리, Hand Counter(M-17), Connection Status(M-18) 신규 추가. Recording·Secure Delay·Studio·Split Recording·Tag Player EBS MVP 범위 외 (추후 개발 예정). Preview 상시 활성화 고정(M-09 토글 제거). 2-column 레이아웃 계승.
+**변환 요약**: PokerGFX 10개 → EBS 13개. RFID Status 독립 분리. Recording·Secure Delay·Studio·Split Recording·Tag Player EBS MVP 범위 외 (추후 개발 예정). Preview 상시 활성화 고정(M-09 토글 제거). 2-column 레이아웃 계승. Hand Counter(M-17)·Connection Status(M-18) Drop 확정.
 
 시스템 모니터링과 긴급 조작을 담당하는 기본 화면. 본방송 중 운영자 주의력의 15%만 할당된다.
 
@@ -135,12 +135,12 @@ PokerGFX의 기본 화면. 좌측에 방송 Preview, 우측에 상태 표시와 
 - **Preview Panel**: 480px 고정폭, 16:9 비율 자동 높이 (480×270). Chroma Key Blue(#0000FF) 배경에 GFX 오버레이 실시간 렌더링. CSS `aspect-ratio:16/9` 적용.
 - **Control Panel**: 나머지 320px. 상단: 필수 상태 인디케이터(CPU/GPU/RFID). 중단: 자동 spacer(flex:1, ~60px). 하단: Quick Actions 버튼 3개. 수직 스크롤 없이 모든 요소가 보여야 한다.
 - **앱 윈도우**: 800×365px 기준 (Title Bar 28px + Preview 270px + Status Bar 22px + Shortcut Bar 24px + Watermark 22px).
-- **Status Bar**: 하단 1행. RFID 연결 상태, 현재 핸드 번호, AT/Overlay/DB 연결 상태를 점 인디케이터로 표시.
+- **Status Bar**: 하단 1행. 서버 연결 상태, 게임 타입, 블라인드 레벨 표시. ~~RFID 연결 상태, 현재 핸드 번호, AT/Overlay/DB 연결 상태~~ (M-17/M-18 Drop 확정).
 - **탭 없음**: Main Window는 독립 모니터링 화면. 각 설정 탭(Sources, Outputs, GFX 1, GFX 2, GFX 3, System)은 키보드 단축키(Ctrl+1~6)로 별도 창 접근.
 
 ###### 레이아웃
 
-Preview Panel(M-02, 좌) + Status Panel(M-03~M-05, M-18, 우상) + Quick Actions(M-11~M-14, 우하).
+Preview Panel(M-02, 좌) + Status Panel(M-03~M-06, 우상) + Quick Actions(M-11~M-14, 우하).
 
 ###### Design Decisions
 
@@ -181,8 +181,8 @@ Preview Panel(M-02, 좌) + Status Panel(M-03~M-05, M-18, 우상) + Quick Actions
 | M-04 | GPU Indicator | ProgressBar | GPU 사용률 + 색상 코딩 | #3 | P1 |
 | M-05 | RFID Status | Icon+Badge | Green=Connected, Red=Disconnected, Yellow=Calibrating | #3 | P0 |
 | M-06 | RFID Connection Icon | Icon | RFID 연결 상태 표시 (연결 시 녹색 USB/WiFi 아이콘으로 변경, 미연결 시 경고 아이콘) | #3 | P1 |
-| M-17 | Hand Counter | Badge | 현재 세션 핸드 번호 (Hand #47) | 신규 | P0 |
-| M-18 | Connection Status | Row | AT/Overlay/DB 각각 Green/Red 표시 | 신규 | P0 |
+| ~~M-17~~ | ~~Hand Counter~~ | ~~Badge~~ | ~~현재 세션 핸드 번호 (Hand #47)~~ | ~~신규~~ | ~~P0~~ **[DROP]** |
+| ~~M-18~~ | ~~Connection Status~~ | ~~Row~~ | ~~AT/Overlay/DB 각각 Green/Red 표시~~ | ~~신규~~ | ~~P0~~ **[DROP]** |
 
 ####### M-02 Preview Panel 해상도 스케일링 스펙
 
@@ -221,7 +221,7 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 | M-11 Reset Hand | 확인 다이얼로그 → 핸드 초기화 | Preview 초기화, Hand# 리셋 |
 | M-12 Settings | 전역 설정 다이얼로그 열림 | 테마/언어/단축키 변경 가능 |
 | M-13 Register Deck | 52장 순차 스캔 다이얼로그 | 1/52~52/52 진행 표시 |
-| M-14 Launch AT | AT 프로세스 실행 + 포커스 전환 | M-18 AT 표시등 Green으로 변경 |
+| M-14 Launch AT | AT 프로세스 실행 + 포커스 전환 | AT 프로세스 활성화 |
 | M-20 Fullscreen Preview | Preview 전체 화면 전환 | ESC로 복귀 |
 
 ###### 에러 상태 (Main Window 특화)
@@ -229,9 +229,9 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 | 에러 유형 | 표시 위치 | 시각 피드백 | 복구 액션 |
 |----------|----------|-----------|---------|
 | RFID 미연결 | M-05 | Red 아이콘 + 경고음 | Ctrl+6 → Y-03 Reset |
-| AT 연결 끊김 | M-18 | AT 표시등 Red | M-14 재실행 |
 | Preview 멈춤 | M-02 | 마지막 프레임 고정 + 테두리 빨간색 | M-09 Preview 토글 재시작 |
-| Hand Counter 불일치 | M-17 | 숫자 빨간색 표시 | M-11 Reset Hand |
+| ~~AT 연결 끊김~~ | ~~M-18~~ | ~~AT 표시등 Red~~ | ~~M-14 재실행~~ (**[DROP]** M-18 제거됨) |
+| ~~Hand Counter 불일치~~ | ~~M-17~~ | ~~숫자 빨간색 표시~~ | ~~M-11 Reset Hand~~ (**[DROP]** M-17 제거됨) |
 
 ###### Navigation
 
@@ -1288,7 +1288,7 @@ PokerGFX에서 Commentary 탭은 해설자 전용 정보 표시 영역을 제어
 
 ### 결정
 
-**EBS에서 완전 배제.** PokerGFX 268개 요소 중 Commentary 8개를 제거한 것이 EBS 184개로의 감축(-84)에 기여하는 첫 번째 요인이다. 향후 해설자 오버레이가 필요해질 경우 GFX-Visual 서브탭의 확장으로 대응 가능하며, 별도 탭 부활은 계획하지 않는다.
+**EBS에서 완전 배제.** PokerGFX 268개 요소 중 Commentary 8개를 제거한 것이 EBS 182개로의 감축(-86)에 기여하는 첫 번째 요인이다. (M-17/M-18 Drop 확정으로 184개→182개 추가 감축) 향후 해설자 오버레이가 필요해질 경우 GFX-Visual 서브탭의 확장으로 대응 가능하며, 별도 탭 부활은 계획하지 않는다.
 
 ---
 
@@ -1635,6 +1635,36 @@ AT는 별도 앱. GfxServer 상호작용 지점만 매핑한다.
 
 ---
 
+## v1.0 스코프 요약 (2026-02-23 확정)
+
+> **기준 문서**: [ebs-console.prd.md](../00-prd/ebs-console.prd.md) | [ebs-console-feature-triage.md](ebs-console-feature-triage.md)
+
+| 버전 | 목표 | 기능 수 |
+|------|------|:------:|
+| **v1.0 Broadcast Ready** | EBS console 단독 라이브 방송 1회 성공 | 66개 |
+| v2.0 Operational Excellence | 통계·분석·방송 품질 고도화 | 62개 |
+| v3.0 EBS Native | RFID 자동 인식 + WSOP LIVE DB 연동 | 9개 |
+
+### Drop 확정 (12개)
+
+| ID | 기능 | 배제 사유 |
+|----|------|----------|
+| GC-019 | Print Report | 방송 운영과 무관한 오프라인 기능 |
+| GC-022 | 시스템 상태 | CPU/메모리 모니터링 — 방송과 무관 |
+| GC-024 | 다크/라이트 테마 | 단일 다크 테마 고정 |
+| EQ-009 | 핸드 레인지 인식 | 고급 AI 분석 — EBS 범위 외 |
+| EQ-011 | Short Deck Equity | 특수 게임타입 — 개발 ROI 불충분 |
+| ST-005 | 누적 3Bet% | 고급 통계 누적 집계 — 우선순위 최하위 |
+| HH-004 | 팟 사이즈 필터 | 분석용 고급 필터 — v1.0 범위 외 |
+| HH-011 | 핸드 공유 | 외부 서비스 연동 필요, EBS 범위 외 |
+| SV-010 | 9x16 Vertical | 쇼츠/모바일용 — EBS 방송 범위 외 |
+| SV-011 | Twitch 연동 | OBS에서 처리, EBS 범위 외 |
+| SV-021 | Commentary Mode | 기존 배제 확정 (운영팀 미사용) |
+| SV-022 | PIP (Commentary) | SV-021 전제 — 기존 배제 |
+| SV-030 | Split Recording | 편집 워크플로우 — 기존 배제 |
+
+> **본 문서의 UI 설계는 v1.0 Keep 66개 기능을 우선 기술한다.** Drop 기능은 해당 섹션에 `[DROP]`으로 표기.
+
 ---
 
 ## 변경 이력
@@ -1656,7 +1686,10 @@ AT는 별도 앱. GfxServer 상호작용 지점만 매핑한다.
 | **v19.1.0** | **2026-02-23** | **Appendix A 추가**: 오버레이 오차율 분석 섹션 신규 삽입. 11개 화면 Guard 위반 상세(23건), DELTA_GUARD 임계값 기준, 해석 지침 포함. tools/analyze_overlay_errors.py 연동. |
 | **v19.2.0** | **2026-02-23** | **Phase 1 복제 원칙 준수 — Rules 탭 폐지**: PokerGFX 원본에 존재하지 않는 독립 Rules 탭(Step 2) 제거. GFX 2 원본 요소 6개(#8 Move Button Bomb Pot, #9 Limit Raises, #10 Straddle Sleeper, #11 Sleeper Final Action, #14 Allow Rabbit Hunting, #21 Ignore Split Pots)를 GFX Display 서브탭(G-52~G-57)으로 복원. Step 번호 3→2, 4→3, 5→4, 6→5, 7→6, 8→7 재조정. Ctrl+4=System, Ctrl+5 제거. 전역 단축키 Ctrl+1~4로 축소. |
 | **v19.3.0** | **2026-02-23** | **PokerGFX 소스 순서 전면 재설계**: Sources→Outputs→GFX1→GFX2→GFX3→System. GFX 합산탭(Layout/Visual/Display/Numbers) 폐지, GFX1/2/3 분리 탭 복원. System Ctrl+4→Ctrl+6. 탭 수 4→6. Step 수 7→8(Action Tracker Step 7→8, Skin Editor Step 7→9 재조정). |
+| **v19.4.0** | **2026-02-24** | **v1.0 스코프 요약/Drop 확정 섹션 최하단 배치**: 문서 최상단에서 변경 이력 바로 앞으로 이동. |
+| **v19.6.0** | **2026-02-24** | **EBS 설계본 해상도 변형 비교 추가**: 기존 자동 16:9 설계본(A) 아래에 고정 720×480 SD 변형 캡쳐(B) 추가. 두 이미지 배치 이유(플렉서블 단일 구현체, CSS 변수 런타임 스위칭) 설명 텍스트 삽입. |
+| **v19.5.0** | **2026-02-24** | **M-17/M-18 Drop 확정 처리**: Hand Counter(M-17), Connection Status(M-18) Drop 마킹. Element Catalog 취소선+[DROP] 적용. 에러 상태 표 취소선 처리. Status Bar 설계 원칙 갱신. 레이아웃 기술에서 M-18 제거. 요소 카운트 184→182개. ebs-main-window.html Wireframe v1.7 반영 (Status Bar M-17/M-18 제거). ebs-main-window-720x480.html 신규 생성 (Preview 고정 720×480). |
 
 ---
 
-**Version**: 19.3.0 | **Updated**: 2026-02-23
+**Version**: 19.6.0 | **Updated**: 2026-02-24

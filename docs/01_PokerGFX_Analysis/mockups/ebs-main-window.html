@@ -203,6 +203,36 @@ body{margin:0;padding:0;background:var(--bg-deep);height:fit-content;display:inl
   color:var(--text-dim);background:#111122;border-top:1px solid var(--border);
   letter-spacing:.3px
 }
+
+/* ===== VARIANT NOTE ===== */
+.variant-note{
+  margin-top:16px;padding:12px 14px;
+  background:#111122;border:1px solid var(--border);
+  width:fit-content;
+}
+.variant-title{
+  font-size:10px;font-weight:700;letter-spacing:.5px;
+  color:var(--text-dim);margin-bottom:10px;text-transform:uppercase
+}
+.variant-row{display:flex;gap:12px;align-items:flex-start}
+.variant-card{
+  background:var(--bg-panel);border:1px solid var(--border);
+  padding:8px 10px;min-width:180px;
+}
+.variant-card.active{border-color:var(--accent)}
+.variant-badge{
+  font-size:8px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  background:var(--border);color:var(--text-dim);
+  padding:1px 6px;border-radius:2px;margin-bottom:5px;display:inline-block
+}
+.variant-badge.alt{background:rgba(68,136,255,.2);color:var(--accent)}
+.variant-label{font-size:11px;font-weight:600;color:var(--text);margin-bottom:4px}
+.variant-img{
+  display:block;width:220px;height:auto;
+  border:1px solid var(--border-light);margin:6px 0;
+}
+.variant-sub{font-size:9px;color:var(--text-dim);line-height:1.5;font-family:monospace;margin-bottom:4px}
+.variant-res{font-size:9px;color:var(--accent);font-family:monospace;font-weight:700}
 </style>
 </head>
 <body>
@@ -294,24 +324,13 @@ body{margin:0;padding:0;background:var(--bg-deep);height:fit-content;display:inl
     </div><!-- /control-panel -->
   </div><!-- /main-header -->
 
-  <!-- Status Bar: M-17 Hand Counter + M-18 Connection Status -->
+  <!-- Status Bar (M-17/M-18 Drop 확정) -->
   <div class="status-bar">
     <div class="status-bar-left">
       <span><span class="status-dot"></span>Connected</span>
-      <span class="status-hand">Hand #142 <span class="id" style="margin-left:2px">M-17</span></span>
-      <span class="status-sep">|</span>
       <span class="status-game">Texas Hold'em</span>
       <span class="status-sep">|</span>
       <span class="status-blinds">500 / 1K</span>
-    </div>
-    <div class="status-bar-right">
-      <!-- M-18: Connection Status -->
-      <div class="status-conn">
-        AT:<span class="status-dot" style="margin-left:3px;margin-right:1px"></span>
-        OVL:<span class="status-dot" style="margin-left:3px;margin-right:1px"></span>
-        DB:<span class="status-dot" style="margin-left:3px;margin-right:1px"></span>
-        <span class="id" style="margin-left:3px">M-18</span>
-      </div>
     </div>
   </div>
 
@@ -328,9 +347,33 @@ body{margin:0;padding:0;background:var(--bg-deep);height:fit-content;display:inl
     </span>
   </div>
 
-  <div class="watermark">PRD-0004 Ch.2 &mdash; EBS Main Window (M-01 ~ M-20, 14 Elements) &mdash; Wireframe v1.6 | 자동 16:9</div>
+  <div class="watermark">PRD-0004 Ch.2 &mdash; EBS Main Window (M-01 ~ M-20, 12 Elements, M-17/M-18 Drop) &mdash; Wireframe v1.7 | 자동 16:9</div>
 
 </div><!-- /app -->
+
+<!-- Preview 유연성 비교 -->
+<div class="variant-note">
+  <div class="variant-title">M-02 Preview — 해상도 변형 비교</div>
+  <div class="variant-row">
+    <!-- 좌: 현재 파일 설명 -->
+    <div class="variant-card active">
+      <div class="variant-badge">현재 파일</div>
+      <div class="variant-label">자동 16:9</div>
+      <div class="variant-sub">flex:1 1 auto · aspect-ratio:16/9<br>출력 해상도에 비례하여 자동 조정</div>
+      <div class="variant-res">1920 × 1080 기준</div>
+    </div>
+    <!-- 우: 720×480 캡쳐 -->
+    <div class="variant-card">
+      <div class="variant-badge alt">SD 변형</div>
+      <div class="variant-label">고정 720×480</div>
+      <img src="ebs-main-window-720x480-capture.png"
+           alt="720×480 고정 Preview 변형"
+           class="variant-img">
+      <div class="variant-sub">flex:0 0 720px · 고정 픽셀<br>SD 480p 출력 환경 전용</div>
+      <div class="variant-res">720 × 480 (3:2)</div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
