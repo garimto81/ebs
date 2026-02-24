@@ -1,297 +1,91 @@
 {
   "name": "03-outputs-tab",
   "src": "스크린샷 2026-02-05 180645.png",
-  "size": [
-    765,
-    730
-  ],
-  "mode": "ocr",
+  "size": [765, 730],
+  "mode": "manual",
+  "note": "수동 재작업 2026-02-24 — is_drop 추가 (SV-010 box2, SV-011 box13), OCR 텍스트 교정",
   "boxes": [
     {
-      "rect": [
-        10,
-        379,
-        255,
-        18
-      ],
+      "rect": [30, 397, 235, 20],
       "label": "1",
-      "original": [
-        30,
-        397,
-        235,
-        20
-      ],
-      "delta": [
-        -20,
-        -18,
-        20,
-        -2
-      ],
-      "ocr_text": "Video | Siza",
-      "ocr_word_count": 2
+      "fn": "O-01 Video Size",
+      "ocr_text": "Video Size | 1920x1080 ▼"
     },
     {
-      "rect": [
-        265,
-        379,
-        153,
-        25
-      ],
+      "rect": [272, 397, 146, 20],
       "label": "2",
-      "original": [
-        270,
-        397,
-        148,
-        20
-      ],
-      "delta": [
-        -5,
-        -18,
-        5,
-        5
-      ],
-      "ocr_text": "B | 9x16 | Vertical",
-      "ocr_word_count": 3
+      "fn": "O-02 9x16 Vertical",
+      "is_drop": true,
+      "ocr_text": "9x16 Vertical ☐",
+      "ebs_scope": "Drop (SV-010)"
     },
     {
-      "rect": [
-        10,
-        417,
-        230,
-        18
-      ],
+      "rect": [30, 423, 210, 21],
       "label": "3",
-      "original": [
-        30,
-        423,
-        210,
-        21
-      ],
-      "delta": [
-        -20,
-        -6,
-        20,
-        -3
-      ],
-      "ocr_text": "Frame | Rate | g | =",
-      "ocr_word_count": 4,
-      "auto_protected": true
+      "fn": "O-03 Frame Rate",
+      "ocr_text": "Frame Rate | 30 fps ▼"
     },
     {
-      "rect": [
-        56,
-        481,
-        215,
-        94
-      ],
+      "rect": [56, 465, 209, 110],
       "label": "4",
-      "original": [
-        56,
-        465,
-        209,
-        110
-      ],
-      "delta": [
-        0,
-        16,
-        6,
-        -16
-      ],
-      "ocr_text": "Live | Praview | Praview | w | No",
-      "ocr_word_count": 8
+      "fn": "O-04 Live Column",
+      "ocr_text": "Live | Preview | Preview w/ No Delay ▼"
     },
     {
-      "rect": [
-        271,
-        481,
-        142,
-        94
-      ],
+      "rect": [271, 465, 142, 110],
       "label": "5",
-      "original": [
-        270,
-        465,
-        143,
-        110
-      ],
-      "delta": [
-        1,
-        16,
-        -1,
-        -16
-      ],
-      "ocr_text": "Dalay",
-      "ocr_word_count": 1
+      "fn": "O-05 Delay Column",
+      "ocr_text": "Delay"
     },
     {
-      "rect": [
-        9,
-        601,
-        256,
-        20
-      ],
+      "rect": [33, 601, 232, 20],
       "label": "6",
-      "original": [
-        28,
-        601,
-        237,
-        20
-      ],
-      "delta": [
-        -19,
-        0,
-        19,
-        0
-      ],
-      "ocr_text": "Virtual | Camera",
-      "ocr_word_count": 2
+      "fn": "O-06 Virtual Camera",
+      "ocr_text": "Virtual Camera ☑"
     },
     {
-      "rect": [
-        9,
-        683,
-        468,
-        35
-      ],
+      "rect": [17, 677, 460, 32],
       "label": "7",
-      "original": [
-        17,
-        677,
-        460,
-        32
-      ],
-      "delta": [
-        -8,
-        6,
-        8,
-        3
-      ],
-      "ocr_text": "Rocording | Mode.",
-      "ocr_word_count": 2
+      "fn": "O-07 Recording Mode",
+      "ocr_text": "Recording Mode | Direct Files ▼"
     },
     {
-      "rect": [
-        554,
-        385,
-        198,
-        24
-      ],
+      "rect": [540, 397, 200, 20],
       "label": "8",
-      "original": [
-        537,
-        397,
-        203,
-        20
-      ],
-      "delta": [
-        17,
-        -12,
-        -5,
-        4
-      ],
-      "ocr_text": "Secura | Delay | [30 | Min",
-      "ocr_word_count": 4
+      "fn": "O-08 Secure Delay",
+      "ocr_text": "Secure Delay | 30 Min ↑↓"
     },
     {
-      "rect": [
-        488,
-        423,
-        222,
-        21
-      ],
+      "rect": [488, 423, 222, 21],
       "label": "9",
-      "original": [
-        488,
-        423,
-        222,
-        21
-      ]
+      "fn": "O-09 Dynamic Delay",
+      "ocr_text": "Dynamic Delay ☐"
     },
     {
-      "rect": [
-        552,
-        443,
-        200,
-        32
-      ],
+      "rect": [540, 449, 200, 21],
       "label": "10",
-      "original": [
-        540,
-        443,
-        200,
-        32
-      ],
-      "delta": [
-        12,
-        0,
-        0,
-        0
-      ],
-      "ocr_text": "Autostream | [0 | Min",
-      "ocr_word_count": 3
+      "fn": "O-10 Auto Stream",
+      "ocr_text": "Auto Stream | 0 Min ↑↓"
     },
     {
-      "rect": [
-        540,
-        476,
-        200,
-        15
-      ],
+      "rect": [540, 476, 200, 15],
       "label": "11",
-      "original": [
-        540,
-        476,
-        200,
-        15
-      ],
-      "ocr_text": "Show | Countdown",
-      "ocr_word_count": 2
+      "fn": "O-11 Show Countdown",
+      "ocr_text": "Show Countdown ☐"
     },
     {
-      "rect": [
-        481,
-        519,
-        271,
-        127
-      ],
+      "rect": [488, 500, 252, 131],
       "label": "12",
-      "original": [
-        488,
-        500,
-        252,
-        131
-      ],
-      "delta": [
-        -7,
-        19,
-        19,
-        -4
-      ],
-      "ocr_text": "Countdown | Lead-Out | Video | Countdown | Background",
-      "ocr_word_count": 5
+      "fn": "O-12 Countdown Video + BG",
+      "ocr_text": "Countdown Lead-Out Video | Countdown Background ▼"
     },
     {
-      "rect": [
-        487,
-        646,
-        265,
-        72
-      ],
+      "rect": [488, 635, 252, 74],
       "label": "13",
-      "original": [
-        488,
-        635,
-        252,
-        74
-      ],
-      "delta": [
-        -1,
-        11,
-        13,
-        -2
-      ],
-      "ocr_text": "ite | unt | L]",
-      "ocr_word_count": 3
+      "fn": "O-13 Twitch / ChatBot",
+      "is_drop": true,
+      "ocr_text": "Twitch / ChatBot",
+      "ebs_scope": "Drop (SV-011)"
     }
   ],
   "empty_warnings": []

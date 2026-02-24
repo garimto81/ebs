@@ -661,7 +661,7 @@ IMAGES = {
         'src': '스크린샷 2026-02-05 180645.png',
         'boxes': [
             {'rect': (30,  397, 235, 20),  'label': '1'},   # Video Size
-            {'rect': (272, 397, 146, 20),  'label': '2'},   # 9x16 Vertical
+            {'rect': (272, 397, 146, 20),  'label': '2',  'is_drop': True},   # 9x16 Vertical [DROP SV-010]
             {'rect': (30,  423, 210, 21),  'label': '3'},   # Frame Rate
             {'rect': (56,  465, 209, 110), 'label': '4'},   # Live column
             {'rect': (271, 465, 142, 110), 'label': '5'},   # Delay column
@@ -672,7 +672,7 @@ IMAGES = {
             {'rect': (540, 449, 200, 21),  'label': '10'},  # Auto Stream
             {'rect': (540, 476, 200, 15),  'label': '11'},  # Show Countdown
             {'rect': (488, 500, 252, 131), 'label': '12'},  # Countdown Video + BG
-            {'rect': (488, 635, 252, 74),  'label': '13'},  # Twitch / ChatBot
+            {'rect': (488, 635, 252, 74),  'label': '13', 'is_drop': True},  # Twitch / ChatBot [DROP SV-011]
         ],
     },
 
@@ -689,7 +689,7 @@ IMAGES = {
         'src': '스크린샷 2026-02-05 180649.png',
         'boxes': [
             # Tab Bar
-            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar (Sources|Outputs|GFX1|...)
+            {'rect': (9,   363, 745, 16),  'label': '1'},   # Tab Bar (full width: Sources|Outputs|GFX1|GFX2|GFX3|Commentary|System)
 
             # Left Panel - 11 individual control rows (x=16-376)
             {'rect': (16,  385, 360, 31),  'label': '2'},   # Board Position [Right]
@@ -749,7 +749,7 @@ IMAGES = {
         'src': '스크린샷 2026-02-05 180652.png',
         'boxes': [
             # Tab Bar
-            {'rect': (9,   363, 381, 17),  'label': '1'},   # Tab Bar (Sources|Outputs|GFX1|GFX2|...)
+            {'rect': (9,   363, 745, 17),  'label': '1'},   # Tab Bar (full width: Sources|Outputs|GFX1|GFX2|GFX3|Commentary|System)
             # Left Panel - Leaderboard Options (6 rows, x=16-330)
             {'rect': (16,  393, 314, 22),  'label': '2',  'no_snap': True},  # Show knockout rank in Leaderboard ☐
             {'rect': (16,  415, 314, 22),  'label': '3',  'no_snap': True},  # Show Chipcount % in Leaderboard ☑
@@ -785,7 +785,7 @@ IMAGES = {
         'src': '스크린샷 2026-02-05 180655.png',
         'boxes': [
             # Tab Bar
-            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar (Sources|...|GFX3|...)
+            {'rect': (9,   363, 745, 16),  'label': '1'},   # Tab Bar (full width: Sources|Outputs|GFX1|GFX2|GFX3|Commentary|System)
             # Left Panel - Outs section (x=16-281)
             {'rect': (16,  392, 265, 26),  'label': '2'},   # Show Outs [Heads Up or All In Showdown] ▼
             {'rect': (16,  418, 265, 26),  'label': '3'},   # Outs Position [Left] ▼
@@ -824,15 +824,15 @@ IMAGES = {
         'src': '스크린샷 2026-02-05 180659.png',
         'boxes': [
             # Tab Bar
-            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar (Sources|...|Commentary|System)
+            {'rect': (9,   363, 745, 16),  'label': '1'},   # Tab Bar (full width: Sources|Outputs|GFX1|GFX2|GFX3|Commentary|System)
             # Commentary Panel (x=16-533, y=385-572)
-            {'rect': (16,  394, 517, 26),  'label': '2'},   # Commentary Mode [Disabled] ▼
-            {'rect': (16,  422, 517, 24),  'label': '3'},   # Password field (masked)
-            {'rect': (16,  472, 517, 22),  'label': '4'},   # Statistics only ☐
-            {'rect': (16,  494, 517, 22),  'label': '5'},   # Allow commentator to control leaderboard ☑
-            {'rect': (16,  516, 326, 22),  'label': '6'},   # Commentator camera as well as audio ☑
-            {'rect': (345, 516, 168, 22),  'label': '7'},   # [Configure Picture In Picture] button
-            {'rect': (16,  540, 517, 22),  'label': '8'},   # Allow commentator camera to go full screen ☑
+            {'rect': (16,  394, 517, 26),  'label': '2',  'is_drop': True},   # Commentary Mode [DROP SV-021]
+            {'rect': (16,  422, 517, 24),  'label': '3',  'is_drop': True},   # Password field [DROP SV-021]
+            {'rect': (16,  472, 517, 22),  'label': '4',  'is_drop': True},   # Statistics only [DROP SV-021]
+            {'rect': (16,  494, 517, 22),  'label': '5',  'is_drop': True},   # Allow commentator to control leaderboard [DROP SV-021]
+            {'rect': (16,  516, 326, 22),  'label': '6',  'is_drop': True},   # Commentator camera as well as audio [DROP SV-021]
+            {'rect': (345, 516, 168, 22),  'label': '7',  'is_drop': True},   # [Configure Picture In Picture] btn [DROP SV-021]
+            {'rect': (16,  540, 517, 22),  'label': '8',  'is_drop': True},   # Allow commentator camera to go full screen [DROP SV-021]
         ],
     },
 
