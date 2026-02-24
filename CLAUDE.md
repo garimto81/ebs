@@ -144,12 +144,33 @@ python C:\claude\ebs\tools\detect_ui_elements.py <image_path>
 python C:\claude\ebs\tools\generate_feature_registry.py
 ```
 
+#### 오버레이 Drop 표시 규칙 (MANDATORY)
+
+새로운 화면(screen)을 `generate_annotations.py`에 추가하거나
+기존 화면의 박스(box) 데이터를 수정할 때 **반드시** 아래 규칙을 적용한다:
+
+1. **Drop 여부 확인**: 각 UI 요소가 `docs/00-prd/ebs-console.prd.md` Appendix A
+   또는 `docs/01_PokerGFX_Analysis/ebs-console-feature-triage.md`에서
+   "Drop 확정"으로 분류된 경우 → `'is_drop': True` 플래그를 추가한다.
+
+2. **시각적 컨벤션**: Drop 항목은 자동으로 빨간 X 오버레이(31% 불투명도)와
+   `[DROP] {기능명}` 라벨로 표시된다. 별도 시각 처리 코드 추가 불필요.
+
+3. **PRD 문서 마킹**: PRD 또는 설계 문서에서 Drop 확정 기능을 언급할 때
+   해당 항목 앞에 `> **[DROP]**` 블록인용 마킹을 추가한다.
+
+4. **Drop 결정 근거**: `is_drop`을 추가할 때 반드시 인라인 주석으로
+   Drop 사유를 기재한다. 예: `# SV-030 Drop 확정`
+
 ### Google Drive 정리
 
 ```powershell
 python C:\claude\ebs\tools\gdrive_organizer.py status              # 현재 상태 조회
 python C:\claude\ebs\tools\gdrive_organizer.py create-folder NAME  # 폴더 생성
 python C:\claude\ebs\tools\gdrive_organizer.py --dry-run ...       # 미리보기
+
+# Drive 문서 표시 이름 PRD 번호 체계로 변경 (PRD-0001, PRD-0002)
+cd /c/claude && python ebs/rename_ebs_docs.py
 ```
 
 ### Database
@@ -290,9 +311,7 @@ mockups/            # HTML 와이어프레임 (sources, outputs, gfx, rules, mai
 |------|------|------|
 | **`_ngd` suffix** | Google Drive 비공유 파일/폴더 | `03_Phase02_ngd/`, `COMMUNICATION-RULES_ngd.md` |
 | **숫자 prefix** | `NN_PascalCase` 형식 (docs/ 내부) | `01_PokerGFX_Analysis/`, `05_Operations_ngd/` |
-| **Drive 동기화 대상** | `01_PokerGFX_Analysis`, `02_Phase01` + root docs만 | `MAPPING_ngd.json` 참조 |
-
-> Drive 폴더명과 로컬 폴더명이 다를 수 있음: `01_PokerGFX_Analysis` (로컬) = `01_Phase00` (Drive)
+| **Drive 동기화 대상** | EBS root 2개 문서만 (하위 폴더 없음) | `MAPPING_ngd.json` v8.0.0 참조 |
 
 ### PDCA 문서 네이밍 컨벤션 (docs/ 서브폴더)
 
@@ -329,12 +348,14 @@ mockups/            # HTML 와이어프레임 (sources, outputs, gfx, rules, mai
 
 ## Google Docs 동기화
 
+**EBS Drive 구조**: EBS root(`1GlDqSgEDs9z8j5VY6iX3QndTLb6_8-PF`)에 두 핵심 문서만 유지. 하위 폴더 없음. (2026-02-24 정리 완료)
+
 | 레포 | 로컬 파일 | Google Docs ID | URL |
 |------|-----------|---------------|-----|
-| **ebs_reverse** | `C:/claude/ebs_reverse/docs/01-plan/pokergfx-development-prd.md` | `1xz3T1tp0jGxp6Dmwicvqf1DD01SW6RYmmGrNzUZ92Y4` | [PRD: PokerGFX Clone](https://docs.google.com/document/d/1xz3T1tp0jGxp6Dmwicvqf1DD01SW6RYmmGrNzUZ92Y4/edit) |
-| **ebs** | `docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md` | `1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk` | [PRD-0004: EBS Server UI Design](https://docs.google.com/document/d/1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk/edit) |
+| **ebs_reverse** | `C:/claude/ebs_reverse/docs/01-plan/pokergfx-prd-v2.md` | `1PLJuD2BbT4Jp1p6smue9ezLAfbkOSTrfVxCOXTsrau4` | [PRD-0001: EBS 기초 기획서](https://docs.google.com/document/d/1PLJuD2BbT4Jp1p6smue9ezLAfbkOSTrfVxCOXTsrau4/edit) |
+| **ebs** | `docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md` | `1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk` | [PRD-0002: EBS UI Design](https://docs.google.com/document/d/1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk/edit) |
 
-> **주의**: 위 Google Docs는 `ebs_reverse` 레포의 파일과 동기화된다. `ebs` 레포의 문서가 아님.
+매핑 파일: `docs/MAPPING_ngd.json` v9.0.0 | Drive 구조 문서: `docs/GOOGLE-DRIVE-STRUCTURE_ngd.md` v9.0.0
 
 ## System Files
 

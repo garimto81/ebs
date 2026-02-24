@@ -1,54 +1,36 @@
 {
-  "version": "6.0.0",
-  "updated": "2026-02-10",
+  "version": "9.0.0",
+  "updated": "2026-02-24",
   "drive_root_id": "1GlDqSgEDs9z8j5VY6iX3QndTLb6_8-PF",
-  "note": "Drive 폴더명과 로컬 폴더명이 다를 수 있음. source가 실제 로컬 경로. _ngd = 비공유.",
-  "local_to_drive_folder": {
-    "01_PokerGFX_Analysis": "01_Phase00",
-    "02_Phase01": "02_Phase01"
-  },
-  "folders": {
-    ".": "1GlDqSgEDs9z8j5VY6iX3QndTLb6_8-PF",
-    "01_Phase00": "1AKvKghcaorH5A-kg9pD4rHxF5ueQWJgS",
-    "02_Phase01": "18Oz-iP3JIEQgjG-x-3zhW1RJfODrnh5s"
-  },
-  "files": {
-    "README.md": {
-      "source": "docs/README.md",
-      "doc_id": "1SQ_cx83kGliBpFAxO9vDeltnc6EetwILFbuRGY8C384",
-      "folder": "."
+  "note": "EBS Drive: 두 핵심 문서만 EBS root 유지. 하위 폴더 없음. rename_ebs_docs.py로 Drive 표시 이름 PRD 번호 체계 적용 완료.",
+  "rename_script": "C:/claude/ebs/rename_ebs_docs.py",
+  "prd_registry": {
+    "PRD-0001": {
+      "display_name": "PRD-0001: EBS 기초 기획서",
+      "local_file": "C:/claude/ebs_reverse/docs/01-plan/pokergfx-prd-v2.md",
+      "doc_id": "1PLJuD2BbT4Jp1p6smue9ezLAfbkOSTrfVxCOXTsrau4"
     },
-    "PRD-0003-EBS-RFID-System.md": {
-      "source": "docs/PRD-0003-EBS-RFID-System.md",
-      "doc_id": "17qt7bq4tvesEMub7Cfc-8QIIGUhkE6csqvmdOwskzIg",
-      "folder": "."
-    },
-    "01_Phase00/VENDOR-SELECTION-CHECKLIST.md": {
-      "source": "docs/01_PokerGFX_Analysis/VENDOR-SELECTION-CHECKLIST.md",
-      "doc_id": "1n50iyuiU0TNBjUWDKFW1-88ALwZ1ClYXBuw2dW_qKOY",
-      "folder": "01_Phase00"
-    },
-    "02_Phase01/PRD-0003-Phase1-PokerGFX-Clone.md": {
-      "source": "docs/01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md",
-      "doc_id": "1WmUxqvu18oVuVGWQSjLix54c-ye7mT17ZGRMM22rAio",
-      "folder": "02_Phase01"
-    },
-    "02_Phase01/PokerGFX-Feature-Checklist.md": {
-      "source": "docs/01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md",
-      "doc_id": "1qXdPbUNBEmHNQzPvYlGJA2jgujAEs2qtdANUyVjrR2I",
-      "folder": "02_Phase01"
-    },
-    "02_Phase01/PokerGFX-UI-Analysis.md": {
-      "source": "docs/01_PokerGFX_Analysis/PokerGFX-UI-Analysis.md",
-      "doc_id": null,
-      "folder": "02_Phase01"
+    "PRD-0002": {
+      "display_name": "PRD-0002: EBS UI Design",
+      "local_file": "C:/claude/ebs/docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md",
+      "doc_id": "1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk"
     }
   },
-  "removed_from_sync": {
-    "PRD-0004-Vendor-Contact-Automation.md": {
-      "reason": "05_Operations_ngd로 이동 (비공유)",
-      "local_path": "docs/05_Operations_ngd/PRD-0004-Vendor-Contact-Automation.md",
-      "last_doc_id": "1K6huVaSnwxoxMI9UPx0MBT-cz_CEa4dIou0USwK0LWQ"
+  "folders": {
+    ".": "1GlDqSgEDs9z8j5VY6iX3QndTLb6_8-PF"
+  },
+  "files": {
+    "pokergfx-prd-v2.md": {
+      "display_name": "PRD-0001: EBS 기초 기획서",
+      "source": "C:/claude/ebs_reverse/docs/01-plan/pokergfx-prd-v2.md",
+      "doc_id": "1PLJuD2BbT4Jp1p6smue9ezLAfbkOSTrfVxCOXTsrau4",
+      "folder": "."
+    },
+    "PRD-0004-EBS-Server-UI-Design.md": {
+      "display_name": "PRD-0002: EBS UI Design",
+      "source": "C:/claude/ebs/docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md",
+      "doc_id": "1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk",
+      "folder": "."
     }
   }
 }
