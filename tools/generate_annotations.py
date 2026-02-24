@@ -62,6 +62,10 @@ RED = (220, 30, 30)
 GREEN = (30, 160, 30)
 BLUE = (30, 100, 220)
 
+DROP_OVERLAY_COLOR = (255, 0, 0)   # X선용 순수 빨강
+DROP_ALPHA = 80                     # 31% 불투명도 (기존 22의 약 3.6배)
+DROP_LINE_WIDTH = 3                 # X 선 굵기
+
 
 # ============================================================
 # EDGE DETECTION & AUTO-CALIBRATION
@@ -494,11 +498,22 @@ def draw_boxes(img, boxes, default_color=RED):
         x, y, w, h = box['rect']
         label = str(box['label'])
         c = box.get('color', default_color)
+        is_drop = box.get('is_drop', False)
 
         # Semi-transparent fill
-        draw.rectangle([x + 2, y + 2, x + w - 2, y + h - 2], fill=(*c, 22))
+        fill_alpha = DROP_ALPHA if is_drop else 22
+        draw.rectangle([x + 2, y + 2, x + w - 2, y + h - 2], fill=(*c, fill_alpha))
         # Border
         draw.rectangle([x, y, x + w, y + h], outline=c, width=2)
+
+        # Drop: 대각선 X 마킹 + [DROP] 라벨 접두사
+        if is_drop:
+            pad = 6
+            draw.line([(x + pad, y + pad), (x + w - pad, y + h - pad)],
+                      fill=DROP_OVERLAY_COLOR, width=DROP_LINE_WIDTH)
+            draw.line([(x + w - pad, y + pad), (x + pad, y + h - pad)],
+                      fill=DROP_OVERLAY_COLOR, width=DROP_LINE_WIDTH)
+            label = f'[DROP] {label}'
 
         # Label badge - positioned above the box
         bbox = draw.textbbox((0, 0), label, font=font)
@@ -587,35 +602,55 @@ IMAGES = {
             {'rect': (0,   0,   765, 32),  'label': '1'},   # Title Bar
             {'rect': (10,  38,  572, 316), 'label': '2'},   # Preview
             {'rect': (594, 38,  158, 40),  'label': '3'},   # CPU/GPU/Error/Lock
-            {'rect': (594, 82,  154, 50),  'label': '4'},   # Secure Delay + Preview
+            {'rect': (594, 82,  154, 50),  'label': '4',  'is_drop': True},   # Secure Delay + Preview (EBS MVP 범위 외)
             # (y=136-152 is empty separator space - no box)
             {'rect': (594, 156, 154, 30),  'label': '5'},   # Reset Hand
             {'rect': (594, 190, 154, 28),  'label': '6'},   # Register Deck
             {'rect': (594, 222, 154, 28),  'label': '7'},   # Action Tracker
-            {'rect': (594, 254, 154, 28),  'label': '8'},   # Studio
-            {'rect': (594, 286, 154, 28),  'label': '9'},   # Split Recording
-            {'rect': (594, 318, 154, 34),  'label': '10'},  # Tag Player
+            {'rect': (594, 254, 154, 28),  'label': '8',  'is_drop': True},   # Studio (EBS MVP 범위 외)
+            {'rect': (594, 286, 154, 28),  'label': '9',  'is_drop': True},   # Split Recording (SV-030 Drop 확정)
+            {'rect': (594, 318, 154, 34),  'label': '10', 'is_drop': True},   # Tag Player (EBS MVP 범위 외)
         ],
     },
 
     # --------------------------------------------------------
-    # 2. Sources Tab (765x730) - calibrated 2026-02-10
+    # 2. Sources Tab (765x730) - 재작업 2026-02-24
+    # 오류 수정: 12박스→18박스, 탭바 너비 보정, no_snap 정비
+    # 기능 매핑: SV-001~SV-018 (ebs-console-feature-triage.md)
+    # Defer v2.0: SV-002 Auto Camera, SV-003 ATEM, SV-004 Board Sync
     # --------------------------------------------------------
     '02-sources-tab': {
         'src': '스크린샷 2026-02-05 180637.png',
         'boxes': [
-            {'rect': (9,   363, 381, 16),  'label': '1'},   # Tab Bar
-            {'rect': (9,   379, 556, 86),  'label': '2'},   # Device Table
-            {'rect': (565, 385, 187, 53),  'label': '3', 'no_snap': True},  # Board Cam / Auto Camera
-            {'rect': (565, 438, 187, 20),  'label': '4', 'no_snap': True},  # Camera Mode
-            {'rect': (565, 458, 187, 63),  'label': '5', 'no_snap': True},  # Heads Up / Follow
-            {'rect': (565, 521, 187, 63),  'label': '6', 'no_snap': True},  # Linger / Post
-            {'rect': (9,   584, 285, 44),  'label': '7'},   # Chroma Key
-            {'rect': (431, 592, 129, 21),  'label': '8'},   # Add Network Camera
-            {'rect': (9,   619, 220, 100), 'label': '9'},   # Audio / Sync / Level
-            {'rect': (235, 619, 235, 90),  'label': '10'},  # External Switcher / ATEM
-            {'rect': (477, 619, 88,  90),  'label': '11'},  # Board Sync / Crossfade
-            {'rect': (572, 619, 172, 90),  'label': '12'},  # Player View
+            # Tab Bar (full width fix: 381→745, Sources|Outputs|GFX1|GFX2|GFX3|Commentary|System)
+            {'rect': (9,   363, 745, 16), 'label': '1',  'no_snap': True},  # [S-00] Tab Bar
+
+            # Device Table [S-01]
+            {'rect': (9,   379, 556, 86), 'label': '2'},                    # [S-01] Device Table (header + 2 rows)
+
+            # Right Panel - Camera Controls (x=565, w=187)
+            {'rect': (565, 385, 187, 26), 'label': '3',  'no_snap': True},  # [S-05] Board Cam Hide GFX ☑
+            {'rect': (565, 411, 187, 27), 'label': '4',  'no_snap': True},  # [S-06] Auto Camera Control ☑ [Defer v2.0]
+            {'rect': (565, 438, 187, 20), 'label': '5',  'no_snap': True},  # Camera Mode section label
+            {'rect': (565, 458, 187, 16), 'label': '6',  'no_snap': True},  # [S-07] Mode: Static ▼
+            {'rect': (565, 474, 187, 16), 'label': '7',  'no_snap': True},  # [S-08] Heads Up Split Screen ☑
+            {'rect': (565, 490, 187, 15), 'label': '8',  'no_snap': True},  # [S-09] Follow Players ☐
+            {'rect': (565, 505, 187, 16), 'label': '9',  'no_snap': True},  # [S-10] Follow Board ☐
+
+            # Right Panel - Linger / Post Bet / Hand
+            {'rect': (565, 521, 187, 21), 'label': '10', 'no_snap': True},  # Linger on Board [3]↑↓ S
+            {'rect': (565, 542, 187, 21), 'label': '11', 'no_snap': True},  # Post Bet [Default] ▼
+            {'rect': (565, 563, 187, 21), 'label': '12', 'no_snap': True},  # Hand [Default] ▼
+
+            # Bottom Row 1 - Chroma Key / Add Camera
+            {'rect': (9,   584, 285, 44), 'label': '13'},                   # [S-11/S-12] Background key colour + Chroma Key ☑
+            {'rect': (431, 592, 129, 21), 'label': '14'},                   # [S-02] Add Network Camera btn
+
+            # Bottom Row 2 - Audio / Switcher / Sync / Player View
+            {'rect': (9,   619, 220, 100), 'label': '15'},                  # [S-17/S-18] Audio Input + Sync + Level
+            {'rect': (235, 619, 235, 90),  'label': '16'},                  # [S-13/S-14] External Switcher + ATEM [Defer v2.0]
+            {'rect': (477, 619, 88,  90),  'label': '17'},                  # [S-15/S-16] Board Sync + Crossfade [Defer v2.0]
+            {'rect': (572, 619, 172, 90),  'label': '18'},                  # Player ▼ + View ▼
         ],
     },
 
