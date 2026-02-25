@@ -348,9 +348,33 @@ Examples:
     args = parser.parse_args()
 
     # MD 파일 처리 분기 (기존 PDF 경로 앞에 삽입)
-    if Path(args.input).suffix.lower() in ('.md', '.markdown'):
+    input_path = Path(args.input)
+    if input_path.suffix.lower() in ('.md', '.markdown'):
         import sys as _sys
         _sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'lib' / '..'))
+
+        # MD --info 모드
+        if args.info:
+            from lib.pdf_utils.strategy import (
+                estimate_tokens, detect_prd_structure, auto_select_strategy
+            )
+            text = input_path.read_text(encoding='utf-8')
+            token_est = estimate_tokens(text)
+            prd_info = detect_prd_structure(text)
+            strategy = auto_select_strategy(str(input_path), text)
+            est_chunks = max(1, token_est // 8000) if strategy != "none" else 1
+
+            info_output = {
+                "file": str(input_path),
+                "token_estimate": token_est,
+                "prd_score": prd_info["prd_score"],
+                "recommended_strategy": strategy,
+                "estimated_chunks": est_chunks,
+                "chunking_needed": strategy != "none"
+            }
+            print(json.dumps(info_output, ensure_ascii=False, indent=2))
+            sys.exit(0)
+
         from lib.pdf_utils.md_chunker import MDChunker
         max_tok = 8000 if args.prd else args.tokens
         overlap = 400 if args.prd else args.overlap
