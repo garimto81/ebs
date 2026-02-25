@@ -1,10 +1,10 @@
 ---
 doc_type: "prd"
 doc_id: "PRD-0004-EBS-ServerUI"
-version: "20.0.0"
+version: "21.0.0"
 status: "draft"
 owner: "BRACELET STUDIO"
-last_updated: "2026-02-25"
+last_updated: "2026-02-26"
 phase: "phase-1"
 priority: "critical"
 
@@ -177,9 +177,9 @@ Preview Panel(M-02, 좌) + Status Panel(M-03~M-06, 우상) + Quick Actions(M-11~
 |:-:|------|------|------|:---:|:--------:|
 | M-01 | Title Bar | AppBar | 앱 이름 + 버전 + 윈도우 컨트롤 | #1 | P2 |
 | M-02 | Preview Panel | Canvas | 출력 해상도(O-01)와 동일한 종횡비 유지, Chroma Key Blue, GFX 오버레이 실시간 렌더링. **해상도 정책**: 실제 출력은 Full HD(1920×1080) 기준 리사이징. 문서 표기(480×270)는 UI 공간 내 표시 크기로 가독성용 축약 표기. | #2 | P0 |
-| M-03 | CPU Indicator | ProgressBar | CPU 사용률 + 색상 코딩 (Green<60%, Yellow<85%, Red>=85%) | #3 | P1 |
-| M-04 | GPU Indicator | ProgressBar | GPU 사용률 + 색상 코딩 | #3 | P1 |
-| M-05 | RFID Status | Icon+Badge | Green=Connected, Red=Disconnected, Yellow=Calibrating | #3 | P0 |
+| M-03 | CPU Indicator | ProgressBar | CPU 사용률 + 색상 코딩 (Green<60%, Yellow<85%, Red>=85%). 매뉴얼: "The icons on the left indicate CPU and GPU usage. If they turn red, usage is too high for the Server to operate reliably." (p.34) | #3 | P1 |
+| M-04 | GPU Indicator | ProgressBar | GPU 사용률 + 색상 코딩. 매뉴얼: "The icons on the left indicate CPU and GPU usage. If they turn red, usage is too high for the Server to operate reliably." (p.34) | #3 | P1 |
+| M-05 | RFID Status | Icon+Badge | RFID 리더 상태 7색 표시. Green=정상 운용, Grey=보안 링크 수립 중, Blue=정상 운용+미등록 카드 감지, Black=정상 운용+동일 카드 중복 감지, Magenta=정상 운용+중복 카드 감지, Orange=연결됨+응답 없음(CPU 과부하/USB 문제), Red=미연결. 매뉴얼 p.34 | #3 | P0 |
 | M-06 | RFID Connection Icon | Icon | RFID 연결 상태 표시 (연결 시 녹색 USB/WiFi 아이콘으로 변경, 미연결 시 경고 아이콘) | #3 | P1 |
 | ~~M-17~~ | ~~Hand Counter~~ | ~~Badge~~ | ~~현재 세션 핸드 번호 (Hand #47)~~ | ~~신규~~ | ~~P0~~ **[DROP]** |
 | ~~M-18~~ | ~~Connection Status~~ | ~~Row~~ | ~~AT/Overlay/DB 각각 Green/Red 표시~~ | ~~신규~~ | ~~P0~~ **[DROP]** |
@@ -200,7 +200,7 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 
 | # | 요소 | 타입 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
-| M-07 | Lock Toggle | IconButton | 설정 잠금/해제. 잠금 시 Quick Actions 외 모든 탭 설정 변경 불가 (본방송 중 실수 방지) | #3 | P1 |
+| M-07 | Lock Toggle | IconButton | 설정 잠금/해제. 잠금 시 Quick Actions 외 모든 탭 설정 변경 불가 (본방송 중 실수 방지). 매뉴얼: "Click the Lock symbol next to the Settings button to password protect the Settings Window." (p.33) | #3 | P1 |
 | M-09 | Preview Toggle | Checkbox | Preview 렌더링 On/Off (CPU 절약) | #4 | P0 |
 
 ###### Quick Actions 그룹
@@ -302,29 +302,29 @@ RFID 리셋/캘리브레이션 -> 안테나 설정 -> AT 접근 정책 -> 진단
 
 | # | 그룹 | 요소 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
-| Y-01 | Table | Name | 테이블 식별 이름 | #2 | P1 |
-| Y-02 | Table | Password | 접속 비밀번호 | #3 | P1 |
-| Y-03 | RFID | Reset | RFID 시스템 초기화 | #4 | P0 |
-| Y-04 | RFID | Calibrate | 안테나별 캘리브레이션 | #5 | P0 |
-| Y-05 | RFID | UPCARD Antennas | UPCARD 안테나로 홀카드 읽기 | #22 | P0 |
-| Y-06 | RFID | Disable Muck | AT 모드 시 muck 안테나 비활성 | #23 | P0 |
+| Y-01 | Table | Name | 테이블 식별 이름. 매뉴얼: "Enter an optional name for this table. This is required when using MultiGFX mode." (p.60) | #2 | P1 |
+| Y-02 | Table | Password | 접속 비밀번호. 매뉴얼: "Password for this table. Anyone attempting to use Action Tracker with this table will be required to enter this password." (p.60) | #3 | P1 |
+| Y-03 | RFID | Reset | RFID 시스템 초기화. 매뉴얼: "Resets the RFID Reader connection, as if PokerGFX had been closed and restarted." (p.60) | #4 | P0 |
+| Y-04 | RFID | Calibrate | 안테나별 캘리브레이션. 매뉴얼: "Perform the once-off table calibration procedure, which 'teaches' the table about its physical configuration." (p.60) | #5 | P0 |
+| Y-05 | RFID | UPCARD Antennas | UPCARD 안테나로 홀카드 읽기. 매뉴얼: "Enables all antennas configured for reading UPCARDS in STUD games to also detect hole cards when playing any flop or draw game." (p.59) | #22 | P0 |
+| Y-06 | RFID | Disable Muck | AT 모드 시 muck 안테나 비활성. 매뉴얼: "Causes the muck antenna to be disabled when in Action Tracker mode." (p.59) | #23 | P0 |
 | Y-07 | RFID | Disable Community | 커뮤니티 카드 안테나 비활성 | #24 | P0 |
 | Y-08 | System Info | Hardware Panel | CPU/GPU/OS/Encoder 자동 감지 | #11 | P1 |
-| Y-09 | Diagnostics | Table Diagnostics | 안테나별 상태, 신호 강도 (별도 창) | #10 | P1 |
+| Y-09 | Diagnostics | Table Diagnostics | 안테나별 상태, 신호 강도 (별도 창). 매뉴얼: "Displays a diagnostic window that displays the physical table configuration along with how many cards are currently detected on each antenna." (p.60) | #10 | P1 |
 | Y-10 | Diagnostics | System Log | 로그 뷰어 | #12 | P1 |
-| Y-12 | Diagnostics | Export Folder | 내보내기 폴더 | #14 | P1 |
-| Y-13 | AT | Allow AT Access | AT 접근 허용 | #26 | P0 |
-| Y-14 | AT | Predictive Bet | 베팅 예측 입력 | #27 | P0 |
-| Y-15 | AT | Kiosk Mode | AT 키오스크 모드 | #28 | P0 |
-| Y-16 | Advanced | MultiGFX | 다중 테이블 운영 | #16 | P2 |
-| Y-17 | Advanced | Sync Stream | 스트림 동기화 | #17 | P2 |
-| Y-18 | Advanced | Sync Skin | 스킨 동기화 | #18 | P2 |
-| Y-19 | Advanced | No Cards | 카드 비활성화 | #19 | P1 |
+| Y-12 | Diagnostics | Export Folder | 내보내기 폴더. 매뉴얼: "When the Developer API is enabled, use this to specify the location for writing the JSON hand history files." (p.60) | #14 | P1 |
+| Y-13 | AT | Allow AT Access | AT 접근 허용. 매뉴얼: "'Track the action' can only be started from Action Tracker if this option is enabled. When disabled, Action Tracker may still be used but only in Auto mode." (p.58) | #26 | P0 |
+| Y-14 | AT | Predictive Bet | 베팅 예측 입력. 매뉴얼: "Action Tracker will auto-complete bets and raises based on the initial digits entered, min raise amount and stack size." (p.60) | #27 | P0 |
+| Y-15 | AT | Kiosk Mode | AT 키오스크 모드. 매뉴얼: "When the Server starts, Action Tracker is automatically started on the same PC on the secondary display in kiosk mode. In this mode, AT cannot be closed or minimised." (p.58) | #28 | P0 |
+| Y-16 | Advanced | MultiGFX | 다중 테이블 운영. 매뉴얼: "Forces PokerGFX to sync to another primary PokerGFX running on a different, networked computer, making it possible to generate multiple live and delayed video streams." (p.58) | #16 | P2 |
+| Y-17 | Advanced | Sync Stream | 스트림 동기화. 매뉴얼: "When in MultiGFX mode, forces secure delay to start and stop in synchronization with the primary server." (p.58) | #17 | P2 |
+| Y-18 | Advanced | Sync Skin | 스킨 동기화. 매뉴얼: "Causes the secondary MultiGFX server skin to auto update from the skin that is currently active on the primary server." (p.58) | #18 | P2 |
+| Y-19 | Advanced | No Cards | 카드 비활성화. 매뉴얼: "When enabled, no hole card information will be shared with any secondary server." (p.58) | #19 | P1 |
 | Y-20 | Advanced | Disable GPU | GPU 인코딩 비활성화 | #20 | P1 |
-| Y-21 | Advanced | Ignore Name Tags | 네임 태그 무시 | #21 | P1 |
-| Y-22 | Advanced | Auto Start | OS 시작 시 자동 실행 | 신규 | P2 |
+| Y-21 | Advanced | Ignore Name Tags | 네임 태그 무시. 매뉴얼: "When enabled, player ID tags are ignored; player names are entered manually in Action Tracker." (p.59) | #21 | P1 |
+| Y-22 | Advanced | Auto Start | OS 시작 시 자동 실행. 매뉴얼: "Automatically start the PokerGFX Server when Windows starts. Useful for unattended installations." (p.58) | 신규 | P2 |
 | Y-23 | Advanced | Stream Deck | Elgato Stream Deck 매핑 | #15 | P2 |
-| Y-24 | Updates | Version + Check | 버전 표시 + 업데이트 | #7,#8 | P2 |
+| Y-24 | Updates | Version + Check | 버전 표시 + 업데이트. 매뉴얼: "Force the Server to check to see if there's a software update available." (p.58) | #7,#8 | P2 |
 
 ###### Interaction Patterns
 
@@ -427,23 +427,23 @@ flowchart LR
 | # | 그룹 | 요소 | 타입 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|------|:---:|:--------:|
 | S-00 | Output Mode | Mode Selector | RadioGroup | Fill & Key / Chroma Key / Internal (기본: Fill & Key) | 신규 | P0 |
-| S-01 | Video Sources | Device Table | DataTable | NDI, 캡처 카드, 네트워크 카메라 목록 | #2 | P0 |
-| S-02 | Video Sources | Add Button | TextButton | NDI 자동 탐색 또는 수동 URL | #8 | P1 |
-| S-03 | Video Sources | Settings | IconButton | 해상도, 프레임레이트, 크롭 | #2 | P1 |
+| S-01 | Video Sources | Device Table | DataTable | NDI, 캡처 카드, 네트워크 카메라 목록. 매뉴얼: "The Sources tab contains a list of available video sources. These include USB cameras, video capture cards installed in the system and NDI sources detected on the local network." (p.35) | #2 | P0 |
+| S-02 | Video Sources | Add Button | TextButton | NDI 자동 탐색 또는 수동 URL. 매뉴얼: "Network cameras can't be auto detected, so to configure one of these as a source click the 'Add network camera' button." (p.35) | #8 | P1 |
+| S-03 | Video Sources | Settings | IconButton | 해상도, 프레임레이트, 크롭. 매뉴얼: "To edit the properties of the video source, click on the 'Settings' keyword. A properties window will open enabling additional camera settings to be changed." (p.35) | #2 | P1 |
 | S-04 | Video Sources | Preview | IconButton | 소스별 미니 프리뷰 | #2 | P1 |
-| S-05 | Camera | Board Cam Hide GFX | Checkbox | 보드 카메라 시 GFX 자동 숨기기 | #3 | P1 |
+| S-05 | Camera | Board Cam Hide GFX | Checkbox | 보드 카메라 시 GFX 자동 숨기기. 매뉴얼: "If the 'Hide GFX' option is enabled, all player graphics will be made invisible while the board cam is active." (p.36) | #3 | P1 |
 | S-06 | Camera | Auto Camera Control | Checkbox | 게임 상태 기반 자동 전환 | #3 | P1 |
-| S-07 | Camera | Mode | Dropdown | Static / Dynamic | #4 | P1 |
-| S-08 | Camera | Heads Up Split | Checkbox | 헤즈업 화면 분할 | #5 | P1 |
-| S-09 | Camera | Follow Players | Checkbox | 플레이어 추적 | #5 | P1 |
-| S-10 | Camera | Follow Board | Checkbox | 보드 추적 | #5 | P1 |
-| S-11 | Background | Enable | Checkbox | 크로마키 활성화 | #7 | P0 |
-| S-12 | Background | Background Colour | ColorPicker | 배경색 (기본 Blue) | #7 | P0 |
-| S-13 | External | Switcher Source | Dropdown | ATEM 스위처 연결 (Fill & Key 필수) | #10 | P0 |
-| S-14 | External | ATEM Control | Checkbox+TextField | ATEM IP + 연결 상태 (Fill & Key 필수) | #10 | P0 |
-| S-15 | Sync | Board Sync | NumberInput | 보드 싱크 보정 (ms) | #11 | P1 |
-| S-16 | Sync | Crossfade | NumberInput | 크로스페이드 (ms, 기본 300) | #11 | P1 |
-| S-17 | Audio | Input Source | Dropdown | 오디오 소스 선택 | #9 | P1 |
+| S-07 | Camera | Mode | Dropdown | Static / Dynamic. 매뉴얼: "To display video sources in rotation, select 'Cycle' mode instead of 'Static'. Enter the number of seconds that each video source should be displayed in the 'Cycle' column." (p.35) | #4 | P1 |
+| S-08 | Camera | Heads Up Split | Checkbox | 헤즈업 화면 분할. 매뉴얼: "When play is heads up, and both players are covered by separate cameras, a split screen view showing each player will automatically be displayed." (p.37) | #5 | P1 |
+| S-09 | Camera | Follow Players | Checkbox | 플레이어 추적. 매뉴얼: "If Action Tracker is enabled, the video will switch to ensure that the player whose turn it is to act is always displayed." (p.37) | #5 | P1 |
+| S-10 | Camera | Follow Board | Checkbox | 보드 추적. 매뉴얼: "When 'Follow Board' is enabled, the video will switch to the community card close-up for a few seconds whenever flop, turn or river cards are dealt." (p.36) | #5 | P1 |
+| S-11 | Background | Enable | Checkbox | 크로마키 활성화. 매뉴얼: "Chroma key is supported by outputting graphics on a solid colour background (usually blue or green). To enable chroma key, enable the 'Chroma Key' checkbox." (p.39) | #7 | P0 |
+| S-12 | Background | Background Colour | ColorPicker | 배경색 (기본 Blue). 매뉴얼: "repeatedly click the 'Background Key Colour' button until the desired colour is selected." (p.39) | #7 | P0 |
+| S-13 | External | Switcher Source | Dropdown | ATEM 스위처 연결 (Fill & Key 필수). 매뉴얼: "When using a camera source for video capture from an external vision switcher, select this capture device using the 'External Switcher Source' dropdown box. This disables the built-in multi-camera switching features." (p.38) | #10 | P0 |
+| S-14 | External | ATEM Control | Checkbox+TextField | ATEM IP + 연결 상태 (Fill & Key 필수). 매뉴얼: "PokerGFX can control a Blackmagic ATEM Video Switcher to automatically switch camera inputs to follow the action." (p.40) | #10 | P0 |
+| S-15 | Sync | Board Sync | NumberInput | 보드 싱크 보정 (ms). 매뉴얼: "Delays the detection of community cards by the specified number of milliseconds. This can be used to compensate for the problem where community card graphics are displayed before the cards are shown being dealt on video." (p.38) | #11 | P1 |
+| S-16 | Sync | Crossfade | NumberInput | 크로스페이드 (ms, 기본 300). 매뉴얼: "When the 'Crossfade' setting is zero, camera sources transition with a hard cut. Setting this value to a higher value between 0.1 and 2.0 causes sources to crossfade." (p.38) | #11 | P1 |
+| S-17 | Audio | Input Source | Dropdown | 오디오 소스 선택. 매뉴얼: "Select the desired audio capture device and volume. The Sync setting adjusts the timing of the audio signal to match the video, if required." (p.38) | #9 | P1 |
 | S-18 | Audio | Audio Sync | NumberInput | 오디오 싱크 보정 (ms) | #9 | P1 |
 
 ###### Interaction Patterns
@@ -539,16 +539,16 @@ flowchart LR
 
 | # | 그룹 | 요소 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
-| O-01 | Resolution | Video Size | 1080p/4K 출력 해상도 | #1 | P0 |
-| O-02 | Resolution | 9x16 Vertical | 세로 모드 (모바일) | #2 | P2 |
+| O-01 | Resolution | Video Size | 1080p/4K 출력 해상도. 매뉴얼: "Select the desired resolution and frame rate of the video output." (p.42) | #1 | P0 |
+| O-02 | Resolution | 9x16 Vertical | 세로 모드 (모바일). 매뉴얼: "PokerGFX supports vertical video natively by enabling the '9x16 Vertical' checkbox in the Outputs settings tab. With vertical video enabled you can stream POV-style content complete with graphics and secure delay." (p.43) | #2 | P2 |
 | O-03 | Resolution | Frame Rate | 30/60fps | #3 | P0 |
-| O-04 | Live | Video/Audio/Device | Live 파이프라인 3개 드롭다운 | #4 | P0 |
-| O-05 | Live | Key & Fill | Live Fill & Key 출력 (DeckLink 채널 할당) | #4 | P0 |
+| O-04 | Live | Video/Audio/Device | Live 파이프라인 3개 드롭다운. 매뉴얼: "Sends the live and/or delayed video and audio feed to a Blackmagic Decklink device output (if installed), or to an NDI stream on the local network." (p.42) | #4 | P0 |
+| O-05 | Live | Key & Fill | Live Fill & Key 출력 (DeckLink 채널 할당). 매뉴얼: "When an output device that supports external keying is selected, the 'Key & Fill' checkbox is enabled. Activating this feature causes separate key & fill signals to be sent to 2 SDI connectors on the device." (p.43) | #4 | P0 |
 | O-06 | Delay | Video/Audio/Device | Delay 파이프라인 (Live와 독립) | #5 | Future |
 | O-07 | Delay | Key & Fill | Delay Fill & Key 출력 (DeckLink 채널 할당) | #5 | Future |
-| O-14 | Virtual | Camera | 가상 카메라 (OBS 연동) | #6 | P2 |
+| O-14 | Virtual | Camera | 가상 카메라 (OBS 연동). 매뉴얼: "Sends the video and audio feed (live OR delayed, depending on this setting) to the POKERGFX VCAM virtual camera device, for use by 3rd party streaming software such as OBS or XSplit." (p.43) | #6 | P2 |
 | O-15 | Recording | Mode | Video / Video+GFX / GFX only | #7 | P1 |
-| O-16 | Streaming | Platform | Twitch/YouTube/Custom RTMP | #13 | P2 |
+| O-16 | Streaming | Platform | Twitch/YouTube/Custom RTMP. 매뉴얼: "PokerGFX includes a fully functional ChatBot that is compatible with the Twitch video streaming service. Commands: !event, !blinds, !players, !delay, !chipcount, !cashwin, !payouts, !vpip, !pfr" (p.47) | #13 | P2 |
 | O-17 | Streaming | Account Connect | OAuth 연결 | #13 | P2 |
 | O-18 | Fill & Key | Key Color | Key 신호 배경색 (기본: #FF000000) | 신규 | P0 |
 | O-19 | Fill & Key | Fill/Key Preview | Fill 신호와 Key 신호 나란히 미리보기 | 신규 | P1 |
@@ -703,27 +703,27 @@ EBS GFX의 위치/크기 값은 두 가지 단위 체계가 혼재한다. 구현
 
 | # | 요소 | 타입 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
-| G-01 | Board Position | Dropdown | 보드 카드 위치 (Left/Right/Centre/Top) | GFX1 #2 | P0 |
-| G-02 | Player Layout | Dropdown | 플레이어 배치 (Vert/Bot/Spill) | GFX1 #3 | P0 |
-| G-03 | X Margin | NumberInput | 좌우 여백 (%, 기본 0.04) | GFX1 #20 | P1 |
-| G-04 | Top Margin | NumberInput | 상단 여백 (%, 기본 0.05) | GFX1 #21 | P1 |
-| G-05 | Bot Margin | NumberInput | 하단 여백 (%, 기본 0.04) | GFX1 #22 | P1 |
-| G-06 | Leaderboard Position | Dropdown | 리더보드 위치 | GFX1 #7 | P1 |
-| G-07 | Heads Up Layout L/R | Dropdown | 헤즈업 화면 분할 배치 | GFX1 #10 | P1 |
+| G-01 | Board Position | Dropdown | 보드 카드 위치 (Left/Right/Centre/Top). 매뉴얼: "Position of the Board graphic (shows community cards, pot size and optionally blind levels). Choices are LEFT, CENTRE and RIGHT. The Board is always positioned at the bottom of the display." (p.48) | GFX1 #2 | P0 |
+| G-02 | Player Layout | Dropdown | 플레이어 배치. 매뉴얼: Horizontal(플레이어 하단 수평), Vert/Bot/Spill(좌하단부터 수직, 넘치면 우하단), Vert/Bot/Fit(좌하단부터 수직, 전원 좌측 맞춤), Vert/Top/Spill(좌상단부터 수직), Vert/Top/Fit(좌상단부터 수직, 전원 좌측 맞춤) (p.48) | GFX1 #3 | P0 |
+| G-03 | X Margin | NumberInput | 좌우 여백 (%, 기본 0.04). 매뉴얼: "This setting controls the size of the horizontal margins. Valid values are between 0 and 1. When in any vertical layout mode, larger values cause all graphics to move towards the centre of the display." (p.49) | GFX1 #20 | P1 |
+| G-04 | Top Margin | NumberInput | 상단 여백 (%, 기본 0.05). 매뉴얼: "This setting controls the size of the vertical margins. Valid values are between 0 and 1. Larger values cause all graphics to move towards the centre of the display." (p.49) | GFX1 #21 | P1 |
+| G-05 | Bot Margin | NumberInput | 하단 여백 (%, 기본 0.04). 매뉴얼: "This setting controls the size of the vertical margins. Valid values are between 0 and 1. Larger values cause all graphics to move towards the centre of the display." (p.49) | GFX1 #22 | P1 |
+| G-06 | Leaderboard Position | Dropdown | 리더보드 위치. 매뉴얼: "Selects the position of the Leaderboard graphic." (p.49) | GFX1 #7 | P1 |
+| G-07 | Heads Up Layout L/R | Dropdown | 헤즈업 화면 분할 배치. 매뉴얼: "Overrides the player layout when players are heads-up. In this mode, the board graphic is positioned at the bottom centre of the display with each player positioned either side." (p.48) | GFX1 #10 | P1 |
 | G-08 | Heads Up Camera | Dropdown | 헤즈업 카메라 위치 | GFX1 #11 | P1 |
-| G-09 | Heads Up Custom Y | Checkbox+NumberInput | Y축 미세 조정 | GFX1 #12 | P1 |
-| G-10 | Sponsor Logo 1 | ImageSlot | Leaderboard 스폰서 | GFX1 #16 | P2 |
-| G-11 | Sponsor Logo 2 | ImageSlot | Board 스폰서 | GFX1 #17 | P2 |
-| G-12 | Sponsor Logo 3 | ImageSlot | Strip 스폰서 | GFX1 #18 | P2 |
-| G-13 | Vanity Text | TextField+Checkbox | 테이블 텍스트 + Game Variant 대체 | GFX1 #19 | P2 |
+| G-09 | Heads Up Custom Y | Checkbox+NumberInput | Y축 미세 조정. 매뉴얼: "Use this to specify the vertical position of player graphics when Heads Up layout is active." (p.48) | GFX1 #12 | P1 |
+| G-10 | Sponsor Logo 1 | ImageSlot | Leaderboard 스폰서. 매뉴얼: "Displays a sponsor logo at the top of the Leaderboard. NOTE: Pro only." (p.50) | GFX1 #16 | P2 |
+| G-11 | Sponsor Logo 2 | ImageSlot | Board 스폰서. 매뉴얼: "Displays a sponsor logo to the side of the Board. NOTE: Pro only." (p.50) | GFX1 #17 | P2 |
+| G-12 | Sponsor Logo 3 | ImageSlot | Strip 스폰서. 매뉴얼: "Displays a sponsor logo at the left-hand end of the Strip. NOTE: Pro only." (p.50) | GFX1 #18 | P2 |
+| G-13 | Vanity Text | TextField+Checkbox | 테이블 텍스트 + Game Variant 대체. 매뉴얼: "Custom text displayed on the Board Card / Pot graphic." + "When this option is enabled, the name of the currently active game variant will be displayed instead of the Vanity text." (p.49) | GFX1 #19 | P2 |
 
 **Visual 그룹 (연출)**
 
 | # | 요소 | 타입 | 설명 | PGX | 우선순위 |
 |:-:|------|------|------|:---:|:--------:|
-| G-14 | Reveal Players | Dropdown | 카드 공개 시점 (Always/Action On/Never) | GFX1 #4 | P0 |
-| G-15 | How to Show Fold | Dropdown+NumberInput | 폴드 표시 (Immediate/Fade + 시간) | GFX1 #5 | P0 |
-| G-16 | Reveal Cards | Dropdown | 카드 공개 연출 (Immediate/Animated) | GFX1 #6 | P0 |
+| G-14 | Reveal Players | Dropdown | 카드 공개 시점. 매뉴얼: "Determines when players are shown: Immediate / On Action / After Bet / On Action + Next" (p.50) | GFX1 #4 | P0 |
+| G-15 | How to Show Fold | Dropdown+NumberInput | 폴드 표시. 매뉴얼: Immediate="Player is removed immediately." / Delayed="Player graphic displays 'Fold', then disappears after a few seconds." (p.51) | GFX1 #5 | P0 |
+| G-16 | Reveal Cards | Dropdown | 카드 공개 연출. 매뉴얼: Immediate(플레이어 등장 즉시), After Action(첫 액션 후), End of Hand(베팅 종료 후), Showdown Cash(승자/최초 공격자), Showdown Tourney(Showdown Cash + 올인 있을 때 전원), Never(미공개) (p.51) | GFX1 #6 | P0 |
 | G-17 | Transition In | Dropdown+NumberInput | 등장 애니메이션 + 시간 | GFX1 #8 | P1 |
 | G-18 | Transition Out | Dropdown+NumberInput | 퇴장 애니메이션 + 시간 | GFX1 #9 | P1 |
 | G-19 | Indent Action Player | Checkbox | 액션 플레이어 들여쓰기 | GFX1 #24 | P1 |
@@ -1734,7 +1734,8 @@ AT는 별도 앱. GfxServer 상호작용 지점만 매핑한다.
 | **v19.6.0** | **2026-02-24** | **EBS 설계본 해상도 변형 비교 추가**: 기존 자동 16:9 설계본(A) 아래에 고정 720×480 SD 변형 캡쳐(B) 추가. 두 이미지 배치 이유(플렉서블 단일 구현체, CSS 변수 런타임 스위칭) 설명 텍스트 삽입. |
 | **v19.5.0** | **2026-02-24** | **M-17/M-18 Drop 확정 처리**: Hand Counter(M-17), Connection Status(M-18) Drop 마킹. Element Catalog 취소선+[DROP] 적용. 에러 상태 표 취소선 처리. Status Bar 설계 원칙 갱신. 레이아웃 기술에서 M-18 제거. 요소 카운트 184→182개. ebs-main-window.html Wireframe v1.7 반영 (Status Bar M-17/M-18 제거). ebs-main-window-720x480.html 신규 생성 (Preview 고정 720×480). |
 | **v20.0.0** | **2026-02-25** | **탭 순서 재정의 및 단축키 제거**: System 탭을 첫 번째로 이동 (RFID/연결 확인이 준비의 출발점). Sources 탭을 두 번째로 이동. Ctrl+1~6 키보드 단축키 전체 제거 (설계 단계에서 단축키 미확정). 누적형 Mermaid 다이어그램 업데이트 (System→Sources→Outputs→GFX1→GFX2→GFX3 순서). Step 번호 재조정: Step 2=System, Step 3=Sources, Step 4=Outputs, Step 5=GFX1, Step 6=GFX2, Step 7=GFX3, Step 8=Action Tracker, Step 9=Skin Editor. Appendix B에서 Ctrl+1~4 탭 단축키 행 제거. |
+| **v21.0.0** | **2026-02-26** | **매뉴얼 v3.2.0 공식 설명 통합**: M-05 RFID Status 3색→7색 확장. M-03/M-04/M-07 공식 설명 추가. S-*(14개), O-*(6개), G-*(15개), Y-*(18개) 요소 총 53개에 매뉴얼 원문 인용 추가. 참조: PokerGFX-Manual-v3.2.0-Element-Reference.md |
 
 ---
 
-**Version**: 20.0.0 | **Updated**: 2026-02-25
+**Version**: 21.0.0 | **Updated**: 2026-02-26
