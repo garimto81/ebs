@@ -1,6 +1,6 @@
 {
-  "version": "9.0.0",
-  "updated": "2026-02-24",
+  "version": "9.1.0",
+  "updated": "2026-02-25",
   "drive_root_id": "1GlDqSgEDs9z8j5VY6iX3QndTLb6_8-PF",
   "note": "EBS Drive: 두 핵심 문서만 EBS root 유지. 하위 폴더 없음. rename_ebs_docs.py로 Drive 표시 이름 PRD 번호 체계 적용 완료.",
   "rename_script": "C:/claude/ebs/rename_ebs_docs.py",
@@ -11,9 +11,15 @@
       "doc_id": "1PLJuD2BbT4Jp1p6smue9ezLAfbkOSTrfVxCOXTsrau4"
     },
     "PRD-0002": {
-      "display_name": "PRD-0002: EBS UI Design",
+      "display_name": "PRD-0002: EBS UI Design (archived - v19.x)",
       "local_file": "C:/claude/ebs/docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md",
-      "doc_id": "1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk"
+      "doc_id": "1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk",
+      "note": "v19.x 버전. 버전 이력으로 복구 가능. v20.0.0은 PRD-0002-v20 참조."
+    },
+    "PRD-0002-v20": {
+      "display_name": "PRD-0002: EBS UI Design v20.0.0",
+      "local_file": "C:/claude/ebs/docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md",
+      "doc_id": "1SapKWeZNgbRD7vHzXDVYb52jBkPxRenXvbRn_7UYwK8"
     }
   },
   "folders": {
@@ -27,9 +33,9 @@
       "folder": "."
     },
     "PRD-0004-EBS-Server-UI-Design.md": {
-      "display_name": "PRD-0002: EBS UI Design",
+      "display_name": "PRD-0002: EBS UI Design v20.0.0",
       "source": "C:/claude/ebs/docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md",
-      "doc_id": "1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk",
+      "doc_id": "1SapKWeZNgbRD7vHzXDVYb52jBkPxRenXvbRn_7UYwK8",
       "folder": "."
     }
   }
