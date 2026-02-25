@@ -142,6 +142,10 @@ python C:\claude\ebs\tools\detect_ui_elements.py <image_path>
 
 # 기능 레지스트리 생성 (기능 체크리스트 → JSON 레지스트리)
 python C:\claude\ebs\tools\generate_feature_registry.py
+
+# 오버레이 오차율 통계 (02_Annotated_ngd/*-ocr.json 파싱 → overlay-error-analysis.json)
+python C:\claude\ebs\tools\analyze_overlay_errors.py
+python C:\claude\ebs\tools\analyze_overlay_errors.py --json   # JSON 출력 모드
 ```
 
 #### 오버레이 Drop 표시 규칙 (MANDATORY)
@@ -162,7 +166,22 @@ python C:\claude\ebs\tools\generate_feature_registry.py
 4. **Drop 결정 근거**: `is_drop`을 추가할 때 반드시 인라인 주석으로
    Drop 사유를 기재한다. 예: `# SV-030 Drop 확정`
 
-### Google Drive 정리
+### Google Drive 동기화
+
+```powershell
+# 로컬 → Drive 단방향 동기화 (MAPPING_ngd.json 기반, 변경 파일만 업로드)
+cd /c/claude && python ebs/sync_ebs_drive.py
+cd /c/claude && python ebs/sync_ebs_drive.py --dry-run   # 미리보기
+cd /c/claude && python ebs/sync_ebs_drive.py --force     # 강제 전체 업로드
+
+# Drive 상태 검증 (MAPPING_ngd.json vs 실제 Drive 비교)
+cd /c/claude && python ebs/verify_ebs_drive.py
+
+# 자동 동기화 스케줄러 등록
+powershell -File C:\claude\ebs\setup_drive_scheduler.ps1
+```
+
+### Google Drive 관리 도구
 
 ```powershell
 python C:\claude\ebs\tools\gdrive_organizer.py status              # 현재 상태 조회
@@ -217,6 +236,11 @@ Reporters (Markdown 파일 + Slack 채널 메시지)
 4. Thread 기반 회신 감지 (발송 메일의 thread에서 새 메시지 탐색)
 
 **Slack Poster 동작 방식**: 새 메시지 post가 아닌 기존 메시지 `chat.update`. `vendor_message_ts.txt`에 저장된 timestamp로 갱신 대상 식별. 메시지 미발견 시 새 메시지 생성으로 fallback.
+
+**증분 수집 상태 파일** (`data/` 디렉토리):
+- `slack_last_ts.txt` — 마지막 수집 Slack 메시지 timestamp (증분 수집 기준점)
+- `gmail_last_date.txt` — 마지막 수집 Gmail 날짜
+- 이 파일들을 삭제하면 다음 실행 시 전체 재수집(`--full`과 동일 효과)
 
 ### 외부 공유 라이브러리
 
@@ -338,6 +362,9 @@ mockups/            # HTML 와이어프레임 (sources, outputs, gfx, rules, mai
 | 기능 체크리스트 | `docs/01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md` | 149개 복제 대상 |
 | PokerGFX UI 분석 | `docs/01_PokerGFX_Analysis/PokerGFX-UI-Analysis.md` | UI 화면 분석 |
 | 바이너리 분석 | `docs/01_PokerGFX_Analysis/PokerGFX-Server-Binary-Analysis.md` | Server 바이너리 역분석 결과 |
+| **기능 트리아지** | `docs/01_PokerGFX_Analysis/ebs-console-feature-triage.md` | Drop 확정 기능 분류 (generate_annotations.py의 `is_drop` 판단 기준) |
+| **EBS Console PRD** | `docs/00-prd/ebs-console.prd.md` | EBS Console 요구사항 + Appendix A (Drop 목록) |
+| Phase 진행 가이드 | `docs/05_Operations_ngd/PHASE-PROGRESSION.md` | Phase 이동 조건/체크리스트 |
 | 업체 관리 | `docs/05_Operations_ngd/VENDOR-MANAGEMENT.md` | 업체 정보 1차 소스 |
 | 커뮤니케이션 규칙 | `docs/05_Operations_ngd/COMMUNICATION-RULES_ngd.md` | 외부 이메일 규칙 |
 | 업체 선정 체크리스트 | `docs/05_Operations_ngd/VENDOR-SELECTION-CHECKLIST.md` | Phase 0 선정 기준 |
