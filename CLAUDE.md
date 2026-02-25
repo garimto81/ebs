@@ -174,6 +174,12 @@ cd /c/claude && python ebs/sync_ebs_drive.py
 cd /c/claude && python ebs/sync_ebs_drive.py --dry-run   # 미리보기
 cd /c/claude && python ebs/sync_ebs_drive.py --force     # 강제 전체 업로드
 
+# Drive → 로컬 역방향 동기화 (Google Docs에서 수정된 내용을 로컬에 반영)
+cd /c/claude && python ebs/pull_ebs_drive.py              # 변경 diff 출력 (적용 안함)
+cd /c/claude && python ebs/pull_ebs_drive.py --dry-run    # 시각 비교만
+cd /c/claude && python ebs/pull_ebs_drive.py --apply      # 변경사항 로컬 적용 (백업 자동 생성)
+cd /c/claude && python ebs/pull_ebs_drive.py --prd PRD-0002  # 특정 PRD만
+
 # Drive 상태 검증 (MAPPING_ngd.json vs 실제 Drive 비교)
 cd /c/claude && python ebs/verify_ebs_drive.py
 
