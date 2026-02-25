@@ -1,10 +1,10 @@
 ---
 doc_type: "prd"
 doc_id: "PRD-0004-EBS-ServerUI"
-version: "19.4.0"
+version: "20.0.0"
 status: "draft"
 owner: "BRACELET STUDIO"
-last_updated: "2026-02-23"
+last_updated: "2026-02-25"
 phase: "phase-1"
 priority: "critical"
 
@@ -53,12 +53,12 @@ stakeholders:
 
 ```mermaid
 flowchart LR
-    MW["Main Window"] -->|"Ctrl+1"| SRC["Sources"]
-    MW -->|"Ctrl+2"| OUT["Outputs"]
-    MW -->|"Ctrl+3"| GFX1["GFX 1"]
-    MW -->|"Ctrl+4"| GFX2["GFX 2"]
-    MW -->|"Ctrl+5"| GFX3["GFX 3"]
-    MW -->|"Ctrl+6"| SYS["System"]
+    MW["Main Window"] --> SYS["System"]
+    MW --> SRC["Sources"]
+    MW --> OUT["Outputs"]
+    MW --> GFX1["GFX 1"]
+    MW --> GFX2["GFX 2"]
+    MW --> GFX3["GFX 3"]
     SYS -->|"Y-09"| TDG["Table Diagnostics"]
     MW -->|"Skin"| SKE["Skin Editor<br/>(별도 창)"]
     SKE -->|"요소 클릭"| GRE["Graphic Editor<br/>(별도 창)"]
@@ -136,7 +136,7 @@ PokerGFX의 기본 화면. 좌측에 방송 Preview, 우측에 상태 표시와 
 - **Control Panel**: 나머지 320px. 상단: 필수 상태 인디케이터(CPU/GPU/RFID). 중단: 자동 spacer(flex:1, ~60px). 하단: Quick Actions 버튼 3개. 수직 스크롤 없이 모든 요소가 보여야 한다.
 - **앱 윈도우**: 800×365px 기준 (Title Bar 28px + Preview 270px + Status Bar 22px + Shortcut Bar 24px + Watermark 22px).
 - **Status Bar**: 하단 1행. 서버 연결 상태, 게임 타입, 블라인드 레벨 표시. ~~RFID 연결 상태, 현재 핸드 번호, AT/Overlay/DB 연결 상태~~ (M-17/M-18 Drop 확정).
-- **탭 없음**: Main Window는 독립 모니터링 화면. 각 설정 탭(Sources, Outputs, GFX 1, GFX 2, GFX 3, System)은 키보드 단축키(Ctrl+1~6)로 별도 창 접근.
+- **탭 없음**: Main Window는 독립 모니터링 화면. 각 설정 탭(System, Sources, Outputs, GFX 1, GFX 2, GFX 3)은 탭 클릭으로 전환.
 
 ###### 레이아웃
 
@@ -153,15 +153,15 @@ Preview Panel(M-02, 좌) + Status Panel(M-03~M-06, 우상) + Quick Actions(M-11~
 **시나리오 A: 방송 전 준비**
 1. 앱 실행 → Preview 상태 확인 (M-02)
 2. RFID Status (M-05) 확인 → Green이면 다음 단계
-3. Ctrl+6 → System 탭: RFID 캘리브레이션
-4. Ctrl+1~5 → 각 탭 설정 완료
+3. System 탭 → RFID 캘리브레이션
+4. Sources → Outputs → GFX 1/2/3 → 각 탭 설정 완료
 5. M-13 Register Deck → 새 덱 등록
 6. F8 / M-14 → Action Tracker 실행
 
 **시나리오 B: 긴급 복구 (본방송 중)**
 1. RFID 빨간색 → M-05 상태 상세 확인
 2. M-11 Reset Hand → 현재 핸드 초기화 (확인 다이얼로그)
-3. 문제 지속 시 → Ctrl+6 → Y-03 Reset → 캘리브레이션 재실행
+3. 문제 지속 시 → System 탭 → Y-03 Reset → 캘리브레이션 재실행
 
 **시나리오 C: 덱 교체**
 1. 핸드 종료 확인 (Action Tracker)
@@ -228,7 +228,7 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 
 | 에러 유형 | 표시 위치 | 시각 피드백 | 복구 액션 |
 |----------|----------|-----------|---------|
-| RFID 미연결 | M-05 | Red 아이콘 + 경고음 | Ctrl+6 → Y-03 Reset |
+| RFID 미연결 | M-05 | Red 아이콘 + 경고음 | System 탭 → Y-03 Reset |
 | Preview 멈춤 | M-02 | 마지막 프레임 고정 + 테두리 빨간색 | M-09 Preview 토글 재시작 |
 | ~~AT 연결 끊김~~ | ~~M-18~~ | ~~AT 표시등 Red~~ | ~~M-14 재실행~~ (**[DROP]** M-18 제거됨) |
 | ~~Hand Counter 불일치~~ | ~~M-17~~ | ~~숫자 빨간색 표시~~ | ~~M-11 Reset Hand~~ (**[DROP]** M-17 제거됨) |
@@ -237,18 +237,123 @@ Preview는 항상 출력 해상도의 종횡비를 유지한다. Preview 캔버�
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
-| Sources~System 탭 | Ctrl+1~6 또는 탭 클릭 | 항상 |
+| System~GFX 3 탭 | 탭 클릭 | 항상 |
 | Skin Editor | GFX 1 탭 > 스킨 선택 영역 | 별도 창 |
 | ActionTracker | F8 또는 M-14 | 별도 앱 실행 |
 | Preview 전체 화면 | F11 또는 M-20 | ESC로 복귀 |
 
-#### Step 2: Sources — 카메라/스위처 연결
+#### Step 2: System — 하드웨어 연결 확인
 
-그래픽만으로는 방송이 완성되지 않는다. 카메라 영상과 합성되어야 한다. 어떤 카메라가 연결되어 있는지, ATEM 스위처의 IP는 무엇인지, 보드 카메라 싱크는 몇 밀리초인지를 설정해야 그래픽 오버레이가 정확한 타이밍에 올라간다. **Sources**(Ctrl+1)는 이 물리적 연결을 담당한다.
+RFID가 카드를 읽으려면 리더가 연결되고 캘리브레이션이 완료되어야 한다. 하드웨어 점검 없이 본방송을 시작하면 중간에 카드 인식이 안 되는 사고가 발생한다. **System**(첫 번째 탭)에서 RFID 리더 상태, 네트워크 연결, 테이블 디바이스를 점검한다.
 
 ```mermaid
 flowchart LR
-    MW["Main Window"] -->|"Ctrl+1"| SRC["Sources<br/>(카메라 + 스위처)"]
+    MW["Main Window"]
+    SYS["System<br/>(RFID + 연결 점검)"]
+    style SYS fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    MW --> SYS
+```
+
+
+##### PokerGFX 원본
+
+**원본 캡쳐**
+
+![System 탭 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180624.png>)
+
+**오버레이 분석본**
+
+![System 탭 - PokerGFX 원본](02_Annotated_ngd/08-system-tab.png)
+
+RFID 리더, 안테나, 라이선스, 시스템 진단, 고급 설정을 관리하는 탭. 28개 UI 요소로 구성.
+
+> **설계 시사점**
+> - RFID 안테나(22~24번)가 하단에 배치되어 있으나, 실제로는 방송 준비의 첫 번째 설정임 → EBS에서 상단 이동 (Y-03~Y-07)
+> - 라이선스 관련 4개(6~9번)는 EBS 자체 시스템에서 불필요 → 제거
+> - AT 접근 정책이 다른 설정과 혼재 → EBS에서 독립 그룹 (Y-13~Y-15)
+
+##### EBS 설계본
+
+![System Tab - EBS 설계본](images/mockups/ebs-system.png)
+
+##### 설계 스펙
+
+**변환 요약**: PokerGFX 28개 → EBS 24개. RFID를 상단으로 이동 (준비 첫 단계), 라이선스 4개 제거, AT 접근 정책 독립 그룹화.
+
+RFID, Action Tracker 연결, 시스템 진단.
+
+###### 레이아웃
+
+4구역: RFID(Y-03~Y-07, 상단) > AT(Y-13~Y-15) > Diagnostics(Y-08~Y-12) > Advanced(Y-16~Y-24).
+
+###### Design Decisions
+
+1. **RFID 캘리브레이션이 방송 준비 첫 단계인 이유**: 캘리브레이션 없이 다른 설정을 진행하면 테스트 핸드에서 카드 오인식이 발생한다. 따라서 하드웨어 점검 -> RFID 캘리브레이션을 최우선으로 배치했다.
+
+2. **AT 접근 정책(Y-13~Y-15)이 이 탭에 있는 이유**: ActionTracker는 딜러가 사용하는 별도 장치이므로 보안 설정이 필요하다. Kiosk Mode(Y-15)는 딜러의 불필요한 기능 접근을 제한한다.
+
+3. **Advanced 그룹(Y-16~Y-23)이 별도 섹션인 이유**: MultiGFX, Stream Deck 매핑 등은 대부분 변경하지 않는다. 자주 사용하는 RFID/Diagnostics 설정과 시각적으로 분리하여 실수를 방지한다.
+
+###### Workflow
+
+RFID 리셋/캘리브레이션 -> 안테나 설정 -> AT 접근 정책 -> 진단 확인 -> 고급 설정.
+
+###### Element Catalog
+
+| # | 그룹 | 요소 | 설명 | PGX | 우선순위 |
+|:-:|------|------|------|:---:|:--------:|
+| Y-01 | Table | Name | 테이블 식별 이름 | #2 | P1 |
+| Y-02 | Table | Password | 접속 비밀번호 | #3 | P1 |
+| Y-03 | RFID | Reset | RFID 시스템 초기화 | #4 | P0 |
+| Y-04 | RFID | Calibrate | 안테나별 캘리브레이션 | #5 | P0 |
+| Y-05 | RFID | UPCARD Antennas | UPCARD 안테나로 홀카드 읽기 | #22 | P0 |
+| Y-06 | RFID | Disable Muck | AT 모드 시 muck 안테나 비활성 | #23 | P0 |
+| Y-07 | RFID | Disable Community | 커뮤니티 카드 안테나 비활성 | #24 | P0 |
+| Y-08 | System Info | Hardware Panel | CPU/GPU/OS/Encoder 자동 감지 | #11 | P1 |
+| Y-09 | Diagnostics | Table Diagnostics | 안테나별 상태, 신호 강도 (별도 창) | #10 | P1 |
+| Y-10 | Diagnostics | System Log | 로그 뷰어 | #12 | P1 |
+| Y-12 | Diagnostics | Export Folder | 내보내기 폴더 | #14 | P1 |
+| Y-13 | AT | Allow AT Access | AT 접근 허용 | #26 | P0 |
+| Y-14 | AT | Predictive Bet | 베팅 예측 입력 | #27 | P0 |
+| Y-15 | AT | Kiosk Mode | AT 키오스크 모드 | #28 | P0 |
+| Y-16 | Advanced | MultiGFX | 다중 테이블 운영 | #16 | P2 |
+| Y-17 | Advanced | Sync Stream | 스트림 동기화 | #17 | P2 |
+| Y-18 | Advanced | Sync Skin | 스킨 동기화 | #18 | P2 |
+| Y-19 | Advanced | No Cards | 카드 비활성화 | #19 | P1 |
+| Y-20 | Advanced | Disable GPU | GPU 인코딩 비활성화 | #20 | P1 |
+| Y-21 | Advanced | Ignore Name Tags | 네임 태그 무시 | #21 | P1 |
+| Y-22 | Advanced | Auto Start | OS 시작 시 자동 실행 | 신규 | P2 |
+| Y-23 | Advanced | Stream Deck | Elgato Stream Deck 매핑 | #15 | P2 |
+| Y-24 | Updates | Version + Check | 버전 표시 + 업데이트 | #7,#8 | P2 |
+
+###### Interaction Patterns
+
+| 조작 | 시스템 반응 | 피드백 |
+|------|-----------|--------|
+| Y-03 Reset 클릭 | RFID 시스템 재초기화 | M-05 상태 변화 (Yellow -> Green/Red) |
+| Y-04 Calibrate 클릭 | 안테나별 캘리브레이션 시작 | 진행률 + 안테나별 결과 |
+| Y-09 Table Diagnostics | 별도 창 열림 | 안테나 신호 강도 실시간 표시 |
+
+###### Navigation
+
+| 목적지 | 방법 | 조건 |
+|--------|------|------|
+| Table Diagnostics | Y-09 클릭 | 별도 창 열림 |
+| Main Window | 탭 영역 외 클릭 | RFID 설정 완료 후 |
+| Sources 탭 | 탭 클릭 | RFID 후 비디오 설정으로 이동 |
+
+#### Step 3: Sources — 카메라/스위처 연결
+
+그래픽만으로는 방송이 완성되지 않는다. 카메라 영상과 합성되어야 한다. 어떤 카메라가 연결되어 있는지, ATEM 스위처의 IP는 무엇인지, 보드 카메라 싱크는 몇 밀리초인지를 설정해야 그래픽 오버레이가 정확한 타이밍에 올라간다. **Sources**(두 번째 탭)는 이 물리적 연결을 담당한다.
+
+```mermaid
+flowchart LR
+    MW["Main Window"]
+    SYS["System"]
+    SRC["Sources<br/>(카메라 + 스위처)"]
+    style SRC fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    MW --> SYS
+    MW --> SRC
 ```
 
 
@@ -354,15 +459,22 @@ flowchart LR
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
 | Main Window | 탭 영역 외 클릭 | 언제든 |
-| Outputs 탭 | Ctrl+2 | 비디오 소스 설정 완료 후 자연스러운 다음 단계 |
+| Outputs 탭 | 탭 클릭 | 비디오 소스 설정 완료 후 자연스러운 다음 단계 |
 
-#### Step 3: Outputs — 출력 파이프라인
+#### Step 4: Outputs — 출력 파이프라인
 
-생성된 그래픽을 내보내야 한다. 그래픽이 어떤 장치로, 어떤 해상도와 프레임레이트로 나가는지를 설정해야 한다. Fill & Key 채널 매핑, 녹화, 스트리밍 설정도 이 탭에서 관리한다. **Outputs**(Ctrl+2)에서 출력 파이프라인을 구성한다.
+생성된 그래픽을 내보내야 한다. 그래픽이 어떤 장치로, 어떤 해상도와 프레임레이트로 나가는지를 설정해야 한다. Fill & Key 채널 매핑, 녹화, 스트리밍 설정도 이 탭에서 관리한다. **Outputs**(세 번째 탭)에서 출력 파이프라인을 구성한다.
 
 ```mermaid
 flowchart LR
-    MW["Main Window"] -->|"Ctrl+2"| OUT["Outputs<br/>(출력 파이프라인)"]
+    MW["Main Window"]
+    SYS["System"]
+    SRC["Sources"]
+    OUT["Outputs<br/>(출력 파이프라인)"]
+    style OUT fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    MW --> SYS
+    MW --> SRC
+    MW --> OUT
 ```
 
 ##### PokerGFX 원본
@@ -477,16 +589,25 @@ flowchart LR
 
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
-| GFX 1 탭 | Ctrl+3 | 출력 설정 후 그래픽 조정 |
+| GFX 1 탭 | 탭 클릭 | 출력 설정 후 그래픽 조정 |
 | Main Window | 탭 영역 외 클릭 | — |
 
-#### Step 4: GFX 1 — 레이아웃 & 연출
+#### Step 5: GFX 1 — 레이아웃 & 연출
 
-카메라와 출력이 준비되면 이제 그래픽을 올린다. **GFX 1**(Ctrl+3)은 그래픽의 "배치"를 담당한다. 보드 카드가 화면 어디에 나타날지, 플레이어 오버레이가 어떤 배열로 표시될지, 카드가 어떤 연출로 공개될지를 설정한다. PokerGFX 원본의 GFX 1 탭 구조를 그대로 계승한다.
+카메라와 출력이 준비되면 이제 그래픽을 올린다. **GFX 1**(네 번째 탭)은 그래픽의 "배치"를 담당한다. 보드 카드가 화면 어디에 나타날지, 플레이어 오버레이가 어떤 배열로 표시될지, 카드가 어떤 연출로 공개될지를 설정한다. PokerGFX 원본의 GFX 1 탭 구조를 그대로 계승한다.
 
 ```mermaid
 flowchart LR
-    MW["Main Window"] -->|"Ctrl+3"| GFX1["GFX 1<br/>(레이아웃 + 연출)"]
+    MW["Main Window"]
+    SYS["System"]
+    SRC["Sources"]
+    OUT["Outputs"]
+    GFX1["GFX 1<br/>(레이아웃 + 연출)"]
+    style GFX1 fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    MW --> SYS
+    MW --> SRC
+    MW --> OUT
+    MW --> GFX1
 ```
 
 ##### PokerGFX 원본
@@ -635,16 +756,27 @@ EBS GFX의 위치/크기 값은 두 가지 단위 체계가 혼재한다. 구현
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
 | Main Window | 탭 영역 외 클릭 | 언제든 |
-| GFX 2 탭 | Ctrl+4 | 레이아웃 설정 후 표시 설정으로 이동 |
+| GFX 2 탭 | 탭 클릭 | 레이아웃 설정 후 표시 설정으로 이동 |
 | Skin Editor | G-14s 버튼 클릭 | 별도 창 |
 
-#### Step 5: GFX 2 — 표시 설정 & 규칙
+#### Step 6: GFX 2 — 표시 설정 & 규칙
 
-GFX 1에서 배치와 연출을 정했다면, **GFX 2**(Ctrl+4)는 "무엇을 표시할지"를 결정한다. 리더보드 옵션, 플레이어 표시 방식, Equity 표시 시점, 게임 규칙(Bomb Pot·Straddle·Rabbit Hunting)이 여기에 모인다. PokerGFX 원본의 GFX 2 탭 구조를 그대로 계승한다.
+GFX 1에서 배치와 연출을 정했다면, **GFX 2**(다섯 번째 탭)는 "무엇을 표시할지"를 결정한다. 리더보드 옵션, 플레이어 표시 방식, Equity 표시 시점, 게임 규칙(Bomb Pot·Straddle·Rabbit Hunting)이 여기에 모인다. PokerGFX 원본의 GFX 2 탭 구조를 그대로 계승한다.
 
 ```mermaid
 flowchart LR
-    MW["Main Window"] -->|"Ctrl+4"| GFX2["GFX 2<br/>(표시 설정 + 규칙)"]
+    MW["Main Window"]
+    SYS["System"]
+    SRC["Sources"]
+    OUT["Outputs"]
+    GFX1["GFX 1"]
+    GFX2["GFX 2<br/>(표시 설정 + 규칙)"]
+    style GFX2 fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    MW --> SYS
+    MW --> SRC
+    MW --> OUT
+    MW --> GFX1
+    MW --> GFX2
 ```
 
 ##### PokerGFX 원본
@@ -767,15 +899,28 @@ GFX 2는 표시 설정(무엇을 보여줄지)과 게임 규칙(어떤 규칙으
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
 | Main Window | 탭 영역 외 클릭 | 언제든 |
-| GFX 3 탭 | Ctrl+5 | 표시 설정 후 수치 형식으로 이동 |
+| GFX 3 탭 | 탭 클릭 | 표시 설정 후 수치 형식으로 이동 |
 
-#### Step 6: GFX 3 — 수치 형식
+#### Step 7: GFX 3 — 수치 형식
 
-**GFX 3**(Ctrl+5)은 숫자의 형식을 결정한다. 칩카운트를 원화(₩)로 표시할지, k/M 단위로 축약할지, BB 배수로 표시할지를 설정한다. Outs 표시 조건, 블라인드 표시 시점, 통화 기호 등 수치 렌더링 전반을 담당한다. PokerGFX 원본의 GFX3 탭 구조를 그대로 계승한다.
+**GFX 3**(여섯 번째 탭)은 숫자의 형식을 결정한다. 칩카운트를 원화(₩)로 표시할지, k/M 단위로 축약할지, BB 배수로 표시할지를 설정한다. Outs 표시 조건, 블라인드 표시 시점, 통화 기호 등 수치 렌더링 전반을 담당한다. PokerGFX 원본의 GFX3 탭 구조를 그대로 계승한다.
 
 ```mermaid
 flowchart LR
-    MW["Main Window"] -->|"Ctrl+5"| GFX3["GFX 3<br/>(수치 형식)"]
+    MW["Main Window"]
+    SYS["System"]
+    SRC["Sources"]
+    OUT["Outputs"]
+    GFX1["GFX 1"]
+    GFX2["GFX 2"]
+    GFX3["GFX 3<br/>(수치 형식)"]
+    style GFX3 fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    MW --> SYS
+    MW --> SRC
+    MW --> OUT
+    MW --> GFX1
+    MW --> GFX2
+    MW --> GFX3
 ```
 
 ##### PokerGFX 원본
@@ -888,104 +1033,7 @@ GFX 3은 수치 렌더링(어떤 형식으로)을 담당한다.
 | 목적지 | 방법 | 조건 |
 |--------|------|------|
 | Main Window | 탭 영역 외 클릭 | 언제든 |
-| System 탭 | Ctrl+6 | 수치 설정 후 RFID 점검으로 이동 |
-
-#### Step 7: System — 하드웨어 연결 확인
-
-RFID가 카드를 읽으려면 리더가 연결되고 캘리브레이션이 완료되어야 한다. 하드웨어 점검 없이 본방송을 시작하면 중간에 카드 인식이 안 되는 사고가 발생한다. **System**(Ctrl+6)에서 RFID 리더 상태, 네트워크 연결, 테이블 디바이스를 점검한다.
-
-```mermaid
-flowchart LR
-    MW["Main Window"] -->|"Ctrl+6"| SYS["System<br/>(RFID + 연결 점검)"]
-```
-
-
-##### PokerGFX 원본
-
-**원본 캡쳐**
-
-![System 탭 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180624.png>)
-
-**오버레이 분석본**
-
-![System 탭 - PokerGFX 원본](02_Annotated_ngd/08-system-tab.png)
-
-RFID 리더, 안테나, 라이선스, 시스템 진단, 고급 설정을 관리하는 탭. 28개 UI 요소로 구성.
-
-> **설계 시사점**
-> - RFID 안테나(22~24번)가 하단에 배치되어 있으나, 실제로는 방송 준비의 첫 번째 설정임 → EBS에서 상단 이동 (Y-03~Y-07)
-> - 라이선스 관련 4개(6~9번)는 EBS 자체 시스템에서 불필요 → 제거
-> - AT 접근 정책이 다른 설정과 혼재 → EBS에서 독립 그룹 (Y-13~Y-15)
-
-##### EBS 설계본
-
-![System Tab - EBS 설계본](images/mockups/ebs-system.png)
-
-##### 설계 스펙
-
-**변환 요약**: PokerGFX 28개 → EBS 24개. RFID를 상단으로 이동 (준비 첫 단계), 라이선스 4개 제거, AT 접근 정책 독립 그룹화.
-
-RFID, Action Tracker 연결, 시스템 진단.
-
-###### 레이아웃
-
-4구역: RFID(Y-03~Y-07, 상단) > AT(Y-13~Y-15) > Diagnostics(Y-08~Y-12) > Advanced(Y-16~Y-24).
-
-###### Design Decisions
-
-1. **RFID 캘리브레이션이 방송 준비 첫 단계인 이유**: 캘리브레이션 없이 다른 설정을 진행하면 테스트 핸드에서 카드 오인식이 발생한다. 따라서 하드웨어 점검 -> RFID 캘리브레이션을 최우선으로 배치했다.
-
-2. **AT 접근 정책(Y-13~Y-15)이 이 탭에 있는 이유**: ActionTracker는 딜러가 사용하는 별도 장치이므로 보안 설정이 필요하다. Kiosk Mode(Y-15)는 딜러의 불필요한 기능 접근을 제한한다.
-
-3. **Advanced 그룹(Y-16~Y-23)이 별도 섹션인 이유**: MultiGFX, Stream Deck 매핑 등은 대부분 변경하지 않는다. 자주 사용하는 RFID/Diagnostics 설정과 시각적으로 분리하여 실수를 방지한다.
-
-###### Workflow
-
-RFID 리셋/캘리브레이션 -> 안테나 설정 -> AT 접근 정책 -> 진단 확인 -> 고급 설정.
-
-###### Element Catalog
-
-| # | 그룹 | 요소 | 설명 | PGX | 우선순위 |
-|:-:|------|------|------|:---:|:--------:|
-| Y-01 | Table | Name | 테이블 식별 이름 | #2 | P1 |
-| Y-02 | Table | Password | 접속 비밀번호 | #3 | P1 |
-| Y-03 | RFID | Reset | RFID 시스템 초기화 | #4 | P0 |
-| Y-04 | RFID | Calibrate | 안테나별 캘리브레이션 | #5 | P0 |
-| Y-05 | RFID | UPCARD Antennas | UPCARD 안테나로 홀카드 읽기 | #22 | P0 |
-| Y-06 | RFID | Disable Muck | AT 모드 시 muck 안테나 비활성 | #23 | P0 |
-| Y-07 | RFID | Disable Community | 커뮤니티 카드 안테나 비활성 | #24 | P0 |
-| Y-08 | System Info | Hardware Panel | CPU/GPU/OS/Encoder 자동 감지 | #11 | P1 |
-| Y-09 | Diagnostics | Table Diagnostics | 안테나별 상태, 신호 강도 (별도 창) | #10 | P1 |
-| Y-10 | Diagnostics | System Log | 로그 뷰어 | #12 | P1 |
-| Y-12 | Diagnostics | Export Folder | 내보내기 폴더 | #14 | P1 |
-| Y-13 | AT | Allow AT Access | AT 접근 허용 | #26 | P0 |
-| Y-14 | AT | Predictive Bet | 베팅 예측 입력 | #27 | P0 |
-| Y-15 | AT | Kiosk Mode | AT 키오스크 모드 | #28 | P0 |
-| Y-16 | Advanced | MultiGFX | 다중 테이블 운영 | #16 | P2 |
-| Y-17 | Advanced | Sync Stream | 스트림 동기화 | #17 | P2 |
-| Y-18 | Advanced | Sync Skin | 스킨 동기화 | #18 | P2 |
-| Y-19 | Advanced | No Cards | 카드 비활성화 | #19 | P1 |
-| Y-20 | Advanced | Disable GPU | GPU 인코딩 비활성화 | #20 | P1 |
-| Y-21 | Advanced | Ignore Name Tags | 네임 태그 무시 | #21 | P1 |
-| Y-22 | Advanced | Auto Start | OS 시작 시 자동 실행 | 신규 | P2 |
-| Y-23 | Advanced | Stream Deck | Elgato Stream Deck 매핑 | #15 | P2 |
-| Y-24 | Updates | Version + Check | 버전 표시 + 업데이트 | #7,#8 | P2 |
-
-###### Interaction Patterns
-
-| 조작 | 시스템 반응 | 피드백 |
-|------|-----------|--------|
-| Y-03 Reset 클릭 | RFID 시스템 재초기화 | M-05 상태 변화 (Yellow -> Green/Red) |
-| Y-04 Calibrate 클릭 | 안테나별 캘리브레이션 시작 | 진행률 + 안테나별 결과 |
-| Y-09 Table Diagnostics | 별도 창 열림 | 안테나 신호 강도 실시간 표시 |
-
-###### Navigation
-
-| 목적지 | 방법 | 조건 |
-|--------|------|------|
-| Table Diagnostics | Y-09 클릭 | 별도 창 열림 |
-| Main Window | 탭 영역 외 클릭 | RFID 설정 완료 후 |
-| Sources 탭 | Ctrl+1 | RFID 후 비디오 설정으로 이동 |
+| System 탭 | 탭 클릭 | 수치 설정 후 RFID 점검으로 이동 (참고: System은 첫 번째 탭이므로 방송 전 준비는 System부터 시작) |
 
 #### Step 8: Action Tracker — 게임 진행 실시간 입력
 
@@ -993,7 +1041,7 @@ RFID 리셋/캘리브레이션 -> 안테나 설정 -> AT 접근 정책 -> 진단
 
 ```mermaid
 flowchart LR
-    MW["Main Window"] -->|"Ctrl+6"| SYS["System"]
+    MW["Main Window"] --> SYS["System"]
     MW -->|"F8"| AT["Action Tracker<br/>(별도 앱, 터치)"]
 ```
 
@@ -1003,12 +1051,12 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    MW["Main Window"] -->|"Ctrl+1"| SRC["Sources"]
-    MW -->|"Ctrl+2"| OUT["Outputs"]
-    MW -->|"Ctrl+3"| GFX1["GFX 1"]
-    MW -->|"Ctrl+4"| GFX2["GFX 2"]
-    MW -->|"Ctrl+5"| GFX3["GFX 3"]
-    MW -->|"Ctrl+6"| SYS["System"]
+    MW["Main Window"] --> SYS["System"]
+    MW --> SRC["Sources"]
+    MW --> OUT["Outputs"]
+    MW --> GFX1["GFX 1"]
+    MW --> GFX2["GFX 2"]
+    MW --> GFX3["GFX 3"]
     SYS -->|"Y-09"| TDG["Table Diagnostics"]
     MW -->|"Skin"| SKE["Skin Editor<br/>(별도 창)"]
     SKE -->|"요소 클릭"| GRE["Graphic Editor<br/>(별도 창)"]
@@ -1197,12 +1245,12 @@ Skin Editor에서 선택한 특정 요소(Board, Player, Card 등)의 위치, �
 | 화면 | 역할 | 주 사용 시점 |
 |------|------|-------------|
 | Main Window | 시스템 모니터링 + 긴급 조작 | 항상 (본방송 중 15% 주의력) |
-| Sources 탭 (Ctrl+1) | 비디오/오디오 입력 장치 설정 | 준비 단계 |
-| Outputs 탭 (Ctrl+2) | 출력 파이프라인 설정 (해상도, 장치, 녹화, 스트리밍) | 준비 단계 |
-| GFX 1 탭 (Ctrl+3) | 그래픽 레이아웃 & 연출 (배치, 카드 공개, 스킨) | 준비 단계 + 핸드 간 조정 |
-| GFX 2 탭 (Ctrl+4) | 표시 설정 & 규칙 (리더보드, Equity, 게임 규칙) | 준비 단계 |
-| GFX 3 탭 (Ctrl+5) | 수치 형식 (통화, 정밀도, BB 모드) | 준비 단계 |
-| System 탭 (Ctrl+6) | RFID, AT 연결, 시스템 진단 | 준비 단계 + 비상 대응 |
+| System 탭 | RFID, AT 연결, 시스템 진단 | 준비 단계 + 비상 대응 |
+| Sources 탭 | 비디오/오디오 입력 장치 설정 | 준비 단계 |
+| Outputs 탭 | 출력 파이프라인 설정 (해상도, 장치, 녹화, 스트리밍) | 준비 단계 |
+| GFX 1 탭 | 그래픽 레이아웃 & 연출 (배치, 카드 공개, 스킨) | 준비 단계 + 핸드 간 조정 |
+| GFX 2 탭 | 표시 설정 & 규칙 (리더보드, Equity, 게임 규칙) | 준비 단계 |
+| GFX 3 탭 | 수치 형식 (통화, 정밀도, BB 모드) | 준비 단계 |
 | Skin Editor | 방송 그래픽 테마 편집 | 사전 준비 |
 | Graphic Editor | 개별 요소 픽셀 단위 편집 | 사전 준비 |
 | **Action Tracker** | **실시간 게임 진행 입력** | **본방송 (85% 주의력)** |
@@ -1213,7 +1261,7 @@ Skin Editor에서 선택한 특정 요소(Board, Player, Card 등)의 위치, �
 |------|---------|
 | 운영자 중심 설계 (라이브 중 인지 부하 최소화) | Quick Actions, 단축키 |
 | 검증된 레이아웃 계승 (PokerGFX 2-column 유지) | Preview(좌) + Control(우) |
-| PokerGFX 원본 탭 순서 계승 | Sources(Ctrl+1), Outputs(Ctrl+2), GFX1(Ctrl+3), GFX2(Ctrl+4), GFX3(Ctrl+5), System(Ctrl+6) |
+| EBS 재정의 탭 순서 | System(1번째), Sources(2번째), Outputs(3번째), GFX1(4번째), GFX2(5번째), GFX3(6번째) |
 
 ### 1.4 공통 레이아웃
 
@@ -1410,10 +1458,6 @@ graph TD
 | `F7` | Register Deck | 메인 |
 | `F8` | Launch AT | 메인 |
 | `F11` | Preview 전체 화면 | 메인 |
-| `Ctrl+1` | Sources 탭 | 전역 |
-| `Ctrl+2` | Outputs 탭 | 전역 |
-| `Ctrl+3` | GFX 탭 | 전역 |
-| `Ctrl+4` | System 탭 | 전역 |
 | `Ctrl+S` | 설정 저장 | 전역 |
 
 ### C. Feature Mapping (149개)
@@ -1689,7 +1733,8 @@ AT는 별도 앱. GfxServer 상호작용 지점만 매핑한다.
 | **v19.4.0** | **2026-02-24** | **v1.0 스코프 요약/Drop 확정 섹션 최하단 배치**: 문서 최상단에서 변경 이력 바로 앞으로 이동. |
 | **v19.6.0** | **2026-02-24** | **EBS 설계본 해상도 변형 비교 추가**: 기존 자동 16:9 설계본(A) 아래에 고정 720×480 SD 변형 캡쳐(B) 추가. 두 이미지 배치 이유(플렉서블 단일 구현체, CSS 변수 런타임 스위칭) 설명 텍스트 삽입. |
 | **v19.5.0** | **2026-02-24** | **M-17/M-18 Drop 확정 처리**: Hand Counter(M-17), Connection Status(M-18) Drop 마킹. Element Catalog 취소선+[DROP] 적용. 에러 상태 표 취소선 처리. Status Bar 설계 원칙 갱신. 레이아웃 기술에서 M-18 제거. 요소 카운트 184→182개. ebs-main-window.html Wireframe v1.7 반영 (Status Bar M-17/M-18 제거). ebs-main-window-720x480.html 신규 생성 (Preview 고정 720×480). |
+| **v20.0.0** | **2026-02-25** | **탭 순서 재정의 및 단축키 제거**: System 탭을 첫 번째로 이동 (RFID/연결 확인이 준비의 출발점). Sources 탭을 두 번째로 이동. Ctrl+1~6 키보드 단축키 전체 제거 (설계 단계에서 단축키 미확정). 누적형 Mermaid 다이어그램 업데이트 (System→Sources→Outputs→GFX1→GFX2→GFX3 순서). Step 번호 재조정: Step 2=System, Step 3=Sources, Step 4=Outputs, Step 5=GFX1, Step 6=GFX2, Step 7=GFX3, Step 8=Action Tracker, Step 9=Skin Editor. Appendix B에서 Ctrl+1~4 탭 단축키 행 제거. |
 
 ---
 
-**Version**: 19.6.0 | **Updated**: 2026-02-24
+**Version**: 20.0.0 | **Updated**: 2026-02-25
