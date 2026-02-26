@@ -1,51 +1,89 @@
-# PRD-0004 설계 시사점 재검토 PDCA 완료 보고서
+# PRD-0004 설계 시사점 품질 개선 — PDCA 완료 보고서
 
-**Version**: 1.0.0 | **Date**: 2026-02-26 | **Commit**: `c4e6ab6`
-
----
-
-## 개요
-
-PRD-0004-EBS-Server-UI-Design.md 내 9개 `> **설계 시사점**` 블록의 일관성과 품질을 개선했다.
-
-**목표**: `[PokerGFX 관찰] → [EBS 설계 결정]` 구조 통일 및 빈약한 섹션 보강
+**보고 일시**: 2026-02-26 | **프로젝트**: PRD-0004 EBS Server UI Design | **커밋**: c4e6ab6
 
 ---
 
-## 변경 결과
+## 1. 작업 개요
 
-| 섹션 | 변경 유형 | Before | After |
-|------|----------|--------|-------|
-| Step 1 Main Window | 정제 | MVP 범위 외 목록 혼재 | Preview 고정 bullet 신규, MVP 제거 |
-| Step 4 Outputs | 보강 | 2개 bullet | 4개 bullet (Recording/VCam 추가) |
-| Step 5 GFX 1 | 전환 | 특징 나열 | 계승 결정 + G-ID 참조 |
-| Step 6 GFX 2 | 전환 | 특징 나열 | 계승 결정 + G-ID 참조 |
-| Step 2/3/7/9× | 유지 | — | 원본 보존 |
+### 목표
+PRD-0004의 9개 화면 설계 시사점 4개 섹션 품질 개선. PokerGFX 단순 특징 나열 → EBS 계승 결정 + 요소 ID 참조로 전환.
 
----
-
-## 핵심 개선 사항
-
-1. **Step 1**: `EBS MVP 범위 외 (추후 개발 예정): Recording, Secure Delay...` bullet 제거 — 요소 테이블에 이미 명시된 중복 정보. Preview 항상 활성화 고정(M-09) 결정을 독립 bullet으로 분리 보존.
-
-2. **Step 4**: Outputs 탭 13개 요소 대비 2개에 불과하던 시사점을 4개로 확장. Live/Delay 파이프라인 전략(Live 우선 → Delay 추후), 스트리밍/녹화 그룹 분리, Virtual Camera 우선순위 하향 명시.
-
-3. **Step 5/6**: GFX 탭 시사점이 PokerGFX 특징만 나열하고 EBS 설계 결정이 없던 문제 해결. 모든 bullet에 `→ EBS 계승 (G-xx)` 형태로 결정과 요소 ID 참조 추가.
+### 실행 범위
+| 섹션 | 화면 | 작업 유형 |
+|------|------|---------|
+| **Step 1** | Main Window | 제거 + 신규 추가 + 개선 |
+| **Step 4** | Outputs | 확장 (2→4 bullet) |
+| **Step 5** | GFX 1 | 전환 (특징 → 계승 + ID 참조) |
+| **Step 6** | GFX 2 | 전환 (특징 → 계승 + ID 참조) |
+| **유지** | Step 2/3/7/9 | 원본 보존 (5개 섹션) |
 
 ---
 
-## 검증
+## 2. 변경 상세
 
-- Architect APPROVE (4개 섹션 체크리스트 전체 통과)
-- `설계 시사점` 블록 9개 존재 확인
-- 존재하지 않는 요소 ID(SK-01 등) 미삽입 확인
-- 유지 대상 5개 섹션 원본 보존 확인
+### Step 1 Main Window (L107-111)
+- **제거**: MVP 범위 외 항목 열거 bullet (테이블 M-08/M-09/M-10에 이미 명시, 중복)
+- **신규**: Preview 항상 활성화 고정 → M-09 토글 UI 제거 결정 명시
+- **개선**: 버튼 3개(Reset Hand / Register Deck / Launch AT) 구체화
+
+### Step 4 Outputs (L513-517)
+- **확장**: 2개 → 4개 bullet
+- **신규**: Recording/스트리밍 별도 그룹 분리, Virtual Camera P2 하향 배치
+
+### Step 5 GFX 1 (L667-671)
+- **전환**: PokerGFX 특징 → EBS 계승 결정 중심
+- **참조**: 요소 ID(G-10~G-25) 명시 + 주제별 구조화 (스킨 배포/로고 관리/애니메이션/효과)
+
+### Step 6 GFX 2 (L829-832)
+- **전환**: PokerGFX 특징 → EBS 계승 결정 중심
+- **참조**: 요소 ID(G-52~G-57, G-37, G-56) 명시 + 주제별 구조화 (게임 규칙/Equity/보안 경보)
 
 ---
 
-## 관련 파일
+## 3. 통계
 
-| 파일 | 역할 |
-|------|------|
-| `docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md` | 수정 대상 (4개 섹션) |
-| `docs/01-plan/prd0004-design-implications.plan.md` | 작업 계획서 |
+| 항목 | 값 |
+|------|-----|
+| 처리 섹션 | 4개 |
+| 제거된 bullet | 1개 |
+| 신규 추가 bullet | 2개 |
+| 전환 섹션 (특징→계승) | 2개 |
+| 유지 섹션 | 5개 |
+
+---
+
+## 4. 검증
+
+- [x] Step 1 Main Window 제거/신규 추가
+- [x] Step 4 Outputs 확장 (2→4 bullet)
+- [x] Step 5 GFX 1 요소 ID 참조 추가
+- [x] Step 6 GFX 2 요소 ID 참조 추가
+- [x] Step 2/3/7/9 유지 (변경 없음)
+
+---
+
+## 5. 결론
+
+**상태**: ✅ 완료 (c4e6ab6 커밋)
+
+### 개선 효과
+- **명확성**: PokerGFX 특징 → EBS 설계 결정 중심으로 전환
+- **정합성**: 9개 화면의 설계 시사점이 요소 ID 기반 상호 참조 구조 강화
+- **완전성**: 4개 섹션이 MVP 범위와 우선순위를 명시적으로 반영
+
+### 산출물
+- **파일**: `C:\claude\ebs\docs\01_PokerGFX_Analysis\PRD-0004-EBS-Server-UI-Design.md`
+- **버전**: v7.1.0 → v7.2.0 (마이너 업데이트)
+
+---
+
+## 변경 이력
+
+| 버전 | 일시 | 변경 내용 |
+|------|------|----------|
+| 1.0.0 | 2026-02-26 | 초판 작성 (설계 시사점 4개 섹션 재검토) |
+
+---
+
+**작성자**: Writer Agent | **상태**: Final (Completed)
