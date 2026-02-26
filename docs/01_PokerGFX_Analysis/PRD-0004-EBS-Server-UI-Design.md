@@ -53,6 +53,7 @@ stakeholders:
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window"] --> SYS["System"]
     MW --> SRC["Sources"]
     MW --> OUT["Outputs"]
@@ -73,6 +74,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window<br/>(중앙 통제실)"]
 ```
 
@@ -81,7 +83,7 @@ flowchart LR
 
 **원본 캡쳐**
 
-![Main Window 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180630.png>)
+![Main Window 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180630.png)
 
 **오버레이 분석본**
 
@@ -248,9 +250,10 @@ RFID가 카드를 읽으려면 리더가 연결되고 캘리브레이션이 완�
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window"]
     SYS["System<br/>(RFID + 연결 점검)"]
-    style SYS fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    style SYS fill:#FFD700,stroke:#FF8C00,stroke-width:3px,color:#000000
     MW --> SYS
 ```
 
@@ -259,7 +262,7 @@ flowchart LR
 
 **원본 캡쳐**
 
-![System 탭 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180624.png>)
+![System 탭 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180624.png)
 
 **오버레이 분석본**
 
@@ -348,10 +351,11 @@ RFID 리셋/캘리브레이션 -> 안테나 설정 -> AT 접근 정책 -> 진단
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window"]
     SYS["System"]
     SRC["Sources<br/>(카메라 + 스위처)"]
-    style SRC fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    style SRC fill:#FFD700,stroke:#FF8C00,stroke-width:3px,color:#000000
     MW --> SYS
     MW --> SRC
 ```
@@ -361,7 +365,7 @@ flowchart LR
 
 **원본 캡쳐**
 
-![Sources 탭 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180637.png>)
+![Sources 탭 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180637.png)
 
 **오버레이 분석본**
 
@@ -415,6 +419,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     S0["모드 선택<br/>S-00"] --> FK{"Fill & Key?"}
     FK -->|"Yes"| S1["DeckLink+ATEM<br/>S-01,S-13,S-14"]
     FK -->|"Chroma"| S3["배경색<br/>S-11,S-12"]
@@ -467,11 +472,12 @@ flowchart LR
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window"]
     SYS["System"]
     SRC["Sources"]
     OUT["Outputs<br/>(출력 파이프라인)"]
-    style OUT fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    style OUT fill:#FFD700,stroke:#FF8C00,stroke-width:3px,color:#000000
     MW --> SYS
     MW --> SRC
     MW --> OUT
@@ -481,7 +487,7 @@ flowchart LR
 
 **원본 캡쳐**
 
-![Outputs 탭 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180645.png>)
+![Outputs 탭 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180645.png)
 
 **오버레이 분석본**
 
@@ -532,6 +538,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     O1["해상도<br/>O-01,O-03"] --> O2["Live<br/>O-04,O-05"] --> O5["녹화/스트리밍<br/>O-15~O-17"]
 ```
 
@@ -598,12 +605,13 @@ flowchart LR
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window"]
     SYS["System"]
     SRC["Sources"]
     OUT["Outputs"]
     GFX1["GFX 1<br/>(레이아웃 + 연출)"]
-    style GFX1 fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    style GFX1 fill:#FFD700,stroke:#FF8C00,stroke-width:3px,color:#000000
     MW --> SYS
     MW --> SRC
     MW --> OUT
@@ -614,7 +622,7 @@ flowchart LR
 
 **원본 캡쳐**
 
-![GFX 1 탭 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180649.png>)
+![GFX 1 탭 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180649.png)
 
 **오버레이 분석본**
 
@@ -765,13 +773,14 @@ GFX 1에서 배치와 연출을 정했다면, **GFX 2**(다섯 번째 탭)는 "�
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window"]
     SYS["System"]
     SRC["Sources"]
     OUT["Outputs"]
     GFX1["GFX 1"]
     GFX2["GFX 2<br/>(표시 설정 + 규칙)"]
-    style GFX2 fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    style GFX2 fill:#FFD700,stroke:#FF8C00,stroke-width:3px,color:#000000
     MW --> SYS
     MW --> SRC
     MW --> OUT
@@ -783,7 +792,7 @@ flowchart LR
 
 **원본 캡쳐**
 
-![GFX 2 탭 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180652.png>)
+![GFX 2 탭 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180652.png)
 
 **오버레이 분석본**
 
@@ -907,6 +916,7 @@ GFX 2는 표시 설정(무엇을 보여줄지)과 게임 규칙(어떤 규칙으
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window"]
     SYS["System"]
     SRC["Sources"]
@@ -914,7 +924,7 @@ flowchart LR
     GFX1["GFX 1"]
     GFX2["GFX 2"]
     GFX3["GFX 3<br/>(수치 형식)"]
-    style GFX3 fill:#FFD700,stroke:#FF8C00,stroke-width:3px
+    style GFX3 fill:#FFD700,stroke:#FF8C00,stroke-width:3px,color:#000000
     MW --> SYS
     MW --> SRC
     MW --> OUT
@@ -927,7 +937,7 @@ flowchart LR
 
 **원본 캡쳐**
 
-![GFX 3 탭 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180655.png>)
+![GFX 3 탭 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180655.png)
 
 **오버레이 분석본**
 
@@ -1041,6 +1051,7 @@ GFX 3은 수치 렌더링(어떤 형식으로)을 담당한다.
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window"] --> SYS["System"]
     MW -->|"F8"| AT["Action Tracker<br/>(별도 앱, 터치)"]
 ```
@@ -1051,6 +1062,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     MW["Main Window"] --> SYS["System"]
     MW --> SRC["Sources"]
     MW --> OUT["Outputs"]
@@ -1069,7 +1081,7 @@ flowchart LR
 
 **원본 캡쳐**
 
-![Skin Editor 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180715.png>)
+![Skin Editor 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180715.png)
 
 **오버레이 분석본**
 
@@ -1110,6 +1122,7 @@ Skin(방송 그래픽 테마) 편집. 색상, 폰트, 레이아웃을 변경하�
 
 ```mermaid
 flowchart LR
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     S1["스킨 정보<br/>SK-01~05"] --> S2["요소 편집<br/>SK-06"] --> S3["텍스트/카드<br/>SK-07~13"]
     S3 --> S4["플레이어<br/>SK-14~20"] --> S5["저장/적용<br/>SK-21~26"]
 ```
@@ -1160,7 +1173,7 @@ PokerGFX의 Graphic Editor는 Board 모드(39개)와 Player 모드(48개)로 분
 
 **원본 캡쳐**
 
-![Graphic Editor Board 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180720.png>)
+![Graphic Editor Board 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180720.png)
 
 **오버레이 분석본**
 
@@ -1170,7 +1183,7 @@ PokerGFX의 Graphic Editor는 Board 모드(39개)와 Player 모드(48개)로 분
 
 **원본 캡쳐**
 
-![Graphic Editor Player 원본 캡쳐](<../../images/pokerGFX/스크린샷 2026-02-05 180728.png>)
+![Graphic Editor Player 원본 캡쳐](../../images/pokerGFX/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-02-05%20180728.png)
 
 **오버레이 분석본**
 
@@ -1412,6 +1425,7 @@ Action Tracker는 GfxServer와는 별도의 독립 앱으로, **본방송 중 �
 
 ```mermaid
 graph TD
+    classDef default fill:#2d3748,stroke:#718096,color:#ffffff
     N(["정상 진행"]) --> RF{"RFID 실패"} -->|"5초"| RR["자동 재인식"] -->|"성공"| N
     RR -->|"실패"| MN["수동 입력"] --> N
     N --> NF{"네트워크 끊김"} --> RC["자동 재연결"] -->|"30초 이내"| N
