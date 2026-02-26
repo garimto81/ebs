@@ -192,7 +192,7 @@ GPU 사용률을 ProgressBar로 표시. 색상 코딩은 M-03과 동일. 30fps �
 2. Lock 상태가 토글됨 (Unlocked ↔ Locked)
 3. Lock 활성 시: 모든 탭(Sources, Outputs, GFX, Rules, System)의 설정 변경 컨트롤이 비활성화됨
 4. Lock 해제 시: 모든 컨트롤이 원래 상태로 복원됨
-5. Quick Actions(M-11~M-16)는 Lock 영향을 받지 않음 (긴급 조작 보장)
+5. 액션 버튼(M-11~M-16)는 Lock 영향을 받지 않음 (긴급 조작 보장)
 
 **상태 변화**: Lock 활성 시 자물쇠 아이콘이 닫힌 자물쇠로 변경. 탭 영역에 그레이아웃 오버레이 적용.
 
@@ -204,7 +204,7 @@ GPU 사용률을 ProgressBar로 표시. 색상 코딩은 M-03과 동일. 30fps �
 | GFX (G-01~G-51) | 전체 비활성화 |
 | Rules (R-01~R-06) | 전체 비활성화 |
 | System (Y-01~Y-24) | 전체 비활성화 |
-| M-11~M-16 | 영향 없음 (Quick Actions) |
+| M-11~M-16 | 영향 없음 (액션 버튼) |
 | M-19 | Ctrl+L로 Lock 토글 (항상 활성) |
 
 ```mermaid
@@ -212,7 +212,7 @@ sequenceDiagram
     participant OP as Operator
     participant LK as Lock Toggle (M-07)
     participant TB as Tab Controls
-    participant QA as Quick Actions
+    participant QA as 액션 버튼
     participant IC as Icon
 
     OP->>LK: 클릭 또는 Ctrl+L
@@ -403,7 +403,7 @@ sequenceDiagram
 
 **트리거**: 버튼 클릭 | **전제조건**: 없음
 
-**로직**: 전역 설정 다이얼로그를 모달로 표시. 테마(Dark/Light), 언어, 단축키 바인딩, 자동 저장 간격 등을 설정. 변경 사항은 Ctrl+S 또는 다이얼로그 내 "Save" 버튼으로 저장. Lock(M-07) 영향을 받지 않는 Quick Action.
+**로직**: 전역 설정 다이얼로그를 모달로 표시. 테마(Dark/Light), 언어, 단축키 바인딩, 자동 저장 간격 등을 설정. 변경 사항은 Ctrl+S 또는 다이얼로그 내 "Save" 버튼으로 저장. Lock(M-07) 영향을 받지 않음.
 
 **영향 요소**: 전역 설정 변경은 모든 화면에 반영
 

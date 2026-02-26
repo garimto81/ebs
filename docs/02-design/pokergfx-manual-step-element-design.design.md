@@ -10,16 +10,16 @@
 
 | Step | PRD 요소 수 | Gap 요소(PRD 누락) | Gap 요소(탭 이동) | EBS 신규 요소 | AT 전용 |
 |------|:-----------:|:------------------:|:-----------------:|:-------------:|:-------:|
-| Step 1: Main Window | 13 (활성) + 2 (DROP) | 2 | 0 | 7 | 0 |
-| Step 2: System | 23 | 2 | 0 | 5 | 0 |
-| Step 3: Sources | 19 | 3 | 1* | 3 | 0 |
-| Step 4: Outputs | 11 (활성) + 3 (DROP) | 7 | 0 | 3 | 0 |
-| Step 5: GFX 1 | 28 | 2 | 6** | 6 | 0 |
-| Step 6: GFX 2 | 20 | 2 | 4** | 7 | 0 |
+| Step 1: Main Window | 7 (활성) + 2 (DROP) | 2 | 0 | 0 | 0 |
+| Step 2: System | 21 | 2 | 0 | 0 | 0 |
+| Step 3: Sources | 17 | 3 | 1* | 0 | 0 |
+| Step 4: Outputs | 8 (활성) + 3 (DROP) | 7 | 0 | 0 | 0 |
+| Step 5: GFX 1 | 28 | 2 | 6** | 0 | 0 |
+| Step 6: GFX 2 | 20 | 2 | 4** | 0 | 0 |
 | Step 7: GFX 3 | 12 | 1 | 2** | 0 | 0 |
 | Step 8: AT (경계) | 0 | 0 | 0 | 0 | 50 |
-| Step 9: Skin Editor + Graphic Editor | 26 + 19 = 45 | 6 | 0 | 2 | 0 |
-| **합계** | **176** | **25** | **13** | **33** | **50** |
+| Step 9: Skin Editor + Graphic Editor | 26 + 19 = 45 | 6 | 0 | 0 | 0 |
+| **합계** | **163** | **25** | **13** | **0** | **50** |
 
 > \* GAP-3-04: Sources 위치 메모(실제 O-05로 배치)
 > \*\* 탭 이동 Gap: 매뉴얼 설명 위치와 PRD 배치 탭이 다른 요소. 기능 자체는 PRD에 존재
@@ -30,15 +30,15 @@
 > - 부록 A에서 System 24개로 기재되나 현재 Catalog는 23개
 > - 합계 차이: 2 + 6 = 8개 → 184 - 8 = **176** (현재 설계 문서 기준)
 
-### 설계 결정 분포 (PRD 요소 176개 기준)
+### 설계 결정 분포 (PRD 요소 163개 기준)
 
 | EBS 결정 | PRD 요소 수 | 비율 |
 |:--------:|:-----------:|:----:|
-| v1.0 Keep | ~66 | ~37% |
-| v2.0 Defer | ~74 | ~42% |
-| v3.0 Defer | ~18 | ~10% |
-| Drop | 18 | ~10% |
-| **합계** | **176** | **100%** |
+| v1.0 Keep | ~67 | ~41% |
+| v2.0 Defer | ~62 | ~38% |
+| v3.0 Defer | ~18 | ~11% |
+| Drop | 16 | ~10% |
+| **합계** | **163** | **100%** |
 
 ### Gap 요소 v1.0 Keep 긴급 반영 대상
 
@@ -67,21 +67,15 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 
 | # | PRD ID | 요소명 | 매뉴얼 원문 설명 | 페이지 | EBS 결정 | 비고 |
 |---|--------|--------|----------------|:------:|:--------:|------|
-| 1 | M-01 | Title Bar | - | - | EBS 신규 | 앱 이름+버전+윈도우 컨트롤. 매뉴얼 미수록 |
-| 2 | M-02 | Preview Panel | - | - | EBS 신규 | GFX 오버레이 실시간 렌더링 캔버스. 매뉴얼 미수록 |
-| 3 | M-03 | CPU Indicator | "The icons on the left indicate CPU and GPU usage. If they turn red, usage is too high for the Server to operate reliably." | p.34 | v1.0 Keep | 색상 임계값(Green<60%, Yellow<85%, Red>=85%)은 EBS 자체 수치 |
-| 4 | M-04 | GPU Indicator | "The icons on the left indicate CPU and GPU usage. If they turn red, usage is too high for the Server to operate reliably." | p.34 | v1.0 Keep | M-03과 동일 매뉴얼 원문 공유 |
-| 5 | M-05 | RFID Status | "Green: RFID Reader is operating normally." / "Grey: PokerGFX Server is establishing a secure link with the RFID Reader." / "Blue: operating normally, however there are playing cards on the table that have not yet been registered." / "Black: operating normally, however more than one card of the same rank and suit has been detected." / "Magenta: operating normally, however duplicate cards have been detected on the table." / "Orange: connected but not responding. May indicate an overloaded CPU or USB link." / "Red: RFID Reader is not connected." | p.34 | v1.0 Keep | 7색 상태 표시. EBS에서 동일 상태 코드 적용 |
-| 6 | M-06 | RFID Connection Icon | - | - | EBS 신규 | RFID 물리 연결 상태(USB/WiFi). 매뉴얼 미수록. M-05와 분리 표시 |
-| 7 | M-07 | Lock Toggle | "Click the Lock symbol next to the Settings button to password protect the Settings Window." | p.33 | v1.0 Keep | EBS: 잠금 시 Quick Actions 외 전 탭 설정 변경 불가 |
-| 8 | M-09 | Preview Toggle | - | - | EBS 신규 | Preview 렌더링 On/Off (CPU 절약). 매뉴얼 미수록 |
-| 9 | M-11 | Reset Hand | - | - | EBS 신규 | 현재 핸드 초기화 + 확인 다이얼로그. 매뉴얼 미수록 |
-| 10 | M-12 | Settings | - | - | EBS 신규 | 전역 설정 다이얼로그(테마, 언어, 단축키). 매뉴얼 미수록 |
-| 11 | M-13 | Register Deck | - | - | v3.0 Defer | 52장 RFID 일괄 등록. 매뉴얼 미수록. SV-023 매핑 |
-| 12 | M-14 | Launch AT | - | - | v1.0 Keep | Action Tracker 실행/포커스 전환. 매뉴얼 미수록 |
-| 13 | M-20 | Fullscreen Preview | - | - | EBS 신규 | Preview 전체 화면(F11). 매뉴얼 미수록 |
-| 14 | ~~M-17~~ | ~~Hand Counter~~ | - | - | **[DROP]** | 현재 세션 핸드 번호 표시. PRD-0004에서 DROP 확정 |
-| 15 | ~~M-18~~ | ~~Connection Status~~ | - | - | **[DROP]** | AT/Overlay/DB 연결 상태 표시. PRD-0004에서 DROP 확정 |
+| 1 | M-03 | CPU Indicator | "The icons on the left indicate CPU and GPU usage. If they turn red, usage is too high for the Server to operate reliably." | p.34 | v1.0 Keep | 색상 임계값(Green<60%, Yellow<85%, Red>=85%)은 EBS 자체 수치 |
+| 2 | M-04 | GPU Indicator | "The icons on the left indicate CPU and GPU usage. If they turn red, usage is too high for the Server to operate reliably." | p.34 | v1.0 Keep | M-03과 동일 매뉴얼 원문 공유 |
+| 3 | M-05 | RFID Status | "Green: RFID Reader is operating normally." / "Grey: PokerGFX Server is establishing a secure link with the RFID Reader." / "Blue: operating normally, however there are playing cards on the table that have not yet been registered." / "Black: operating normally, however more than one card of the same rank and suit has been detected." / "Magenta: operating normally, however duplicate cards have been detected on the table." / "Orange: connected but not responding. May indicate an overloaded CPU or USB link." / "Red: RFID Reader is not connected." | p.34 | v1.0 Keep | 7색 상태 표시. EBS에서 동일 상태 코드 적용 |
+| 4 | M-07 | Lock Toggle | "Click the Lock symbol next to the Settings button to password protect the Settings Window." | p.33 | v1.0 Keep | EBS: 잠금 시 전 탭 설정 변경 불가 |
+| 5 | M-11 | Reset Hand | - | - | v1.0 Keep | 현재 핸드 초기화 + 확인 다이얼로그. 매뉴얼 미수록. PokerGFX 바이너리 resetHandButton 확인 |
+| 6 | M-13 | Register Deck | - | - | v3.0 Defer | 52장 RFID 일괄 등록. 매뉴얼 미수록. SV-023 매핑 |
+| 7 | M-14 | Launch AT | - | - | v1.0 Keep | Action Tracker 실행/포커스 전환. 매뉴얼 미수록 |
+| 8 | ~~M-17~~ | ~~Hand Counter~~ | - | - | **[DROP]** | 현재 세션 핸드 번호 표시. PRD-0004에서 DROP 확정 |
+| 9 | ~~M-18~~ | ~~Connection Status~~ | - | - | **[DROP]** | AT/Overlay/DB 연결 상태 표시. PRD-0004에서 DROP 확정 |
 
 ### Gap 요소 (매뉴얼 있음, PRD 없음)
 
@@ -89,18 +83,6 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 |---|--------|--------|----------------|:------:|:--------:|------|
 | 1 | GAP-1-01 | Secure Delay Icon | "The icon to the right indicates whether Secure Delay is enabled." | p.34 | v1.0 Keep | 딜레이 활성 상태는 방송 보안 운영 필수 정보. SEC-005(모드 표시)로 기능 흡수 가능 — PRD에서 별도 아이콘 대신 M-10(Secure Delay 상태) 영역으로 통합 설계 예정 |
 | 2 | GAP-1-02 | Settings Reset | "Hold the CTRL key while starting the Server to reset all settings to their default values." | p.33 | v2.0 Defer | 설정 전체 초기화 — 방송 필수 아님. 운영 편의 기능으로 v2.0에서 Settings 다이얼로그 내 "Factory Reset" 항목으로 구현 |
-
-### EBS 신규 요소 (매뉴얼 없음, EBS 추가)
-
-| # | PRD ID | 요소명 | 추가 근거 |
-|---|--------|--------|----------|
-| 1 | M-01 | Title Bar | 앱 식별 표준 UI 요소 |
-| 2 | M-02 | Preview Panel | 출력 오버레이 실시간 확인은 방송 운영 핵심 |
-| 3 | M-06 | RFID Connection Icon | M-05 상태 아이콘과 물리 연결 아이콘 분리 — 원인 진단 용이 |
-| 4 | M-09 | Preview Toggle | CPU 절약 옵션 — 렌더링 부하 관리 |
-| 5 | M-11 | Reset Hand | 운영 오류 복구 핵심 기능 |
-| 6 | M-12 | Settings | 전역 앱 설정(테마/언어/단축키) |
-| 7 | M-20 | Fullscreen Preview | 프로덕션 모니터 활용 |
 
 ### PokerGFX 대비 EBS 변경점
 
@@ -127,22 +109,20 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 | 5 | Y-05 | UPCARD Antennas | "Enables all antennas configured for reading UPCARDS in STUD games to also detect hole cards when playing any flop or draw game." | p.59 | v3.0 Defer | RFID 하드웨어 전제. STUD 게임 전용 |
 | 6 | Y-06 | Disable Muck | "Causes the muck antenna to be disabled when in Action Tracker mode." | p.59 | v3.0 Defer | RFID 하드웨어 전제 |
 | 7 | Y-07 | Disable Community | - | - | v3.0 Defer | 커뮤니티 카드 안테나 비활성. 매뉴얼 미수록. EBS 신규 |
-| 8 | Y-08 | Hardware Panel | - | - | EBS 신규 | CPU/GPU/OS/Encoder 자동 감지. 매뉴얼 미수록 |
-| 9 | Y-09 | Table Diagnostics | "Displays a diagnostic window that displays the physical table configuration along with how many cards are currently detected on each antenna." | p.60 | v3.0 Defer | RFID 하드웨어 전제 |
-| 10 | Y-10 | System Log | - | - | EBS 신규 | 로그 뷰어. 매뉴얼 미수록 |
-| 11 | Y-12 | Export Folder | "When the Developer API is enabled, use this to specify the location for writing the JSON hand history files." | p.60 | v2.0 Defer | Hand History 시스템 전제 |
-| 12 | Y-13 | Allow AT Access | "'Track the action' can only be started from Action Tracker if this option is enabled. When disabled, Action Tracker may still be used but only in Auto mode." | p.58 | v1.0 Keep | - |
-| 13 | Y-14 | Predictive Bet | "Action Tracker will auto-complete bets and raises based on the initial digits entered, min raise amount and stack size." | p.60 | v1.0 Keep | - |
-| 14 | Y-15 | Kiosk Mode | "When the Server starts, Action Tracker is automatically started on the same PC on the secondary display in kiosk mode. In this mode, AT cannot be closed or minimised." | p.58 | v1.0 Keep | - |
-| 15 | Y-16 | MultiGFX | "Forces PokerGFX to sync to another primary PokerGFX running on a different, networked computer, making it possible to generate multiple live and delayed video streams with different graphics, from the same table." | p.58 | v3.0 Defer | SV-025 매핑. 다중 테이블 인프라 전제 |
-| 16 | Y-17 | Sync Stream | "When in MultiGFX mode, forces secure delay to start and stop in synchronization with the primary server." | p.58 | v3.0 Defer | MultiGFX 전제 |
-| 17 | Y-18 | Sync Skin | "Causes the secondary MultiGFX server skin to auto update from the skin that is currently active on the primary server." | p.58 | v3.0 Defer | MultiGFX 전제 |
-| 18 | Y-19 | No Cards | "When enabled, no hole card information will be shared with any secondary server." | p.58 | v3.0 Defer | MultiGFX 전제 |
-| 19 | Y-20 | Disable GPU | - | - | v2.0 Defer | GPU 인코딩 비활성화. 매뉴얼 미수록. EBS 신규 |
-| 20 | Y-21 | Ignore Name Tags | "When enabled, player ID tags are ignored; player names are entered manually in Action Tracker." | p.59 | v1.0 Keep | - |
-| 21 | Y-22 | Auto Start | "Automatically start the PokerGFX Server when Windows starts. Useful for unattended installations." | p.58 | v2.0 Defer | 운영 편의. 방송 필수 아님 |
-| 22 | Y-23 | Stream Deck | - | - | v2.0 Defer | Elgato Stream Deck 매핑. SV-026 매핑. 매뉴얼 미수록 |
-| 23 | Y-24 | Version + Check | "Force the Server to check to see if there's a software update available." | p.58 | v2.0 Defer | 업데이트 확인 — 방송 필수 아님 |
+| 8 | Y-09 | Table Diagnostics | "Displays a diagnostic window that displays the physical table configuration along with how many cards are currently detected on each antenna." | p.60 | v3.0 Defer | RFID 하드웨어 전제 |
+| 9 | Y-12 | Export Folder | "When the Developer API is enabled, use this to specify the location for writing the JSON hand history files." | p.60 | v2.0 Defer | Hand History 시스템 전제 |
+| 10 | Y-13 | Allow AT Access | "'Track the action' can only be started from Action Tracker if this option is enabled. When disabled, Action Tracker may still be used but only in Auto mode." | p.58 | v1.0 Keep | - |
+| 11 | Y-14 | Predictive Bet | "Action Tracker will auto-complete bets and raises based on the initial digits entered, min raise amount and stack size." | p.60 | v1.0 Keep | - |
+| 12 | Y-15 | Kiosk Mode | "When the Server starts, Action Tracker is automatically started on the same PC on the secondary display in kiosk mode. In this mode, AT cannot be closed or minimised." | p.58 | v1.0 Keep | - |
+| 13 | Y-16 | MultiGFX | "Forces PokerGFX to sync to another primary PokerGFX running on a different, networked computer, making it possible to generate multiple live and delayed video streams with different graphics, from the same table." | p.58 | v3.0 Defer | SV-025 매핑. 다중 테이블 인프라 전제 |
+| 14 | Y-17 | Sync Stream | "When in MultiGFX mode, forces secure delay to start and stop in synchronization with the primary server." | p.58 | v3.0 Defer | MultiGFX 전제 |
+| 15 | Y-18 | Sync Skin | "Causes the secondary MultiGFX server skin to auto update from the skin that is currently active on the primary server." | p.58 | v3.0 Defer | MultiGFX 전제 |
+| 16 | Y-19 | No Cards | "When enabled, no hole card information will be shared with any secondary server." | p.58 | v3.0 Defer | MultiGFX 전제 |
+| 17 | Y-20 | Disable GPU | - | - | v2.0 Defer | GPU 인코딩 비활성화. 매뉴얼 미수록 |
+| 18 | Y-21 | Ignore Name Tags | "When enabled, player ID tags are ignored; player names are entered manually in Action Tracker." | p.59 | v1.0 Keep | - |
+| 19 | Y-22 | Auto Start | "Automatically start the PokerGFX Server when Windows starts. Useful for unattended installations." | p.58 | v2.0 Defer | 운영 편의. 방송 필수 아님 |
+| 20 | Y-23 | Stream Deck | - | - | v2.0 Defer | Elgato Stream Deck 매핑. SV-026 매핑. 매뉴얼 미수록 |
+| 21 | Y-24 | Version + Check | "Force the Server to check to see if there's a software update available." | p.58 | v2.0 Defer | 업데이트 확인 — 방송 필수 아님 |
 
 ### Gap 요소 (매뉴얼 있음, PRD 없음)
 
@@ -150,16 +130,6 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 |---|--------|--------|----------------|:------:|:--------:|------|
 | 1 | GAP-2-01 | Setup WIFI | "Configure WIFI settings on the RFID Reader." | p.60 | v3.0 Defer | RFID 리더 WiFi 설정. RFID 하드웨어 전제. Y-03/Y-04 그룹 내 포함 예정 |
 | 2 | GAP-2-02 | Secure Delay Folder | "Click the 'Secure Delay Folder' button to specify a storage folder on a different drive. These files occupy approximately 50 GB of space for a video size of 1920 x 1080." | p.60 | v1.0 Keep | Secure Delay 파일 저장 경로 — 딜레이 기능 운영 필수. Outputs 탭(O-06 그룹) 또는 System 탭 중 위치 결정 필요. 매뉴얼 p.60에서 System 탭 내 배치 확인 — PRD 설명 불일치: Secure Delay 상세 섹션에는 p.60으로, Outputs 탭에는 누락 |
-
-### EBS 신규 요소 (매뉴얼 없음, EBS 추가)
-
-| # | PRD ID | 요소명 | 추가 근거 |
-|---|--------|--------|----------|
-| 1 | Y-07 | Disable Community | 커뮤니티 카드 안테나 독립 비활성화 — RFID 디버깅 지원 |
-| 2 | Y-08 | Hardware Panel | 시스템 자원 자동 감지 표시 |
-| 3 | Y-10 | System Log | 오류 진단 지원 |
-| 4 | Y-20 | Disable GPU | GPU 없는 환경 대응 |
-| 5 | Y-23 | Stream Deck | 방송 컨트롤러 연동 |
 
 ### PokerGFX 대비 EBS 변경점
 
@@ -179,25 +149,23 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 
 | # | PRD ID | 요소명 | 매뉴얼 원문 설명 | 페이지 | EBS 결정 | 비고 |
 |---|--------|--------|----------------|:------:|:--------:|------|
-| 1 | S-00 | Mode Selector | - | - | EBS 신규 | Fill & Key / Chroma Key / Internal 모드 선택. 매뉴얼 미수록 |
-| 2 | S-01 | Device Table | "The Sources tab contains a list of available video sources. These include USB cameras, video capture cards installed in the system and NDI sources detected on the local network." | p.35 | v1.0 Keep | SV-001 매핑 |
-| 3 | S-02 | Add Button | "Network cameras can't be auto detected, so to configure one of these as a source click the 'Add network camera' button, scroll down to the new camera at end of the Sources list and enter the stream URL for the camera by clicking in the 'Input / Format / URL' column." | p.35 | v1.0 Keep | - |
-| 4 | S-03 | Settings | "To edit the properties of the video source, click on the 'Settings' keyword. A properties window will open enabling additional camera settings to be changed." | p.35 | v1.0 Keep | - |
-| 5 | S-04 | Preview | - | - | EBS 신규 | 소스별 미니 프리뷰. 매뉴얼 미수록 |
-| 6 | S-05 | Board Cam Hide GFX | "If the 'Hide GFX' option is enabled, all player graphics will be made invisible while the board cam is active." | p.36 | v2.0 Defer | SV-002(Auto Camera) 하위 기능 |
-| 7 | S-06 | Auto Camera Control | - | - | v2.0 Defer | SV-002 매핑. 게임 상태 기반 자동 전환. 매뉴얼 미수록 |
-| 8 | S-07 | Cycle Mode | "To display video sources in rotation, select 'Cycle' mode instead of 'Static'. Enter the number of seconds that each video source should be displayed in the 'Cycle' column. A value of zero will exclude that source from the rotation." | p.35 | v1.0 Keep | - |
-| 9 | S-08 | Heads Up Split | "When play is heads up, and both players are covered by separate cameras, a split screen view showing each player will automatically be displayed." | p.37 | v2.0 Defer | SV-002 하위 기능 |
-| 10 | S-09 | Follow Players | "When 'Follow Players' is enabled: If Action Tracker is enabled, the video will switch to ensure that the player whose turn it is to act is always displayed." | p.37 | v2.0 Defer | SV-002 하위 기능 |
-| 11 | S-10 | Follow Board | "When 'Follow Board' is enabled, the video will switch to the community card close-up for a few seconds whenever flop, turn or river cards are dealt." | p.36 | v2.0 Defer | SV-002 하위 기능 |
-| 12 | S-11 | Chroma Key Enable | "Chroma key is supported by outputting graphics on a solid colour background (usually blue or green). To enable chroma key, enable the 'Chroma Key' checkbox then repeatedly click the 'Background Key Colour' button until the desired colour is selected." | p.39 | v1.0 Keep | SV-005 매핑 |
-| 13 | S-12 | Background Colour | "repeatedly click the 'Background Key Colour' button until the desired colour is selected." | p.39 | v1.0 Keep | SV-005 하위 설정 |
-| 14 | S-13 | Switcher Source | "When using a camera source for video capture from an external vision switcher, select this capture device using the 'External Switcher Source' dropdown box. This disables the built-in multi-camera switching features." | p.38 | v2.0 Defer | SV-003(ATEM) 연동 |
-| 15 | S-14 | ATEM Control | "PokerGFX can control a Blackmagic ATEM Video Switcher to automatically switch camera inputs to follow the action." | p.40 | v2.0 Defer | SV-003 매핑 |
-| 16 | S-15 | Board Sync | "Delays the detection of community cards by the specified number of milliseconds. This can be used to compensate for the problem where community card graphics are displayed before the cards are shown being dealt on video." | p.38 | v2.0 Defer | SV-004 매핑 |
-| 17 | S-16 | Crossfade | "When the 'Crossfade' setting is zero, camera sources transition with a hard cut. Setting this value to a higher value between 0.1 and 2.0 causes sources to crossfade, resulting in a softer, more fluid transition." | p.38 | v2.0 Defer | SV-004 하위 설정 |
-| 18 | S-17 | Audio Input | "Select the desired audio capture device and volume. The Sync setting adjusts the timing of the audio signal to match the video, if required." | p.38 | v1.0 Keep | - |
-| 19 | S-18 | Audio Sync | - | - | v1.0 Keep | 오디오 싱크 보정(ms). 매뉴얼 p.38 Audio Input 설명에 포함 |
+| 1 | S-01 | Device Table | "The Sources tab contains a list of available video sources. These include USB cameras, video capture cards installed in the system and NDI sources detected on the local network." | p.35 | v1.0 Keep | SV-001 매핑 |
+| 2 | S-02 | Add Button | "Network cameras can't be auto detected, so to configure one of these as a source click the 'Add network camera' button, scroll down to the new camera at end of the Sources list and enter the stream URL for the camera by clicking in the 'Input / Format / URL' column." | p.35 | v1.0 Keep | - |
+| 3 | S-03 | Settings | "To edit the properties of the video source, click on the 'Settings' keyword. A properties window will open enabling additional camera settings to be changed." | p.35 | v1.0 Keep | - |
+| 4 | S-05 | Board Cam Hide GFX | "If the 'Hide GFX' option is enabled, all player graphics will be made invisible while the board cam is active." | p.36 | v2.0 Defer | SV-002(Auto Camera) 하위 기능 |
+| 5 | S-06 | Auto Camera Control | - | - | v2.0 Defer | SV-002 매핑. 게임 상태 기반 자동 전환. 매뉴얼 미수록 |
+| 6 | S-07 | Cycle Mode | "To display video sources in rotation, select 'Cycle' mode instead of 'Static'. Enter the number of seconds that each video source should be displayed in the 'Cycle' column. A value of zero will exclude that source from the rotation." | p.35 | v1.0 Keep | - |
+| 7 | S-08 | Heads Up Split | "When play is heads up, and both players are covered by separate cameras, a split screen view showing each player will automatically be displayed." | p.37 | v2.0 Defer | SV-002 하위 기능 |
+| 8 | S-09 | Follow Players | "When 'Follow Players' is enabled: If Action Tracker is enabled, the video will switch to ensure that the player whose turn it is to act is always displayed." | p.37 | v2.0 Defer | SV-002 하위 기능 |
+| 9 | S-10 | Follow Board | "When 'Follow Board' is enabled, the video will switch to the community card close-up for a few seconds whenever flop, turn or river cards are dealt." | p.36 | v2.0 Defer | SV-002 하위 기능 |
+| 10 | S-11 | Chroma Key Enable | "Chroma key is supported by outputting graphics on a solid colour background (usually blue or green). To enable chroma key, enable the 'Chroma Key' checkbox then repeatedly click the 'Background Key Colour' button until the desired colour is selected." | p.39 | v1.0 Keep | SV-005 매핑 |
+| 11 | S-12 | Background Colour | "repeatedly click the 'Background Key Colour' button until the desired colour is selected." | p.39 | v1.0 Keep | SV-005 하위 설정 |
+| 12 | S-13 | Switcher Source | "When using a camera source for video capture from an external vision switcher, select this capture device using the 'External Switcher Source' dropdown box. This disables the built-in multi-camera switching features." | p.38 | v2.0 Defer | SV-003(ATEM) 연동 |
+| 13 | S-14 | ATEM Control | "PokerGFX can control a Blackmagic ATEM Video Switcher to automatically switch camera inputs to follow the action." | p.40 | v2.0 Defer | SV-003 매핑 |
+| 14 | S-15 | Board Sync | "Delays the detection of community cards by the specified number of milliseconds. This can be used to compensate for the problem where community card graphics are displayed before the cards are shown being dealt on video." | p.38 | v2.0 Defer | SV-004 매핑 |
+| 15 | S-16 | Crossfade | "When the 'Crossfade' setting is zero, camera sources transition with a hard cut. Setting this value to a higher value between 0.1 and 2.0 causes sources to crossfade, resulting in a softer, more fluid transition." | p.38 | v2.0 Defer | SV-004 하위 설정 |
+| 16 | S-17 | Audio Input | "Select the desired audio capture device and volume. The Sync setting adjusts the timing of the audio signal to match the video, if required." | p.38 | v1.0 Keep | - |
+| 17 | S-18 | Audio Sync | - | - | v1.0 Keep | 오디오 싱크 보정(ms). 매뉴얼 p.38 Audio Input 설명에 포함 |
 
 ### Gap 요소 (매뉴얼 있음, PRD 없음)
 
@@ -208,19 +176,10 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 | 3 | GAP-3-03 | Post Hand | "The 'Post Hand' option determines what happens at the end of the hand: Default / Player / Winner" | p.37 | v2.0 Defer | Auto Camera 하위 설정. v2.0 구현 시 포함 |
 | 4 | GAP-3-04 | Key & Fill (Sources) | "Key & Fill is supported on specific Blackmagic devices that support external keying including the Decklink Duo 2, Quad 2, 8K Pro & 4K Extreme 12G." | p.39 | v1.0 Keep | Element Reference에서 O-05로 분류. PRD에서 Sources 탭이 아닌 Outputs 탭에 배치. 매뉴얼 p.39에서 Sources 섹션 내 설명 — PRD 설명 불일치: 매뉴얼 p.39는 Sources 섹션이나 PRD는 Outputs에 배치 |
 
-### EBS 신규 요소 (매뉴얼 없음, EBS 추가)
-
-| # | PRD ID | 요소명 | 추가 근거 |
-|---|--------|--------|----------|
-| 1 | S-00 | Mode Selector | Fill & Key / Chroma Key / Internal 모드를 명시적으로 선택하는 UX 개선 — PokerGFX에서는 암묵적 설정 |
-| 2 | S-04 | Preview | 소스 선택 전 미리보기 — 방송 카메라 배치 확인 필수 |
-| 3 | S-06 | Auto Camera Control | Auto Camera 기능의 마스터 On/Off 토글 명시 |
-
 ### PokerGFX 대비 EBS 변경점
 
-1. **S-00 Mode Selector 신규**: PokerGFX에서는 Fill&Key / Chroma Key 전환이 암묵적 설정이었으나, EBS에서는 RadioGroup으로 명시적 전환 UX 제공.
-2. **GAP-3-01~03 (Linger/Post Bet/Post Hand) → v2.0 Defer**: Auto Camera v2.0 구현 시 S-09/S-10과 함께 그룹화. v1.0에서는 기본 카메라 전환만 지원.
-3. **GAP-3-04 Key & Fill 위치**: 매뉴얼 p.39(Sources 섹션)에서 설명하지만 PRD-0004에서 Outputs 탭(O-05)에 배치. EBS 설계에서는 Outputs 탭 배치 유지(하드웨어 출력 설정 그룹화 원칙).
+1. **GAP-3-01~03 (Linger/Post Bet/Post Hand) → v2.0 Defer**: Auto Camera v2.0 구현 시 S-09/S-10과 함께 그룹화. v1.0에서는 기본 카메라 전환만 지원.
+2. **GAP-3-04 Key & Fill 위치**: 매뉴얼 p.39(Sources 섹션)에서 설명하지만 PRD-0004에서 Outputs 탭(O-05)에 배치. EBS 설계에서는 Outputs 탭 배치 유지(하드웨어 출력 설정 그룹화 원칙).
 
 ---
 
@@ -245,10 +204,6 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 | 9 | O-15 | Recording Mode | - | - | v1.0 Keep | Video / Video+GFX / GFX only. 매뉴얼 미수록 |
 | 10 | O-16 | Streaming Platform | "PokerGFX includes a fully functional ChatBot that is compatible with the Twitch video streaming service." | p.47 | **Drop** | SV-011 매핑. Twitch/YouTube SNS 연동은 EBS 범위 외 |
 | 11 | O-17 | Streaming Account | - | - | **Drop** | SV-011 하위. OAuth 연결. SNS 연동 배제로 함께 DROP |
-| 12 | O-18 | Key Color | - | - | EBS 신규 | Key 신호 배경색(기본 #FF000000). 매뉴얼 미수록 |
-| 13 | O-19 | Fill/Key Preview | - | - | EBS 신규 | Fill+Key 신호 나란히 미리보기. 매뉴얼 미수록 |
-| 14 | O-20 | DeckLink Channel Map | - | - | EBS 신규 | Live Fill/Key → DeckLink 포트 매핑. 매뉴얼 미수록 |
-
 ### Gap 요소 (매뉴얼 있음, PRD 없음)
 
 | # | GAP ID | 요소명 | 매뉴얼 원문 설명 | 페이지 | EBS 결정 | 근거 |
@@ -261,20 +216,11 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 | 6 | GAP-4-06 | Delay Countdown | "When a secure delay is started, a countdown clock is displayed to viewers that indicates when the video will start." | p.45 | v1.0 Keep | SEC-002(카운트다운 표시) 매핑. 딜레이 시작 시 시청자에게 카운트다운 표시 |
 | 7 | GAP-4-07 | Dynamic Delay | "The Dynamic Delay feature automatically skips tourney breaks during a delayed stream by starting with a much longer delay which is progressively reduced every time there's a break." | p.46 | v2.0 Defer | 토너먼트 브레이크 자동 스킵. 운영 편의. 방송 필수 아님 |
 
-### EBS 신규 요소 (매뉴얼 없음, EBS 추가)
-
-| # | PRD ID | 요소명 | 추가 근거 |
-|---|--------|--------|----------|
-| 1 | O-18 | Key Color | Fill & Key 신호 키 배경색 설정 — DeckLink 외부 키잉 정확도 향상 |
-| 2 | O-19 | Fill/Key Preview | Fill+Key 신호를 사이드 바이 사이드 미리보기 — 외부 키잉 설정 검증 필수 |
-| 3 | O-20 | DeckLink Channel Map | DeckLink 포트별 신호 할당 명시적 제어 — 다채널 운영 지원 |
-
 ### PokerGFX 대비 EBS 변경점
 
 1. **O-02 9x16 Vertical → Drop**: PokerGFX에서는 세로 모드를 지원하지만, EBS는 방송 오버레이 전용(16:9)으로 세로 모드 배제.
 2. **O-16/O-17 Twitch/YouTube → Drop**: SNS 스트리밍 연동은 OBS 등 외부 도구에서 처리. EBS 관심사는 오버레이 생성.
 3. **GAP-4-03~07 Secure Delay 상세 기능**: 매뉴얼의 7가지 Secure Delay 관련 요소가 PRD-0004에서 O-06/O-07(Future)로 통합됨. EBS에서는 Secure Delay 전용 섹션을 Outputs 탭에 명시하고, Auto Delay는 v2.0, Dynamic Delay는 v2.0으로 배치.
-4. **O-18~O-20 신규 Fill & Key 제어**: PokerGFX에는 없던 명시적 Key Color/Preview/Channel Map 제어 추가 — EBS의 DeckLink 기반 방송 출력 요구사항 반영.
 
 ---
 
@@ -341,17 +287,6 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 | 6 | GAP-5-06 | Allow Rabbit Hunting | "When a hand has finished that didn't go to a showdown, additional cards placed on the community card antenna will show as 'rabbit hunt' cards." | p.52 | v2.0 Defer | PRD에서 G-54(GFX 2)로 배치. 매뉴얼 p.52에서 GFX 공통으로 설명 |
 | 7 | GAP-5-07 | Clear Previous Action | "When the action returns to a player after a bet or raise, the previous action is cleared and 'x TO CALL' or 'OPTION' is displayed." | p.52 | v1.0 Keep | PRD에서 G-35(GFX 2)로 배치. 매뉴얼에서는 GFX 1 섹션에서 설명. 방송 필수 UX |
 | 8 | GAP-5-08 | Unknown Cards Blink | "When Secure Delay is enabled, the live preview window always displays hole cards down. When this option is enabled, cards that have not been scanned are indicated by blinking." | p.52 | v1.0 Keep | PRD에서 G-34(GFX 2)로 배치. Secure Delay 운영 필수 피드백 |
-
-### EBS 신규 요소 (매뉴얼 없음, EBS 추가)
-
-| # | PRD ID | 요소명 | 추가 근거 |
-|---|--------|--------|----------|
-| 1 | G-08 | Heads Up Camera | 헤즈업 시 카메라 위치 재정의 — Split Screen 레이아웃과 연동 |
-| 2 | G-22 | Show Leaderboard | 핸드 종료 후 리더보드 자동 표시 — 방송 연출 자동화 |
-| 3 | G-23 | Show PIP Capture | PIP 미리보기 — SV-022 DROP 처리로 Commentary PIP와 무관한 독립 PIP |
-| 4 | G-17 | Transition In | 플레이어 등장 애니메이션 방식/속도 |
-| 5 | G-18 | Transition Out | 플레이어 퇴장 애니메이션 방식/속도 |
-| 6 | G-20 | Bounce Action Player | 액션 플레이어 바운스 효과 — SV-015 매핑 |
 
 ### PokerGFX 대비 EBS 변경점
 
@@ -420,23 +355,10 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 | 5 | GAP-6-05 | Show eliminated players in Strip | "When enabled, players with a zero chip count will still be displayed in the Strip (but these players will be greyed-out)." | p.53 | v2.0 Defer | PRD에 미포함. Strip 그룹(G-43/G-44)에 추가 필요 |
 | 6 | GAP-6-06 | Show eliminated players in Leaderboard | "When enabled, players that have left the table or been eliminated are displayed using the alternate colour." | p.53 | v2.0 Defer | G-28(Show Eliminated)과 유사하나 Leaderboard 전용. PRD 설명 불일치: G-28은 "Show Eliminated on player graphic"으로 약간 다른 기능 |
 
-### EBS 신규 요소 (매뉴얼 없음, EBS 추가)
-
-| # | PRD ID | 요소명 | 추가 근거 |
-|---|--------|--------|----------|
-| 1 | G-29 | Cumulative Winnings | 캐시 게임 누적 수익 표시 — 방송 연출 향상 |
-| 2 | G-30 | Hide Leaderboard | 핸드 중 리더보드 자동 숨김 — 레이아웃 공간 확보 |
-| 3 | G-36 | Order Players | 플레이어 정렬 순서(좌석/스택) — 방송 연출 유연성 |
-| 4 | G-52 | Move Button Bomb Pot | 봄팟 특수 규칙 처리 |
-| 5 | G-55 | Straddle Sleeper | 스트래들 규칙 다양성 지원 |
-| 6 | G-56 | Sleeper Final Action | 슬리퍼 최종 액션 처리 |
-| 7 | G-57 | Ignore Split Pots | Equity 계산 예외 처리 |
-
 ### PokerGFX 대비 EBS 변경점
 
 1. **GAP-6-01/02 (Show Blinds, Show Hand # Blinds) → GFX 3으로 이동**: 매뉴얼 p.50에서 설명하나, PRD-0004에서 GFX 3(G-45/G-46)으로 이동. "블라인드 표시"가 "통화/수치 표시" 그룹에 속하는 설계 원칙.
 2. **GAP-6-05 Show eliminated players in Strip → PRD 누락**: G-43/G-44(Score Strip/Order Strip by) 그룹에 추가 필요. v2.0 구현 시 Strip 설정 그룹에 포함.
-3. **Equity 그룹 3개 (G-37~G-39) → EBS 신규**: PokerGFX에는 없던 명시적 Equity 표시 시점 제어. EBS Equity 엔진 구현(v2.0) 전제.
 
 ---
 
@@ -482,10 +404,6 @@ PRD-0004에 완전 누락된 Gap 요소 중 v1.0 Keep으로 분류된 항목 —
 | 1 | GAP-7-01 | Max BB Multiple | "Whether to show Big Blind multiples in the chip count display." | p.50 | v1.0 Keep | PRD에서 G-31(GFX 2)로 배치. 매뉴얼에서는 p.50(GFX 공통) 설명. 기능적으로 BB 표시 그룹(G-51)과 통합하는 것이 일관성 있음 — PRD 설명 불일치: G-31은 GFX 2에 있고 G-51(Display Mode)은 GFX 3에 있어 동일 기능이 분리됨 |
 | 2 | GAP-7-02 | Show Chipcount % | "Shows each player's stack on the Leaderboard as a percentage of total chips on the table." | p.53 | v1.0 Keep | PRD에서 G-27(GFX 2)으로 배치. 매뉴얼 p.53에서 칩카운트 표시 섹션에서 설명. PRD 배치가 불일치하나 G-27로 이미 존재 — 중복 등록 아님, 위치 메모 목적 |
 | 3 | GAP-7-03 | Display Side Pot Amount | "When a player is all-in, and there is side action, PokerGFX can display both the main and side pot separated by a '/'" | p.53 | v1.0 Keep | PRD에 완전 누락. 올인 상황 팟 표시 — 방송 필수. G-50(Chipcount Precision) 그룹에 추가 필요 |
-
-### EBS 신규 요소 (매뉴얼 없음, EBS 추가)
-
-GFX 3 탭에는 EBS 신규 요소가 없음. 모든 요소가 매뉴얼 원문 기반이거나 다른 탭에서 이동된 요소임.
 
 ### PokerGFX 대비 EBS 변경점
 
@@ -607,13 +525,6 @@ Server UI에서 AT 동작에 영향을 미치는 설정 요소 (단방향: Serve
 | 5 | GAP-9-05 | Language Editor | "Language Editor: UI 텍스트 다국어 편집" | p.64 | v3.0 Defer | SK-10(Language)와 연동. GC-025(다국어) v3.0 기준 적용 |
 | 6 | GAP-9-06 | Custom Animations | "Custom Animations: 커스텀 애니메이션 지원" | p.64 | v2.0 Defer | Graphic Editor의 Animation In/Out 확장 기능 |
 
-### EBS 신규 요소 (매뉴얼 없음, EBS 추가)
-
-| # | PRD ID | 요소명 | 추가 근거 |
-|---|--------|--------|----------|
-| 1 | - | Anchor (7종) | 해상도 변경 시 요소 위치 보존 — PokerGFX의 암묵적 앵커를 명시적 선택지로 개선 |
-| 2 | - | Coordinate Display | Design Resolution 기준값 vs 실제 픽셀값 분리 표시 — 4K 스케일링 디버깅 지원 |
-
 ### PokerGFX 대비 EBS 변경점
 
 1. **PokerGFX 87개 → EBS 29개 (Skin 26 + Graphic 19개 중 Board 공통 10 + Player 8 + 신규 1)**: Board(39개)+Player(48개)를 단일 에디터 + 모드 전환으로 통합. 공통 기능(Position, Animation, Text, Background) 60% 이상 중복 제거.
@@ -685,9 +596,10 @@ Server UI에서 AT 동작에 영향을 미치는 설정 요소 (단방향: Serve
 
 | 날짜 | 버전 | 변경 내용 |
 |------|------|---------|
+| 2026-02-26 | v3.0.0 | "EBS 신규" 요소 전면 제거. 완전 요소 목록에서 EBS 결정이 "EBS 신규"인 행 삭제(Step1: M-01/02/06/09/12, Step2: Y-08/10, Step3: S-00/04, Step4: O-18/19/20). 모든 Step의 "EBS 신규 요소" 섹션 삭제. 요약 통계 EBS 신규 요소 컬럼 전체 0으로 업데이트. |
 | 2026-02-26 | v2.1.0 | 요약 통계 합계 수정 (184→176). PRD-0004 부록 A v16.0.0 이전 기준(184)과 현재 Element Catalog 기준(176) 차이 주석 추가. M-08/M-10/O-06~O-13 Future 처리 설명 추가. |
 | 2026-02-26 | v2.0.0 | 모든 Step(1~9) 완전 요소 설계 완성. Gap 요소 37개 식별(PRD 완전 누락 20개 + 탭 이동 13개 + 위치 메모 4개). 설계 결정 완료. |
 | 2026-02-26 | v1.0.0 | 최초 작성 (스켈레톤 + Step 1~2 초안) |
 
 ---
-**Version**: 2.1.0 | **Updated**: 2026-02-26
+**Version**: 3.0.0 | **Updated**: 2026-02-26

@@ -55,7 +55,7 @@
 > **설계 시사점**
 > - Preview + 우측 컨트롤 패널 2-column 레이아웃은 운영 효율이 검증된 구조 → EBS 계승
 > - RFID 상태(3번)가 CPU/GPU와 같은 행에 묻혀 존재감 약함 → EBS에서 독립 분리 (M-05)
-> - 버튼 7개가 우선순위 구분 없이 균등 노출 → EBS에서 Quick Actions 그룹으로 재편
+> - 버튼 7개가 우선순위 구분 없이 균등 노출 (PokerGFX 관찰)
 > - **EBS MVP 범위 외 (추후 개발 예정)**: Recording, Secure Delay(4번), Studio(8번), Split Recording(9번), Tag Player(10번) — Preview는 미리보기 항상 활성화 고정(토글 UI 제거)
 ```
 
@@ -64,18 +64,18 @@
 > **설계 시사점**
 > - Preview + 우측 컨트롤 패널 2-column 레이아웃은 운영 효율이 검증된 구조 → EBS 계승
 > - RFID 상태(3번)가 CPU/GPU와 같은 행에 묻혀 존재감 약함 → EBS에서 독립 분리 (M-05)
-> - 버튼 7개가 우선순위 구분 없이 균등 노출 → EBS에서 Reset Hand / Register Deck / Launch AT 3개 Quick Actions로 재편, 나머지 제거
-> - Preview Toggle(4번)이 실수로 꺼지면 방송 모니터링 공백 발생 → EBS에서 Preview 항상 활성화 고정 (M-09 토글 UI 제거)
+> - 버튼 7개가 우선순위 구분 없이 균등 노출 (Reset Hand / Register Deck / Launch AT / Settings 등 혼재)
+> - Preview Toggle(4번)이 실수로 꺼지면 방송 모니터링 공백 발생 → Drop 결정 (M-09 토글 제거)
 ```
 
 **변경 근거**:
 - MVP 범위 외 목록은 요소 테이블(L103~L105)에 이미 명시. 시사점 블록에서 제거.
-- 버튼 그룹화 시사점은 구체적 결정(3개 유지, 나머지 제거)으로 명시.
-- Preview 항상 활성화 결정은 설계 스펙(L131)에 언급되어 있으므로 별도 bullet 보존.
+- 버튼 우선순위 미구분은 PokerGFX 관찰 사항으로만 기술. EBS 재편 결정은 별도 설계 단계에서 결정.
+- Preview Toggle Drop 결정은 설계 스펙(L131)에 언급되어 있으므로 별도 bullet 보존.
 
 **Acceptance Criteria**:
 - [ ] MVP 범위 외 항목 열거 bullet 제거됨
-- [ ] 4개 bullet 유지 (레이아웃 계승 / RFID 분리 / Quick Actions 재편 / Preview 고정)
+- [ ] 4개 bullet 유지 (레이아웃 계승 / RFID 분리 / 버튼 관찰 / Preview 고정)
 - [ ] 각 bullet이 `[PokerGFX 관찰] → [EBS 결정]` 구조를 가짐
 - [ ] 기존에 없던 정보가 추가되지 않음 (문서 내 근거만 사용)
 
