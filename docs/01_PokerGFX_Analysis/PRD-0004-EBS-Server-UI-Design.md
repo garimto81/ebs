@@ -107,8 +107,8 @@ PokerGFX의 기본 화면. 좌측에 방송 Preview, 우측에 상태 표시와 
 > **설계 시사점**
 > - Preview + 우측 컨트롤 패널 2-column 레이아웃은 운영 효율이 검증된 구조 → EBS 계승
 > - RFID 상태(3번)가 CPU/GPU와 같은 행에 묻혀 존재감 약함 → EBS에서 독립 분리 (M-05)
-> - 버튼 7개가 우선순위 구분 없이 균등 노출 → EBS에서 Quick Actions 그룹으로 재편
-> - **EBS MVP 범위 외 (추후 개발 예정)**: Recording, Secure Delay(4번), Studio(8번), Split Recording(9번), Tag Player(10번) — Preview는 미리보기 항상 활성화 고정(토글 UI 제거)
+> - 버튼 7개가 우선순위 구분 없이 균등 노출 → EBS에서 Reset Hand / Register Deck / Launch AT 3개 Quick Actions로 재편, 나머지 제거
+> - Preview Toggle(4번)이 실수로 꺼지면 방송 모니터링 공백 발생 → EBS에서 Preview 항상 활성화 고정 (M-09 토글 UI 제거)
 
 ##### EBS 설계본 — 해상도 변형 비교
 
@@ -511,8 +511,10 @@ flowchart LR
 | 13 | Twitch / ChatBot | Twitch 직접 연동 | P2 |
 
 > **설계 시사점**
-> - Live/Delay 2열 구조는 직관적이며 EBS 계승 가치 있음
-> - Key & Fill(4~5번)의 DeckLink 포트 할당이 불명확 → EBS에서 O-18~O-20 Fill & Key 전용 섹션 신규
+> - Live/Delay 2열 구조가 동일 화면에서 두 파이프라인을 병렬 관리 → EBS에서 Live 단일 출력 우선 구현, Delay 파이프라인은 추후 개발
+> - Key & Fill(4~5번)의 DeckLink 포트 할당이 불명확하고 Sources 탭과 설정 분리됨 → EBS에서 O-18~O-20 Fill & Key 전용 섹션 신규 추가
+> - Recording(7번) / Auto Stream(10번) / Twitch ChatBot(13번)이 출력 설정과 혼재 → EBS에서 스트리밍/녹화는 별도 그룹 분리 (P2 통합)
+> - Virtual Camera(6번)가 SDI/NDI와 동일 Priority로 배치 → EBS에서 P2로 내려 운영 필수 설정과 구분
 
 ##### EBS 설계본
 
@@ -663,10 +665,10 @@ flowchart LR
 | 29 | Action Clock | Show Action Clock at `[10] S`. 지정 시간부터 원형 타이머 표시 | P0 |
 
 > **설계 시사점**
-> - 스킨 시스템: 1.41GB "Titanium" 스킨 — 모든 그래픽 에셋이 단일 스킨으로 패키징
-> - 3개 스폰서 슬롯: Leaderboard / Board / Strip 위치별 로고 배치
-> - Transition Animation: Pop/Slide/Fade + 시간(초) 조합으로 세밀한 제어
-> - Bounce Action Player: 액션 대기 플레이어에 바운스 시각 효과 (방송 UX 핵심)
+> - 단일 스킨 패키지(1.41GB)가 모든 그래픽 에셋을 포함 → EBS에서 계승, 스킨 단위 배포 구조 유지
+> - 스폰서 슬롯 3개(Leaderboard / Board / Strip)가 위치별로 독립 관리 → EBS 계승 (G-10~G-12), P2 우선순위 유지
+> - Transition Animation이 Pop/Slide/Fade + 시간 조합으로 세밀하게 제어됨 → EBS 계승 (G-22~G-24), 방송 연출 핵심 기능
+> - Bounce Action Player가 액션 대기 플레이어의 바운스 시각 효과를 체크박스 하나로 제어 → EBS 계승 (G-25), 체크박스 On/Off 구조 동일 유지
 
 ##### EBS 설계본
 
@@ -825,9 +827,9 @@ flowchart LR
 | 21 | Ignore split pots | When showing equity and outs, ignore split pots 체크박스. Split pot Equity 계산 규칙 | P1 |
 
 > **설계 시사점**
-> - Bomb Pot / Rabbit Hunting / Sleeper Straddle: 방송에서 사용되는 다양한 특수 규칙 지원 필요
-> - Equity 표시 시점: "After 1st betting round" 등 정밀 제어 가능
-> - Secure Mode 깜빡임: 보안 모드에서 미확인 카드의 시각적 피드백
+> - Bomb Pot / Rabbit Hunting / Sleeper Straddle 등 특수 규칙이 별도 체크박스로 독립 노출 → EBS 계승 (G-52~G-57), 규칙 변경이 그래픽 표시에 직접 영향을 미쳐 GFX 2 탭 배치 유지
+> - Equity 표시 시점이 "After 1st betting round" 등 정밀 드롭다운으로 제어 → EBS 계승 (G-37), 방송 긴장감에 직결되어 P0 유지
+> - 보안 모드에서 미확인 카드 깜빡임(Unknown cards blink)이 별도 체크박스로 제어 → EBS 계승 (G-56), RFID 미인식 카드의 시각적 경보 기능
 
 ##### EBS 설계본
 
