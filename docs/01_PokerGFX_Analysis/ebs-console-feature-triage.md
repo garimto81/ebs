@@ -38,14 +38,14 @@ EBS console은 PokerGFX를 대체하는 방송 프로덕션 통제 소프트웨�
 | Action Tracker | 26 | 22 | 4 | 0 | 0 |
 | Pre-Start Setup | 13 | 10 | 0 | 3 | 0 |
 | Viewer Overlay | 14 | 10 | 4 | 0 | 0 |
-| GFX Console | 25 | 3 | 18 | 2 | 2 |
+| GFX Console | 25 | 3 | 18 | 2 | 3 |
 | Security | 11 | 7 | 3 | 1 | 0 |
 | Equity & Stats | 19 | 1 | 15 | 0 | 3 |
 | Hand History | 11 | 1 | 8 | 0 | 2 |
-| Server 관리 | 30 | 12 | 10 | 3 | 5 |
-| **합계** | **149** | **66** | **62** | **9** | **12** |
+| Server 관리 | 30 | 15 | 7 | 3 | 5 |
+| **합계** | **149** | **69** | **59** | **9** | **13** |
 
-> v1.0 목표 범위: ~55-65개. 실제 결정: 66개 (방송 필수 기능 중심으로 엄선)
+> v1.0 목표 범위: ~55-65개. 실제 결정: 69개 (방송 필수 기능 + PRD-0004 v22.0.0 복원 3개 포함)
 
 ## 기능별 트리아지 결정
 
@@ -144,7 +144,7 @@ EBS console은 PokerGFX를 대체하는 방송 프로덕션 통제 소프트웨�
 | GC-021 | 티커 메시지 | Defer | v3.0 | 스크롤 텍스트 — WSOP LIVE 연동 시 활용 |
 | GC-022 | 시스템 상태 | Drop | — | CPU/메모리 모니터링 — 방송과 무관한 운영 도구 |
 | GC-023 | Preview 창 | Defer | v2.0 | PIP 미리보기 — 방송 화질 향상 기능 |
-| GC-024 | 다크/라이트 테마 | Drop | — | UI 편의 기능 — 개발 우선순위 낮음 |
+| GC-024 | 다크/라이트 테마 | Drop | — | UI 편의 기능 — 개발 우선순위 낮음 *(N/A — UI에 사용자 대면 토글 없음, Skin 시스템 내부)* |
 | GC-025 | 다국어 지원 | Defer | v3.0 | 국제화 — EBS Native 단계에서 구현 |
 
 ### 5. Security (11개)
@@ -220,9 +220,9 @@ EBS console은 PokerGFX를 대체하는 방송 프로덕션 통제 소프트웨�
 | SV-011 | Twitch 연동 | Drop | — | Twitch SNS 연동 — 방송 플랫폼 연동, EBS 범위 외 |
 | SV-012 | Board Position | Keep | v1.0 | 보드 카드 위치 설정 — 오버레이 레이아웃 기본 |
 | SV-013 | Player Layout | Keep | v1.0 | 플레이어 배치 방식 — 오버레이 레이아웃 기본 |
-| SV-014 | Transition Animation | Defer | v2.0 | 등장/퇴장 애니메이션 — 방송 연출 향상 |
-| SV-015 | Bounce Action Player | Defer | v2.0 | 바운스 시각 효과 — 연출 향상 |
-| SV-016 | 스폰서 로고 3슬롯 | Defer | v2.0 | 스폰서 로고 — 방송 수익화, 기본 기능 아님 |
+| SV-014 | Transition Animation | Keep | v1.0 | 등장/퇴장 애니메이션 — 방송 연출 필수 (PRD-0004 v22.0.0 복원) |
+| SV-015 | Bounce Action Player | Keep | v1.0 | 바운스 시각 효과 — 방송 연출 필수 (PRD-0004 v22.0.0 복원) |
+| SV-016 | 스폰서 로고 3슬롯 | Keep | v1.0 | 스폰서 로고 3슬롯 — 방송 브랜딩 필수 (PRD-0004 v22.0.0 복원) |
 | SV-017 | Action Clock | Keep | v1.0 | 원형 카운트다운 타이머 — 방송 연출 필수 |
 | SV-018 | 영역별 Chipcount Precision | Keep | v1.0 | 수치 형식 설정 — 방송 표시 기본 |
 | SV-019 | BB 표시 모드 | Keep | v1.0 | BB 배수 표시 — 시청자 이해도 향상, 방송 기본 |
@@ -240,7 +240,7 @@ EBS console은 PokerGFX를 대체하는 방송 프로덕션 통제 소프트웨�
 
 ## Drop 사유 상세
 
-### 완전 배제 기능 (12개)
+### 완전 배제 기능 (13개)
 
 | ID | 기능 | 배제 사유 |
 |----|------|----------|
@@ -250,14 +250,14 @@ EBS console은 PokerGFX를 대체하는 방송 프로덕션 통제 소프트웨�
 | SV-011 | Twitch 연동 | Twitch ChatBot, 채널 제목 설정 등 SNS 플랫폼 연동. EBS 관심사는 오버레이 생성이며, 방송 플랫폼 연동은 OBS/외부 도구에서 처리 |
 | SV-030 | Split Recording | 핸드별 분할 녹화는 영상 편집 워크플로우. EBS 방송 운영 관심사 외 범위 |
 | GC-022 | 시스템 상태 | CPU/메모리/네트워크 사용률 모니터링. 방송 운영 관련성 낮고 OS 내장 도구로 대체 가능 |
-| GC-024 | 다크/라이트 테마 | UI 편의 기능. 개발 복잡도 대비 방송 가치 없음. 단일 테마(다크)로 고정 |
+| GC-024 | 다크/라이트 테마 | UI 편의 기능. 개발 복잡도 대비 방송 가치 없음. 단일 테마(다크)로 고정 *(N/A — Skin 시스템 내부 구현, 사용자 대면 테마 토글 UI 없음)* |
 | EQ-009 | 핸드 레인지 인식 | 상대 레인지 기반 승률 계산은 AI/ML 분석 전제. EBS 범위 외 고급 기능 |
 | EQ-011 | Short Deck Equity | 36장 덱 특수 게임타입 전용. 운영 빈도 낮아 개발 ROI 불충분 |
 | ST-005 | 누적 3Bet% | 고급 통계 누적 집계. P2 우선순위로 개발 순위 최하위, v2.0 통계 완성 시 재검토 |
 | HH-004 | 팟 사이즈 필터 | 분석용 고급 필터링. v1.0/v2.0에서 플레이어 필터, 태그 필터로 충분 |
 | HH-011 | 핸드 공유 | 공유 링크 생성은 외부 서비스 연동 필요. EBS 단독 실행 범위 외 |
 
-## v1.0 개발 대상 목록 (66개)
+## v1.0 개발 대상 목록 (69개)
 
 EBS console v1.0 Broadcast Ready에서 구현할 기능 전체 목록.
 
@@ -350,7 +350,7 @@ EBS console v1.0 Broadcast Ready에서 구현할 기능 전체 목록.
 |----|------|------|
 | HH-001 | 핸드 목록 표시 | 현재 세션 핸드 목록, 기본 저장만으로 구현 가능 |
 
-### Server 관리 (12개)
+### Server 관리 (15개)
 
 | ID | 기능 | 비고 |
 |----|------|------|
@@ -361,6 +361,9 @@ EBS console v1.0 Broadcast Ready에서 구현할 기능 전체 목록.
 | SV-008 | Video Size / Frame Rate | |
 | SV-012 | Board Position | |
 | SV-013 | Player Layout | |
+| SV-014 | Transition Animation | PRD-0004 v22.0.0 복원 |
+| SV-015 | Bounce Action Player | PRD-0004 v22.0.0 복원 |
+| SV-016 | 스폰서 로고 3슬롯 | PRD-0004 v22.0.0 복원 |
 | SV-017 | Action Clock | |
 | SV-018 | 영역별 Chipcount Precision | |
 | SV-019 | BB 표시 모드 | |
@@ -378,8 +381,8 @@ EBS console v1.0 Broadcast Ready에서 구현할 기능 전체 목록.
 | Security | 7 |
 | Equity & Stats | 1 |
 | Hand History | 1 |
-| Server 관리 | 12 |
-| **합계** | **66** |
+| Server 관리 | 15 |
+| **합계** | **69** |
 
 ---
 
@@ -389,6 +392,8 @@ EBS console v1.0 Broadcast Ready에서 구현할 기능 전체 목록.
 |------|------|----------|
 | 1.0.0 | 2026-02-23 | 최초 작성 |
 | 1.1.0 | 2026-02-23 | 트리아지 전면 재검토: Viewer Overlay v1.0 10개(VO-011/014 → v2.0), GFX Console v3.0 2개(GC-021/025), Equity Drop 3개(EQ-009/011/ST-005), Hand History v1.0=HH-001, Server v1.0 12개(SV-001/018/029 추가), Security SEC-011 v1.0으로 변경 |
+| 1.2.0 | 2026-02-27 | GFX Console Drop 2→3 수정 (GC-019 누락 반영), N/A 6개 재분류 주석 추가 (EQ-009/011, ST-005, HH-004/011, GC-024) |
+| 1.3.0 | 2026-02-27 | SV-014/015/016 v2.0 Defer → v1.0 Keep 복원 (PRD-0004 v22.0.0 동기화). Server 관리 v1.0: 12→15, 합계: 66→69 |
 
 ---
-**Version**: 1.1.0 | **Updated**: 2026-02-23
+**Version**: 1.3.0 | **Updated**: 2026-02-27

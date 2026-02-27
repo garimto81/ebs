@@ -201,8 +201,9 @@ GPU 사용률을 ProgressBar로 표시. 색상 코딩은 M-03과 동일. 30fps �
 |------|------|
 | Sources (S-00~S-18) | 전체 비활성화 |
 | Outputs (O-01~O-20) | 전체 비활성화 |
-| GFX (G-01~G-51) | 전체 비활성화 |
-| Rules (R-01~R-06) | 전체 비활성화 |
+| GFX 1 (G-01~G-25) | 전체 비활성화 |
+| GFX 2 (G-26~G-39, G-52~G-57) | 전체 비활성화 |
+| GFX 3 / Display (G-40~G-51) | 전체 비활성화 |
 | System (Y-01~Y-24) | 전체 비활성화 |
 | M-11~M-16 | 영향 없음 (액션 버튼) |
 | M-19 | Ctrl+L로 Lock 토글 (항상 활성) |
@@ -236,7 +237,7 @@ sequenceDiagram
 
 **트리거**: 체크박스 토글 또는 Ctrl+D 단축키
 
-**전제조건**: Outputs 탭에서 Delay 파이프라인(O-06, O-07)이 설정되어 있어야 함
+**전제조건**: I/O 탭에서 Delay 파이프라인(O-06, O-07)이 설정되어 있어야 함
 
 **로직 플로우**:
 1. 운영자가 Secure Delay 체크박스 토글
@@ -549,11 +550,16 @@ sequenceDiagram
 ---
 
 ### M-17: Hand Counter
+
+> **[PRD-0004 v22.0.0에서 제거됨]** M-17은 신규 추가 기능으로 분류되어 v22.0.0 재설계에서 제외됨.
+
 현재 세션의 핸드 번호를 Badge로 표시 (예: "Hand #47"). 게임 상태가 SETUP에 진입할 때마다 자동 증가. M-11 Reset Hand로는 카운터가 리셋되지 않음. G-46 "Show Hand #" 체크 시 Viewer Overlay에도 표시.
 
 ---
 
 ### M-18: Connection Status
+
+> **[PRD-0004 v22.0.0에서 제거됨]** M-18은 신규 추가 기능으로 분류되어 v22.0.0 재설계에서 제외됨.
 
 **트리거**: 연결 상태 변경 시 자동 갱신 | **전제조건**: 없음
 
@@ -566,11 +572,16 @@ sequenceDiagram
 ---
 
 ### M-19: Quick Lock
+
+> **[PRD-0004 v22.0.0에서 제거됨]** M-19은 신규 추가 기능으로 분류되어 v22.0.0 재설계에서 제외됨.
+
 Ctrl+L 키보드 단축키. M-07 Lock Toggle과 동일한 동작을 키보드로 수행. Lock 상태 토글 결과는 M-07에 반영.
 
 ---
 
 ### M-20: Fullscreen Preview
+
+> **[PRD-0004 v22.0.0에서 제거됨]** M-20은 신규 추가 기능으로 분류되어 v22.0.0 재설계에서 제외됨.
 
 **트리거**: 버튼 클릭 또는 F11 단축키 | **전제조건**: M-09 Preview Toggle이 On
 
@@ -582,7 +593,7 @@ Ctrl+L 키보드 단축키. M-07 Lock Toggle과 동일한 동작을 키보드로
 
 ---
 
-## 3장: Sources 탭 기능 상세
+## 3장: I/O 탭 기능 상세 (Sources — v22.0.0에서 I/O 탭으로 통합)
 
 ### 요소 인덱스
 
@@ -612,6 +623,8 @@ Ctrl+L 키보드 단축키. M-07 Lock Toggle과 동일한 동작을 키보드로
 
 ### S-00: Output Mode Selector
 
+> **[PRD-0004 v22.0.0에서 제거됨]** S-00은 신규 추가 기능으로 분류되어 v22.0.0 재설계에서 제외됨.
+
 **트리거**: RadioGroup 선택 변경
 
 **전제조건**: Lock(M-07) 해제 상태
@@ -622,10 +635,10 @@ Ctrl+L 키보드 단축키. M-07 Lock Toggle과 동일한 동작을 키보드로
    - **Fill & Key**: DeckLink 장치 필수. S-13, S-14 ATEM 설정 표시. S-11, S-12 배경 설정 숨김. O-05, O-07 Fill&Key 채널 할당 활성.
    - **Chroma Key**: S-11 배경 활성화 표시, S-12 배경색 선택 표시. S-13, S-14 ATEM 숨김. O-18 Key Color 활성.
    - **Internal**: 내부 캡처 소스(S-01~S-04) 중심. S-13, S-14 숨김. S-11, S-12 숨김.
-3. 모드 변경은 Outputs 탭(O-04~O-07, O-18~O-20) 구성에도 영향
+3. 모드 변경은 I/O 탭(O-04~O-07, O-18~O-20) 구성에도 영향
 4. 라이브 중 모드 변경 시 확인 다이얼로그 표시 ("라이브 중 모드 변경은 방송 중단을 유발할 수 있습니다")
 
-**상태 변화**: 선택된 모드에 따라 Sources 탭과 Outputs 탭의 가시성 재구성
+**상태 변화**: 선택된 모드에 따라 I/O 탭의 가시성 재구성
 
 **영향 요소**:
 | 요소 | 변화 |
@@ -654,7 +667,7 @@ sequenceDiagram
     Note over SC: Fill&Key: S-13,S-14 표시 / S-11,S-12 숨김
     Note over SC: Chroma: S-11,S-12 표시 / S-13,S-14 숨김
     Note over SC: Internal: S-13,S-14 숨김 / S-11,S-12 숨김
-    SM->>OC: Outputs 탭 가시성 재결정
+    SM->>OC: I/O 탭 가시성 재결정
     SM->>PV: 출력 모드에 맞는 Preview 갱신
 ```
 
@@ -895,7 +908,7 @@ NumberInput. 오디오와 비디오 간 싱크 보정값 (ms 단위). S-17에서
 
 ---
 
-## 4장: Outputs 탭 기능 상세
+## 4장: I/O 탭 기능 상세 (Outputs — v22.0.0에서 I/O 탭으로 통합)
 
 ### 요소 인덱스
 
@@ -1198,6 +1211,8 @@ OAuth 인증 버튼. O-16에서 선택된 플랫폼(Twitch/YouTube)의 계정 �
 
 ### O-18: Key Color
 
+> **[PRD-0004 v22.0.0에서 제거됨]** O-18은 신규 추가 기능으로 분류되어 v22.0.0 재설계에서 제외됨.
+
 **트리거**: ColorPicker | **전제조건**: S-00 Fill & Key 또는 Chroma Key 모드
 
 **로직**: Key 신호의 배경색 설정 (기본: #FF000000, 완전 불투명 검정). Fill & Key 모드에서 Key 채널의 Alpha 마스크 배경을 정의. ATEM 스위처의 DSK Key 설정과 일치해야 정상 합성됨.
@@ -1210,6 +1225,8 @@ OAuth 인증 버튼. O-16에서 선택된 플랫폼(Twitch/YouTube)의 계정 �
 
 ### O-19: Fill/Key Preview
 
+> **[PRD-0004 v22.0.0에서 제거됨]** O-19은 신규 추가 기능으로 분류되어 v22.0.0 재설계에서 제외됨.
+
 **트리거**: 자동 표시 (Fill & Key 모드에서) | **전제조건**: S-00 Fill & Key 모드
 
 **로직**: Fill 신호(RGB)와 Key 신호(Alpha)를 나란히 미니 프리뷰로 표시. 운영자가 Fill과 Key가 정확히 분리되었는지 시각적으로 확인 가능. Key 신호에서 흰색 영역이 GFX 오버레이 영역, 검정 영역이 투명 영역.
@@ -1221,6 +1238,8 @@ OAuth 인증 버튼. O-16에서 선택된 플랫폼(Twitch/YouTube)의 계정 �
 ---
 
 ### O-20: DeckLink Channel Map
+
+> **[PRD-0004 v22.0.0에서 제거됨]** O-20은 신규 추가 기능으로 분류되어 v22.0.0 재설계에서 제외됨.
 
 **트리거**: 4개 Dropdown 선택 (Live Fill / Live Key / Delay Fill / Delay Key → DeckLink 물리 포트) — Delay 채널은 추후 개발 시 활성화
 
@@ -1691,7 +1710,7 @@ Checkbox. 활성 시 현재 액션 중인 플레이어 박스에 바운스 애�
 
 **로직**: 핸드 사이에 PIP 캡처(다른 테이블의 방송 화면)를 자동 표시할지 결정한다. Pipcap 앱(4.1절)이 연결된 상태에서만 동작. 활성 시 원격 GfxServer의 방송 프레임을 pip_element로 렌더링하여 현재 화면의 일부 영역에 작은 PIP 창으로 표시.
 
-**영향 요소**: G-08 Heads Up Camera (PIP 위치 겹침 가능), Sources 탭 비디오 입력 설정
+**영향 요소**: G-08 Heads Up Camera (PIP 위치 겹침 가능), I/O 탭 비디오 입력 설정
 
 **비활성 조건**: Pipcap 앱 미연결 시 Checkbox 회색 처리.
 
@@ -3292,7 +3311,8 @@ GfxServer는 게임 상태 전이 시 TCP를 통해 AT에 활성 버튼 목록�
 | 버전 | 날짜 | 변경 내용 |
 |------|------|----------|
 | v1.0.0 | 2026-02-18 | 초기 작성. System(24개), Skin Editor(26개), Graphic Editor(Board 10 + Player 8), AT 상호작용 지점 |
+| v1.1.0 | 2026-02-27 | PRD-0004 v22.0.0 5탭 구조 반영. Sources 탭→I/O 탭, Outputs 탭→I/O 탭 섹션 명칭 변경. 제거된 신규 기능(M-17/18/19/20, S-00, O-18/19/20)에 "[PRD-0004 v22.0.0에서 제거됨]" 주석 추가. |
 
 ---
 
-**Version**: 1.0.0 | **Updated**: 2026-02-18
+**Version**: 1.1.0 | **Updated**: 2026-02-27
