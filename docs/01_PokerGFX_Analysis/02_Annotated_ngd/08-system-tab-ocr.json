@@ -28,7 +28,8 @@
         0
       ],
       "ocr_text": "ur | X1 | = | = | menta",
-      "ocr_word_count": 5
+      "ocr_word_count": 5,
+      "fn": "#1 Tab Bar"
     },
     {
       "rect": [
@@ -45,7 +46,8 @@
         32
       ],
       "ocr_text": "Name | GGP",
-      "ocr_word_count": 2
+      "ocr_word_count": 2,
+      "fn": "#2 Table Name"
     },
     {
       "rect": [
@@ -68,7 +70,8 @@
         0
       ],
       "ocr_text": "Pwd | (cCC",
-      "ocr_word_count": 2
+      "ocr_word_count": 2,
+      "fn": "#3 Password"
     },
     {
       "rect": [
@@ -89,7 +92,8 @@
         -1,
         28,
         3
-      ]
+      ],
+      "fn": "#4 RFID Reset"
     },
     {
       "rect": [
@@ -110,7 +114,8 @@
         -1,
         0,
         3
-      ]
+      ],
+      "fn": "#5 RFID Calibrate"
     },
     {
       "rect": [
@@ -133,7 +138,8 @@
         22
       ],
       "ocr_text": "Serial",
-      "ocr_word_count": 1
+      "ocr_word_count": 1,
+      "fn": "#6 Serial Number"
     },
     {
       "rect": [
@@ -154,7 +160,8 @@
         3,
         0,
         1
-      ]
+      ],
+      "fn": "#7 Version Check"
     },
     {
       "rect": [
@@ -177,7 +184,8 @@
         -14
       ],
       "ocr_text": "Updatas | & | support | Evaluation | moda",
-      "ocr_word_count": 5
+      "ocr_word_count": 5,
+      "fn": "#8 Updates & Support"
     },
     {
       "rect": [
@@ -200,7 +208,8 @@
         -14
       ],
       "ocr_text": "Evaluation | moda",
-      "ocr_word_count": 2
+      "ocr_word_count": 2,
+      "fn": "#9 Evaluation Mode"
     },
     {
       "rect": [
@@ -221,7 +230,8 @@
         -1,
         -24,
         3
-      ]
+      ],
+      "fn": "#10 Table Diagnostics"
     },
     {
       "rect": [
@@ -244,7 +254,8 @@
         5
       ],
       "ocr_text": "Intel(R) | Cora(TM) | i9-14900HX | GaForce | RTX",
-      "ocr_word_count": 14
+      "ocr_word_count": 14,
+      "fn": "#11 Hardware Panel"
     },
     {
       "rect": [
@@ -267,7 +278,8 @@
         0
       ],
       "ocr_text": "Log",
-      "ocr_word_count": 1
+      "ocr_word_count": 1,
+      "fn": "#12 System Log"
     },
     {
       "rect": [
@@ -290,7 +302,8 @@
         0
       ],
       "ocr_text": "ure | or",
-      "ocr_word_count": 2
+      "ocr_word_count": 2,
+      "fn": "#13 Secure Delay Folder"
     },
     {
       "rect": [
@@ -311,7 +324,8 @@
         0,
         3,
         0
-      ]
+      ],
+      "fn": "#14 Export Folder"
     },
     {
       "rect": [
@@ -332,7 +346,8 @@
         0,
         -24,
         0
-      ]
+      ],
+      "fn": "#15 Stream Deck"
     },
     {
       "rect": [
@@ -355,7 +370,8 @@
         5
       ],
       "ocr_text": "B",
-      "ocr_word_count": 1
+      "ocr_word_count": 1,
+      "fn": "#16 MultiGFX"
     },
     {
       "rect": [
@@ -376,7 +392,8 @@
         -7,
         -9,
         -4
-      ]
+      ],
+      "fn": "#17 Sync Stream"
     },
     {
       "rect": [
@@ -391,7 +408,8 @@
         587,
         100,
         20
-      ]
+      ],
+      "fn": "#18 Sync Skin"
     },
     {
       "rect": [
@@ -414,7 +432,8 @@
         0
       ],
       "ocr_text": "NoCards | @",
-      "ocr_word_count": 2
+      "ocr_word_count": 2,
+      "fn": "#19 No Cards"
     },
     {
       "rect": [
@@ -437,7 +456,8 @@
         0
       ],
       "ocr_text": "Disable | GPU | Encode | B",
-      "ocr_word_count": 4
+      "ocr_word_count": 4,
+      "fn": "#20 Disable GPU Encode"
     },
     {
       "rect": [
@@ -454,7 +474,8 @@
         20
       ],
       "ocr_text": "Ignore | Nama",
-      "ocr_word_count": 2
+      "ocr_word_count": 2,
+      "fn": "#21 Ignore Name Tags"
     },
     {
       "rect": [
@@ -477,7 +498,8 @@
         0
       ],
       "ocr_text": "UPCARD | antannas | raad | hole | cards",
-      "ocr_word_count": 10
+      "ocr_word_count": 10,
+      "fn": "#22 UPCARD Antennas"
     },
     {
       "rect": [
@@ -494,7 +516,8 @@
         20
       ],
       "ocr_text": "Disable | muck | antenna | when | in",
-      "ocr_word_count": 8
+      "ocr_word_count": 8,
+      "fn": "#23 Disable Muck Antenna"
     },
     {
       "rect": [
@@ -511,7 +534,8 @@
         20
       ],
       "ocr_text": "Disablo | Community | Card | antenna | for",
-      "ocr_word_count": 8
+      "ocr_word_count": 8,
+      "fn": "#24 Disable Community Antenna"
     },
     {
       "rect": [
@@ -528,7 +552,8 @@
         32
       ],
       "ocr_text": "Auto | Start | PokerGFX | Sarvar | with",
-      "ocr_word_count": 7
+      "ocr_word_count": 7,
+      "fn": "#25 Auto Start Server"
     },
     {
       "rect": [
@@ -545,7 +570,8 @@
         20
       ],
       "ocr_text": "Allow | Action | Tracker",
-      "ocr_word_count": 3
+      "ocr_word_count": 3,
+      "fn": "#26 Allow Action Tracker"
     },
     {
       "rect": [
@@ -568,7 +594,8 @@
         -10
       ],
       "ocr_text": "Action | Tracker | Pradictiva | Bat | Input",
-      "ocr_word_count": 5
+      "ocr_word_count": 5,
+      "fn": "#27 AT Predictive Bet"
     },
     {
       "rect": [
@@ -591,7 +618,8 @@
         22
       ],
       "ocr_text": "Action | Tracker | Kiosk",
-      "ocr_word_count": 3
+      "ocr_word_count": 3,
+      "fn": "#28 AT Kiosk Mode"
     }
   ],
   "empty_warnings": []

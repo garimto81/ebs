@@ -8,25 +8,25 @@
     {
       "rect": [0, 0, 765, 32],
       "label": "1",
-      "fn": "M-00 Title Bar",
+      "fn": "#1 Title Bar",
       "ocr_text": "PokerGFX Server"
     },
     {
       "rect": [10, 38, 572, 316],
       "label": "2",
-      "fn": "M-01 Preview Area",
+      "fn": "#2 Preview Panel",
       "ocr_text": "(Preview Canvas)"
     },
     {
       "rect": [594, 38, 158, 40],
       "label": "3",
-      "fn": "M-02 Status Indicators",
+      "fn": "#3 Status Indicators",
       "ocr_text": "CPU | GPU | Error | Lock"
     },
     {
       "rect": [594, 82, 154, 50],
       "label": "4",
-      "fn": "M-03 Secure Delay + Preview",
+      "fn": "#4 Secure Delay + Preview",
       "is_drop": true,
       "ocr_text": "Secure Delay | Preview",
       "ebs_scope": "Drop"
@@ -34,25 +34,25 @@
     {
       "rect": [594, 156, 154, 30],
       "label": "5",
-      "fn": "M-04 Reset Hand",
+      "fn": "#5 Reset Hand + Settings + Lock",
       "ocr_text": "Reset Hand"
     },
     {
       "rect": [594, 190, 154, 28],
       "label": "6",
-      "fn": "M-05 Register Deck",
+      "fn": "#6 Register Deck",
       "ocr_text": "Register Deck"
     },
     {
       "rect": [594, 222, 154, 28],
       "label": "7",
-      "fn": "M-06 Action Tracker",
+      "fn": "#7 Launch Action Tracker",
       "ocr_text": "Action Tracker"
     },
     {
       "rect": [594, 254, 154, 28],
       "label": "8",
-      "fn": "M-07 Studio",
+      "fn": "#8 Studio",
       "is_drop": true,
       "ocr_text": "Studio",
       "ebs_scope": "Drop"
@@ -60,7 +60,7 @@
     {
       "rect": [594, 286, 154, 28],
       "label": "9",
-      "fn": "M-08 Split Recording",
+      "fn": "#9 Split Recording",
       "is_drop": true,
       "ocr_text": "Split Recording",
       "ebs_scope": "Drop (SV-030)"
@@ -68,7 +68,7 @@
     {
       "rect": [594, 318, 154, 34],
       "label": "10",
-      "fn": "M-09 Tag Player",
+      "fn": "#10 Tag Player",
       "is_drop": true,
       "ocr_text": "Tag Player",
       "ebs_scope": "Drop"

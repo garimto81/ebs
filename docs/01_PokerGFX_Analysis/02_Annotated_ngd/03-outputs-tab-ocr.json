@@ -8,13 +8,13 @@
     {
       "rect": [30, 397, 235, 20],
       "label": "1",
-      "fn": "O-01 Video Size",
+      "fn": "#1 Video Size",
       "ocr_text": "Video Size | 1920x1080 ▼"
     },
     {
       "rect": [272, 397, 146, 20],
       "label": "2",
-      "fn": "O-02 9x16 Vertical",
+      "fn": "#2 9x16 Vertical",
       "is_drop": true,
       "ocr_text": "9x16 Vertical ☐",
       "ebs_scope": "Drop (SV-010)"
@@ -22,67 +22,67 @@
     {
       "rect": [30, 423, 210, 21],
       "label": "3",
-      "fn": "O-03 Frame Rate",
+      "fn": "#3 Frame Rate",
       "ocr_text": "Frame Rate | 30 fps ▼"
     },
     {
       "rect": [56, 465, 209, 110],
       "label": "4",
-      "fn": "O-04 Live Column",
+      "fn": "#4 Live Pipeline",
       "ocr_text": "Live | Preview | Preview w/ No Delay ▼"
     },
     {
       "rect": [271, 465, 142, 110],
       "label": "5",
-      "fn": "O-05 Delay Column",
+      "fn": "#5 Delay Pipeline",
       "ocr_text": "Delay"
     },
     {
       "rect": [33, 601, 232, 20],
       "label": "6",
-      "fn": "O-06 Virtual Camera",
+      "fn": "#6 Virtual Camera",
       "ocr_text": "Virtual Camera ☑"
     },
     {
       "rect": [17, 677, 460, 32],
       "label": "7",
-      "fn": "O-07 Recording Mode",
+      "fn": "#7 Recording Mode",
       "ocr_text": "Recording Mode | Direct Files ▼"
     },
     {
       "rect": [540, 397, 200, 20],
       "label": "8",
-      "fn": "O-08 Secure Delay",
+      "fn": "#8 Secure Delay",
       "ocr_text": "Secure Delay | 30 Min ↑↓"
     },
     {
       "rect": [488, 423, 222, 21],
       "label": "9",
-      "fn": "O-09 Dynamic Delay",
+      "fn": "#9 Dynamic Delay",
       "ocr_text": "Dynamic Delay ☐"
     },
     {
       "rect": [540, 449, 200, 21],
       "label": "10",
-      "fn": "O-10 Auto Stream",
+      "fn": "#10 Auto Stream",
       "ocr_text": "Auto Stream | 0 Min ↑↓"
     },
     {
       "rect": [540, 476, 200, 15],
       "label": "11",
-      "fn": "O-11 Show Countdown",
+      "fn": "#11 Show Countdown",
       "ocr_text": "Show Countdown ☐"
     },
     {
       "rect": [488, 500, 252, 131],
       "label": "12",
-      "fn": "O-12 Countdown Video + BG",
+      "fn": "#12 Countdown Video + BG",
       "ocr_text": "Countdown Lead-Out Video | Countdown Background ▼"
     },
     {
       "rect": [488, 635, 252, 74],
       "label": "13",
-      "fn": "O-13 Twitch / ChatBot",
+      "fn": "#13 Twitch / ChatBot",
       "is_drop": true,
       "ocr_text": "Twitch / ChatBot",
       "ebs_scope": "Drop (SV-011)"
