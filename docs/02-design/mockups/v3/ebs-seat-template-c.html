@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <!-- Style Reference: Brutalist B&W — Seat Template C: Semicircle (Grid-Based) -->
+<!-- Redesign: BOARD CARDS at bottom (base), seats arc above in semicircle -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 <title>EBS Seat Template C — Semicircle — B&W Mockup v3</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,7 +14,7 @@
     width: 720px;
     background: #fff;
     border: 3px solid #000;
-    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-family: 'Noto Sans', sans-serif;
   }
 
   .header {
@@ -40,7 +42,7 @@
     border-collapse: collapse;
     width: 100%;
     font-size: 11px;
-    font-family: 'Courier New', 'Lucida Console', monospace;
+    font-family: 'Noto Sans', sans-serif;
   }
 
   th, td {
@@ -138,19 +140,19 @@
         </tr>
       </thead>
       <tbody>
-        <!-- R1: P7(C2), P8(C4), P9(C6), P1(C8), P2(C10), P3(C12) -->
+        <!-- R1: P3(C3), P4(C5), P5(C7), P6(C9), P7(C11) — top arc -->
         <tr>
           <td class="row-header">R1</td>
-          <td class="empty"></td><td class="seat">P7</td><td class="empty"></td><td class="seat">P8</td>
-          <td class="empty"></td><td class="seat">P9</td><td class="empty"></td><td class="seat">P1</td>
-          <td class="empty"></td><td class="seat">P2</td><td class="empty"></td><td class="seat">P3</td>
+          <td class="empty"></td><td class="empty"></td><td class="seat">P3</td><td class="empty"></td>
+          <td class="seat">P4</td><td class="empty"></td><td class="seat">P5</td><td class="empty"></td>
+          <td class="seat">P6</td><td class="empty"></td><td class="seat">P7</td><td class="empty"></td>
         </tr>
-        <!-- R2 -->
+        <!-- R2: P2(C2), P8(C12) — upper sides -->
         <tr>
           <td class="row-header">R2</td>
+          <td class="empty"></td><td class="seat">P2</td><td class="empty"></td><td class="empty"></td>
           <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
-          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
-          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="seat">P8</td>
         </tr>
         <!-- R3 -->
         <tr>
@@ -159,12 +161,12 @@
           <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
           <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
         </tr>
-        <!-- R4: BOARD CARDS (C5-C8) -->
+        <!-- R4: P1(C1), BOARD CARDS (C5-C8), P9(C12) — base -->
         <tr>
           <td class="row-header">R4</td>
-          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="seat">P1</td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
           <td class="board board-label" colspan="4">BOARD CARDS</td>
-          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="seat">P9</td>
         </tr>
         <!-- R5: POT (C6-C7) -->
         <tr>
@@ -175,18 +177,18 @@
           <td class="empty"></td>
           <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
         </tr>
-        <!-- R6: P6(C2), P4(C11) -->
+        <!-- R6 -->
         <tr>
           <td class="row-header">R6</td>
-          <td class="empty"></td><td class="seat">P6</td><td class="empty"></td><td class="empty"></td>
           <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
-          <td class="empty"></td><td class="empty"></td><td class="seat">P4</td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
         </tr>
-        <!-- R7: P5(C6) -->
+        <!-- R7 -->
         <tr>
           <td class="row-header">R7</td>
           <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
-          <td class="empty"></td><td class="seat">P5</td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
           <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
         </tr>
         <!-- R8 -->
