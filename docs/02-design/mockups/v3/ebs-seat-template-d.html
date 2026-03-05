@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- Style Reference: Brutalist B&W — Seat Template D: Rectangular -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>EBS Seat Template D — Rectangular — B&W Mockup v3</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; background: #fff; display: inline-block; }
+
+  .component {
+    width: 640px;
+    background: #fff;
+    border: 3px solid #000;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+  }
+
+  .header {
+    background: #000;
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    border-bottom: 3px solid #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header .sub {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  .arena {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    background: #fff;
+  }
+
+  .seat {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border: 3px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    background: #fff;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+  }
+
+  .board {
+    position: absolute;
+    width: 160px;
+    height: 48px;
+    border: 3px solid #000;
+    background: #eee;
+    text-align: center;
+    line-height: 48px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    left: 220px;
+    top: 176px;
+  }
+
+  /* Rectangular layout — 9 seats
+     Top row (4 seats evenly): P7, P8, P9, P1
+       y=28, x spread: 80, 200, 360, 480
+     Right side (1 seat): P2
+       x=520, y=176
+     Left side (1 seat): P6
+       x=28, y=176
+     Bottom-left: P5 x=80, y=316
+     Bottom-right: P3 x=480, y=316
+     Bottom-center: P4 x=270, y=360
+  */
+  .s-p7 { left: calc(80px  - 28px); top: calc(28px  - 28px); }
+  .s-p8 { left: calc(200px - 28px); top: calc(28px  - 28px); }
+  .s-p9 { left: calc(360px - 28px); top: calc(28px  - 28px); }
+  .s-p1 { left: calc(480px - 28px); top: calc(28px  - 28px); }
+
+  .s-p2 { left: calc(560px - 28px); top: calc(200px - 28px); }
+  .s-p6 { left: calc(28px  - 28px); top: calc(200px - 28px); }
+
+  .s-p5 { left: calc(80px  - 28px); top: calc(340px - 28px); }
+  .s-p3 { left: calc(480px - 28px); top: calc(340px - 28px); }
+  .s-p4 { left: calc(270px - 28px); top: calc(375px - 28px); }
+
+  .footer {
+    border-top: 2px solid #000;
+    padding: 10px 16px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+<div class="component">
+  <div class="header">
+    EBS / SEAT TEMPLATE D — RECTANGULAR
+    <span class="sub">9 PLAYERS</span>
+  </div>
+  <div class="arena">
+    <div class="board">BOARD</div>
+    <div class="seat s-p7">P7</div>
+    <div class="seat s-p8">P8</div>
+    <div class="seat s-p9">P9</div>
+    <div class="seat s-p1">P1</div>
+    <div class="seat s-p2">P2</div>
+    <div class="seat s-p3">P3</div>
+    <div class="seat s-p4">P4</div>
+    <div class="seat s-p5">P5</div>
+    <div class="seat s-p6">P6</div>
+  </div>
+  <div class="footer">
+    <span>LAYOUT: RECTANGULAR</span>
+    <span>TOP: P7-P1 | SIDES: P6, P2 | BOTTOM: P5, P4, P3</span>
+    <span>600×400</span>
+  </div>
+</div>
+</body>
+</html>

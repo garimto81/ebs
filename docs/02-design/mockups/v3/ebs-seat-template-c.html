@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!-- Style Reference: Brutalist B&W — Seat Template C: Semicircle -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>EBS Seat Template C — Semicircle — B&W Mockup v3</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; background: #fff; display: inline-block; }
+
+  .component {
+    width: 640px;
+    background: #fff;
+    border: 3px solid #000;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+  }
+
+  .header {
+    background: #000;
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    border-bottom: 3px solid #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header .sub {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  .arena {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    background: #fff;
+  }
+
+  .seat {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border: 3px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    background: #fff;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+  }
+
+  .board {
+    position: absolute;
+    width: 160px;
+    height: 48px;
+    border: 3px solid #000;
+    background: #eee;
+    text-align: center;
+    line-height: 48px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    left: 220px;
+    top: 210px;
+  }
+
+  /* Semicircle layout — 9 seats
+     Upper arc center: (300, 200), radius 190
+     P7 at -150deg, P8 at -120deg, P9 at -90deg, P1 at -60deg, P2 at -30deg, P3 at 0deg
+     angles in degrees from positive X axis:
+       P7: 180+30=210 → but let's use top arc from left to right
+     Let arc from 210° to 330° (measuring CCW from right)
+     Actually use degrees from top-center going left to right:
+     P7=210°, P8=240°, P9=270°(top), P1=300°, P2=330°, P3=360°/0°
+     In CSS coords (y inverted):
+       x = cx + r*cos(θ), y = cy - r*sin(θ)  [standard math]
+     cx=300, cy=220, r=185
+
+     θ=210° → x=300+185*cos210=300+185*(-0.866)=300-160=140, y=220-185*sin210=220-185*(-0.5)=220+92=312  ← bottom
+     That's wrong approach. Let me use angle from top going clockwise.
+
+     Place 6 seats in upper arc:
+     Spread evenly: angles from -150° to 0° (measured from right, CCW = standard math)
+     Step = 30°
+     P7: -150° → x=300+185*cos(-150)=300+185*(-0.866)=140, y=220+185*sin(-150)=220+185*(-0.5)=127
+     P8: -120° → x=300+185*cos(-120)=300+185*(-0.5)=207, y=220+185*sin(-120)=220+185*(-0.866)=60
+     P9: -90°  → x=300+185*cos(-90)=300,                 y=220+185*sin(-90)=220-185=35
+     P1: -60°  → x=300+185*cos(-60)=300+185*(0.5)=392,   y=220+185*sin(-60)=220+185*(-0.866)=60
+     P2: -30°  → x=300+185*cos(-30)=300+185*(0.866)=460, y=220+185*sin(-30)=220+185*(-0.5)=127
+     P3:  0°   → x=300+185*cos(0)=485,                   y=220+185*sin(0)=220
+
+     Lower 3: P6(left), P5(center), P4(right) at y≈340
+  */
+  .s-p7 { left: calc(140px - 28px); top: calc(127px - 28px); }
+  .s-p8 { left: calc(207px - 28px); top: calc(60px  - 28px); }
+  .s-p9 { left: calc(300px - 28px); top: calc(35px  - 28px); }
+  .s-p1 { left: calc(392px - 28px); top: calc(60px  - 28px); }
+  .s-p2 { left: calc(460px - 28px); top: calc(127px - 28px); }
+  .s-p3 { left: calc(485px - 28px); top: calc(220px - 28px); }
+
+  .s-p6 { left: calc(90px  - 28px); top: calc(330px - 28px); }
+  .s-p5 { left: calc(300px - 28px); top: calc(355px - 28px); }
+  .s-p4 { left: calc(510px - 28px); top: calc(330px - 28px); }
+
+  .footer {
+    border-top: 2px solid #000;
+    padding: 10px 16px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+<div class="component">
+  <div class="header">
+    EBS / SEAT TEMPLATE C — SEMICIRCLE
+    <span class="sub">9 PLAYERS</span>
+  </div>
+  <div class="arena">
+    <div class="board">BOARD</div>
+    <div class="seat s-p7">P7</div>
+    <div class="seat s-p8">P8</div>
+    <div class="seat s-p9">P9</div>
+    <div class="seat s-p1">P1</div>
+    <div class="seat s-p2">P2</div>
+    <div class="seat s-p3">P3</div>
+    <div class="seat s-p6">P6</div>
+    <div class="seat s-p5">P5</div>
+    <div class="seat s-p4">P4</div>
+  </div>
+  <div class="footer">
+    <span>LAYOUT: SEMICIRCLE</span>
+    <span>UPPER: P7-P3 ARC | LOWER: P6, P5, P4</span>
+    <span>600×400</span>
+  </div>
+</div>
+</body>
+</html>

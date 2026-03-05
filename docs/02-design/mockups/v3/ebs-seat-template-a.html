@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- Style Reference: Brutalist B&W — Seat Template A: Oval -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>EBS Seat Template A — Oval — B&W Mockup v3</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; background: #fff; display: inline-block; }
+
+  .component {
+    width: 640px;
+    background: #fff;
+    border: 3px solid #000;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+  }
+
+  .header {
+    background: #000;
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    border-bottom: 3px solid #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header .sub {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  .arena {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    background: #fff;
+  }
+
+  .seat {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border: 3px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    background: #fff;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+  }
+
+  .board {
+    position: absolute;
+    width: 160px;
+    height: 48px;
+    border: 3px solid #000;
+    background: #eee;
+    text-align: center;
+    line-height: 48px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    font-family: 'Courier New', 'Lucida Console', monospace;
+    /* Center: left=(600-160)/2=220, top=(400-48)/2=176 */
+    left: 220px;
+    top: 176px;
+  }
+
+  /* Oval layout — 9 seats
+     Center: (300, 200)
+     Horizontal radius ~220, vertical radius ~160
+
+     P8(top-left), P9(top-center-left), P1(top-center-right) — upper arc
+     P7(left-upper), P2(right-upper)
+     P6(left-lower), P3(right-lower)
+     P5(bottom-center-left), P4(bottom-center-right) — lower arc
+  */
+  .s-p1  { left: calc(300px + 110px - 28px); top: calc(200px - 160px - 28px); } /* top right */
+  .s-p2  { left: calc(300px + 200px - 28px); top: calc(200px - 90px  - 28px); } /* right upper */
+  .s-p3  { left: calc(300px + 200px - 28px); top: calc(200px + 90px  - 28px); } /* right lower */
+  .s-p4  { left: calc(300px + 60px  - 28px); top: calc(200px + 160px - 28px); } /* bottom right */
+  .s-p5  { left: calc(300px - 60px  - 28px); top: calc(200px + 160px - 28px); } /* bottom left */
+  .s-p6  { left: calc(300px - 220px - 28px); top: calc(200px + 90px  - 28px); } /* left lower */
+  .s-p7  { left: calc(300px - 220px - 28px); top: calc(200px - 90px  - 28px); } /* left upper */
+  .s-p8  { left: calc(300px - 110px - 28px); top: calc(200px - 160px - 28px); } /* top left */
+  .s-p9  { left: calc(300px - 28px);          top: calc(200px - 175px - 28px); } /* top center */
+
+  .footer {
+    border-top: 2px solid #000;
+    padding: 10px 16px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+<div class="component">
+  <div class="header">
+    EBS / SEAT TEMPLATE A — OVAL
+    <span class="sub">9 PLAYERS</span>
+  </div>
+  <div class="arena">
+    <div class="board">BOARD</div>
+    <div class="seat s-p1">P1</div>
+    <div class="seat s-p2">P2</div>
+    <div class="seat s-p3">P3</div>
+    <div class="seat s-p4">P4</div>
+    <div class="seat s-p5">P5</div>
+    <div class="seat s-p6">P6</div>
+    <div class="seat s-p7">P7</div>
+    <div class="seat s-p8">P8</div>
+    <div class="seat s-p9">P9</div>
+  </div>
+  <div class="footer">
+    <span>LAYOUT: OVAL</span>
+    <span>SEATS: P1–P9</span>
+    <span>600×400</span>
+  </div>
+</div>
+</body>
+</html>
