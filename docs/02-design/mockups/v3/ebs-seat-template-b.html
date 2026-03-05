@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Style Reference: Brutalist B&W — Seat Template B: Hexagonal -->
+<!-- Style Reference: Brutalist B&W — Seat Template B: Hexagonal (Grid-Based) -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -9,7 +9,7 @@
   html, body { margin: 0; padding: 0; background: #fff; display: inline-block; }
 
   .component {
-    width: 640px;
+    width: 720px;
     background: #fff;
     border: 3px solid #000;
     font-family: 'Courier New', 'Lucida Console', monospace;
@@ -34,69 +34,91 @@
     opacity: 0.7;
   }
 
-  .arena {
-    position: relative;
-    width: 600px;
-    height: 400px;
-    margin: 0 auto;
-    background: #fff;
+  .grid-wrap { padding: 16px; overflow-x: auto; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 11px;
+    font-family: 'Courier New', 'Lucida Console', monospace;
   }
 
-  .seat {
-    position: absolute;
-    width: 56px;
-    height: 56px;
-    border: 3px solid #000;
+  th, td {
+    border: 1px solid #000;
+    width: 48px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+  }
+
+  th {
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    height: 28px;
+    letter-spacing: 0.05em;
+  }
+
+  td.row-header {
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    width: 36px;
+  }
+
+  td.empty { background: #fff; }
+
+  td.board {
+    background: #000;
+    color: #fff;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+  }
+
+  td.board-label {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
+
+  td.pot {
+    background: #ccc;
+    color: #000;
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
+
+  td.seat {
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    padding: 12px 16px;
+    border-top: 2px solid #000;
+    font-size: 11px;
+  }
+
+  .legend-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
-    background: #fff;
-    font-family: 'Courier New', 'Lucida Console', monospace;
+    gap: 8px;
   }
 
-  .board {
-    position: absolute;
-    width: 160px;
-    height: 48px;
-    border: 3px solid #000;
-    background: #eee;
-    text-align: center;
-    line-height: 48px;
-    font-weight: bold;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    font-family: 'Courier New', 'Lucida Console', monospace;
-    left: 220px;
-    top: 176px;
+  .legend-swatch {
+    width: 20px;
+    height: 14px;
+    border: 1px solid #000;
   }
 
-  /* Hexagonal layout — 8 seats
-     Center: (300, 200)
-     P8/P1 top:    y=40   x=220/380
-     P7/P2 middle-upper: y=130  x=80/490
-     P6/P3 middle-lower: y=270  x=80/490
-     P5/P4 bottom: y=360  x=220/380
-  */
-  .s-p1 { left: calc(380px - 28px); top: calc(40px  - 28px); }
-  .s-p2 { left: calc(490px - 28px); top: calc(130px - 28px); }
-  .s-p3 { left: calc(490px - 28px); top: calc(270px - 28px); }
-  .s-p4 { left: calc(380px - 28px); top: calc(360px - 28px); }
-  .s-p5 { left: calc(220px - 28px); top: calc(360px - 28px); }
-  .s-p6 { left: calc(80px  - 28px); top: calc(270px - 28px); }
-  .s-p7 { left: calc(80px  - 28px); top: calc(130px - 28px); }
-  .s-p8 { left: calc(220px - 28px); top: calc(40px  - 28px); }
-
-  .footer {
-    border-top: 2px solid #000;
-    padding: 10px 16px;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: #555;
-    display: flex;
-    justify-content: space-between;
-  }
+  .swatch-seat  { background: #000; }
+  .swatch-board { background: #000; }
+  .swatch-pot   { background: #ccc; }
+  .swatch-empty { background: #fff; }
 </style>
 </head>
 <body>
@@ -105,21 +127,95 @@
     EBS / SEAT TEMPLATE B — HEXAGONAL
     <span class="sub">8 PLAYERS</span>
   </div>
-  <div class="arena">
-    <div class="board">BOARD</div>
-    <div class="seat s-p1">P1</div>
-    <div class="seat s-p2">P2</div>
-    <div class="seat s-p3">P3</div>
-    <div class="seat s-p4">P4</div>
-    <div class="seat s-p5">P5</div>
-    <div class="seat s-p6">P6</div>
-    <div class="seat s-p7">P7</div>
-    <div class="seat s-p8">P8</div>
+  <div class="grid-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>C1</th><th>C2</th><th>C3</th><th>C4</th>
+          <th>C5</th><th>C6</th><th>C7</th><th>C8</th>
+          <th>C9</th><th>C10</th><th>C11</th><th>C12</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- R1 -->
+        <tr>
+          <td class="row-header">R1</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R2: P8(C4), P1(C9) -->
+        <tr>
+          <td class="row-header">R2</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="seat">P8</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="seat">P1</td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R3: P7(C2), P2(C11) -->
+        <tr>
+          <td class="row-header">R3</td>
+          <td class="empty"></td><td class="seat">P7</td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="seat">P2</td><td class="empty"></td>
+        </tr>
+        <!-- R4: BOARD CARDS (C5-C8) -->
+        <tr>
+          <td class="row-header">R4</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="board board-label" colspan="4">BOARD CARDS</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R5: POT (C6-C7) -->
+        <tr>
+          <td class="row-header">R5</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td>
+          <td class="pot" colspan="2">POT</td>
+          <td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R6: P6(C2), P3(C11) -->
+        <tr>
+          <td class="row-header">R6</td>
+          <td class="empty"></td><td class="seat">P6</td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="seat">P3</td><td class="empty"></td>
+        </tr>
+        <!-- R7: P5(C4), P4(C9) -->
+        <tr>
+          <td class="row-header">R7</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="seat">P5</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="seat">P4</td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R8 -->
+        <tr>
+          <td class="row-header">R8</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="footer">
-    <span>LAYOUT: HEXAGONAL</span>
-    <span>SEATS: P1–P8</span>
-    <span>600×400</span>
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-swatch swatch-seat"></div>
+      <span>SEAT (P1–P8)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch swatch-board"></div>
+      <span>BOARD CARDS</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch swatch-pot"></div>
+      <span>POT</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch swatch-empty"></div>
+      <span>EMPTY</span>
+    </div>
   </div>
 </div>
 </body>

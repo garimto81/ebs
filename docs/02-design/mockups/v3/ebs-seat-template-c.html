@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Style Reference: Brutalist B&W — Seat Template C: Semicircle -->
+<!-- Style Reference: Brutalist B&W — Seat Template C: Semicircle (Grid-Based) -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -9,7 +9,7 @@
   html, body { margin: 0; padding: 0; background: #fff; display: inline-block; }
 
   .component {
-    width: 640px;
+    width: 720px;
     background: #fff;
     border: 3px solid #000;
     font-family: 'Courier New', 'Lucida Console', monospace;
@@ -34,91 +34,91 @@
     opacity: 0.7;
   }
 
-  .arena {
-    position: relative;
-    width: 600px;
-    height: 400px;
-    margin: 0 auto;
-    background: #fff;
+  .grid-wrap { padding: 16px; overflow-x: auto; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 11px;
+    font-family: 'Courier New', 'Lucida Console', monospace;
   }
 
-  .seat {
-    position: absolute;
-    width: 56px;
-    height: 56px;
-    border: 3px solid #000;
+  th, td {
+    border: 1px solid #000;
+    width: 48px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+  }
+
+  th {
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    height: 28px;
+    letter-spacing: 0.05em;
+  }
+
+  td.row-header {
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    width: 36px;
+  }
+
+  td.empty { background: #fff; }
+
+  td.board {
+    background: #000;
+    color: #fff;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+  }
+
+  td.board-label {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
+
+  td.pot {
+    background: #ccc;
+    color: #000;
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
+
+  td.seat {
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    padding: 12px 16px;
+    border-top: 2px solid #000;
+    font-size: 11px;
+  }
+
+  .legend-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
-    background: #fff;
-    font-family: 'Courier New', 'Lucida Console', monospace;
+    gap: 8px;
   }
 
-  .board {
-    position: absolute;
-    width: 160px;
-    height: 48px;
-    border: 3px solid #000;
-    background: #eee;
-    text-align: center;
-    line-height: 48px;
-    font-weight: bold;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    font-family: 'Courier New', 'Lucida Console', monospace;
-    left: 220px;
-    top: 210px;
+  .legend-swatch {
+    width: 20px;
+    height: 14px;
+    border: 1px solid #000;
   }
 
-  /* Semicircle layout — 9 seats
-     Upper arc center: (300, 200), radius 190
-     P7 at -150deg, P8 at -120deg, P9 at -90deg, P1 at -60deg, P2 at -30deg, P3 at 0deg
-     angles in degrees from positive X axis:
-       P7: 180+30=210 → but let's use top arc from left to right
-     Let arc from 210° to 330° (measuring CCW from right)
-     Actually use degrees from top-center going left to right:
-     P7=210°, P8=240°, P9=270°(top), P1=300°, P2=330°, P3=360°/0°
-     In CSS coords (y inverted):
-       x = cx + r*cos(θ), y = cy - r*sin(θ)  [standard math]
-     cx=300, cy=220, r=185
-
-     θ=210° → x=300+185*cos210=300+185*(-0.866)=300-160=140, y=220-185*sin210=220-185*(-0.5)=220+92=312  ← bottom
-     That's wrong approach. Let me use angle from top going clockwise.
-
-     Place 6 seats in upper arc:
-     Spread evenly: angles from -150° to 0° (measured from right, CCW = standard math)
-     Step = 30°
-     P7: -150° → x=300+185*cos(-150)=300+185*(-0.866)=140, y=220+185*sin(-150)=220+185*(-0.5)=127
-     P8: -120° → x=300+185*cos(-120)=300+185*(-0.5)=207, y=220+185*sin(-120)=220+185*(-0.866)=60
-     P9: -90°  → x=300+185*cos(-90)=300,                 y=220+185*sin(-90)=220-185=35
-     P1: -60°  → x=300+185*cos(-60)=300+185*(0.5)=392,   y=220+185*sin(-60)=220+185*(-0.866)=60
-     P2: -30°  → x=300+185*cos(-30)=300+185*(0.866)=460, y=220+185*sin(-30)=220+185*(-0.5)=127
-     P3:  0°   → x=300+185*cos(0)=485,                   y=220+185*sin(0)=220
-
-     Lower 3: P6(left), P5(center), P4(right) at y≈340
-  */
-  .s-p7 { left: calc(140px - 28px); top: calc(127px - 28px); }
-  .s-p8 { left: calc(207px - 28px); top: calc(60px  - 28px); }
-  .s-p9 { left: calc(300px - 28px); top: calc(35px  - 28px); }
-  .s-p1 { left: calc(392px - 28px); top: calc(60px  - 28px); }
-  .s-p2 { left: calc(460px - 28px); top: calc(127px - 28px); }
-  .s-p3 { left: calc(485px - 28px); top: calc(220px - 28px); }
-
-  .s-p6 { left: calc(90px  - 28px); top: calc(330px - 28px); }
-  .s-p5 { left: calc(300px - 28px); top: calc(355px - 28px); }
-  .s-p4 { left: calc(510px - 28px); top: calc(330px - 28px); }
-
-  .footer {
-    border-top: 2px solid #000;
-    padding: 10px 16px;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: #555;
-    display: flex;
-    justify-content: space-between;
-  }
+  .swatch-seat  { background: #000; }
+  .swatch-board { background: #000; }
+  .swatch-pot   { background: #ccc; }
+  .swatch-empty { background: #fff; }
 </style>
 </head>
 <body>
@@ -127,22 +127,95 @@
     EBS / SEAT TEMPLATE C — SEMICIRCLE
     <span class="sub">9 PLAYERS</span>
   </div>
-  <div class="arena">
-    <div class="board">BOARD</div>
-    <div class="seat s-p7">P7</div>
-    <div class="seat s-p8">P8</div>
-    <div class="seat s-p9">P9</div>
-    <div class="seat s-p1">P1</div>
-    <div class="seat s-p2">P2</div>
-    <div class="seat s-p3">P3</div>
-    <div class="seat s-p6">P6</div>
-    <div class="seat s-p5">P5</div>
-    <div class="seat s-p4">P4</div>
+  <div class="grid-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>C1</th><th>C2</th><th>C3</th><th>C4</th>
+          <th>C5</th><th>C6</th><th>C7</th><th>C8</th>
+          <th>C9</th><th>C10</th><th>C11</th><th>C12</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- R1: P7(C2), P8(C4), P9(C6), P1(C8), P2(C10), P3(C12) -->
+        <tr>
+          <td class="row-header">R1</td>
+          <td class="empty"></td><td class="seat">P7</td><td class="empty"></td><td class="seat">P8</td>
+          <td class="empty"></td><td class="seat">P9</td><td class="empty"></td><td class="seat">P1</td>
+          <td class="empty"></td><td class="seat">P2</td><td class="empty"></td><td class="seat">P3</td>
+        </tr>
+        <!-- R2 -->
+        <tr>
+          <td class="row-header">R2</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R3 -->
+        <tr>
+          <td class="row-header">R3</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R4: BOARD CARDS (C5-C8) -->
+        <tr>
+          <td class="row-header">R4</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="board board-label" colspan="4">BOARD CARDS</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R5: POT (C6-C7) -->
+        <tr>
+          <td class="row-header">R5</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td>
+          <td class="pot" colspan="2">POT</td>
+          <td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R6: P6(C2), P4(C11) -->
+        <tr>
+          <td class="row-header">R6</td>
+          <td class="empty"></td><td class="seat">P6</td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="seat">P4</td><td class="empty"></td>
+        </tr>
+        <!-- R7: P5(C6) -->
+        <tr>
+          <td class="row-header">R7</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="seat">P5</td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+        <!-- R8 -->
+        <tr>
+          <td class="row-header">R8</td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+          <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="footer">
-    <span>LAYOUT: SEMICIRCLE</span>
-    <span>UPPER: P7-P3 ARC | LOWER: P6, P5, P4</span>
-    <span>600×400</span>
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-swatch swatch-seat"></div>
+      <span>SEAT (P1–P9)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch swatch-board"></div>
+      <span>BOARD CARDS</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch swatch-pot"></div>
+      <span>POT</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch swatch-empty"></div>
+      <span>EMPTY</span>
+    </div>
   </div>
 </div>
 </body>
