@@ -152,7 +152,7 @@ flowchart LR
 | 문서 | 독자 | 역할 |
 |------|------|------|
 | **이 문서 (core.md)** | PM/기획자 | 범위, 우선순위, 핵심 결정 |
-| [EBS-UI-Design.md](../00-prd/EBS-UI-Design.md) | 기획자/개발자 | EBS UI 설계 (5탭 + AT + Editor, 180개 요소) |
+| [EBS-UI-Design-v3.prd.md](../00-prd/EBS-UI-Design-v3.prd.md) | 기획자/개발자 | EBS UI 설계 (5탭 + AT + Editor, 180개 요소) |
 | [element-catalog.md](PRD-0004-element-catalog.md) | 개발자 | 180개 요소 전체 스펙 (타입, v1.0 여부, 설명) |
 | [pokergfx-analysis.md](PRD-0004-pokergfx-analysis.md) | 분석가 | PokerGFX 원본 289개 요소 전수 분석 |
 | [feature-interactions.md](PRD-0004-feature-interactions.md) | 개발자 | 요소 간 상호작용 및 조건부 표시 규칙 |

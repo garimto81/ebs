@@ -7,7 +7,7 @@ owner: "BRACELET STUDIO"
 last_updated: "2026-03-05"
 phase: "phase-1"
 priority: "critical"
-parent_doc: "EBS-UI-Design.md"
+parent_doc: "EBS-UI-Design-v3.prd.md"
 ---
 
 # PRD-AT-001: EBS Action Tracker
@@ -351,7 +351,7 @@ UI Widgets (watch 구독)
 
 ## 5. UI 설계 — 3단계 분석 기반
 
-이 섹션은 [PRD-0004](EBS-UI-Design.md)의 3단계 내러티브를 따른다.
+이 섹션은 [PRD-0004](EBS-UI-Design-v3.prd.md)의 3단계 내러티브를 따른다.
 
 | 단계 | 설명 |
 |:----:|------|

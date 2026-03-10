@@ -31,7 +31,7 @@ EBS/                                         1GlDqSgEDs9z8j5VY6iX3QndTLb6_8-PF
 | 로컬 파일 | Google Docs | 위치 |
 |----------|-------------|------|
 | `C:/claude/ebs_reverse/docs/01-plan/pokergfx-prd-v2.md` | [PRD-0001: EBS 기초 기획서](https://docs.google.com/document/d/1PLJuD2BbT4Jp1p6smue9ezLAfbkOSTrfVxCOXTsrau4/edit) | EBS/ |
-| `C:/claude/ebs/docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md` | [PRD-0002: EBS UI Design](https://docs.google.com/document/d/1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk/edit) | EBS/ |
+| `C:/claude/ebs/docs/00-prd/EBS-UI-Design-v3.prd.md` | [PRD-0002: EBS UI Design](https://docs.google.com/document/d/1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk/edit) | EBS/ |
 
 ---
 

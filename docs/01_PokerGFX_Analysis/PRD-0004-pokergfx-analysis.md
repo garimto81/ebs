@@ -3,7 +3,7 @@ doc_type: "analysis"
 doc_id: "PRD-0004-PGX-Analysis"
 version: "29.0.0"
 status: "reference"
-parent_doc: "PRD-0004-EBS-Server-UI-Design.md"
+parent_doc: "EBS-UI-Design-v3.prd.md"
 last_updated: "2026-03-03"
 ---
 
@@ -12,7 +12,7 @@ last_updated: "2026-03-03"
 > PokerGFX 289개 UI 요소의 전수 분석과 6탭→5탭 변환 원칙을 기록한 참조 문서.
 >
 > **이 문서는 PokerGFX 원본 분석 전용이다.** EBS 설계는 아래 문서를 참조:
-> - [PRD-0004-EBS-Server-UI-Design.md](PRD-0004-EBS-Server-UI-Design.md) — EBS 통합 설계서 (6~13장)
+> - [EBS-UI-Design-v3.prd.md](../00-prd/EBS-UI-Design-v3.prd.md) — EBS 통합 설계서 (1~11장)
 > - [PRD-0004-element-catalog.md](PRD-0004-element-catalog.md) — EBS 180개 요소 카탈로그
 
 ### 읽기 순서
@@ -134,7 +134,7 @@ flowchart LR
 
 | # | 그룹 | 요소 | 타입 | 설명 | Ref | EBS |
 |:-:|------|------|------|------|:---:|:---:|
-| S-00 | Output Mode | Mode Selector | RadioGroup | Fill & Key / Chroma Key / Internal (기본: Fill & Key) | #1 | Keep |
+| ~~S-00~~ | ~~Output Mode~~ | ~~Mode Selector~~ | ~~RadioGroup~~ | ~~Fill & Key / Chroma Key / Internal (기본: Fill & Key). I/O 탭에서 Sources 전체 제거로 Output Mode Selector 불필요~~ | ~~#1~~ | ~~Drop~~ |
 | S-01 | Video Sources | Device Table | DataTable | NDI, 캡처 카드, 네트워크 카메라 목록. 매뉴얼: "The Sources tab contains a list of available video sources." (p.35) | #2 | Keep |
 | S-02 | Video Sources | Add Button | TextButton | NDI 자동 탐색 또는 수동 URL | #22 | Defer |
 | S-03 | Video Sources | L Column | DataColumn | 좌측 비디오 소스 할당 (X 표시). 매뉴얼: "click both the Left and Right columns for the desired source." (p.35) | #5 | Keep |
@@ -461,8 +461,8 @@ Commentary 탭 원본 구성(8개): Commentary ON/OFF 토글(SV-021), Commentato
 
 | PokerGFX 원본 탭 | 요소 | EBS 탭 | 처리 방식 |
 |-----------------|------|--------|---------|
-| Sources | S-01, S-03, S-04, S-11~S-14 | I/O | Input 섹션 |
-| Outputs | O-01~O-05, O-18~O-20 | I/O | Output 섹션 |
+| ~~Sources~~ | ~~S-01, S-03, S-04, S-11~S-14~~ | ~~I/O~~ | ~~v33.0.0 전체 제거 (비디오 입력은 OBS 처리)~~ |
+| Outputs | O-01~O-05, O-18~O-20 | Output | Output 탭으로 변경 |
 | GFX 1 Layout | G-01~G-06 | GFX | Layout 서브그룹 |
 | GFX 1 Card & Player | G-14~G-16, G-22~G-23 | GFX | Card & Player 서브그룹 |
 | GFX 1 Animation | G-17~G-20 | GFX | Animation 서브그룹 |
@@ -513,8 +513,9 @@ flowchart LR
 
 | 날짜 | 버전 | 변경 내용 | 결정 근거 |
 |------|------|-----------|----------|
+| 2026-03-06 | v30.0.0 | S-00 Keep→Drop 변경. 4.3 매핑 테이블 Sources 행 제거(v33.0.0 제거 반영). Outputs→Output 탭명 변경 | EBS-UI-Design v33.0.0 Sources 전체 제거 동기화 |
 | 2026-03-03 | v29.0.0 | Sources 탭 Element Catalog 오버레이 1:1 확장 (25→30): S-03/S-04/S-14 그룹핑 해제, S-25~S-29 신규 추가. 총 284→289, EBS 175→180 | 오버레이 #1~#32(30개)와 Element Catalog 불일치 해소 |
 | 2026-03-02 | v1.0.0 | PRD-0004 v28.0.0에서 3~5장 분리 독립. 감축 수식 284-111+2=175 정합성 확보 | 문서 분리 구조화 — PokerGFX 원본 분석을 참조 문서로 독립 |
 
 ---
-**Version**: 29.0.0 | **Updated**: 2026-03-03
+**Version**: 30.0.0 | **Updated**: 2026-03-06

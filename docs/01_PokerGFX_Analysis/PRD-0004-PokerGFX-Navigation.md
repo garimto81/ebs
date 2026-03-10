@@ -37,7 +37,7 @@ stakeholders:
 
 > **역할 재정의 (2026-02-23)**: 본 문서는 **EBS console v1.0 Broadcast Ready** 범위의 UI 설계서입니다. v2.0 이후 기능 (Equity/Stats 전체, Hand History 고급, Skin Editor, 고급 GFX Console)은 버전별 별도 설계서에서 다룹니다. 스코프 기준: [ebs-console.prd.md](../00-prd/ebs-console.prd.md)
 
-> **아카이브 안내**: 이 문서는 PRD-0004 v21.0.0의 아카이브입니다. PokerGFX 원본 UI 분석 (스크린샷, 오버레이 분석본, 기능 테이블, 설계 시사점)을 보존합니다. 현행 EBS 설계는 [PRD-0004-EBS-Server-UI-Design.md](PRD-0004-EBS-Server-UI-Design.md)를 참조하세요.
+> **아카이브 안내**: 이 문서는 PRD-0004 v21.0.0의 아카이브입니다. PokerGFX 원본 UI 분석 (스크린샷, 오버레이 분석본, 기능 테이블, 설계 시사점)을 보존합니다. 현행 EBS 설계는 [EBS-UI-Design-v3.prd.md](../00-prd/EBS-UI-Design-v3.prd.md)를 참조하세요.
 
 > 화면별 UI 설계만 다룬다. 시스템 아키텍처는 [전체 기획서](../../ebs_reverse/docs/01-plan/pokergfx-prd-v2.md), 기술 상세는 [PRD-0004-technical-specs.md](PRD-0004-technical-specs.md) 참조.
 

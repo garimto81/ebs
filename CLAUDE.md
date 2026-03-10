@@ -332,7 +332,7 @@ mockups/            # HTML 와이어프레임 (sources, outputs, gfx, rules, mai
 |------|------|------|
 | Master PRD | `docs/PRD-0003-EBS-RFID-System.md` | 비전/전략/로드맵 |
 | Phase 1 복제 PRD | `docs/01_PokerGFX_Analysis/PRD-0003-Phase1-PokerGFX-Clone.md` | PokerGFX 동일 복제 설계서 (v9.1.0) |
-| Server UI 설계 | `docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md` | EBS Server UI 통합 설계서 (184개 요소) |
+| Server UI 설계 | `docs/00-prd/EBS-UI-Design-v3.prd.md` | EBS UI Design SSOT (v8.1.0) |
 | 기능 상호작용 | `docs/01_PokerGFX_Analysis/PRD-0004-feature-interactions.md` | 탭/기능 간 상호작용 명세 |
 | 기술 스펙 | `docs/01_PokerGFX_Analysis/PRD-0004-technical-specs.md` | 성능/프로토콜 기술 스펙 |
 | 기능 체크리스트 | `docs/01_PokerGFX_Analysis/PokerGFX-Feature-Checklist.md` | 149개 복제 대상 |
@@ -353,9 +353,9 @@ mockups/            # HTML 와이어프레임 (sources, outputs, gfx, rules, mai
 | 레포 | 로컬 파일 | Google Docs ID | URL |
 |------|-----------|---------------|-----|
 | **ebs_reverse** | `C:/claude/ebs_reverse/docs/01-plan/pokergfx-prd-v2.md` | `1PLJuD2BbT4Jp1p6smue9ezLAfbkOSTrfVxCOXTsrau4` | [PRD-0001: EBS 기초 기획서](https://docs.google.com/document/d/1PLJuD2BbT4Jp1p6smue9ezLAfbkOSTrfVxCOXTsrau4/edit) |
-| **ebs** | `docs/01_PokerGFX_Analysis/PRD-0004-EBS-Server-UI-Design.md` | `1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk` | [PRD-0002: EBS UI Design](https://docs.google.com/document/d/1y_g_h-5aso4aQgw_C5YcE8g9c5kFXYB-78mfFd5aDdk/edit) |
+| **ebs** | `docs/00-prd/EBS-UI-Design-v3.prd.md` | `1SapKWeZNgbRD7vHzXDVYb52jBkPxRenXvbRn_7UYwK8` | [PRD-0002: EBS UI Design](https://docs.google.com/document/d/1SapKWeZNgbRD7vHzXDVYb52jBkPxRenXvbRn_7UYwK8/edit) |
 
-매핑 파일: `docs/MAPPING_ngd.json` v9.0.0 | Drive 구조 문서: `docs/GOOGLE-DRIVE-STRUCTURE_ngd.md` v9.0.0
+매핑 파일: `docs/MAPPING_ngd.json` v10.0.0 | Drive 구조 문서: `docs/GOOGLE-DRIVE-STRUCTURE_ngd.md` v9.0.0
 
 ## System Files
 
